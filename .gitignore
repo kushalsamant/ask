@@ -1,0 +1,93 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Environment files - PROTECTED (not deleted, just ignored by Git)
+.env
+.env.local
+.env.production
+ask.env
+*.env
+
+# Logs
+logs/*.log
+*.log
+
+# Cache
+cache/*.pkl
+cache/*.cache
+
+# Temporary files
+temp_*
+*.tmp
+*.temp
+
+# Generated content
+daily_pdfs/*.pdf
+images/*/
+captions/*/
+instagram/*/
+scraped_content/*/
+
+# API tokens and secrets - PROTECTED (not deleted, just ignored by Git)
+pinterest_token.json
+*.token
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.secret
+*_token.json
+*_key.json
+*_secret.json
+
+# Credentials and authentication - PROTECTED (not deleted, just ignored by Git)
+credentials.json
+auth.json
+config.json
+secrets.json
+*.credentials
+*.auth
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large files
+*.pdf
+*.zip
+*.tar.gz
+
+# Backup files
+*.bak
+*.backup
