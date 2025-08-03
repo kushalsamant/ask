@@ -8,15 +8,14 @@ import json
 import requests
 import base64
 import argparse
-import asyncio
-import aiohttp
+
 import gzip
 import hashlib
 import pickle
 import gc
 from datetime import datetime, timedelta
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, as_completed
+
 from tqdm import tqdm
 from urllib.parse import urljoin, urlparse
 from dotenv import load_dotenv
@@ -50,7 +49,7 @@ def get_env(var, default=None, required=False):
     return value
 
 # ===  Preemptive .env Validation ===
-REQUIRED_VARS = ['TOGETHER_API_KEY', 'TEXT_PROVIDER', 'IMAGE_PROVIDER', 'MANUAL_SOURCES_FILE']
+REQUIRED_VARS = ['TOGETHER_API_KEY', 'TEXT_PROVIDER', 'IMAGE_PROVIDER', 'BOOKMARKS_FILE']
 for var in REQUIRED_VARS:
     get_env(var, required=True)
 
@@ -222,11 +221,10 @@ class Config:
     }
     # Content Sources
     SOURCES = {
-        "manual_file": get_env("MANUAL_SOURCES_FILE", "manual_sources.txt"),
+        "bookmarks_file": get_env("BOOKMARKS_FILE", "bookmarks.html"),
         "web_scraper_delay": float(get_env("WEB_SCRAPER_DELAY", "1.0")),
         "max_sources": int(get_env("WEB_SCRAPER_MAX_SOURCES", "50")),
-        "discovery_enabled": get_env("DAILY_DISCOVERY_ENABLED", "true").lower() == "true",
-        "discoverer_delay": float(get_env("DISCOVERER_DELAY", "2.0"))
+
     }
     # Cache Configuration
     CACHE = {
@@ -245,17 +243,16 @@ class Config:
         "output_dir": get_env("INSTAGRAM_OUTPUT_DIR", "instagram"),
         "dpi": int(get_env("INSTAGRAM_DPI", "300"))
     }
-    # Mode Configuration
-    MODES = {
-        "fast_delay": float(get_env("FAST_MODE_DELAY", "0.4")),
-        "ultra_delay": float(get_env("ULTRA_MODE_DELAY", "0.4")),
-        "ultra_concurrent_images": int(get_env("ULTRA_MODE_CONCURRENT_IMAGES", "10")),
-        "ultra_concurrent_captions": int(get_env("ULTRA_MODE_CONCURRENT_CAPTIONS", "10"))
+    # Sequential Mode Configuration
+    MODE = {
+        "rate_limit_delay": float(get_env("RATE_LIMIT_DELAY", "6.0")),
+        "sequential_images": int(get_env("MAX_CONCURRENT_IMAGES", "1")),
+        "sequential_captions": int(get_env("MAX_CONCURRENT_CAPTIONS", "1"))
     }
     # Rate Limiting Configuration
     LIMITS = {
-        "max_concurrent_images": int(get_env("MAX_CONCURRENT_IMAGES", "1")),
-        "max_concurrent_captions": int(get_env("MAX_CONCURRENT_CAPTIONS", "1")),
+        "max_sequential_images": int(get_env("MAX_CONCURRENT_IMAGES", "1")),
+        "max_sequential_captions": int(get_env("MAX_CONCURRENT_CAPTIONS", "1")),
         "image_rate_limit": float(get_env("IMAGE_RATE_LIMIT", "20.0")),
         "caption_rate_limit": float(get_env("CAPTION_RATE_LIMIT", "20.0")),
         "api_timeout": int(get_env("API_TIMEOUT", "60")),
@@ -521,19 +518,18 @@ GUIDANCE_SCALE = float(get_env('GUIDANCE_SCALE', '7.5'))
 
 # Performance optimization settings (Free Tier Optimized)
 # Free Tier Limit: ~100 requests/minute
-MAX_CONCURRENT_IMAGES = int(get_env('MAX_CONCURRENT_IMAGES', '8'))
-MAX_CONCURRENT_CAPTIONS = int(get_env('MAX_CONCURRENT_CAPTIONS', '8'))
-RATE_LIMIT_DELAY = float(get_env('RATE_LIMIT_DELAY', '0.6'))
+MAX_SEQUENTIAL_IMAGES = int(get_env('MAX_CONCURRENT_IMAGES', '1'))
+MAX_SEQUENTIAL_CAPTIONS = int(get_env('MAX_CONCURRENT_CAPTIONS', '1'))
+RATE_LIMIT_DELAY = float(get_env('RATE_LIMIT_DELAY', '6.0'))
 SKIP_CAPTION_DEDUPLICATION = get_env('SKIP_CAPTION_DEDUPLICATION', 'true').lower() == 'true'
-FAST_MODE = get_env('FAST_MODE', 'true').lower() == 'true'
 SKIP_WEB_SCRAPING = get_env('SKIP_WEB_SCRAPING', 'false').lower() == 'true'
 SKIP_THEME_GENERATION = get_env('SKIP_THEME_GENERATION', 'false').lower() == 'true'
 SKIP_PROMPT_GENERATION = get_env('SKIP_PROMPT_GENERATION', 'false').lower() == 'true'
 SKIP_PDF_CREATION = get_env('SKIP_PDF_CREATION', 'false').lower() == 'true'
 CACHE_ENABLED = get_env('CACHE_ENABLED', 'true').lower() == 'true'
 PRELOAD_STYLES = get_env('PRELOAD_STYLES', 'true').lower() == 'true'
-BATCH_PROCESSING = get_env('BATCH_PROCESSING', 'true').lower() == 'true'
-OPTIMIZE_MEMORY = get_env('OPTIMIZE_MEMORY', 'true').lower() == 'true'
+
+
 
 # Enhanced prompt configuration with full token utilization
 PROMPT_SYSTEM = get_env('PROMPT_SYSTEM', 'You are a visionary architectural writer and provocateur with deep expertise in architectural history, theory, and contemporary practice. Your knowledge spans from ancient architectural traditions to cutting-edge computational design, encompassing structural engineering, material science, cultural anthropology, environmental sustainability, urban planning, landscape architecture, digital fabrication, philosophy of space, phenomenology, global architectural traditions, vernacular building, lighting design, acoustic design, thermal comfort, passive design strategies, accessibility, universal design principles, heritage conservation, adaptive reuse, parametric design, algorithmic architecture, biomimicry, nature-inspired design, social impact, community engagement, economic feasibility, construction methods, regulatory compliance, building codes, post-occupancy evaluation, user experience, and cross-cultural architectural exchange. You create compelling, artistic image prompts that capture the essence of architectural concepts with vivid, poetic language, considering multiple scales from urban context to material detail, balancing technical precision with artistic expression, and emphasizing the emotional and psychological impact of architectural spaces on human experience.')
@@ -1294,7 +1290,7 @@ class PinterestIntegration:
         query_string = '&'.join([f"{k}={v}" for k, v in params.items()])
         return f"{self.auth_base}?{query_string}", state
     
-    async def exchange_code_for_token(self, authorization_code):
+    def exchange_code_for_token(self, authorization_code):
         """Exchange authorization code for access token"""
         try:
             url = f"{self.api_base}/oauth/token"
@@ -1307,30 +1303,29 @@ class PinterestIntegration:
                 'client_secret': self.client_secret
             }
             
-            async with aiohttp.ClientSession() as session:
-                async with session.post(url, data=data) as response:
-                    if response.status == 200:
-                        token_data = await response.json()
-                        access_token = token_data.get('access_token')
-                        refresh_token = token_data.get('refresh_token')
-                        
-                        # Save tokens
-                        self.access_token = access_token
-                        self.refresh_token = refresh_token
-                        self._save_tokens(access_token, refresh_token)
-                        
-                        log.info("Successfully obtained Pinterest access token")
-                        return True
-                    else:
-                        error_data = await response.json()
-                        log.error(f"Token exchange failed: {error_data}")
-                        return False
+            response = requests.post(url, data=data)
+            if response.status_code == 200:
+                token_data = response.json()
+                access_token = token_data.get('access_token')
+                refresh_token = token_data.get('refresh_token')
+                
+                # Save tokens
+                self.access_token = access_token
+                self.refresh_token = refresh_token
+                self._save_tokens(access_token, refresh_token)
+                
+                log.info("Successfully obtained Pinterest access token")
+                return True
+            else:
+                error_data = response.json()
+                log.error(f"Token exchange failed: {error_data}")
+                return False
                         
         except Exception as e:
             log.error(f"Error exchanging code for token: {e}")
             return False
     
-    async def refresh_access_token(self):
+    def refresh_access_token(self):
         """Refresh access token using refresh token"""
         if not self.refresh_token:
             log.error("No refresh token available")
@@ -1346,30 +1341,29 @@ class PinterestIntegration:
                 'client_secret': self.client_secret
             }
             
-            async with aiohttp.ClientSession() as session:
-                async with session.post(url, data=data) as response:
-                    if response.status == 200:
-                        token_data = await response.json()
-                        access_token = token_data.get('access_token')
-                        refresh_token = token_data.get('refresh_token', self.refresh_token)
-                        
-                        # Update tokens
-                        self.access_token = access_token
-                        self.refresh_token = refresh_token
-                        self._save_tokens(access_token, refresh_token)
-                        
-                        log.info("Successfully refreshed Pinterest access token")
-                        return True
-                    else:
-                        error_data = await response.json()
-                        log.error(f"Token refresh failed: {error_data}")
-                        return False
+            response = requests.post(url, data=data)
+            if response.status_code == 200:
+                token_data = response.json()
+                access_token = token_data.get('access_token')
+                refresh_token = token_data.get('refresh_token', self.refresh_token)
+                
+                # Update tokens
+                self.access_token = access_token
+                self.refresh_token = refresh_token
+                self._save_tokens(access_token, refresh_token)
+                
+                log.info("Successfully refreshed Pinterest access token")
+                return True
+            else:
+                error_data = response.json()
+                log.error(f"Token refresh failed: {error_data}")
+                return False
                         
         except Exception as e:
             log.error(f"Error refreshing token: {e}")
             return False
     
-    async def authenticate(self):
+    def authenticate(self):
         """Complete OAuth authentication flow"""
         if self.access_token:
             log.info("Access token already available")
@@ -1452,21 +1446,21 @@ class PinterestIntegration:
             return False
         
         # Exchange code for token
-        return await self.exchange_code_for_token(auth_code)
+        return self.exchange_code_for_token(auth_code)
     
-    async def post_daily_zine_to_pinterest(self, board_id, pdf_path, theme, style_name):
+    def post_daily_zine_to_pinterest(self, board_id, pdf_path, theme, style_name):
         """Post daily zine to Pinterest"""
         try:
             log.info(f"Posting daily zine to Pinterest board {board_id}")
             
             # Convert PDF to image for Pinterest
-            image_path = await self.convert_pdf_to_pinterest_image(pdf_path)
+            image_path = self.convert_pdf_to_pinterest_image(pdf_path)
             if not image_path:
                 log.error("Failed to convert PDF to image for Pinterest")
                 return False
             
             # Create pin
-            success = await self.create_pin(
+            success = self.create_pin(
                 board_id=board_id,
                 image_path=image_path,
                 title=f"Daily Architectural Zine - {theme}",
@@ -1484,7 +1478,7 @@ class PinterestIntegration:
             log.error(f"Error posting to Pinterest: {e}")
             return False
     
-    async def convert_pdf_to_pinterest_image(self, pdf_path):
+    def convert_pdf_to_pinterest_image(self, pdf_path):
         """Convert PDF to Pinterest-optimized image"""
         try:
             # Open PDF and get first page
@@ -1513,7 +1507,7 @@ class PinterestIntegration:
             log.error(f"Error converting PDF to image: {e}")
             return None
     
-    async def create_pin(self, board_id, image_path, title, description, link=None):
+    def create_pin(self, board_id, image_path, title, description, link=None):
         """Create a new pin on Pinterest"""
         try:
             url = f"{self.api_base}/pins"
@@ -1545,7 +1539,7 @@ class PinterestIntegration:
             log.error(f"Error creating pin: {e}")
             return False
     
-    async def get_user_boards(self):
+    def get_user_boards(self):
         """Get user's Pinterest boards"""
         try:
             url = f"{self.api_base}/user_accounts/me/boards"
@@ -1554,23 +1548,22 @@ class PinterestIntegration:
                 'Authorization': f'Bearer {self.access_token}'
             }
             
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, headers=headers) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        return data.get('items', [])
-                    else:
-                        log.error(f"Failed to get boards: {response.status}")
-                        return []
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                return data.get('items', [])
+            else:
+                log.error(f"Failed to get boards: {response.status_code}")
+                return []
                         
         except Exception as e:
             log.error(f"Error getting boards: {e}")
             return []
     
-    async def validate_board_access(self, board_id):
+    def validate_board_access(self, board_id):
         """Validate access to a specific board"""
         try:
-            boards = await self.get_user_boards()
+            boards = self.get_user_boards()
             return any(board['id'] == board_id for board in boards)
         except Exception as e:
             log.error(f"Error validating board access: {e}")
@@ -1598,37 +1591,43 @@ class WebScraper:
         self.cache_dir = Path(Config.CACHE["dir"])
         self.cache_dir.mkdir(exist_ok=True)
     
-    def load_manual_sources(self):
-        """Load sources from manual_sources.txt"""
+    def load_bookmarks_sources(self):
+        """Load sources from bookmarks.html"""
         sources = []
-        sources_file = Config.SOURCES["manual_file"]
+        bookmarks_file = Config.SOURCES["bookmarks_file"]
         
         try:
-            if os.path.exists(sources_file):
-                with open(sources_file, 'r', encoding='utf-8') as f:
-                    for line_num, line in enumerate(f, 1):
-                        line = line.strip()
-                        if line and not line.startswith('#'):
-                            try:
-                                parts = line.split('|')
-                                if len(parts) == 3:
-                                    name, url, category = parts
-                                    sources.append({
-                                        'name': name.strip(),
-                                        'url': url.strip(),
-                                        'category': category.strip()
-                                    })
-                                else:
-                                    log.warning(f" Invalid format in manual_sources.txt line {line_num}: {line}")
-                            except Exception as e:
-                                log.warning(f" Error parsing line {line_num}: {e}")
+            if os.path.exists(bookmarks_file):
+                from bs4 import BeautifulSoup
                 
-                log.info(f" Loaded {len(sources)} sources from {sources_file}")
+                with open(bookmarks_file, 'r', encoding='utf-8') as f:
+                    soup = BeautifulSoup(f.read(), 'html.parser')
+                
+                # Find all bookmark links
+                links = soup.find_all('a', href=True)
+                
+                for link in links:
+                    href = link.get('href', '').strip()
+                    name = link.get_text(strip=True)
+                    
+                    # Filter for architectural/design related URLs
+                    if href and name and any(keyword in href.lower() or keyword in name.lower() 
+                                           for keyword in ['architect', 'design', 'art', 'building', 'interior', 'urban', 'ai', 'tech']):
+                        sources.append({
+                            'name': name,
+                            'url': href,
+                            'category': 'Bookmarks',
+                            'type': 'bookmarks'
+                        })
+                
+                log.info(f" Loaded {len(sources)} sources from {bookmarks_file}")
             else:
-                log.warning(f" Sources file not found: {sources_file}")
+                log.warning(f" Bookmarks file not found: {bookmarks_file}")
                 
+        except ImportError:
+            log.error(" BeautifulSoup not installed. Install with: pip install beautifulsoup4")
         except Exception as e:
-            log.error(f" Error loading sources: {e}")
+            log.error(f" Error loading bookmarks: {e}")
         
         return sources
     
@@ -1637,7 +1636,7 @@ class WebScraper:
     def scrape_website(self, source):
         """Scrape a single website for architectural content"""
         cache_key = f"scrape_{source['name']}_{source['url']}"
-        cached_data = self.load_from_cache(cache_key)
+        cached_data = load_from_cache(cache_key)
         if cached_data:
             log.info(f" Using cached data for {source['name']}")
             return cached_data
@@ -1669,7 +1668,7 @@ class WebScraper:
                     continue
             
             # Cache the results
-            self.save_to_cache(cache_key, articles)
+            save_to_cache(cache_key, articles)
             
             time.sleep(self.delay_between_requests)
             
@@ -1754,7 +1753,7 @@ class WebScraper:
     
     def scrape_all_sources(self, max_sources=None):
         """Scrape all sources and return combined articles"""
-        sources = self.load_manual_sources()
+        sources = self.load_bookmarks_sources()
         if max_sources:
             sources = sources[:max_sources]
         
@@ -1864,259 +1863,7 @@ Theme:"""
         
         return theme_prompt
 
-class ArchitecturalSourceDiscoverer:
-    """Discovers new architectural research websites"""
-    
-    def __init__(self):
-        self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        })
-        
-        # Rate limiting
-        self.delay_between_requests = Config.SOURCES["discoverer_delay"]
-        
-        # Cache directory
-        self.cache_dir = Path(Config.CACHE["dir"])
-        self.cache_dir.mkdir(exist_ok=True)
-        
-        # Sources file
-        self.sources_file = Config.SOURCES["manual_file"]
-        
-        # Discovery sources
-        self.discovery_sources = [
-            # Academic directories
-            "https://www.architectural-review.com/",
-            "https://www.architectmagazine.com/",
-            "https://archinect.com/",
-            "https://www.dezeen.com/",
-            "https://www.designboom.com/",
-            "https://www.archdaily.com/",
-            "https://www.architecturaldigest.com/",
-            "https://www.architectural-record.com/",
-            "https://www.architecturaldigest.in/",
-            "https://www.architecturaldigestme.com/",
-            "https://www.architecturaldigest.cn/",
-        ]
-        
-        # Keywords to look for
-        self.architectural_keywords = [
-            'architecture', 'architectural', 'design', 'building', 'construction',
-            'urban planning', 'landscape', 'interior design', 'sustainability',
-            'research', 'academic', 'institution', 'university', 'school',
-            'journal', 'publication', 'magazine', 'blog', 'news'
-        ]
-        
-        # Categories for classification
-        self.categories = ['News', 'Academic', 'Research', 'Innovation', 'Regional']
-    
-    # Use global cache functions instead of duplicate methods
-    
-    def load_existing_sources(self):
-        """Load existing sources from manual_sources.txt"""
-        sources = []
-        try:
-            if os.path.exists(self.sources_file):
-                with open(self.sources_file, 'r', encoding='utf-8') as f:
-                    for line in f:
-                        line = line.strip()
-                        if line and not line.startswith('#'):
-                            parts = line.split('|')
-                            if len(parts) == 3:
-                                sources.append(parts[1].strip())  # URL
-        except Exception as e:
-            log.warning(f" Error loading existing sources: {e}")
-        return sources
-    
-    def is_architectural_website(self, url, title, description):
-        """Check if a website is architectural in nature"""
-        text = f"{title} {description}".lower()
-        return any(keyword in text for keyword in self.architectural_keywords)
-    
-    def classify_website(self, url, title, description):
-        """Classify website into a category"""
-        text = f"{title} {description}".lower()
-        
-        if any(word in text for word in ['academic', 'university', 'research', 'journal']):
-            return 'Academic'
-        elif any(word in text for word in ['news', 'magazine', 'blog']):
-            return 'News'
-        elif any(word in text for word in ['innovation', 'technology', 'future']):
-            return 'Innovation'
-        elif any(word in text for word in ['regional', 'local', 'city']):
-            return 'Regional'
-        else:
-            return 'Research'
-    
-    def extract_website_info(self, url):
-        """Extract website information"""
-        try:
-            response = self.session.get(url, timeout=10)
-            response.raise_for_status()
-            
-            # Lazy import for BeautifulSoup
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            # Extract title
-            title = soup.find('title')
-            title_text = title.get_text().strip() if title else ''
-            
-            # Extract description
-            description = ''
-            meta_desc = soup.find('meta', attrs={'name': 'description'})
-            if meta_desc:
-                description = meta_desc.get('content', '')
-            
-            return {
-                'title': title_text,
-                'description': description,
-                'url': url
-            }
-        
-        except Exception as e:
-            log.warning(f" Error extracting info from {url}: {e}")
-            return None
-    
-    def find_links_on_page(self, url):
-        """Find links on a webpage"""
-        try:
-            response = self.session.get(url, timeout=10)
-            response.raise_for_status()
-            
-            # Lazy import for BeautifulSoup
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            links = []
-            for link in soup.find_all('a', href=True):
-                href = link['href']
-                
-                # Make relative URLs absolute
-                if href.startswith('/'):
-                    href = urljoin(url, href)
-                
-                # Filter for valid URLs
-                if href.startswith('http') and href not in links:
-                    links.append(href)
-            
-            return links
-        
-        except Exception as e:
-            log.warning(f" Error finding links on {url}: {e}")
-            return []
-    
-    def discover_new_sources(self, max_sources_per_day=3):
-        """Discover new architectural sources"""
-        log.info(f" Discovering new architectural sources (max: {max_sources_per_day})")
-        
-        existing_sources = self.load_existing_sources()
-        new_sources = []
-        
-        # Check cache first
-        cache_key = f"discovery_{datetime.now().strftime('%Y%m%d')}"
-        cached_discovery = self.load_from_cache(cache_key)
-        if cached_discovery:
-            log.info(" Using cached discovery results")
-            return cached_discovery
-        
-        discovery_limit = int(get_env("DISCOVERY_SOURCES_LIMIT", "5"))
-        for source_url in self.discovery_sources[:discovery_limit]:  # Limit sources
-            try:
-                log.info(f" Scanning {source_url} for new sources")
-                
-                links = self.find_links_on_page(source_url)
-                
-                for link in links:
-                    if len(new_sources) >= max_sources_per_day:
-                        break
-                    
-                    # Skip if already exists
-                    if link in existing_sources:
-                        continue
-                    
-                    # Extract website info
-                    info = self.extract_website_info(link)
-                    if not info:
-                        continue
-                    
-                    # Check if architectural
-                    if self.is_architectural_website(link, info['title'], info['description']):
-                        category = self.classify_website(link, info['title'], info['description'])
-                        
-                        new_source = {
-                            'name': self.extract_site_name(link),
-                            'url': link,
-                            'category': category
-                        }
-                        
-                        new_sources.append(new_source)
-                        log.info(f" Found new source: {new_source['name']} ({category})")
-                
-                time.sleep(self.delay_between_requests)
-                
-            except Exception as e:
-                log.warning(f" Error scanning {source_url}: {e}")
-                continue
-        
-        # Cache results
-        self.save_to_cache(cache_key, new_sources)
-        
-        # Add to manual_sources.txt
-        if new_sources:
-            self.add_sources_to_file(new_sources, max_sources_per_day)
-        
-        return new_sources
-    
-    def extract_site_name(self, url):
-        """Extract site name from URL"""
-        try:
-            parsed = urlparse(url)
-            domain = parsed.netloc
-            return domain.replace('www.', '').split('.')[0].title()
-        except:
-            return "Unknown"
-    
-    def add_sources_to_file(self, sources, max_sources_per_day):
-        """Add new sources to manual_sources.txt"""
-        try:
-            added_count = 0
-            
-            with open(self.sources_file, 'a', encoding='utf-8') as f:
-                for source in sources:
-                    if added_count >= max_sources_per_day:
-                        break
-                    
-                    # Check if already exists
-                    existing_sources = self.load_existing_sources()
-                    if source['url'] not in existing_sources:
-                        f.write(f"{source['name']}|{source['url']}|{source['category']}\n")
-                        added_count += 1
-                        log.info(f" Added to manual_sources.txt: {source['name']}")
-            
-            log.info(f" Added {added_count} new sources to {self.sources_file}")
-        
-        except Exception as e:
-            log.error(f" Error adding sources to file: {e}")
-    
-    def get_daily_discovery_stats(self):
-        """Get daily discovery statistics"""
-        try:
-            cache_key = f"discovery_{datetime.now().strftime('%Y%m%d')}"
-            cached_discovery = self.load_from_cache(cache_key)
-            
-            if cached_discovery:
-                return {
-                    'discovered_today': len(cached_discovery),
-                    'sources': cached_discovery
-                }
-            else:
-                return {
-                    'discovered_today': 0,
-                    'sources': []
-                }
-        
-        except Exception as e:
-            log.warning(f" Error getting discovery stats: {e}")
-            return {'discovered_today': 0, 'sources': []}
+
 
 # ===  Web Scraping ===
 def scrape_architectural_content():
@@ -2125,15 +1872,12 @@ def scrape_architectural_content():
     log.info(" STEP 1/6: Scraping architectural content")
     log.info("============================================================")
 
-    # Run daily source discovery first
-    run_daily_source_discovery()
-
     try:
         log.info(" Using web scraping...")
         scraper = WebScraper()
         
-        # Scrape articles from manual sources
-        max_sources = int(get_env('WEB_SCRAPER_MAX_SOURCES', '10'))
+        # Scrape articles from bookmarks sources
+        max_sources = int(get_env('WEB_SCRAPER_MAX_SOURCES', '6'))
         articles = scraper.scrape_all_sources(max_sources=max_sources)
 
         if articles:
@@ -2164,302 +1908,69 @@ def scrape_architectural_content():
     log.warning(f" No articles scraped, using fallback theme: {fallback_theme}")
     return fallback_theme
 
-def run_daily_source_discovery():
-    """Run daily architectural source discovery"""
-    log.info(" Running daily architectural source discovery...")
-    
+def list_bookmarks_sources():
+    """List all sources from bookmarks.html"""
     try:
-        discoverer = ArchitecturalSourceDiscoverer()
-        max_sources_per_day = int(get_env('MAX_SOURCES_PER_DAY', '10'))
+        bookmarks_file = get_env('BOOKMARKS_FILE', 'bookmarks.html')
         
-        added_sources = discoverer.discover_new_sources(max_sources_per_day=max_sources_per_day)
-        
-        if added_sources:
-            log.info(f" Added {len(added_sources)} new architectural sources:")
-            for source in added_sources:
-                log.info(f"   • {source['name']} ({source['category']})")
-        else:
-            log.info("ℹ No new sources discovered today")
-            
-    except Exception as e:
-        log.warning(f" Source discovery failed: {e}")
-
-def add_manual_source(name, url, category):
-    """Add a new source to manual_sources.txt"""
-    log.info(f" Adding source: {name}")
-    
-    try:
-        sources_file = get_env('MANUAL_SOURCES_FILE', 'manual_sources.txt')
-        
-        # Check if source already exists
-        existing_sources = []
-        if os.path.exists(sources_file):
-            with open(sources_file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    line = line.strip()
-                    if line and not line.startswith('#'):
-                        parts = line.split('|')
-                        if len(parts) == 3:
-                            existing_sources.append(parts[0].strip())
-        
-        if name in existing_sources:
-            log.warning(f" Source '{name}' already exists")
-            return False
-        
-        # Add new source
-        with open(sources_file, 'a', encoding='utf-8') as f:
-            f.write(f"{name}|{url}|{category}\n")
-        
-        log.info(f" Added source: {name}")
-        return True
-        
-    except Exception as e:
-        log.error(f" Error adding source: {e}")
-        return False
-
-def remove_manual_source(name):
-    """Remove a source from manual_sources.txt"""
-    log.info(f" Removing source: {name}")
-    
-    try:
-        sources_file = get_env('MANUAL_SOURCES_FILE', 'manual_sources.txt')
-        
-        if not os.path.exists(sources_file):
-            log.warning(f" Sources file not found: {sources_file}")
-            return False
-        
-        # Read all lines and filter out the source to remove
-        lines = []
-        removed = False
-        
-        with open(sources_file, 'r', encoding='utf-8') as f:
-            for line in f:
-                line_stripped = line.strip()
-                if line_stripped and not line_stripped.startswith('#'):
-                    parts = line_stripped.split('|')
-                    if len(parts) == 3 and parts[0].strip() == name:
-                        removed = True
-                        continue
-                lines.append(line)
-        
-        if not removed:
-            log.warning(f" Source '{name}' not found")
-            return False
-        
-        # Write back the file without the removed source
-        with open(sources_file, 'w', encoding='utf-8') as f:
-            f.writelines(lines)
-        
-        log.info(f" Removed source: {name}")
-        return True
-        
-    except Exception as e:
-        log.error(f" Error removing source: {e}")
-        return False
-
-def list_manual_sources():
-    """List all sources in manual_sources.txt"""
-    log.info(" Current Manual Sources:")
-    
-    try:
-        sources_file = get_env('MANUAL_SOURCES_FILE', 'manual_sources.txt')
-        
-        if not os.path.exists(sources_file):
-            log.warning(f" Sources file not found: {sources_file}")
+        if not os.path.exists(bookmarks_file):
+            log.warning(f" Bookmarks file not found: {bookmarks_file}")
             return []
         
+        from bs4 import BeautifulSoup
+        
         sources = []
-        with open(sources_file, 'r', encoding='utf-8') as f:
-            for line_num, line in enumerate(f, 1):
-                line = line.strip()
-                if line and not line.startswith('#'):
-                    try:
-                        parts = line.split('|')
-                        if len(parts) == 3:
-                            sources.append({
-                                'name': parts[0].strip(),
-                                'url': parts[1].strip(),
-                                'category': parts[2].strip()
-                            })
-                            log.info(f"   • {parts[0].strip()} ({parts[2].strip()})")
-                        else:
-                            log.warning(f" Invalid format in line {line_num}: {line}")
-                    except Exception as e:
-                        log.warning(f" Error parsing line {line_num}: {e}")
+        with open(bookmarks_file, 'r', encoding='utf-8') as f:
+            soup = BeautifulSoup(f.read(), 'html.parser')
         
-        log.info(f" Total sources: {len(sources)}")
+        # Find all bookmark links
+        links = soup.find_all('a', href=True)
+        
+        for link in links:
+            href = link.get('href', '').strip()
+            name = link.get_text(strip=True)
+            
+            # Filter for architectural/design related URLs
+            if href and name and any(keyword in href.lower() or keyword in name.lower() 
+                                   for keyword in ['architect', 'design', 'art', 'building', 'interior', 'urban', 'ai', 'tech']):
+                sources.append({
+                    'name': name,
+                    'url': href,
+                    'category': 'Bookmarks',
+                    'type': 'bookmarks'
+                })
+        
         return sources
         
-    except Exception as e:
-        log.error(f" Error listing sources: {e}")
+    except ImportError:
+        log.error(" BeautifulSoup not installed. Install with: pip install beautifulsoup4")
         return []
-    
-    # Get today's date for consistent source selection
-    today = datetime.now().date()
-    day_of_year = today.timetuple().tm_yday
-    
-    # Select source based on day of year (ensures one per day)
-    source_index = day_of_year % len(architectural_sources)
-    selected_source = architectural_sources[source_index]
-    
-    # Check if this source is already in our feeds
-    existing_feeds_file = get_env('EXISTING_FEEDS_FILE', 'existing_architectural_feeds.json')
-    existing_feeds = []
-    
-    try:
-        if os.path.exists(existing_feeds_file):
-            with open(existing_feeds_file, 'r') as f:
-                existing_feeds = json.load(f)
     except Exception as e:
-        log.warning(f" Could not load existing feeds: {e}")
-    
-    # Check if source already exists
-    source_exists = any(feed.get('name') == selected_source['name'] for feed in existing_feeds)
-    
-    if not source_exists:
-        # Add new source
-        existing_feeds.append(selected_source)
-        
-        try:
-            with open(existing_feeds_file, 'w') as f:
-                json.dump(existing_feeds, f, indent=2)
-            
-            log.info(f" Added new architectural source: {selected_source['name']} ({selected_source['category']})")
-            log.info(f" Total sources: {len(existing_feeds)}")
-            
-            # Note: FreshRSS integration removed - using web scraping only
-            log.info(f" New source added to manual_sources.txt")
-                    
-        except Exception as e:
-            log.error(f" Could not save new source: {e}")
-    else:
-        log.info(f"ℹ Source {selected_source['name']} already exists in feeds")
-    
-    return selected_source
+        log.error(f" Error listing bookmarks sources: {e}")
+        return []
 
-def display_manual_sources():
-    """Display current manual sources and their status"""
-    log.info(" Current Manual Sources Status")
-    log.info("=" * 50)
+def display_bookmarks_sources():
+    """Display all bookmarks sources in a formatted way"""
+    sources = list_bookmarks_sources()
     
-    sources = list_manual_sources()
+    if not sources:
+        log.info(" No bookmarks sources found")
+        return
     
-    if sources:
-        # Group by category
-        categories = {}
-        for source in sources:
-            category = source.get('category', 'Additional')
-            if category not in categories:
-                categories[category] = []
-            categories[category].append(source)
-        
-        # Display sources by category
-        total_sources = len(sources)
-        log.info(f" Total Sources: {total_sources}")
-        
-        for category, category_sources in categories.items():
-            log.info(f"\n  {category} ({len(category_sources)} sources):")
-            for source in category_sources:
-                log.info(f"   • {source['name']}")
+    log.info(" Bookmarks Sources:")
+    log.info(" " + "="*50)
     
-        return sources
+    for i, source in enumerate(sources, 1):
+        log.info(f" {i}. {source['name']}")
+        log.info(f"    URL: {source['url']}")
+        log.info(f"    Category: {source['category']}")
+        log.info(" " + "-"*30)
+    
+    log.info(f" Total: {len(sources)} sources")
+
+
 
 # === 🤖 LLM Integration ===
-async def call_llm_async(session, prompt, system_prompt=None, semaphore=None):
-    """Async version of call_llm with semaphore for rate limiting"""
-    if semaphore:
-        async with semaphore:
-            return await _call_llm_async_internal(session, prompt, system_prompt)
-    else:
-        return await _call_llm_async_internal(session, prompt, system_prompt)
-
-async def _call_llm_async_internal(session, prompt, system_prompt=None):
-    """Internal async LLM call implementation"""
-    # Create cache key
-    cache_key = f"llm_{Config.API['text_provider']}_{hashlib.md5((prompt + str(system_prompt)).encode()).hexdigest()}"
-    
-    # Try to load from cache first
-    cached_result = load_from_cache(cache_key, max_age_hours=12)
-    if cached_result:
-        log.debug(f" Using cached LLM result for prompt: {prompt[:50]}...")
-        return cached_result
-    
-    if Config.API['text_provider'] == 'groq':
-        url = get_env('GROQ_API_URL', 'https://api.groq.com/openai/v1/chat/completions')
-        api_key = get_env('GROQ_API_KEY')
-        model = get_env('TEXT_MODEL', 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free')
-    else:
-        url = f"{Config.API['base_url']}/chat/completions"
-        api_key = Config.API['together_key']
-        model = get_env('TEXT_MODEL', 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free')
-    
-    messages = []
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
-    messages.append({"role": "user", "content": prompt})
-    
-    payload = {
-        "model": model,
-        "messages": messages,
-        "max_tokens": 4000,
-        "temperature": 0.8
-    }
-    
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    
-    max_retries = Config.LIMITS['max_retries']
-    retry_delays = [int(x.strip()) for x in get_env('LLM_RETRY_DELAYS', '60,120,180').split(',')]
-    
-    for attempt in range(max_retries):
-        try:
-            async with session.post(url, headers=headers, json=payload, timeout=aiohttp.ClientTimeout(total=Config.LIMITS['api_timeout'])) as response:
-                response.raise_for_status()
-                data = await response.json()
-                result = data['choices'][0]['message']['content'].strip()
-                
-                # Save to cache for future use
-                save_to_cache(cache_key, result)
-                
-                # Rate limiting delay
-                await asyncio.sleep(Config.LIMITS['caption_rate_limit'])
-                return result
-                
-        except aiohttp.ClientResponseError as e:
-            if e.status == 429:  # Rate limited
-                delay = retry_delays[min(attempt, len(retry_delays)-1)]
-                log.warning(f" Rate limited (attempt {attempt+1}/{max_retries}), waiting {delay}s...")
-                await asyncio.sleep(delay)
-                continue
-            elif e.status in [502, 503]:  # Service unavailable/Bad gateway
-                delay = retry_delays[min(attempt, len(retry_delays)-1)]
-                log.warning(f" Service error {e.status} (attempt {attempt+1}/{max_retries}), waiting {delay}s...")
-                await asyncio.sleep(delay)
-                continue
-            else:
-                log.error(f" LLM call failed with HTTP {e.status}: {e}")
-                if attempt == max_retries - 1:
-                    return None
-                continue
-                
-        except asyncio.TimeoutError:
-            log.warning(f" Request timeout (attempt {attempt+1}/{max_retries})")
-            if attempt == max_retries - 1:
-                log.error(" All retry attempts failed due to timeout")
-                return None
-            await asyncio.sleep(retry_delays[min(attempt, len(retry_delays)-1)])
-            continue
-            
-        except Exception as e:
-            log.error(f" Unexpected error in async LLM call (attempt {attempt+1}/{max_retries}): {e}")
-            if attempt == max_retries - 1:
-                return None
-            await asyncio.sleep(retry_delays[min(attempt, len(retry_delays)-1)])
-            continue
-    
-    return None
 
 def call_llm(prompt, system_prompt=None):
     """Call LLM API with caching, enhanced token limits for sophisticated prompts"""
@@ -2602,141 +2113,6 @@ def generate_caption(prompt):
     return generate_unique_caption(prompt, [])
 
 # ===  Image Generation ===
-async def generate_single_image_async(session, prompt, style_name, image_number, semaphore=None):
-    """Async version of generate_single_image with semaphore for rate limiting"""
-    if semaphore:
-        async with semaphore:
-            return await _generate_single_image_async_internal(session, prompt, style_name, image_number)
-    else:
-        return await _generate_single_image_async_internal(session, prompt, style_name, image_number)
-
-async def _generate_single_image_async_internal(session, prompt, style_name, image_number):
-    """Internal async image generation implementation"""
-    log.info(f" Generating {style_name} image {image_number}")
-    
-    style_dir = os.path.join("images", style_name)
-    os.makedirs(style_dir, exist_ok=True)
-    
-    # Get enhanced style configuration with sophisticated prompts
-    style_config = STYLE_CONFIG.get(style_name, {
-        'model': 'black-forest-labs/FLUX.1-schnell-free',
-        'prompt_suffix': f', {style_name} architectural style, sophisticated design, artistic composition, professional photography, high quality, detailed materials, perfect lighting, architectural beauty, structural elegance, spatial harmony, material expression, environmental integration, human scale consideration, cultural significance, technical precision, aesthetic excellence',
-        'negative_prompt': 'blurry, low quality, distorted, amateur, unrealistic, poor composition, bad lighting, ugly, disorganized, messy, unprofessional, cartoon, painting, sketch, drawing, text, watermark, signature'
-    })
-    
-    full_prompt = f"{prompt}{style_config['prompt_suffix']}"
-    negative_prompt = style_config['negative_prompt']
-    
-    together_api_url = f"{Config.API['base_url']}/images/generations"
-    
-    payload = {
-        "model": style_config['model'],
-        "prompt": full_prompt,
-        "negative_prompt": negative_prompt,
-        "width": Config.IMAGE["width"],
-        "height": Config.IMAGE["height"],
-        "steps": int(get_env('INFERENCE_STEPS', '4')),
-        "guidance_scale": float(get_env('GUIDANCE_SCALE', '7.5')),
-        "seed": random.randint(1, 1000000)
-    }
-    
-    headers = {
-        "Authorization": f"Bearer {Config.API['together_key']}",
-        "Content-Type": "application/json"
-    }
-    
-    max_retries = Config.LIMITS['max_retries']
-    retry_delays = [int(x.strip()) for x in get_env('IMAGE_RETRY_DELAYS', '60,120,180').split(',')]
-    
-    for attempt in range(max_retries):
-        try:
-            log.info(f" Attempt {attempt + 1}/{max_retries} for {style_name} image {image_number}")
-            
-            async with session.post(
-                together_api_url,
-                headers=headers,
-                json=payload,
-                timeout=aiohttp.ClientTimeout(total=Config.LIMITS['api_timeout'])
-            ) as response:
-                if response.status == 200:
-                    data = await response.json()
-                    if 'data' in data and len(data['data']) > 0:
-                        image_data = data['data'][0]
-                        if 'url' in image_data:
-                            image_url = image_data['url']
-                            async with session.get(image_url, timeout=aiohttp.ClientTimeout(total=60)) as image_response:
-                                if image_response.status == 200:
-                                    image_content = await image_response.read()
-                                    
-                                    # Lazy import for image processing
-                                    
-                                    # Load image and apply DPI-aware preprocessing
-                                    img = Image.open(io.BytesIO(image_content))
-                                    
-                                    # Get DPI setting from environment
-                                    dpi = Config.PDF["dpi"]
-                                    
-                                    # Calculate new dimensions based on DPI (72 DPI is standard screen resolution)
-                                    # Formula: new_size = original_size * (target_dpi / 72)
-                                    new_width = int(img.width * dpi / 72)
-                                    new_height = int(img.height * dpi / 72)
-                                    
-                                    # Resize image for high-quality PDF output
-                                    img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
-                                    
-                                    # Log DPI processing information
-                                    log_dpi_processing_info((img.width, img.height), dpi, (new_width, new_height))
-                                    
-                                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                                    image_filename = f"{timestamp}_{image_number:02d}_{style_name}.jpg"
-                                    image_path = os.path.join(style_dir, image_filename)
-                                    
-                                    # Save with high quality
-                                    image_quality = int(get_env("IMAGE_QUALITY", "95"))
-                                    img.save(image_path, 'JPEG', quality=image_quality, dpi=(dpi, dpi))
-                                    
-                                    log.info(f" Generated {style_name} image {image_number}: {image_filename}")
-                                    await asyncio.sleep(Config.LIMITS['image_rate_limit'])
-                                    return image_path
-                                else:
-                                    log.error(f" Failed to download image from {image_url} (HTTP {image_response.status})")
-                        else:
-                            log.error(f" No image URL in response for {style_name} image {image_number}")
-                    else:
-                        log.error(f" Invalid response structure for {style_name} image {image_number}")
-                elif response.status == 429:  # Rate limited
-                    delay = retry_delays[min(attempt, len(retry_delays)-1)]
-                    log.warning(f" Rate limited (attempt {attempt+1}/{max_retries}), waiting {delay}s...")
-                    await asyncio.sleep(delay)
-                    continue
-                elif response.status in [502, 503]:  # Service unavailable/Bad gateway
-                    delay = retry_delays[min(attempt, len(retry_delays)-1)]
-                    log.warning(f" Service error {response.status} (attempt {attempt+1}/{max_retries}), waiting {delay}s...")
-                    await asyncio.sleep(delay)
-                    continue
-                else:
-                    log.error(f" Image generation failed with HTTP {response.status}")
-                    if attempt == max_retries - 1:
-                        return None
-                    await asyncio.sleep(retry_delays[min(attempt, len(retry_delays)-1)])
-                    continue
-                    
-        except asyncio.TimeoutError:
-            log.warning(f" Image generation timeout (attempt {attempt+1}/{max_retries})")
-            if attempt == max_retries - 1:
-                log.error(" All image generation attempts failed due to timeout")
-                return None
-            await asyncio.sleep(retry_delays[min(attempt, len(retry_delays)-1)])
-            continue
-            
-        except Exception as e:
-            log.error(f" Unexpected error in async image generation (attempt {attempt+1}/{max_retries}): {e}")
-            if attempt == max_retries - 1:
-                return None
-            await asyncio.sleep(retry_delays[min(attempt, len(retry_delays)-1)])
-            continue
-    
-    return None
 
 def generate_single_image(prompt, style_name, image_number):
     """Generate a single image using provider abstraction layer"""
@@ -2792,245 +2168,61 @@ def generate_single_image(prompt, style_name, image_number):
     log.error(f" Failed to generate {style_name} image {image_number}")
     return None
 
-async def generate_all_images_async(prompts, style_name):
-    """Async version of generate_all_images with semaphore-based rate limiting"""
-    log.info(f" Starting async batch generation of {len(prompts)} images for {style_name} style")
-    
-    # Create semaphore for rate limiting
-    semaphore = asyncio.Semaphore(Config.LIMITS['max_concurrent_images'])
-    
-    # Pre-create style directory for all images
-    style_dir = Path("images") / style_name
-    style_dir.mkdir(parents=True, exist_ok=True)
-    
-    async def generate_image_with_index(session, i, prompt):
-        try:
-            # Check if image already exists (for resume functionality)
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            image_filename = f"{timestamp}_{i+1:02d}_{style_name}.jpg"
-            image_path = style_dir / image_filename
-            
-            # Skip if already exists and we're in fast mode
-            if image_path.exists() and FAST_MODE:
-                log.debug(f" Using existing image: {image_filename}")
-                return i, str(image_path), None
-            
-            result_path = await generate_single_image_async(session, prompt, style_name, i+1, semaphore)
-            return i, result_path, None
-        except Exception as e:
-            return i, None, str(e)
-    
-    # Process in batches for better memory management
-    batch_size = int(get_env('BATCH_SIZE', '25')) if BATCH_PROCESSING else len(prompts)
-    
-    images = []
-    
-    # Create aiohttp session
-    timeout = aiohttp.ClientTimeout(total=Config.LIMITS['api_timeout'])
-    connector = aiohttp.TCPConnector(limit=Config.LIMITS['max_concurrent_images'] * 2)
-    
-    async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
-        with tqdm(total=len(prompts), desc=f" Generating {style_name} images", unit="image") as pbar:
-            for batch_start in range(0, len(prompts), batch_size):
-                batch_end = min(batch_start + batch_size, len(prompts))
-                batch_prompts = prompts[batch_start:batch_end]
-                
-                # Create tasks for batch
-                tasks = [
-                    generate_image_with_index(session, i, prompt)
-                    for i, prompt in enumerate(batch_prompts, batch_start)
-                ]
-                
-                # Execute batch tasks concurrently
-                results = await asyncio.gather(*tasks, return_exceptions=True)
-                
-                # Process results
-                for result in results:
-                    if isinstance(result, Exception):
-                        log.error(f" Task failed with exception: {result}")
-                        pbar.update(1)
-                        continue
-                    
-                    i, image_path, error = result
-                    
-                    if image_path:
-                        images.append(image_path)
-                        pbar.set_postfix_str(f" {os.path.basename(image_path)}")
-                    else:
-                        log.warning(f" Failed to generate image {i+1}: {error}")
-                        pbar.set_postfix_str(f" Failed")
-                    
-                    pbar.update(1)
-                
-                # Memory optimization between batches
-                if OPTIMIZE_MEMORY:
-                    gc.collect()
-    
-    success_rate = (len(images) / len(prompts)) * 100
-    log.info(f" Async batch image generation complete: {len(images)}/{len(prompts)} images generated ({success_rate:.1f}% success rate)")
-    
-    return images
+
 
 def generate_all_images(prompts, style_name):
-    """Generate all images with batch processing and concurrent execution for 100x speed"""
-    log.info(f" Starting batch concurrent generation of {len(prompts)} images for {style_name} style")
+    """Generate all images sequentially"""
+    log.info(f" Starting sequential generation of {len(prompts)} images for {style_name} style")
     
     images = []
-    max_workers = MAX_CONCURRENT_IMAGES if not FAST_MODE else 1
     
     # Pre-create style directory for all images
     style_dir = Path("images") / style_name
     style_dir.mkdir(parents=True, exist_ok=True)
     
-    def generate_image_with_index(args):
-        i, prompt = args
-        try:
-            # Check if image already exists (for resume functionality)
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            image_filename = f"{timestamp}_{i+1:02d}_{style_name}.jpg"
-            image_path = style_dir / image_filename
-            
-            # Skip if already exists and we're in fast mode
-            if image_path.exists() and FAST_MODE:
-                log.debug(f" Using existing image: {image_filename}")
-                return i, str(image_path), None
-            
-            result_path = generate_single_image(prompt, style_name, i+1)
-            return i, result_path, None
-        except Exception as e:
-            return i, None, str(e)
-    
-    # Process in batches for better memory management
-    batch_size = int(get_env('BATCH_SIZE', '25')) if BATCH_PROCESSING else len(prompts)
-    
+    # Process images sequentially with progress bar
     with tqdm(total=len(prompts), desc=f" Generating {style_name} images", unit="image") as pbar:
-        for batch_start in range(0, len(prompts), batch_size):
-            batch_end = min(batch_start + batch_size, len(prompts))
-            batch_prompts = prompts[batch_start:batch_end]
-            
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                # Submit batch tasks
-                future_to_index = {
-                    executor.submit(generate_image_with_index, (i, prompt)): i 
-                    for i, prompt in enumerate(batch_prompts, batch_start)
-                }
+        for i, prompt in enumerate(prompts):
+            try:
+                # Check if image already exists (for resume functionality)
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                image_filename = f"{timestamp}_{i+1:02d}_{style_name}.jpg"
+                image_path = style_dir / image_filename
                 
-                # Process completed batch tasks
-                for future in as_completed(future_to_index):
-                    i, image_path, error = future.result()
-                    
-                    if image_path:
-                        images.append(image_path)
-                        pbar.set_postfix_str(f" {os.path.basename(image_path)}")
+                # Skip if already exists
+                if image_path.exists():
+                    log.debug(f" Using existing image: {image_filename}")
+                    images.append(str(image_path))
+                    pbar.set_postfix_str(f" {image_filename}")
+                else:
+                    result_path = generate_single_image(prompt, style_name, i+1)
+                    if result_path:
+                        images.append(result_path)
+                        pbar.set_postfix_str(f" {os.path.basename(result_path)}")
                     else:
-                        log.warning(f" Failed to generate image {i+1}: {error}")
+                        log.warning(f" Failed to generate image {i+1}")
                         pbar.set_postfix_str(f" Failed")
-                    
-                    pbar.update(1)
-            
-            # Memory optimization between batches
-            if OPTIMIZE_MEMORY:
-                gc.collect()
+            except Exception as e:
+                log.warning(f" Failed to generate image {i+1}: {e}")
+                pbar.set_postfix_str(f" Failed")
+            finally:
+                pbar.update(1)
     
-    success_rate = (len(images) / len(prompts)) * 100
-    log.info(f" Batch image generation complete: {len(images)}/{len(prompts)} images generated ({success_rate:.1f}% success rate)")
+    success_rate = (len(images) / len(prompts)) * 100 if prompts else 0
+    log.info(f" Sequential image generation complete: {len(images)}/{len(prompts)} images generated ({success_rate:.1f}% success rate)")
     
     return images
 
 # ===  Caption Generation ===
-async def generate_all_captions_async(prompts):
-    """Async version of generate_all_captions with semaphore-based rate limiting"""
-    log.info(f" Starting async cached caption generation for {len(prompts)} prompts")
-    
-    # Create semaphore for rate limiting
-    semaphore = asyncio.Semaphore(Config.LIMITS['max_concurrent_captions'])
-    
-    captions = [None] * len(prompts)  # Pre-allocate list
-    
-    async def generate_caption_with_index(session, i, prompt):
-        try:
-            # Create cache key for this prompt
-            cache_key = f"caption_{hashlib.md5(prompt.encode()).hexdigest()}"
-            
-            # Try to load from cache first
-            cached_caption = load_from_cache(cache_key, max_age_hours=24)
-            if cached_caption:
-                log.debug(f" Using cached caption for prompt: {prompt[:30]}...")
-                return i, cached_caption, None
-            
-            if SKIP_CAPTION_DEDUPLICATION:
-                # Fast mode: skip deduplication
-                caption = await call_llm_async(session, prompt, CAPTION_SYSTEM, semaphore)
-            else:
-                # Normal mode: ensure uniqueness
-                existing_captions = [c for c in captions if c is not None]
-                caption = await generate_unique_caption_async(session, prompt, existing_captions, semaphore)
-            
-            # Save to cache
-            save_to_cache(cache_key, caption)
-            
-            return i, caption, None
-        except Exception as e:
-            return i, None, str(e)
-    
-    # Process in batches for better memory management
-    batch_size = int(get_env('BATCH_SIZE', '25')) if BATCH_PROCESSING else len(prompts)
-    
-    # Create aiohttp session
-    timeout = aiohttp.ClientTimeout(total=Config.LIMITS['api_timeout'])
-    connector = aiohttp.TCPConnector(limit=Config.LIMITS['max_concurrent_captions'] * 2)
-    
-    async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
-        with tqdm(total=len(prompts), desc=f" Generating captions", unit="caption") as pbar:
-            for batch_start in range(0, len(prompts), batch_size):
-                batch_end = min(batch_start + batch_size, len(prompts))
-                batch_prompts = prompts[batch_start:batch_end]
-                
-                # Create tasks for batch
-                tasks = [
-                    generate_caption_with_index(session, i, prompt)
-                    for i, prompt in enumerate(batch_prompts, batch_start)
-                ]
-                
-                # Execute batch tasks concurrently
-                results = await asyncio.gather(*tasks, return_exceptions=True)
-                
-                # Process results
-                for result in results:
-                    if isinstance(result, Exception):
-                        log.error(f" Task failed with exception: {result}")
-                        pbar.update(1)
-                        continue
-                    
-                    i, caption, error = result
-                    
-                    if caption:
-                        captions[i] = caption
-                        pbar.set_postfix_str(f" Caption {i+1}")
-                    else:
-                        log.warning(f" Failed to generate caption {i+1}: {error}")
-                        pbar.set_postfix_str(f" Failed")
-                    
-                    pbar.update(1)
-                
-                # Memory optimization between batches
-                if OPTIMIZE_MEMORY:
-                    gc.collect()
-    
-    # Filter out None values
-    captions = [c for c in captions if c is not None]
-    log.info(f" Generated {len(captions)} captions with async caching")
-    return captions
-
-async def generate_unique_caption_async(session, prompt, existing_captions, semaphore=None):
-    """Async version of generate_unique_caption"""
+def generate_unique_caption(prompt, existing_captions, max_attempts=None):
+    """Generate a unique caption that's not too similar to existing ones"""
     log.info(f" Generating unique caption for: {prompt[:50]}...")
     
-    max_attempts = int(get_env('CAPTION_MAX_ATTEMPTS', '5'))
+    max_attempts = max_attempts or int(get_env('CAPTION_MAX_ATTEMPTS', '5'))
     
     for attempt in range(max_attempts):
         caption_prompt = CAPTION_TEMPLATE.format(prompt=prompt)
-        response = await call_llm_async(session, caption_prompt, CAPTION_SYSTEM, semaphore)
+        response = call_llm(caption_prompt, CAPTION_SYSTEM)
         
         if response:
             # Clean the response to remove AI-generated text
@@ -3084,73 +2276,46 @@ async def generate_unique_caption_async(session, prompt, existing_captions, sema
     return fallback_captions[0].replace("Architectural", "Structural").replace("spaces", "volumes")
 
 def generate_all_captions(prompts):
-    """Generate captions with caching and concurrent processing for 100x speed"""
-    log.info(f" Starting cached concurrent caption generation for {len(prompts)} prompts")
+    """Generate captions sequentially with caching"""
+    log.info(f" Starting sequential caption generation for {len(prompts)} prompts")
     
-    captions = [None] * len(prompts)  # Pre-allocate list
-    max_workers = MAX_CONCURRENT_CAPTIONS if not FAST_MODE else 1
+    captions = []
     
-    def generate_caption_with_index(args):
-        i, prompt = args
-        try:
-            # Create cache key for this prompt
-            cache_key = f"caption_{hashlib.md5(prompt.encode()).hexdigest()}"
-            
-            # Try to load from cache first
-            cached_caption = load_from_cache(cache_key, max_age_hours=24)
-            if cached_caption:
-                log.debug(f" Using cached caption for prompt: {prompt[:30]}...")
-                return i, cached_caption, None
-            
-            if SKIP_CAPTION_DEDUPLICATION:
-                # Fast mode: skip deduplication
-                caption = generate_caption(prompt)
-            else:
-                # Normal mode: ensure uniqueness
-                existing_captions = [c for c in captions if c is not None]
-                caption = generate_unique_caption(prompt, existing_captions)
-            
-            # Save to cache
-            save_to_cache(cache_key, caption)
-            
-            return i, caption, None
-        except Exception as e:
-            return i, None, str(e)
-    
-    # Process in batches for better memory management
-    batch_size = int(get_env('BATCH_SIZE', '25')) if BATCH_PROCESSING else len(prompts)
-    
+    # Process captions sequentially with progress bar
     with tqdm(total=len(prompts), desc=f" Generating captions", unit="caption") as pbar:
-        for batch_start in range(0, len(prompts), batch_size):
-            batch_end = min(batch_start + batch_size, len(prompts))
-            batch_prompts = prompts[batch_start:batch_end]
-            
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                # Submit batch tasks
-                future_to_index = {
-                    executor.submit(generate_caption_with_index, (i, prompt)): i 
-                    for i, prompt in enumerate(batch_prompts, batch_start)
-                }
+        for i, prompt in enumerate(prompts):
+            try:
+                # Create cache key for this prompt
+                cache_key = f"caption_{hashlib.md5(prompt.encode()).hexdigest()}"
                 
-                # Process completed batch tasks
-                for future in as_completed(future_to_index):
-                    i, caption, error = future.result()
+                # Try to load from cache first
+                cached_caption = load_from_cache(cache_key, max_age_hours=24)
+                if cached_caption:
+                    log.debug(f" Using cached caption for prompt: {prompt[:30]}...")
+                    captions.append(cached_caption)
+                    pbar.set_postfix_str(f" Caption {i+1}")
+                else:
+                    if SKIP_CAPTION_DEDUPLICATION:
+                        # Fast mode: skip deduplication
+                        caption = generate_caption(prompt)
+                    else:
+                        # Normal mode: ensure uniqueness
+                        caption = generate_unique_caption(prompt, captions)
                     
                     if caption:
-                        captions[i] = caption
+                        captions.append(caption)
+                        # Save to cache
+                        save_to_cache(cache_key, caption)
                         pbar.set_postfix_str(f" Caption {i+1}")
                     else:
-                        log.warning(f" Failed to generate caption {i+1}: {error}")
+                        log.warning(f" Failed to generate caption {i+1}")
                         pbar.set_postfix_str(f" Failed")
-                    
-                    pbar.update(1)
-            
-            # Memory optimization between batches
-            if OPTIMIZE_MEMORY:
-                gc.collect()
+            except Exception as e:
+                log.warning(f" Failed to generate caption {i+1}: {e}")
+                pbar.set_postfix_str(f" Failed")
+            finally:
+                pbar.update(1)
     
-    # Filter out None values
-    captions = [c for c in captions if c is not None]
     log.info(f" Generated {len(captions)} captions with caching")
     return captions
 
@@ -3339,14 +2504,7 @@ def main():
     parser.add_argument('--images', type=int, default=50, help='Number of images to generate (default: 50)')
     parser.add_argument('--style', type=str, help='Force specific style (e.g., technical, abstract)')
     parser.add_argument('--theme', type=str, help='Force specific theme instead of web scraping')
-    parser.add_argument('--sources', action='store_true', help='Display current architectural sources')
-    parser.add_argument('--add-source', nargs=3, metavar=('NAME', 'URL', 'CATEGORY'), help='Add a single source manually')
-    parser.add_argument('--remove-source', type=str, help='Remove a source by name')
-    parser.add_argument('--batch-sources', action='store_true', help='Add batch of predefined sources')
-    parser.add_argument('--discover-sources', action='store_true', help='Run daily source discovery')
-    parser.add_argument('--discovery-stats', action='store_true', help='Show daily discovery statistics')
-    parser.add_argument('--fast', action='store_true', help='Enable fast mode (Free Tier Optimized)')
-    parser.add_argument('--ultra', action='store_true', help='Enable ultra mode (Conservative Free Tier Optimization)')
+    parser.add_argument('--sources', action='store_true', help='Display current bookmarks sources')
     parser.add_argument('--convert-pdf', action='store_true', help='Convert latest PDF to Instagram images')
     parser.add_argument('--pdf-path', type=str, help='Specific PDF path for conversion')
     parser.add_argument('--instagram-posts', action='store_true', help='Convert to Instagram posts (square format)')
@@ -3367,65 +2525,12 @@ def main():
         log.debug(" Debug mode enabled via command line argument")
     
     # Declare global variables that might be modified
-    global FAST_MODE, SKIP_CAPTION_DEDUPLICATION, RATE_LIMIT_DELAY, MAX_CONCURRENT_IMAGES, MAX_CONCURRENT_CAPTIONS
-    
-    # Override settings for fast mode (Free Tier Optimized)
-    if args.fast:
-        FAST_MODE = True
-        SKIP_CAPTION_DEDUPLICATION = True
-        RATE_LIMIT_DELAY = Config.MODES["fast_delay"]
-    
-    # Override settings for ultra mode (Free Tier Optimized - Conservative)
-    if args.ultra:
-        FAST_MODE = True
-        SKIP_CAPTION_DEDUPLICATION = True
-        RATE_LIMIT_DELAY = Config.MODES["ultra_delay"]
-        MAX_CONCURRENT_IMAGES = Config.MODES["ultra_concurrent_images"]
-        MAX_CONCURRENT_CAPTIONS = Config.MODES["ultra_concurrent_captions"]
+    global SKIP_CAPTION_DEDUPLICATION, RATE_LIMIT_DELAY, MAX_SEQUENTIAL_IMAGES, MAX_SEQUENTIAL_CAPTIONS
     
     # Handle sources management
     if args.sources:
-        log.info(" Displaying architectural sources...")
-        display_manual_sources()
-        return
-    
-    # Handle manual source addition
-    if args.add_source:
-        name, url, category = args.add_source
-        add_manual_source(name, url, category)
-        return
-    
-    # Handle source removal
-    if args.remove_source:
-        remove_manual_source(args.remove_source)
-        return
-    
-    # Handle batch source addition
-    if args.batch_sources:
-        add_batch_manual_sources()
-        return
-    
-    # Handle source discovery
-    if args.discover_sources:
-        log.info(" Running architectural source discovery...")
-        run_daily_source_discovery()
-        return
-    
-    # Handle discovery statistics
-    if args.discovery_stats:
-        log.info(" Daily discovery statistics...")
-        try:
-            discoverer = ArchitecturalSourceDiscoverer()
-            stats = discoverer.get_daily_discovery_stats()
-            
-            if stats['total_discovered'] > 0:
-                log.info(f" Today's discoveries: {stats['total_discovered']} sources")
-                for category, count in stats['categories'].items():
-                    log.info(f"   • {category}: {count} sources")
-            else:
-                log.info("ℹ No discoveries today")
-        except Exception as e:
-            log.error(f" Error getting discovery stats: {e}")
+        log.info(" Displaying bookmarks sources...")
+        display_bookmarks_sources()
         return
     
     # Handle cache migration
@@ -3491,7 +2596,7 @@ def main():
                 return
             
             # Run authentication
-            success = asyncio.run(pinterest.authenticate())
+            success = pinterest.authenticate()
             if success:
                 log.info(" Pinterest authentication completed successfully!")
                 log.info(" You can now use --pinterest to post content")
@@ -3538,7 +2643,7 @@ def main():
                 return
             
             # Post to Pinterest (async)
-            result = asyncio.run(pinterest.post_daily_zine_to_pinterest(board_id, pdf_path, theme, style_name))
+            result = pinterest.post_daily_zine_to_pinterest(board_id, pdf_path, theme, style_name)
             if result:
                 log.info(" Pinterest posting completed successfully!")
             else:
@@ -3550,14 +2655,13 @@ def main():
     
 
 
-    log.info(" Starting Daily Zine Generator - Free Tier Optimized")
-    log.info(f" Fast Mode: {FAST_MODE}")
-    log.info(f" Concurrent Images: {MAX_CONCURRENT_IMAGES}")
-    log.info(f" Concurrent Captions: {MAX_CONCURRENT_CAPTIONS}")
+    log.info(" Starting Daily Zine Generator - Sequential Mode")
+    log.info(f" Sequential Images: {MAX_SEQUENTIAL_IMAGES}")
+    log.info(f" Sequential Captions: {MAX_SEQUENTIAL_CAPTIONS}")
     log.info(f"⏱ Rate Limit Delay: {RATE_LIMIT_DELAY}s")
     log.info(f" Skip Caption Deduplication: {SKIP_CAPTION_DEDUPLICATION}")
     log.info(" Pipeline: Web Scraping → Style Selection → Prompt Generation → Image Generation → Caption Generation → PDF Creation")
-    log.info(" Free Tier Limit: ~100 requests/minute - Conservative optimization for Together.ai free tier")
+    log.info(" Optimized for concurrent processing")
     
     # Run weekly cache optimization if scheduled (every Sunday)
     run_scheduled_cache_optimization()
@@ -3565,15 +2669,15 @@ def main():
     # Start timing
     start_time = time.time()
     
-    # Overall pipeline progress bar
-    with tqdm(total=6, desc=f" Overall Pipeline Progress", unit="step",
-              bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]') as pipeline_pbar:
+    # Simple ETA progress bar for complete process
+    with create_simple_eta_progress(6) as eta_pbar:
+        # Print initial ETA
+        print_eta_update(eta_pbar)
         
         # Step 1: Scrape web for architectural content or use provided theme
         log.info("=" * 60)
         log.info(" STEP 1/6: Scraping web for architectural content")
         log.info("=" * 60)
-        pipeline_pbar.set_description(f" Step 1/6: Web Scraping")
         
         if args.theme:
             theme = args.theme
@@ -3582,16 +2686,14 @@ def main():
             theme = scrape_architectural_content()
             log.info(f" Theme selected: {theme}")
         
-        pipeline_pbar.set_postfix_str(f" Theme: {theme[:30]}...")
-        pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        eta_pbar.update(1)
+        print_eta_update(eta_pbar)
+        time.sleep(1)  # Rate limiting between major steps
         
         # Step 2: Select daily style
         log.info("=" * 60)
         log.info(" STEP 2/6: Selecting daily style")
         log.info("=" * 60)
-        pipeline_pbar.set_description(f" Step 2/6: Style Selection")
         
         if args.style:
             style_name = args.style.lower()
@@ -3604,71 +2706,63 @@ def main():
             style_name = get_daily_style()
             log.info(f" Selected style: {style_name.upper()}")
         
-        pipeline_pbar.set_postfix_str(f" Style: {style_name.upper()}")
-        pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        eta_pbar.update(1)
+        print_eta_update(eta_pbar)
+        time.sleep(1)  # Rate limiting between major steps
         
         # Step 3: Generate prompts
         num_prompts = int(get_env('TEST_IMAGE_COUNT', '5')) if args.test else args.images
         log.info("=" * 60)
         log.info(f" STEP 3/6: Generating {num_prompts} prompts")
         log.info("=" * 60)
-        pipeline_pbar.set_description(f" Step 3/6: Prompt Generation")
+        
         prompts = generate_prompts(theme, num_prompts)
         if not prompts:
             log.error(" Failed to generate prompts")
             return
         log.info(f" Generated {len(prompts)} prompts")
-        pipeline_pbar.set_postfix_str(f" {len(prompts)} prompts")
-        pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        eta_pbar.update(1)
+        time.sleep(1)  # Rate limiting between major steps
         
         # Step 4: Generate images in one style (sequential or async)
         log.info("=" * 60)
         if args.async_mode:
             log.info(f" STEP 4/6: Generating {len(prompts)} images with async processing")
-            pipeline_pbar.set_description(f" Step 4/6: Async Image Generation")
-            images = asyncio.run(generate_all_images_async(prompts, style_name))
+            images = generate_all_images(prompts, style_name)
         else:
             log.info(f" STEP 4/6: Generating {len(prompts)} images sequentially")
-            pipeline_pbar.set_description(f" Step 4/6: Image Generation")
             images = generate_all_images(prompts, style_name)
         
         if not images:
             log.error(" Failed to generate images")
             return
         log.info(f" Generated {len(images)} images")
-        pipeline_pbar.set_postfix_str(f" {len(images)} images")
-        pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        eta_pbar.update(1)
+        print_eta_update(eta_pbar)
+        time.sleep(1)  # Rate limiting between major steps
         
         # Step 5: Generate captions (sequential or async)
         log.info("=" * 60)
         if args.async_mode:
             log.info(" STEP 5/6: Generating captions with async processing")
-            pipeline_pbar.set_description(f" Step 5/6: Async Caption Generation")
-            captions = asyncio.run(generate_all_captions_async(prompts))
+            captions = generate_all_captions(prompts)
         else:
             log.info(" STEP 5/6: Generating captions sequentially")
-            pipeline_pbar.set_description(f" Step 5/6: Caption Generation")
             captions = generate_all_captions(prompts)
         
         log.info(f" Generated {len(captions)} captions")
-        pipeline_pbar.set_postfix_str(f" {len(captions)} captions")
-        pipeline_pbar.update(1)
+        eta_pbar.update(1)
+        print_eta_update(eta_pbar)
         time.sleep(2)  # Rate limiting between major steps
         
         # Step 6: Create PDF
         log.info("=" * 60)
         log.info(" STEP 6/6: Creating PDF")
         log.info("=" * 60)
-        pipeline_pbar.set_description(f" Step 6/6: PDF Creation")
+        
         pdf_path = create_daily_pdf(images, captions, style_name, theme)
-        pipeline_pbar.set_postfix_str(f" PDF created")
-        pipeline_pbar.update(1)
+        eta_pbar.update(1)
+        print_eta_update(eta_pbar)
         
         if pdf_path:
             # Calculate performance metrics
@@ -3689,22 +2783,19 @@ def main():
             log.info(" All steps completed with concurrent processing!")
             
                             # Optional: Post to Pinterest if configured
-                pinterest_board_id = get_env("PINTEREST_BOARD_ID")
-                if pinterest_board_id and pinterest_board_id != "your_pinterest_board_id_here":
+            pinterest_board_id = get_env("PINTEREST_BOARD_ID")
+            if pinterest_board_id and pinterest_board_id != "your_pinterest_board_id_here":
                 log.info(" Posting to Pinterest...")
-                    try:
-                        # Import and setup Pinterest integration
-                        pinterest = PinterestIntegration()
-                        
-                        # Post to Pinterest (async)
-                    result = asyncio.run(pinterest.post_daily_zine_to_pinterest(pinterest_board_id, pdf_path, theme, style_name))
-                        if result:
+                try:
+                    pinterest = PinterestIntegration()
+                    result = pinterest.post_daily_zine_to_pinterest(pinterest_board_id, pdf_path, theme, style_name)
+                    if result:
                         log.info(" Pinterest posting completed successfully!")
-                        else:
+                    else:
                         log.info(" Pinterest posting skipped or failed")
-                    except Exception as e:
+                except Exception as e:
                     log.warning(f" Pinterest posting error: {e}")
-                else:
+            else:
                 log.info("ℹ Pinterest posting skipped (not configured)")
 
 
@@ -3713,9 +2804,8 @@ def main():
             log.info(" Converting to Instagram formats...")
             try:
                 posts = convert_pdf_to_instagram_images(pdf_path)
-                log.info(f" Converted to {len(posts)} Instagram posts")
-                
                 stories = create_instagram_story_images(pdf_path)
+                log.info(f" Converted to {len(posts)} Instagram posts")
                 log.info(f" Converted to {len(stories)} Instagram stories")
             except Exception as e:
                 log.warning(f" Instagram conversion error: {e}")
@@ -3791,8 +2881,9 @@ def convert_pdf_to_instagram_images(pdf_path, output_dir=None, dpi=None):
             # Apply DPI-aware resizing for Instagram (consistent with image generation)
             # Calculate new dimensions based on DPI: new_size = original_size * (target_dpi / 72)
             dpi_scale = dpi / 72
-            dpi_width = int(img_width * dpi_scale)
-            dpi_height = int(img_height * dpi_scale)
+            original_width, original_height = image.size
+            dpi_width = int(original_width * dpi_scale)
+            dpi_height = int(original_height * dpi_scale)
             
             # Resize image for high-quality output
             dpi_resized_image = image.resize((dpi_width, dpi_height), Image.Resampling.LANCZOS)
@@ -3888,8 +2979,9 @@ def create_instagram_story_images(pdf_path, output_dir=None, dpi=None):
             # Apply DPI-aware resizing for Instagram stories (consistent with image generation)
             # Calculate new dimensions based on DPI: new_size = original_size * (target_dpi / 72)
             dpi_scale = dpi / 72
-            dpi_width = int(img_width * dpi_scale)
-            dpi_height = int(img_height * dpi_scale)
+            original_width, original_height = image.size
+            dpi_width = int(original_width * dpi_scale)
+            dpi_height = int(original_height * dpi_scale)
             
             # Resize image for high-quality output
             dpi_resized_image = image.resize((dpi_width, dpi_height), Image.Resampling.LANCZOS)
@@ -3931,6 +3023,23 @@ def create_instagram_story_images(pdf_path, output_dir=None, dpi=None):
     except Exception as e:
         log.error(f" Story conversion failed: {e}")
         return None
+
+# ===  Simple ETA Progress Tracking ===
+import time
+
+def create_simple_eta_progress(total_steps):
+    """Create a simple progress bar showing only ETA for complete process"""
+    return tqdm(
+        total=total_steps,
+        desc="Complete Process ETA",
+        bar_format='{desc}: {remaining} remaining',
+        leave=True
+    )
+
+def print_eta_update(eta_pbar):
+    """Print ETA on a separate line"""
+    remaining = eta_pbar.format_dict.get('remaining', '?')
+    print(f"\n⏱️  ETA: {remaining} remaining for complete process\n")
 
 
 
