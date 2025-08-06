@@ -524,12 +524,12 @@ GUIDANCE_SCALE = float(get_env('GUIDANCE_SCALE', '7.5'))
 MAX_CONCURRENT_IMAGES = int(get_env('MAX_CONCURRENT_IMAGES', '8'))
 MAX_CONCURRENT_CAPTIONS = int(get_env('MAX_CONCURRENT_CAPTIONS', '8'))
 RATE_LIMIT_DELAY = float(get_env('RATE_LIMIT_DELAY', '0.6'))
-SKIP_CAPTION_DEDUPLICATION = get_env('SKIP_CAPTION_DEDUPLICATION', 'true').lower() == 'true'
-FAST_MODE = get_env('FAST_MODE', 'true').lower() == 'true'
-SKIP_WEB_SCRAPING = get_env('SKIP_WEB_SCRAPING', 'false').lower() == 'true'
-SKIP_THEME_GENERATION = get_env('SKIP_THEME_GENERATION', 'false').lower() == 'true'
-SKIP_PROMPT_GENERATION = get_env('SKIP_PROMPT_GENERATION', 'false').lower() == 'true'
-SKIP_PDF_CREATION = get_env('SKIP_PDF_CREATION', 'false').lower() == 'true'
+CAPTION_DEDUPLICATION = get_env('CAPTION_DEDUPLICATION', 'true').lower() == 'true'
+FAST_MODE = get_env('FAST_MODE', 'false').lower() == 'true'
+WEB_SCRAPING_ENABLED = get_env('WEB_SCRAPING_ENABLED', 'true').lower() == 'true'
+THEME_GENERATION_ENABLED = get_env('THEME_GENERATION_ENABLED', 'true').lower() == 'true'
+PROMPT_GENERATION_ENABLED = get_env('PROMPT_GENERATION_ENABLED', 'true').lower() == 'true'
+PDF_CREATION_ENABLED = get_env('PDF_CREATION_ENABLED', 'true').lower() == 'true'
 CACHE_ENABLED = get_env('CACHE_ENABLED', 'true').lower() == 'true'
 PRELOAD_STYLES = get_env('PRELOAD_STYLES', 'true').lower() == 'true'
 BATCH_PROCESSING = get_env('BATCH_PROCESSING', 'true').lower() == 'true'
@@ -1262,14 +1262,14 @@ class WebScraper:
                                     })
                                 else:
                                     log.warning(f" Invalid format in manual_sources.txt line {line_num}: {line}")
-                            except Exception as e:
+            except Exception as e:
                                 log.warning(f" Error parsing line {line_num}: {e}")
                 
                 log.info(f" Loaded {len(sources)} sources from {sources_file}")
             else:
                 log.warning(f" Sources file not found: {sources_file}")
                 
-        except Exception as e:
+            except Exception as e:
             log.error(f" Error loading sources: {e}")
         
         return sources
@@ -1306,7 +1306,7 @@ class WebScraper:
                     article_data = self.extract_article_data(element, source, selectors)
                     if article_data:
                         articles.append(article_data)
-                except Exception as e:
+        except Exception as e:
                     log.warning(f" Error extracting article from {source['name']}: {e}")
                     continue
             
@@ -1388,7 +1388,7 @@ class WebScraper:
                     'category': source['category'],
                     'scraped_at': datetime.now().isoformat()
                 }
-        
+                        
         except Exception as e:
             log.warning(f" Error extracting article data: {e}")
         
@@ -1614,7 +1614,7 @@ class ArchitecturalSourceDiscoverer:
                 'description': description,
                 'url': url
             }
-        
+            
         except Exception as e:
             log.warning(f" Error extracting info from {url}: {e}")
             return None
@@ -1641,7 +1641,7 @@ class ArchitecturalSourceDiscoverer:
                     links.append(href)
             
             return links
-        
+            
         except Exception as e:
             log.warning(f" Error finding links on {url}: {e}")
             return []
@@ -1795,7 +1795,7 @@ def scrape_architectural_content():
                     log.info(f" Web Scraping Summary: {analysis['total_articles']} articles from {len(analysis['top_sources'])} sources")
 
                     return selected_theme
-            except Exception as e:
+        except Exception as e:
                 log.warning(f" Error generating web-scraped theme: {e}")
 
     except Exception as e:
@@ -1820,10 +1820,10 @@ def run_daily_source_discovery():
             log.info(f" Added {len(added_sources)} new architectural sources:")
             for source in added_sources:
                 log.info(f"   • {source['name']} ({source['category']})")
-        else:
+                    else:
             log.info("ℹ No new sources discovered today")
-            
-    except Exception as e:
+                        
+        except Exception as e:
         log.warning(f" Source discovery failed: {e}")
 
 def add_manual_source(name, url, category):
@@ -1855,9 +1855,9 @@ def add_manual_source(name, url, category):
         log.info(f" Added source: {name}")
         return True
         
-    except Exception as e:
+        except Exception as e:
         log.error(f" Error adding source: {e}")
-        return False
+            return False
 
 def remove_manual_source(name):
     """Remove a source from manual_sources.txt"""
@@ -2600,7 +2600,7 @@ async def generate_all_captions_async(prompts):
                 log.debug(f" Using cached caption for prompt: {prompt[:30]}...")
                 return i, cached_caption, None
             
-            if SKIP_CAPTION_DEDUPLICATION:
+            if not CAPTION_DEDUPLICATION:
                 # Fast mode: skip deduplication
                 caption = await call_llm_async(session, prompt, CAPTION_SYSTEM, semaphore)
             else:
@@ -2744,7 +2744,7 @@ def generate_all_captions(prompts):
                 log.debug(f" Using cached caption for prompt: {prompt[:30]}...")
                 return i, cached_caption, None
             
-            if SKIP_CAPTION_DEDUPLICATION:
+            if not CAPTION_DEDUPLICATION:
                 # Fast mode: skip deduplication
                 caption = generate_caption(prompt)
             else:
@@ -3008,18 +3008,18 @@ def main():
         log.debug(" Debug mode enabled via command line argument")
     
     # Declare global variables that might be modified
-    global FAST_MODE, SKIP_CAPTION_DEDUPLICATION, RATE_LIMIT_DELAY, MAX_CONCURRENT_IMAGES, MAX_CONCURRENT_CAPTIONS
+    global FAST_MODE, CAPTION_DEDUPLICATION, RATE_LIMIT_DELAY, MAX_CONCURRENT_IMAGES, MAX_CONCURRENT_CAPTIONS
     
     # Override settings for fast mode (Free Tier Optimized)
     if args.fast:
         FAST_MODE = True
-        SKIP_CAPTION_DEDUPLICATION = True
+        CAPTION_DEDUPLICATION = False
         RATE_LIMIT_DELAY = Config.MODES["fast_delay"]
     
     # Override settings for ultra mode (Free Tier Optimized - Conservative)
     if args.ultra:
         FAST_MODE = True
-        SKIP_CAPTION_DEDUPLICATION = True
+        CAPTION_DEDUPLICATION = False
         RATE_LIMIT_DELAY = Config.MODES["ultra_delay"]
         MAX_CONCURRENT_IMAGES = Config.MODES["ultra_concurrent_images"]
         MAX_CONCURRENT_CAPTIONS = Config.MODES["ultra_concurrent_captions"]
@@ -3128,7 +3128,7 @@ def main():
     log.info(f" Concurrent Images: {MAX_CONCURRENT_IMAGES}")
     log.info(f" Concurrent Captions: {MAX_CONCURRENT_CAPTIONS}")
     log.info(f"⏱ Rate Limit Delay: {RATE_LIMIT_DELAY}s")
-    log.info(f" Skip Caption Deduplication: {SKIP_CAPTION_DEDUPLICATION}")
+    log.info(f" Caption Deduplication: {CAPTION_DEDUPLICATION}")
     log.info(" Pipeline: Web Scraping → Style Selection → Prompt Generation → Image Generation → Caption Generation → PDF Creation")
     log.info(" Free Tier Limit: ~100 requests/minute - Conservative optimization for Together.ai free tier")
     
@@ -3495,4 +3495,4 @@ def create_instagram_story_images(pdf_path, output_dir=None, dpi=None):
 
 
 if __name__ == "__main__":
-    main() 
+        main() 
