@@ -1257,14 +1257,14 @@ class WebScraper:
                                     })
                                 else:
                                     log.warning(f" Invalid format in manual_sources.txt line {line_num}: {line}")
-            except Exception as e:
+                            except Exception as e:
                                 log.warning(f" Error parsing line {line_num}: {e}")
                 
                 log.info(f" Loaded {len(sources)} sources from {sources_file}")
             else:
                 log.warning(f" Sources file not found: {sources_file}")
                 
-            except Exception as e:
+        except Exception as e:
             log.error(f" Error loading sources: {e}")
         
         return sources
@@ -1301,7 +1301,7 @@ class WebScraper:
                     article_data = self.extract_article_data(element, source, selectors)
                     if article_data:
                         articles.append(article_data)
-        except Exception as e:
+                except Exception as e:
                     log.warning(f" Error extracting article from {source['name']}: {e}")
                     continue
             
@@ -1790,7 +1790,7 @@ def scrape_architectural_content():
                     log.info(f" Web Scraping Summary: {analysis['total_articles']} articles from {len(analysis['top_sources'])} sources")
 
                     return selected_theme
-        except Exception as e:
+            except Exception as e:
                 log.warning(f" Error generating web-scraped theme: {e}")
 
     except Exception as e:
@@ -1815,10 +1815,10 @@ def run_daily_source_discovery():
             log.info(f" Added {len(added_sources)} new architectural sources:")
             for source in added_sources:
                 log.info(f"   • {source['name']} ({source['category']})")
-                    else:
+        else:
             log.info("ℹ No new sources discovered today")
                         
-        except Exception as e:
+    except Exception as e:
         log.warning(f" Source discovery failed: {e}")
 
 def add_manual_source(name, url, category):
@@ -1850,9 +1850,9 @@ def add_manual_source(name, url, category):
         log.info(f" Added source: {name}")
         return True
         
-        except Exception as e:
+    except Exception as e:
         log.error(f" Error adding source: {e}")
-            return False
+        return False
 
 def remove_manual_source(name):
     """Remove a source from manual_sources.txt"""
