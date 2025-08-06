@@ -25,12 +25,10 @@ venv/
 env/
 ENV/
 
-# Environment files - PROTECTED (not deleted, just ignored by Git)
+# Environment files
 .env
 .env.local
 .env.production
-ask.env
-*.env
 
 # Logs
 logs/*.log
@@ -52,26 +50,9 @@ captions/*/
 instagram/*/
 scraped_content/*/
 
-# API tokens and secrets - PROTECTED (not deleted, just ignored by Git)
-pinterest_token.json
-*.token
-*.key
-*.pem
-*.p12
-*.pfx
-*.crt
-*.secret
-*_token.json
-*_key.json
-*_secret.json
+# API tokens
 
-# Credentials and authentication - PROTECTED (not deleted, just ignored by Git)
-credentials.json
-auth.json
-config.json
-secrets.json
-*.credentials
-*.auth
+*.token
 
 # IDE
 .vscode/
