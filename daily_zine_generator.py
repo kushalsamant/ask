@@ -243,11 +243,7 @@ class Config:
         "output_dir": get_env("INSTAGRAM_OUTPUT_DIR", "instagram"),
         "dpi": int(get_env("INSTAGRAM_DPI", "300"))
     }
-    # Mode Configuration (Sequential Only)
-    MODES = {
-        "ultra_concurrent_images": int(get_env("ULTRA_MODE_CONCURRENT_IMAGES", "1")),
-        "ultra_concurrent_captions": int(get_env("ULTRA_MODE_CONCURRENT_CAPTIONS", "1"))
-    }
+
     # Rate Limiting Configuration
     LIMITS = {
         "max_concurrent_images": int(get_env("MAX_CONCURRENT_IMAGES", "1")),
@@ -1793,8 +1789,8 @@ def scrape_architectural_content():
             except Exception as e:
                 log.warning(f" Error generating web-scraped theme: {e}")
 
-        except Exception as e:
-            log.warning(f" Web scraping failed: {e}")
+    except Exception as e:
+        log.warning(f" Web scraping failed: {e}")
 
     # Final fallback
     fallback_theme = get_env('FALLBACK_THEME', 'Modern Architectural Innovation')
@@ -2983,7 +2979,7 @@ def main():
     parser.add_argument('--discover-sources', action='store_true', help='Run daily source discovery')
     parser.add_argument('--discovery-stats', action='store_true', help='Show daily discovery statistics')
     parser.add_argument('--fast', action='store_true', help='Enable fast mode (Free Tier Optimized)')
-    parser.add_argument('--ultra', action='store_true', help='Enable ultra mode (Conservative Free Tier Optimization)')
+
     parser.add_argument('--convert-pdf', action='store_true', help='Convert latest PDF to Instagram images')
     parser.add_argument('--pdf-path', type=str, help='Specific PDF path for conversion')
     parser.add_argument('--instagram-posts', action='store_true', help='Convert to Instagram posts (square format)')
@@ -3010,12 +3006,7 @@ def main():
         CAPTION_DEDUPLICATION = False
         RATE_LIMIT_DELAY = Config.LIMITS["rate_limit_delay"]
     
-    # Override settings for ultra mode (Sequential Processing)
-    if args.ultra:
-        CAPTION_DEDUPLICATION = False
-        RATE_LIMIT_DELAY = Config.LIMITS["rate_limit_delay"]
-        MAX_CONCURRENT_IMAGES = Config.MODES["ultra_concurrent_images"]
-        MAX_CONCURRENT_CAPTIONS = Config.MODES["ultra_concurrent_captions"]
+
     
     # Handle sources management
     if args.sources:
