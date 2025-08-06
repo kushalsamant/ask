@@ -520,7 +520,7 @@ MAX_CONCURRENT_IMAGES = int(get_env('MAX_CONCURRENT_IMAGES', '8'))
 MAX_CONCURRENT_CAPTIONS = int(get_env('MAX_CONCURRENT_CAPTIONS', '8'))
 RATE_LIMIT_DELAY = float(get_env('RATE_LIMIT_DELAY', '0.6'))
 CAPTION_DEDUPLICATION = get_env('CAPTION_DEDUPLICATION', 'true').lower() == 'true'
-FAST_MODE = get_env('FAST_MODE', 'false').lower() == 'true'
+
 WEB_SCRAPING_ENABLED = get_env('WEB_SCRAPING_ENABLED', 'true').lower() == 'true'
 THEME_GENERATION_ENABLED = get_env('THEME_GENERATION_ENABLED', 'true').lower() == 'true'
 PROMPT_GENERATION_ENABLED = get_env('PROMPT_GENERATION_ENABLED', 'true').lower() == 'true'
@@ -1793,8 +1793,8 @@ def scrape_architectural_content():
             except Exception as e:
                 log.warning(f" Error generating web-scraped theme: {e}")
 
-    except Exception as e:
-        log.warning(f" Web scraping failed: {e}")
+        except Exception as e:
+            log.warning(f" Web scraping failed: {e}")
 
     # Final fallback
     fallback_theme = get_env('FALLBACK_THEME', 'Modern Architectural Innovation')
@@ -2447,8 +2447,8 @@ async def generate_all_images_async(prompts, style_name):
             image_filename = f"{timestamp}_{i+1:02d}_{style_name}.jpg"
             image_path = style_dir / image_filename
             
-            # Skip if already exists and we're in fast mode
-            if image_path.exists() and FAST_MODE:
+            # Skip if already exists
+            if image_path.exists():
                 log.debug(f" Using existing image: {image_filename}")
                 return i, str(image_path), None
             
@@ -2513,7 +2513,7 @@ def generate_all_images(prompts, style_name):
     log.info(f" Starting batch concurrent generation of {len(prompts)} images for {style_name} style")
     
     images = []
-    max_workers = MAX_CONCURRENT_IMAGES if not FAST_MODE else 1
+    max_workers = MAX_CONCURRENT_IMAGES
     
     # Pre-create style directory for all images
     style_dir = Path("images") / style_name
@@ -2527,8 +2527,8 @@ def generate_all_images(prompts, style_name):
             image_filename = f"{timestamp}_{i+1:02d}_{style_name}.jpg"
             image_path = style_dir / image_filename
             
-            # Skip if already exists and we're in fast mode
-            if image_path.exists() and FAST_MODE:
+            # Skip if already exists
+            if image_path.exists():
                 log.debug(f" Using existing image: {image_filename}")
                 return i, str(image_path), None
             
@@ -2725,7 +2725,7 @@ def generate_all_captions(prompts):
     log.info(f" Starting cached concurrent caption generation for {len(prompts)} prompts")
     
     captions = [None] * len(prompts)  # Pre-allocate list
-    max_workers = MAX_CONCURRENT_CAPTIONS if not FAST_MODE else 1
+    max_workers = MAX_CONCURRENT_CAPTIONS
     
     def generate_caption_with_index(args):
         i, prompt = args
@@ -3003,17 +3003,15 @@ def main():
         log.debug(" Debug mode enabled via command line argument")
     
     # Declare global variables that might be modified
-    global FAST_MODE, CAPTION_DEDUPLICATION, RATE_LIMIT_DELAY, MAX_CONCURRENT_IMAGES, MAX_CONCURRENT_CAPTIONS
+    global CAPTION_DEDUPLICATION, RATE_LIMIT_DELAY, MAX_CONCURRENT_IMAGES, MAX_CONCURRENT_CAPTIONS
     
     # Override settings for fast mode (Sequential Processing)
     if args.fast:
-        FAST_MODE = True
         CAPTION_DEDUPLICATION = False
         RATE_LIMIT_DELAY = Config.LIMITS["rate_limit_delay"]
     
     # Override settings for ultra mode (Sequential Processing)
     if args.ultra:
-        FAST_MODE = True
         CAPTION_DEDUPLICATION = False
         RATE_LIMIT_DELAY = Config.LIMITS["rate_limit_delay"]
         MAX_CONCURRENT_IMAGES = Config.MODES["ultra_concurrent_images"]
@@ -3119,7 +3117,7 @@ def main():
 
 
     log.info(" Starting Daily Zine Generator - Free Tier Optimized")
-    log.info(f" Fast Mode: {FAST_MODE}")
+    
     log.info(f" Concurrent Images: {MAX_CONCURRENT_IMAGES}")
     log.info(f" Concurrent Captions: {MAX_CONCURRENT_CAPTIONS}")
     log.info(f"⏱ Rate Limit Delay: {RATE_LIMIT_DELAY}s")
@@ -3152,8 +3150,7 @@ def main():
         
         pipeline_pbar.set_postfix_str(f" Theme: {theme[:30]}...")
         pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        time.sleep(2)  # Rate limiting between major steps
         
         # Step 2: Select daily style
         log.info("=" * 60)
@@ -3174,8 +3171,7 @@ def main():
         
         pipeline_pbar.set_postfix_str(f" Style: {style_name.upper()}")
         pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        time.sleep(2)  # Rate limiting between major steps
         
         # Step 3: Generate prompts
         num_prompts = int(get_env('TEST_IMAGE_COUNT', '5')) if args.test else args.images
@@ -3190,8 +3186,7 @@ def main():
         log.info(f" Generated {len(prompts)} prompts")
         pipeline_pbar.set_postfix_str(f" {len(prompts)} prompts")
         pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        time.sleep(2)  # Rate limiting between major steps
         
         # Step 4: Generate images in one style (sequential or async)
         log.info("=" * 60)
@@ -3210,8 +3205,7 @@ def main():
         log.info(f" Generated {len(images)} images")
         pipeline_pbar.set_postfix_str(f" {len(images)} images")
         pipeline_pbar.update(1)
-        if not FAST_MODE:
-            time.sleep(2)  # Rate limiting between major steps
+        time.sleep(2)  # Rate limiting between major steps
         
         # Step 5: Generate captions (sequential or async)
         log.info("=" * 60)
