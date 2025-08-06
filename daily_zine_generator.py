@@ -209,16 +209,14 @@ class Config:
         "width": int(get_env("IMAGE_WIDTH", "1024")),
         "height": int(get_env("IMAGE_HEIGHT", "1024")),
         "quality": int(get_env("IMAGE_QUALITY", "85")),
-        "max_concurrent": int(get_env("MAX_CONCURRENT_IMAGES", "1")),
-        "rate_limit_delay": float(get_env("RATE_LIMIT_DELAY", "20.0"))
+        "max_concurrent": int(get_env("MAX_CONCURRENT_IMAGES", "1"))
     }
     
     # Caption Generation
     CAPTION = {
         "max_concurrent": int(get_env("MAX_CONCURRENT_CAPTIONS", "1")),
         "line_count": int(get_env("CAPTION_LINE_COUNT", "6")),
-        "words_per_line": int(get_env("CAPTION_WORDS_PER_LINE", "6")),
-        "rate_limit_delay": float(get_env("RATE_LIMIT_DELAY", "20.0"))
+        "words_per_line": int(get_env("CAPTION_WORDS_PER_LINE", "6"))
     }
     # Content Sources
     SOURCES = {
@@ -245,19 +243,16 @@ class Config:
         "output_dir": get_env("INSTAGRAM_OUTPUT_DIR", "instagram"),
         "dpi": int(get_env("INSTAGRAM_DPI", "300"))
     }
-    # Mode Configuration
+    # Mode Configuration (Sequential Only)
     MODES = {
-        "fast_delay": float(get_env("FAST_MODE_DELAY", "0.4")),
-        "ultra_delay": float(get_env("ULTRA_MODE_DELAY", "0.4")),
-        "ultra_concurrent_images": int(get_env("ULTRA_MODE_CONCURRENT_IMAGES", "10")),
-        "ultra_concurrent_captions": int(get_env("ULTRA_MODE_CONCURRENT_CAPTIONS", "10"))
+        "ultra_concurrent_images": int(get_env("ULTRA_MODE_CONCURRENT_IMAGES", "1")),
+        "ultra_concurrent_captions": int(get_env("ULTRA_MODE_CONCURRENT_CAPTIONS", "1"))
     }
     # Rate Limiting Configuration
     LIMITS = {
         "max_concurrent_images": int(get_env("MAX_CONCURRENT_IMAGES", "1")),
         "max_concurrent_captions": int(get_env("MAX_CONCURRENT_CAPTIONS", "1")),
-        "image_rate_limit": float(get_env("IMAGE_RATE_LIMIT", "20.0")),
-        "caption_rate_limit": float(get_env("CAPTION_RATE_LIMIT", "20.0")),
+        "rate_limit_delay": float(get_env("RATE_LIMIT_DELAY", "20.0")),  # Single delay for all operations
         "api_timeout": int(get_env("API_TIMEOUT", "60")),
         "max_retries": int(get_env("MAX_RETRIES", "3"))
     }
@@ -974,7 +969,7 @@ def _make_api_request(url, headers, payload, provider_name):
             data = response.json()
             result = data['choices'][0]['message']['content'].strip()
             
-            time.sleep(Config.LIMITS['caption_rate_limit'])
+            time.sleep(Config.LIMITS['rate_limit_delay'])
             return result
             
         except requests.exceptions.HTTPError as e:
@@ -2066,7 +2061,7 @@ async def _call_llm_async_internal(session, prompt, system_prompt=None):
                 save_to_cache(cache_key, result)
                 
                 # Rate limiting delay
-                await asyncio.sleep(Config.LIMITS['caption_rate_limit'])
+                await asyncio.sleep(Config.LIMITS['rate_limit_delay'])
                 return result
                 
         except aiohttp.ClientResponseError as e:
@@ -2120,7 +2115,7 @@ def call_llm(prompt, system_prompt=None):
     if result:
         # Save to cache for future use
         save_to_cache(cache_key, result)
-        time.sleep(Config.LIMITS['caption_rate_limit'])  # Configurable rate limiting
+        time.sleep(Config.LIMITS['rate_limit_delay'])  # Configurable rate limiting
     
     return result
 
@@ -2338,7 +2333,7 @@ async def _generate_single_image_async_internal(session, prompt, style_name, ima
                                     img.save(image_path, 'JPEG', quality=image_quality, dpi=(dpi, dpi))
                                     
                                     log.info(f" Generated {style_name} image {image_number}: {image_filename}")
-                                    await asyncio.sleep(Config.LIMITS['image_rate_limit'])
+                                    await asyncio.sleep(Config.LIMITS['rate_limit_delay'])
                                     return image_path
                                 else:
                                     log.error(f" Failed to download image from {image_url} (HTTP {image_response.status})")
@@ -2428,7 +2423,7 @@ def generate_single_image(prompt, style_name, image_number):
         img.save(image_path, 'JPEG', quality=image_quality, dpi=(dpi, dpi))
         
         log.info(f" Generated {style_name} image {image_number}: {image_filename}")
-        time.sleep(Config.LIMITS['image_rate_limit'])  # Configurable rate limiting
+        time.sleep(Config.LIMITS['rate_limit_delay'])  # Configurable rate limiting
         return image_path
     
     log.error(f" Failed to generate {style_name} image {image_number}")
@@ -3010,17 +3005,17 @@ def main():
     # Declare global variables that might be modified
     global FAST_MODE, CAPTION_DEDUPLICATION, RATE_LIMIT_DELAY, MAX_CONCURRENT_IMAGES, MAX_CONCURRENT_CAPTIONS
     
-    # Override settings for fast mode (Free Tier Optimized)
+    # Override settings for fast mode (Sequential Processing)
     if args.fast:
         FAST_MODE = True
         CAPTION_DEDUPLICATION = False
-        RATE_LIMIT_DELAY = Config.MODES["fast_delay"]
+        RATE_LIMIT_DELAY = Config.LIMITS["rate_limit_delay"]
     
-    # Override settings for ultra mode (Free Tier Optimized - Conservative)
+    # Override settings for ultra mode (Sequential Processing)
     if args.ultra:
         FAST_MODE = True
         CAPTION_DEDUPLICATION = False
-        RATE_LIMIT_DELAY = Config.MODES["ultra_delay"]
+        RATE_LIMIT_DELAY = Config.LIMITS["rate_limit_delay"]
         MAX_CONCURRENT_IMAGES = Config.MODES["ultra_concurrent_images"]
         MAX_CONCURRENT_CAPTIONS = Config.MODES["ultra_concurrent_captions"]
     
