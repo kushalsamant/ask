@@ -1,20 +1,20 @@
-name: Daily Zine Generation
+name: Daily Instagram Story Generation
 
 on:
   schedule:
     # Run daily at 9:00 AM IST (3:30 AM UTC)
     - cron: '30 3 * * *'
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch:  # Allow manual triggering from GitHub UI
 
 env:
   PYTHON_VERSION: '3.12'
-  IMAGE_GENERATION_TIMEOUT: 3600  # 1 hour timeout
+  IMAGE_GENERATION_TIMEOUT: 3600  # 1 hour timeout for image generation
   MAX_RETRIES: 3
 
 jobs:
-  generate-daily-zine:
+  generate-instagram-stories:
     runs-on: ubuntu-latest
-    timeout-minutes: 180  # 3 hour job timeout (increased from 2 hours)
+    timeout-minutes: 180  # 3 hour job timeout
     
     steps:
     - name: Checkout repository
@@ -42,23 +42,23 @@ jobs:
       run: |
         cp ask.env.template ask.env
         echo "TOGETHER_API_KEY=${{ secrets.TOGETHER_API_KEY }}" >> ask.env
-        echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" >> ask.env
-        echo "REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }}" >> ask.env
-        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> ask.env
-        echo "TEXT_PROVIDER=${{ secrets.TEXT_PROVIDER || 'together' }}" >> ask.env
-        echo "TEXT_MODEL=${{ secrets.TEXT_MODEL || 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free' }}" >> ask.env
-        echo "IMAGE_PROVIDER=${{ secrets.IMAGE_PROVIDER || 'together' }}" >> ask.env
-        echo "IMAGE_MODEL=${{ secrets.IMAGE_MODEL || 'stabilityai/stable-diffusion-xl-base-1.0' }}" >> ask.env
+        echo "TOGETHER_API_URL=https://api.together.xyz/v1" >> ask.env
+        echo "IMAGE_MODEL=black-forest-labs/FLUX.1-schnell-free" >> ask.env
+        echo "INFERENCE_STEPS=4" >> ask.env
+        echo "GUIDANCE_SCALE=7.5" >> ask.env
+        echo "RATE_LIMIT_DELAY=10.0" >> ask.env
+        echo "LOG_DIR=logs" >> ask.env
+        echo "IMAGES_DIR=images" >> ask.env
         
     - name: Create necessary directories
       run: |
-        mkdir -p images logs daily_pdfs scraped_content captions instagram
+        mkdir -p images logs
         
     - name: Test basic functionality
       id: test-basic
       run: |
         echo "🧪 Testing basic functionality..."
-        python daily_zine_generator.py --list-styles
+        python -c "import os; print('Environment file exists:', os.path.exists('ask.env')); print('Script exists:', os.path.exists('daily.py'))"
         if [ $? -eq 0 ]; then
           echo "✅ Basic test passed"
           echo "basic_test=passed" >> $GITHUB_OUTPUT
@@ -68,17 +68,17 @@ jobs:
           exit 1
         fi
         
-    - name: Generate daily zine (Free Tier Optimized)
-      id: generate-zine
+    - name: Generate Instagram stories
+      id: generate-stories
       if: steps.test-basic.outputs.basic_test == 'passed'
       run: |
-        echo "🚀 Starting daily zine generation at $(date)"
+        echo "🚀 Starting Instagram story generation at $(date)"
         echo "📅 Date: $(date '+%Y-%m-%d')"
         echo "⏰ Time: $(date '+%H:%M:%S %Z')"
-        echo "💰 Free Tier Optimized: ~100 requests/minute limit"
+        echo "📱 Generating 7 Instagram stories (one per discipline)"
         
-        # Run with conservative settings for GitHub Actions
-        python daily_zine_generator.py --debug --images 10 --theme "GitHub Action Daily"
+        # Run Instagram story generator
+        python daily.py
         
         if [ $? -eq 0 ]; then
           echo "✅ Generation completed successfully"
@@ -90,46 +90,53 @@ jobs:
         fi
         
     - name: Upload generated artifacts
-      if: steps.generate-zine.outputs.success == 'true'
+      if: steps.generate-stories.outputs.success == 'true'
       uses: actions/upload-artifact@v3
       with:
-        name: daily-zine-${{ github.run_number }}
+        name: instagram-stories-${{ github.run_number }}
         path: |
-          daily_pdfs/*.pdf
           images/
           logs/
-          captions/
+          log.csv
         retention-days: 30
         
     - name: Commit and push generated content
-      if: steps.generate-zine.outputs.success == 'true'
+      if: steps.generate-stories.outputs.success == 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
         # Add generated files
-        git add daily_pdfs/*.pdf images/ logs/ captions/ || true
+        git add images/ logs/ log.csv || true
         
         # Commit with timestamp
-        git commit -m "🤖 Daily zine generation - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+        git commit -m "📱 Daily Instagram stories - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
         
         # Push to repository
         git push origin main || echo "Push failed (might be protected branch)"
         
     - name: Notify success
-      if: steps.generate-zine.outputs.success == 'true'
+      if: steps.generate-stories.outputs.success == 'true'
       run: |
-        echo "🎉 Daily zine generation completed successfully!"
+        echo "🎉 Daily Instagram story generation completed successfully!"
         echo "📊 Summary:"
-        echo "  - Generated: $(ls daily_pdfs/*.pdf 2>/dev/null | wc -l) PDF files"
-        echo "  - Images: $(find images/ -name '*.jpg' 2>/dev/null | wc -l) images"
+        echo "  - Images: $(find images/ -name '*.jpg' 2>/dev/null | wc -l) Instagram stories"
         echo "  - Logs: $(ls logs/ 2>/dev/null | wc -l) log files"
-        echo "  - Captions: $(ls captions/ 2>/dev/null | wc -l) caption files"
+        echo "  - Questions: $(test -f log.csv && echo 'Generated' || echo 'Not found')"
+        echo ""
+        echo "📱 Generated stories for disciplines:"
+        echo "  - Architecture"
+        echo "  - Construction" 
+        echo "  - Design"
+        echo "  - Engineering"
+        echo "  - Interiors"
+        echo "  - Planning"
+        echo "  - Urbanism"
         
     - name: Notify failure
       if: failure()
       run: |
-        echo "❌ Daily zine generation failed!"
+        echo "❌ Daily Instagram story generation failed!"
         echo "📋 Debug information:"
         echo "  - Python version: $(python --version)"
         echo "  - Working directory: $(pwd)"
@@ -137,6 +144,8 @@ jobs:
         echo "  - Environment file exists: $(test -f ask.env && echo 'Yes' || echo 'No')"
         echo "  - Recent logs:"
         tail -n 50 logs/*.log 2>/dev/null || echo "No logs found"
+        echo "  - Questions log:"
+        cat log.csv 2>/dev/null || echo "No log.csv found"
         echo "  - Requirements:"
         cat requirements.txt || echo "No requirements.txt found"
         

@@ -1,74 +1,72 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Python bytecode and build artifacts
+__pycache__/  # Python cache directories
+*.py[cod]  # Python compiled files
+*$py.class  # Python class files
+*.so  # Shared object files
+.Python  # Python executable
+build/  # Build directory
+develop-eggs/  # Development eggs
+dist/  # Distribution directory
+downloads/  # Downloads directory
+eggs/  # Eggs directory
+.eggs/  # Hidden eggs directory
+lib/  # Library directory
+lib64/  # 64-bit library directory
+parts/  # Parts directory
+sdist/  # Source distribution
+var/  # Variable directory
+wheels/  # Wheel packages
+*.egg-info/  # Egg info directories
+.installed.cfg  # Installation configuration
+*.egg  # Egg packages
 
 # Virtual environments
-venv/
-env/
-ENV/
+venv/  # Virtual environment directory
+env/  # Environment directory
+ENV/  # Environment directory (uppercase)
 
-# Environment files
-.env
-.env.local
-.env.production
+# Environment files (contains API keys)
+.env  # Environment variables file
+.env.local  # Local environment file
+.env.production  # Production environment file
 
 # Logs
-logs/*.log
-*.log
+logs/  # Log directory
+*.log  # All log files
+log.csv  # Questions and images log
+logs/execution.log  # Main application execution log
 
-# Cache
-cache/*.pkl
-cache/*.cache
+
 
 # Temporary files
-temp_*
-*.tmp
-*.temp
+temp_*  # Temporary files
+*.tmp  # Temporary files
+*.temp  # Temporary files
 
 # Generated content
-daily_pdfs/*.pdf
-images/*/
-captions/*/
-instagram/*/
-scraped_content/*/
+daily_pdfs/*.pdf  # Generated PDF files
+images/  # Generated image directory
+captions/*/  # Generated caption directories
+instagram/*/  # Generated Instagram content
 
 # API tokens
-
-*.token
+*.token  # API token files
 
 # IDE
-.vscode/
-.idea/
-*.swp
-*.swo
+.vscode/  # Visual Studio Code settings
+.idea/  # IntelliJ IDEA settings
+*.swp  # Vim swap files
+*.swo  # Vim swap files
 
 # OS
-.DS_Store
-Thumbs.db
+.DS_Store  # macOS system files
+Thumbs.db  # Windows thumbnail cache
 
 # Large files
-*.pdf
-*.zip
-*.tar.gz
+*.pdf  # PDF files
+*.zip  # ZIP archives
+*.tar.gz  # Compressed archives
 
 # Backup files
-*.bak
-*.backup
+*.bak  # Backup files
+*.backup  # Backup files
