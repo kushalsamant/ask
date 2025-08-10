@@ -48,6 +48,47 @@ API_TIMEOUT = int(os.getenv('API_TIMEOUT', '60'))
 DOWNLOAD_TIMEOUT = int(os.getenv('DOWNLOAD_TIMEOUT', '30'))
 IMAGE_QUALITY = int(os.getenv('IMAGE_QUALITY', '95'))
 
+# Validate API key
+if not TOGETHER_API_KEY:
+    log.error("❌ TOGETHER_API_KEY environment variable is not set!")
+    console_logger.error("❌ TOGETHER_API_KEY environment variable is not set!")
+    exit(1)
+
+if not TOGETHER_API_KEY.startswith('tgsk_'):
+    log.warning("⚠️  TOGETHER_API_KEY format may be invalid (should start with 'tgsk_')")
+    console_logger.warning("⚠️  TOGETHER_API_KEY format may be invalid (should start with 'tgsk_')")
+
+log.info(f"✅ API key configured: {TOGETHER_API_KEY[:10]}...")
+console_logger.info(f"✅ API key configured: {TOGETHER_API_KEY[:10]}...")
+
+def test_api_connection():
+    """Test API connection to verify the key works"""
+    try:
+        url = os.getenv('TOGETHER_API_URL', 'https://api.together.xyz/v1') + '/models'
+        headers = {
+            "Authorization": f"Bearer {TOGETHER_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        
+        log.info("Testing API connection...")
+        console_logger.info("Testing API connection...")
+        
+        response = requests.get(url, headers=headers, timeout=30)
+        
+        if response.status_code == 200:
+            log.info("✅ API connection test successful")
+            console_logger.info("✅ API connection test successful")
+            return True
+        else:
+            log.error(f"❌ API connection test failed: {response.status_code} - {response.text[:200]}")
+            console_logger.error(f"❌ API connection test failed: {response.status_code}")
+            return False
+            
+    except Exception as e:
+        log.error(f"❌ API connection test failed: {e}")
+        console_logger.error(f"❌ API connection test failed: {e}")
+        return False
+
 def get_used_questions():
     """Read previously used questions from log.csv to avoid duplicates"""
     used_questions = set()
@@ -417,6 +458,12 @@ def main():
         log.info("=" * log_separator_length)
         log.info("Starting Instagram Story Generation")
         log.info("=" * log_separator_length)
+        
+        # Test API connection first
+        if not test_api_connection():
+            console_logger.error("❌ API connection test failed. Exiting.")
+            log.error("❌ API connection test failed. Exiting.")
+            exit(1)
         
         # Generate questions
         console_logger.info("Generating questions for each discipline...")

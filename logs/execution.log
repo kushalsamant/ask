@@ -329,3 +329,87 @@
 2025-08-08 23:21:59,573 - INFO - Generating architecture image 2 with Modern Minimalist style (attempt 1/3)
 2025-08-08 23:22:59,925 - ERROR - Timeout error generating architecture image 2 (attempt 1/3)
 2025-08-08 23:22:59,925 - INFO - Retrying in 30 seconds...
+2025-08-10 12:40:20,901 - INFO - Starting Instagram Story Generation...
+2025-08-10 12:40:20,901 - INFO - ============================================================
+2025-08-10 12:40:20,901 - INFO - Starting Instagram Story Generation
+2025-08-10 12:40:20,902 - INFO - ============================================================
+2025-08-10 12:40:20,902 - INFO - Testing API connection...
+2025-08-10 12:40:20,902 - INFO - Testing API connection...
+2025-08-10 12:40:21,940 - INFO - Generating questions for each discipline...
+2025-08-10 12:40:21,955 - INFO - Generating Instagram stories...
+2025-08-10 12:40:21,955 - INFO - Starting image numbering from: 2
+2025-08-10 12:40:21,955 - INFO - Generating architecture story (Image #2)...
+2025-08-10 12:40:21,956 - INFO - Generating architecture image 2 with Art Deco style (attempt 1/3)
+2025-08-10 12:40:26,533 - INFO - Generated architecture image 2: images/ASK-02-architecture.jpg
+2025-08-10 12:40:26,735 - INFO - Added text overlay to image: images/ASK-02-architecture.jpg
+2025-08-10 12:40:26,735 - INFO - Logged architecture question and image to log.csv: ASK-02-architecture.jpg
+2025-08-10 12:40:36,742 - INFO - Generating construction story (Image #3)...
+2025-08-10 12:40:36,742 - INFO - Generating construction image 3 with Contemporary style (attempt 1/3)
+2025-08-10 12:40:54,188 - INFO - Generated construction image 3: images/ASK-03-construction.jpg
+2025-08-10 12:40:54,231 - INFO - Added text overlay to image: images/ASK-03-construction.jpg
+2025-08-10 12:40:54,232 - INFO - Logged construction question and image to log.csv: ASK-03-construction.jpg
+2025-08-10 12:41:04,233 - INFO - Generating design story (Image #4)...
+2025-08-10 12:41:04,233 - INFO - Generating design image 4 with Expressionist style (attempt 1/3)
+2025-08-10 12:41:08,916 - INFO - Generated design image 4: images/ASK-04-design.jpg
+2025-08-10 12:41:08,953 - INFO - Added text overlay to image: images/ASK-04-design.jpg
+2025-08-10 12:41:08,955 - INFO - Logged design question and image to log.csv: ASK-04-design.jpg
+2025-08-10 12:41:18,956 - INFO - Generating engineering story (Image #5)...
+2025-08-10 12:41:18,957 - INFO - Generating engineering image 5 with International Style style (attempt 1/3)
+2025-08-10 12:42:19,238 - ERROR - Timeout error generating engineering image 5 (attempt 1/3)
+2025-08-10 12:42:19,238 - INFO - Retrying in 30 seconds...
+2025-08-10 12:42:49,238 - INFO - Generating engineering image 5 with Constructivist style (attempt 2/3)
+2025-08-10 12:42:54,744 - INFO - Generated engineering image 5: images/ASK-05-engineering.jpg
+2025-08-10 12:42:54,788 - INFO - Added text overlay to image: images/ASK-05-engineering.jpg
+2025-08-10 12:42:54,790 - INFO - Logged engineering question and image to log.csv: ASK-05-engineering.jpg
+2025-08-10 12:43:04,791 - INFO - Generating interiors story (Image #6)...
+2025-08-10 12:43:04,791 - INFO - Generating interiors image 6 with Modern Minimalist style (attempt 1/3)
+2025-08-10 12:43:09,309 - INFO - Generated interiors image 6: images/ASK-06-interiors.jpg
+2025-08-10 12:43:09,347 - INFO - Added text overlay to image: images/ASK-06-interiors.jpg
+2025-08-10 12:43:09,348 - INFO - Logged interiors question and image to log.csv: ASK-06-interiors.jpg
+2025-08-10 12:43:19,349 - INFO - Generating planning story (Image #7)...
+2025-08-10 12:43:19,350 - INFO - Generating planning image 7 with Modern style (attempt 1/3)
+2025-08-10 12:43:39,765 - INFO - Generated planning image 7: images/ASK-07-planning.jpg
+2025-08-10 12:43:39,805 - INFO - Added text overlay to image: images/ASK-07-planning.jpg
+2025-08-10 12:43:39,806 - INFO - Logged planning question and image to log.csv: ASK-07-planning.jpg
+2025-08-10 12:43:49,808 - INFO - Generating urbanism story (Image #8)...
+2025-08-10 12:43:49,809 - INFO - Generating urbanism image 8 with Neo-Futurist style (attempt 1/3)
+2025-08-10 12:43:54,296 - INFO - Generated urbanism image 8: images/ASK-08-urbanism.jpg
+2025-08-10 12:43:54,332 - INFO - Added text overlay to image: images/ASK-08-urbanism.jpg
+2025-08-10 12:43:54,333 - INFO - Logged urbanism question and image to log.csv: ASK-08-urbanism.jpg
+2025-08-10 12:44:04,334 - INFO - SUCCESS! All Instagram stories created successfully
+2025-08-10 12:44:04,334 - INFO - ============================================================
+2025-08-10 12:44:04,334 - INFO - SUCCESS! All Instagram stories created successfully
+2025-08-10 12:44:04,334 - INFO - Images generated: 7
+2025-08-10 12:44:04,335 - INFO - ============================================================
+2025-08-10 12:44:04,335 - INFO - Image (architecture): What would a building that breathes look like?
+2025-08-10 12:44:04,335 - INFO - Image (construction): How can we build structures that repair themselves?
+2025-08-10 12:44:04,335 - INFO - Image (design): What would a building designed by nature look like?
+2025-08-10 12:44:04,335 - INFO - Image (engineering): What would buildings that harvest resources look like?
+2025-08-10 12:44:04,335 - INFO - Image (interiors): How can we design interiors that age beautifully?
+2025-08-10 12:44:04,335 - INFO - Image (planning): How can we plan for the future while preserving history?
+2025-08-10 12:44:04,335 - INFO - Image (urbanism): How can we design cities for human interaction?
+2025-08-10 12:44:04,335 - INFO - ============================================================
+2025-08-10 12:44:43,207 - INFO - Starting Instagram Story Generation...
+2025-08-10 12:44:43,209 - INFO - ============================================================
+2025-08-10 12:44:43,210 - INFO - Starting Instagram Story Generation
+2025-08-10 12:44:43,210 - INFO - ============================================================
+2025-08-10 12:44:43,210 - INFO - Testing API connection...
+2025-08-10 12:44:43,210 - INFO - Testing API connection...
+2025-08-10 12:44:44,055 - INFO - Generating questions for each discipline...
+2025-08-10 12:44:44,055 - INFO - Generating Instagram stories...
+2025-08-10 12:44:44,055 - INFO - Starting image numbering from: 1
+2025-08-10 12:44:44,055 - INFO - Generating architecture story (Image #1)...
+2025-08-10 12:44:44,055 - INFO - Generating architecture image 1 with Contemporary style (attempt 1/3)
+2025-08-10 12:44:49,138 - INFO - Generated architecture image 1: images/ASK-01-architecture.jpg
+2025-08-10 12:44:49,188 - INFO - Added text overlay to image: images/ASK-01-architecture.jpg
+2025-08-10 12:44:49,191 - INFO - Logged architecture question and image to log.csv: ASK-01-architecture.jpg
+2025-08-10 12:44:59,192 - INFO - Generating construction story (Image #2)...
+2025-08-10 12:44:59,192 - INFO - Generating construction image 2 with Contemporary style (attempt 1/3)
+2025-08-10 12:45:04,323 - INFO - Generated construction image 2: images/ASK-02-construction.jpg
+2025-08-10 12:45:04,375 - INFO - Added text overlay to image: images/ASK-02-construction.jpg
+2025-08-10 12:45:04,376 - INFO - Logged construction question and image to log.csv: ASK-02-construction.jpg
+2025-08-10 12:45:14,377 - INFO - Generating design story (Image #3)...
+2025-08-10 12:45:14,377 - INFO - Generating design image 3 with Organic Architecture style (attempt 1/3)
+2025-08-10 12:45:37,153 - INFO - Generated design image 3: images/ASK-03-design.jpg
+2025-08-10 12:45:37,197 - INFO - Added text overlay to image: images/ASK-03-design.jpg
+2025-08-10 12:45:37,199 - INFO - Logged design question and image to log.csv: ASK-03-design.jpg
