@@ -48,6 +48,7 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 - **Sequential Numbering**: Continuous image numbering across all runs
 - **Immediate Logging**: Real-time tracking of generated content
 - **Error Recovery**: Robust retry logic and failure handling
+- **API Validation**: Built-in API key validation and connectivity testing
 - **Permanent Storage**: All content committed to repository with full history
 
 ---
@@ -95,6 +96,15 @@ Each Instagram story features:
 
 ## 🔧 **Technical Implementation**
 
+### **GitHub Actions Automation**
+The project includes a fully automated GitHub Actions workflow that:
+- **Runs 4 times daily** at scheduled intervals
+- **Validates API keys** before execution
+- **Tests API connectivity** to ensure reliability
+- **Handles errors gracefully** with detailed debugging information
+- **Commits generated content** to the repository automatically
+- **Provides comprehensive logging** for troubleshooting
+
 ### **Quick Start for Developers**
 
 #### **Prerequisites**
@@ -113,7 +123,11 @@ pip install -r requirements.txt
 2. Add your Together.ai API key to `ask.env`:
    ```
    TOGETHER_API_KEY=your_api_key_here
+   TOGETHER_API_BASE=https://api.together.xyz/v1
+   TOGETHER_API_URL=https://api.together.xyz/v1
    ```
+   
+   **Note**: Your API key should start with `tgsk_` for Together.ai
 
 #### **Generate Instagram Stories**
 ```bash
@@ -154,6 +168,7 @@ ask/
 ```bash
 # API Configuration
 TOGETHER_API_KEY=your_api_key
+TOGETHER_API_BASE=https://api.together.xyz/v1
 TOGETHER_API_URL=https://api.together.xyz/v1
 
 # AI Model
@@ -193,10 +208,14 @@ python daily.py
 ## 🔍 **Troubleshooting**
 
 ### **Common Issues**
-1. **API Errors**: Check your Together.ai API key and rate limits
-2. **Image Generation Failures**: Verify API configuration and internet connection
-3. **Text Overlay Issues**: Ensure PIL/Pillow is properly installed
-4. **Permission Errors**: Check write permissions for `images/` and `logs/` directories
+1. **API Key Issues**: 
+   - Ensure your Together.ai API key starts with `tgsk_`
+   - Verify the key is properly set in `ask.env`
+   - Check that `TOGETHER_API_BASE` and `TOGETHER_API_URL` are configured
+2. **API Errors**: Check your Together.ai API key and rate limits
+3. **Image Generation Failures**: Verify API configuration and internet connection
+4. **Text Overlay Issues**: Ensure PIL/Pillow is properly installed
+5. **Permission Errors**: Check write permissions for `images/` and `logs/` directories
 
 ### **Logs**
 - **Application Logs**: Check `logs/execution.log`
@@ -244,6 +263,6 @@ Whether you're:
 
 ---
 
-**Status**: Production Ready | **Last Updated**: August 2025 | **Version**: Instagram Story Generator v2.0
+**Status**: Production Ready | **Last Updated**: December 2024 | **Version**: Instagram Story Generator v2.1
 
 *Built with ❤️ for the architecture community*
