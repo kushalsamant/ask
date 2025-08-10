@@ -564,3 +564,58 @@
 2025-08-10 13:31:47,181 - INFO - Image (planning): How can we plan for renewable energy?
 2025-08-10 13:31:47,181 - INFO - Image (urbanism): What makes a city feel like home?
 2025-08-10 13:31:47,181 - INFO - ============================================================
+2025-08-10 17:34:12,142 - INFO - Starting Instagram Story Generation...
+2025-08-10 17:34:12,142 - INFO - ============================================================
+2025-08-10 17:34:12,142 - INFO - Starting Instagram Story Generation
+2025-08-10 17:34:12,142 - INFO - ============================================================
+2025-08-10 17:34:12,142 - INFO - Generating questions for each discipline...
+2025-08-10 17:34:12,160 - INFO - Generating Instagram stories...
+2025-08-10 17:34:12,160 - INFO - Starting image numbering from: 22
+2025-08-10 17:34:12,160 - INFO - Generating architecture story (Image #22)...
+2025-08-10 17:34:12,160 - INFO - Generating architecture image 22 with Modern Minimalist style (attempt 1/3)
+2025-08-10 17:34:16,790 - INFO - Generated architecture image 22: images/ASK-22-architecture.jpg
+2025-08-10 17:34:16,924 - INFO - Added text overlay to image: images/ASK-22-architecture.jpg
+2025-08-10 17:34:16,924 - INFO - Logged architecture question and image to log.csv: ASK-22-architecture.jpg
+2025-08-10 17:34:26,931 - INFO - Generating construction story (Image #23)...
+2025-08-10 17:34:26,931 - INFO - Generating construction image 23 with Contemporary style (attempt 1/3)
+2025-08-10 17:34:30,893 - INFO - Generated construction image 23: images/ASK-23-construction.jpg
+2025-08-10 17:34:30,954 - INFO - Added text overlay to image: images/ASK-23-construction.jpg
+2025-08-10 17:34:30,956 - INFO - Logged construction question and image to log.csv: ASK-23-construction.jpg
+2025-08-10 17:34:40,957 - INFO - Generating design story (Image #24)...
+2025-08-10 17:34:40,957 - INFO - Generating design image 24 with Organic Architecture style (attempt 1/3)
+2025-08-10 17:34:45,762 - INFO - Generated design image 24: images/ASK-24-design.jpg
+2025-08-10 17:34:45,806 - INFO - Added text overlay to image: images/ASK-24-design.jpg
+2025-08-10 17:34:45,808 - INFO - Logged design question and image to log.csv: ASK-24-design.jpg
+2025-08-10 17:34:55,809 - INFO - Generating engineering story (Image #25)...
+2025-08-10 17:34:55,809 - INFO - Generating engineering image 25 with Modern style (attempt 1/3)
+2025-08-10 17:35:13,253 - INFO - Generated engineering image 25: images/ASK-25-engineering.jpg
+2025-08-10 17:35:13,304 - INFO - Added text overlay to image: images/ASK-25-engineering.jpg
+2025-08-10 17:35:13,304 - INFO - Logged engineering question and image to log.csv: ASK-25-engineering.jpg
+2025-08-10 17:35:23,311 - INFO - Generating interiors story (Image #26)...
+2025-08-10 17:35:23,311 - INFO - Generating interiors image 26 with Art Nouveau style (attempt 1/3)
+2025-08-10 17:35:28,017 - INFO - Generated interiors image 26: images/ASK-26-interiors.jpg
+2025-08-10 17:35:28,070 - INFO - Added text overlay to image: images/ASK-26-interiors.jpg
+2025-08-10 17:35:28,070 - INFO - Logged interiors question and image to log.csv: ASK-26-interiors.jpg
+2025-08-10 17:35:38,072 - INFO - Generating planning story (Image #27)...
+2025-08-10 17:35:38,072 - INFO - Generating planning image 27 with International Style style (attempt 1/3)
+2025-08-10 17:35:42,414 - INFO - Generated planning image 27: images/ASK-27-planning.jpg
+2025-08-10 17:35:42,448 - INFO - Added text overlay to image: images/ASK-27-planning.jpg
+2025-08-10 17:35:42,448 - INFO - Logged planning question and image to log.csv: ASK-27-planning.jpg
+2025-08-10 17:35:52,456 - INFO - Generating urbanism story (Image #28)...
+2025-08-10 17:35:52,456 - INFO - Generating urbanism image 28 with Modern style (attempt 1/3)
+2025-08-10 17:35:56,598 - INFO - Generated urbanism image 28: images/ASK-28-urbanism.jpg
+2025-08-10 17:35:56,647 - INFO - Added text overlay to image: images/ASK-28-urbanism.jpg
+2025-08-10 17:35:56,655 - INFO - Logged urbanism question and image to log.csv: ASK-28-urbanism.jpg
+2025-08-10 17:36:06,656 - INFO - SUCCESS! All Instagram stories created successfully
+2025-08-10 17:36:06,656 - INFO - ============================================================
+2025-08-10 17:36:06,656 - INFO - SUCCESS! All Instagram stories created successfully
+2025-08-10 17:36:06,656 - INFO - Images generated: 7
+2025-08-10 17:36:06,656 - INFO - ============================================================
+2025-08-10 17:36:06,656 - INFO - Image (architecture): How can we create buildings that age gracefully?
+2025-08-10 17:36:06,656 - INFO - Image (construction): What would 3D printed buildings look like?
+2025-08-10 17:36:06,656 - INFO - Image (design): What makes a design truly innovative?
+2025-08-10 17:36:06,656 - INFO - Image (engineering): What would buildings that harvest resources look like?
+2025-08-10 17:36:06,656 - INFO - Image (interiors): How can we design interiors for wellness?
+2025-08-10 17:36:06,656 - INFO - Image (planning): How can we plan for the future while preserving history?
+2025-08-10 17:36:06,656 - INFO - Image (urbanism): What makes a city feel authentic?
+2025-08-10 17:36:06,656 - INFO - ============================================================
