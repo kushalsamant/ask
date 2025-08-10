@@ -96,7 +96,9 @@ jobs:
       if: steps.test-basic.outputs.basic_test == 'passed'
       run: |
         echo "🌐 Testing API connectivity..."
-        source ask.env
+        
+        # Export only the API key from the environment file (safer than sourcing)
+        export TOGETHER_API_KEY="${{ secrets.TOGETHER_API_KEY }}"
         
         # Test API endpoint with a simple request
         curl -s -o /dev/null -w "%{http_code}" \
