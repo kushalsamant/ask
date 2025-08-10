@@ -38,6 +38,13 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 
 ## 🚀 **The Technology Behind the Magic**
 
+### **🆕 Recent Improvements (v2.2)**
+- **Self-Documenting Code**: Every line in `daily.py` now includes inline comments
+- **Enhanced Configuration**: All settings in `ask.env` and `ask.env.template` are fully documented
+- **Improved API Validation**: Better error handling and connectivity testing
+- **Comprehensive Logging**: Enhanced debugging information and error reporting
+- **Developer Experience**: Clear documentation and easier troubleshooting
+
 ### **Core Features**
 - **Multi-Discipline Questions**: Generates unique questions for 7 architectural disciplines
 - **AI-Powered Image Generation**: Creates stunning Instagram stories using Together.ai FLUX.1 model
@@ -49,6 +56,7 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 - **Immediate Logging**: Real-time tracking of generated content
 - **Error Recovery**: Robust retry logic and failure handling
 - **API Validation**: Built-in API key validation and connectivity testing
+- **Self-Documenting Code**: Comprehensive inline comments throughout the codebase
 - **Permanent Storage**: All content committed to repository with full history
 
 ---
@@ -99,11 +107,12 @@ Each Instagram story features:
 ### **GitHub Actions Automation**
 The project includes a fully automated GitHub Actions workflow that:
 - **Runs 4 times daily** at scheduled intervals
-- **Validates API keys** before execution
-- **Tests API connectivity** to ensure reliability
+- **Validates API keys** before execution with format checking
+- **Tests API connectivity** to ensure reliability before generation
 - **Handles errors gracefully** with detailed debugging information
 - **Commits generated content** to the repository automatically
 - **Provides comprehensive logging** for troubleshooting
+- **Validates configuration** and provides clear error messages
 
 ### **Quick Start for Developers**
 
@@ -127,7 +136,9 @@ pip install -r requirements.txt
    TOGETHER_API_URL=https://api.together.xyz/v1
    ```
    
-   **Note**: Your API key should start with `tgsk_` for Together.ai
+   **Note**: Your API key should start with `tgsk_` or `tgp_v1_` for Together.ai
+   
+   **Pro Tip**: The configuration files include comprehensive inline comments explaining every setting!
 
 #### **Generate Instagram Stories**
 ```bash
@@ -147,9 +158,9 @@ This will:
 
 ```
 ask/
-├── 📄 daily.py                    # Main Instagram story generator
-├── 📄 ask.env                     # Environment variables (local)
-├── 📄 ask.env.template            # Environment template
+├── 📄 daily.py                    # Main Instagram story generator (fully commented)
+├── 📄 ask.env                     # Environment variables with inline documentation
+├── 📄 ask.env.template            # Environment template with detailed comments
 ├── 📄 requirements.txt            # Python dependencies
 ├── 📄 README.md                   # This file
 ├── 📄 .gitignore                  # Git ignore rules
@@ -189,6 +200,12 @@ CONSTRUCTION_QUESTIONS=question1|question2|...
 # ... (7 disciplines with 15 questions each)
 ```
 
+### **📝 Self-Documenting Configuration**
+Every configuration file includes comprehensive inline comments:
+- **`ask.env.template`**: Template with detailed explanations for each setting
+- **`ask.env`**: Your local configuration with inline documentation
+- **`daily.py`**: Fully commented code explaining every function and line
+
 ---
 
 ## 🧪 **Testing & Quality Assurance**
@@ -209,13 +226,15 @@ python daily.py
 
 ### **Common Issues**
 1. **API Key Issues**: 
-   - Ensure your Together.ai API key starts with `tgsk_`
+   - Ensure your Together.ai API key starts with `tgsk_` or `tgp_v1_`
    - Verify the key is properly set in `ask.env`
    - Check that `TOGETHER_API_BASE` and `TOGETHER_API_URL` are configured
+   - The script validates API keys automatically and provides clear error messages
 2. **API Errors**: Check your Together.ai API key and rate limits
 3. **Image Generation Failures**: Verify API configuration and internet connection
 4. **Text Overlay Issues**: Ensure PIL/Pillow is properly installed
 5. **Permission Errors**: Check write permissions for `images/` and `logs/` directories
+6. **Configuration Issues**: All settings are documented with inline comments in the config files
 
 ### **Logs**
 - **Application Logs**: Check `logs/execution.log`
@@ -230,7 +249,14 @@ python daily.py
 2. Create a feature branch
 3. Make your changes
 4. Test thoroughly with `python daily.py`
-5. Submit a pull request
+5. Ensure all code includes inline comments for clarity
+6. Submit a pull request
+
+### **Code Quality Standards**
+- **Inline Comments**: Every line should be self-documenting
+- **Configuration Documentation**: All settings should have clear explanations
+- **Error Handling**: Comprehensive error messages and logging
+- **API Validation**: Proper validation and testing of external services
 
 ---
 
@@ -263,6 +289,6 @@ Whether you're:
 
 ---
 
-**Status**: Production Ready | **Last Updated**: December 2024 | **Version**: Instagram Story Generator v2.1
+**Status**: Production Ready | **Last Updated**: December 2024 | **Version**: Instagram Story Generator v2.2
 
 *Built with ❤️ for the architecture community*

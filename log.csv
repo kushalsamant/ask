@@ -2,3 +2,14 @@ timestamp,discipline,question,image_filename
 2025-08-10 12:44:49,architecture,What would a building that breathes look like?,ASK-01-architecture.jpg
 2025-08-10 12:45:04,construction,What would prefabrication look like for complex forms?,ASK-02-construction.jpg
 2025-08-10 12:45:37,design,How can we create spaces that heal?,ASK-03-design.jpg
+2025-08-10 12:47:31,engineering,How can we make buildings more resilient to disasters?,ASK-04-engineering.jpg
+2025-08-10 12:47:45,interiors,What makes a space feel luxurious yet comfortable?,ASK-05-interiors.jpg
+2025-08-10 12:48:16,planning,How can we plan for cultural preservation?,ASK-06-planning.jpg
+2025-08-10 12:48:31,urbanism,How can we design cities for human interaction?,ASK-07-urbanism.jpg
+2025-08-10 13:05:42,architecture,How can architecture foster community?,ASK-08-architecture.jpg
+2025-08-10 13:05:56,construction,What would construction look like in space?,ASK-09-construction.jpg
+2025-08-10 13:06:11,design,How can we design buildings that tell stories?,ASK-10-design.jpg
+2025-08-10 13:06:38,engineering,What would buildings that float look like?,ASK-11-engineering.jpg
+2025-08-10 13:06:52,interiors,What would a space that responds to mood look like?,ASK-12-interiors.jpg
+2025-08-10 13:07:07,planning,What would a walkable city look like?,ASK-13-planning.jpg
+2025-08-10 13:07:34,urbanism,How can we design cities for sustainability?,ASK-14-urbanism.jpg
