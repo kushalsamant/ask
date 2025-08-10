@@ -62,11 +62,11 @@ jobs:
           exit 1
         else
           echo "✅ TOGETHER_API_KEY secret is configured"
-          # Check if the key looks valid (starts with 'tgsk_')
-          if [[ "${{ secrets.TOGETHER_API_KEY }}" == tgsk_* ]]; then
+          # Check if the key looks valid (starts with 'tgp_')
+          if [[ "${{ secrets.TOGETHER_API_KEY }}" == tgp_* ]]; then
             echo "✅ API key format appears valid"
           else
-            echo "⚠️  API key format may be invalid (should start with 'tgsk_')"
+            echo "⚠️  API key format may be invalid (should start with 'tgp_')"
           fi
         fi
         

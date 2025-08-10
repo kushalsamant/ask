@@ -138,7 +138,7 @@ pip install -r requirements.txt
    TOGETHER_API_URL=https://api.together.xyz/v1
    ```
    
-   **Note**: Your API key should start with `tgsk_` or `tgp_v1_` for Together.ai
+   **Note**: Your API key should start with `tgp_` or `tgp_v1_` for Together.ai
    
    **Pro Tip**: The configuration files include comprehensive inline comments explaining every setting!
 
@@ -228,7 +228,7 @@ python daily.py
 
 ### **Common Issues**
 1. **API Key Issues**: 
-   - Ensure your Together.ai API key starts with `tgsk_` or `tgp_v1_`
+   - Ensure your Together.ai API key starts with `tgp_` or `tgp_v1_`
    - Verify the key is properly set in `ask.env`
    - Check that `TOGETHER_API_BASE` and `TOGETHER_API_URL` are configured
    - The script validates API keys automatically and provides clear error messages

@@ -54,9 +54,9 @@ if not TOGETHER_API_KEY:  # Check if API key is missing
     console_logger.error("❌ TOGETHER_API_KEY environment variable is not set!")  # Console error
     exit(1)  # Exit with error code
 
-if not TOGETHER_API_KEY.startswith('tgsk_'):  # Check API key format
-    log.warning("⚠️  TOGETHER_API_KEY format may be invalid (should start with 'tgsk_')")  # Log warning
-    console_logger.warning("⚠️  TOGETHER_API_KEY format may be invalid (should start with 'tgsk_')")  # Console warning
+if not TOGETHER_API_KEY.startswith('tgp_'):  # Check API key format
+    log.warning("⚠️  TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")  # Log warning
+    console_logger.warning("⚠️  TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")  # Console warning
 
 log.info(f"✅ API key configured: {TOGETHER_API_KEY[:10]}...")  # Log successful configuration
 console_logger.info(f"✅ API key configured: {TOGETHER_API_KEY[:10]}...")  # Console confirmation
