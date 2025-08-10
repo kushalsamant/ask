@@ -38,10 +38,12 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 
 ## 🚀 **The Technology Behind the Magic**
 
-### **🆕 Recent Improvements (v2.2)**
-- **Self-Documenting Code**: Every line in `daily.py` now includes inline comments
+### **🆕 Recent Improvements (v2.3)**
+- **Streamlined Workflow**: Removed API connectivity testing for faster execution
+- **Simplified Architecture**: Direct image generation without pre-flight checks
+- **Enhanced Reliability**: Graceful handling of API issues during generation
+- **Self-Documenting Code**: Every line in `daily.py` includes inline comments
 - **Enhanced Configuration**: All settings in `ask.env` and `ask.env.template` are fully documented
-- **Improved API Validation**: Better error handling and connectivity testing
 - **Comprehensive Logging**: Enhanced debugging information and error reporting
 - **Developer Experience**: Clear documentation and easier troubleshooting
 
@@ -55,7 +57,7 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 - **Sequential Numbering**: Continuous image numbering across all runs
 - **Immediate Logging**: Real-time tracking of generated content
 - **Error Recovery**: Robust retry logic and failure handling
-- **API Validation**: Built-in API key validation and connectivity testing
+- **API Validation**: Built-in API key validation with format checking
 - **Self-Documenting Code**: Comprehensive inline comments throughout the codebase
 - **Permanent Storage**: All content committed to repository with full history
 
@@ -108,11 +110,11 @@ Each Instagram story features:
 The project includes a fully automated GitHub Actions workflow that:
 - **Runs 4 times daily** at scheduled intervals
 - **Validates API keys** before execution with format checking
-- **Tests API connectivity** to ensure reliability before generation
 - **Handles errors gracefully** with detailed debugging information
 - **Commits generated content** to the repository automatically
 - **Provides comprehensive logging** for troubleshooting
 - **Validates configuration** and provides clear error messages
+- **Streamlined execution** without pre-flight API connectivity tests
 
 ### **Quick Start for Developers**
 
@@ -289,6 +291,6 @@ Whether you're:
 
 ---
 
-**Status**: Production Ready | **Last Updated**: December 2024 | **Version**: Instagram Story Generator v2.2
+**Status**: Production Ready | **Last Updated**: December 2024 | **Version**: Instagram Story Generator v2.3
 
 *Built with ❤️ for the architecture community*
