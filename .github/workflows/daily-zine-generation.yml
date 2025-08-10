@@ -2,186 +2,47 @@ name: Daily Instagram Story Generation
 
 on:
   schedule:
-    # Run daily at 9:00 AM IST (3:30 AM UTC)
-    - cron: '30 3 * * *'
-    - cron: '30 9 * * *'
-    - cron: '30 15 * * *'
-    - cron: '30 21 * * *'
-  workflow_dispatch:  # Allow manual triggering from GitHub UI
-
-env:
-  PYTHON_VERSION: '3.12'
-  IMAGE_GENERATION_TIMEOUT: 3600  # 1 hour timeout for image generation
-  MAX_RETRIES: 3
+    # Runs 4 times daily at 9:00, 15:00, 21:00, and 03:00 UTC
+    - cron: '0 3,9,15,21 * * *'
+  workflow_dispatch: # Allow manual runs
 
 jobs:
-  generate-instagram-stories:
+  generate-stories:
     runs-on: ubuntu-latest
-    timeout-minutes: 180  # 3 hour job timeout
-    
+
+    env:
+      # Inject secrets directly into environment variables
+      TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
-        
-    - name: Cache pip dependencies
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-          
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        
-    - name: Create environment file
-      run: |
-        cp ask.env.template ask.env
-        echo "TOGETHER_API_KEY=${{ secrets.TOGETHER_API_KEY }}" >> ask.env
-        echo "TOGETHER_API_BASE=https://api.together.xyz/v1" >> ask.env
-        echo "TOGETHER_API_URL=https://api.together.xyz/v1" >> ask.env
-        echo "IMAGE_MODEL=black-forest-labs/FLUX.1-schnell-free" >> ask.env
-        echo "INFERENCE_STEPS=4" >> ask.env
-        echo "GUIDANCE_SCALE=7.5" >> ask.env
-        echo "RATE_LIMIT_DELAY=10.0" >> ask.env
-        echo "LOG_DIR=logs" >> ask.env
-        echo "IMAGES_DIR=images" >> ask.env
-        
-    - name: Verify API key configuration
-      run: |
-        echo "🔑 Verifying API key configuration..."
-        if [ -z "${{ secrets.TOGETHER_API_KEY }}" ]; then
-          echo "❌ TOGETHER_API_KEY secret is not set!"
-          exit 1
-        else
-          echo "✅ TOGETHER_API_KEY secret is configured"
-          # Check if the key looks valid (starts with 'tgp_')
-          if [[ "${{ secrets.TOGETHER_API_KEY }}" == tgp_* ]]; then
-            echo "✅ API key format appears valid"
-          else
-            echo "⚠️  API key format may be invalid (should start with 'tgp_')"
-          fi
-        fi
-        
-        echo "📄 Environment file contents (without sensitive data):"
-        grep -v "TOGETHER_API_KEY" ask.env || echo "No environment file found"
-        
-    - name: Create necessary directories
-      run: |
-        mkdir -p images logs
-        
-    - name: Test basic functionality
-      id: test-basic
-      run: |
-        echo "🧪 Testing basic functionality..."
-        python -c "import os; print('Environment file exists:', os.path.exists('ask.env')); print('Script exists:', os.path.exists('daily.py'))"
-        if [ $? -eq 0 ]; then
-          echo "✅ Basic test passed"
-          echo "basic_test=passed" >> $GITHUB_OUTPUT
-        else
-          echo "❌ Basic test failed"
-          echo "basic_test=failed" >> $GITHUB_OUTPUT
-          exit 1
-        fi
-        
-    - name: Generate Instagram stories
-      id: generate-stories
-      if: steps.test-basic.outputs.basic_test == 'passed'
-      run: |
-        echo "🚀 Starting Instagram story generation at $(date)"
-        echo "📅 Date: $(date '+%Y-%m-%d')"
-        echo "⏰ Time: $(date '+%H:%M:%S %Z')"
-        echo "📱 Generating 7 Instagram stories (one per discipline)"
-        
-        # Run Instagram story generator
-        python daily.py
-        
-        if [ $? -eq 0 ]; then
-          echo "✅ Generation completed successfully"
-          echo "success=true" >> $GITHUB_OUTPUT
-        else
-          echo "❌ Generation failed"
-          echo "success=false" >> $GITHUB_OUTPUT
-          exit 1
-        fi
-        
-    - name: Upload generated artifacts
-      if: steps.generate-stories.outputs.success == 'true'
-      uses: actions/upload-artifact@v4
-      with:
-        name: instagram-stories-${{ github.run_number }}
-        path: |
-          images/
-          logs/
-          log.csv
-        
-    - name: Commit and push generated content
-      if: steps.generate-stories.outputs.success == 'true'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        
-        # Add generated files
-        git add images/ logs/ log.csv || true
-        
-        # Commit with timestamp
-        git commit -m "📱 Daily Instagram stories - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
-        
-        # Push to repository
-        git push origin main || echo "Push failed (might be protected branch)"
-        
-    - name: Notify success
-      if: steps.generate-stories.outputs.success == 'true'
-      run: |
-        echo "🎉 Daily Instagram story generation completed successfully!"
-        echo "📊 Summary:"
-        echo "  - Images: $(find images/ -name '*.jpg' 2>/dev/null | wc -l) Instagram stories"
-        echo "  - Logs: $(ls logs/ 2>/dev/null | wc -l) log files"
-        echo "  - Questions: $(test -f log.csv && echo 'Generated' || echo 'Not found')"
-        echo ""
-        echo "📱 Generated stories for disciplines:"
-        echo "  - Architecture"
-        echo "  - Construction" 
-        echo "  - Design"
-        echo "  - Engineering"
-        echo "  - Interiors"
-        echo "  - Planning"
-        echo "  - Urbanism"
-        
-    - name: Notify failure
-      if: failure()
-      run: |
-        echo "❌ Daily Instagram story generation failed!"
-        echo "📋 Debug information:"
-        echo "  - Python version: $(python --version)"
-        echo "  - Working directory: $(pwd)"
-        echo "  - Files in directory: $(ls -la)"
-        echo "  - Environment file exists: $(test -f ask.env && echo 'Yes' || echo 'No')"
-        echo "  - API key configured: $(test -n '${{ secrets.TOGETHER_API_KEY }}' && echo 'Yes' || echo 'No')"
-        echo "  - API key format: $(test -n '${{ secrets.TOGETHER_API_KEY }}' && echo 'Valid' || echo 'Missing')"
-        echo "  - Environment variables (non-sensitive):"
-        if [ -f ask.env ]; then
-          grep -v "TOGETHER_API_KEY" ask.env || echo "No env vars found"
-        else
-          echo "No ask.env file found"
-        fi
-        echo "  - Recent logs:"
-        tail -n 50 logs/*.log 2>/dev/null || echo "No logs found"
-        echo "  - Questions log:"
-        cat log.csv 2>/dev/null || echo "No log.csv found"
-        echo "  - Requirements:"
-        cat requirements.txt || echo "No requirements.txt found"
-        
-    - name: Cleanup
-      if: always()
-      run: |
-        echo "🧹 Cleaning up temporary files..."
-        rm -f ask.env
-        echo "✅ Cleanup completed" 
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 📝 Prepare environment file
+        run: |
+          cp ask.env.template ask.env
+          # Replace placeholder API key in ask.env
+          sed -i "s|TOGETHER_API_KEY=.*|TOGETHER_API_KEY=${TOGETHER_API_KEY}|" ask.env
+
+      - name: 🚀 Run story generation
+        run: |
+          echo "🚀 Starting Instagram story generation at $(date)"
+          python daily.py
+
+      - name: 📤 Commit and push generated content
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add images/ log.csv logs/
+          git commit -m "Automated Instagram stories - $(date -u '+%Y-%m-%d %H:%M:%S') UTC" || echo "No changes to commit"
+          git push
