@@ -91,33 +91,9 @@ jobs:
           exit 1
         fi
         
-    - name: Test API connectivity
-      id: test-api
-      if: steps.test-basic.outputs.basic_test == 'passed'
-      run: |
-        echo "🌐 Testing API connectivity..."
-        
-        # Export only the API key from the environment file (safer than sourcing)
-        export TOGETHER_API_KEY="${{ secrets.TOGETHER_API_KEY }}"
-        
-        # Test API endpoint with a simple request
-        curl -s -o /dev/null -w "%{http_code}" \
-          -H "Authorization: Bearer $TOGETHER_API_KEY" \
-          -H "Content-Type: application/json" \
-          -X GET "https://api.together.xyz/v1/models" || echo "000"
-        
-        if [ $? -eq 0 ]; then
-          echo "✅ API connectivity test passed"
-          echo "api_test=passed" >> $GITHUB_OUTPUT
-        else
-          echo "❌ API connectivity test failed"
-          echo "api_test=failed" >> $GITHUB_OUTPUT
-          exit 1
-        fi
-        
     - name: Generate Instagram stories
       id: generate-stories
-      if: steps.test-basic.outputs.basic_test == 'passed' && steps.test-api.outputs.api_test == 'passed'
+      if: steps.test-basic.outputs.basic_test == 'passed'
       run: |
         echo "🚀 Starting Instagram story generation at $(date)"
         echo "📅 Date: $(date '+%Y-%m-%d')"

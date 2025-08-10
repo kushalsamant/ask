@@ -459,12 +459,6 @@ def main():
         log.info("Starting Instagram Story Generation")  # Log start message
         log.info("=" * log_separator_length)  # Log separator line
         
-        # Test API connection first
-        if not test_api_connection():  # Test API connection
-            console_logger.error("❌ API connection test failed. Exiting.")  # Console error
-            log.error("❌ API connection test failed. Exiting.")  # Log error
-            exit(1)  # Exit with error code
-        
         # Generate questions
         console_logger.info("Generating questions for each discipline...")  # Console message
         questions = get_questions_by_discipline()  # Get questions for each discipline
