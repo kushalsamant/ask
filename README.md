@@ -38,7 +38,9 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 
 ## 🚀 **The Technology Behind the Magic**
 
-### **🆕 Recent Improvements (v2.3)**
+### **🆕 Recent Improvements (v2.4)**
+- **Fixed API Key Validation**: Updated all format checks from `tgsk_` to `tgp_v1_` for correct Together.ai API key format
+- **Consistent Documentation**: All files now show the correct API key format (`tgp_v1_`)
 - **Streamlined Workflow**: Removed API connectivity testing for faster execution
 - **Simplified Architecture**: Direct image generation without pre-flight checks
 - **Enhanced Reliability**: Graceful handling of API issues during generation
@@ -46,6 +48,12 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 - **Enhanced Configuration**: All settings in `ask.env` and `ask.env.template` are fully documented
 - **Comprehensive Logging**: Enhanced debugging information and error reporting
 - **Developer Experience**: Clear documentation and easier troubleshooting
+
+### **�� Recent Fixes (v2.4)**
+- **API Key Format Validation**: Fixed validation to check for correct `tgp_v1_` format instead of incorrect `tgsk_`
+- **Consistent Documentation**: Updated all files to show correct Together.ai API key format
+- **Eliminated Misleading Warnings**: No more false format validation warnings
+- **Improved User Experience**: Clean execution without format-related error messages
 
 ### **Core Features**
 - **Multi-Discipline Questions**: Generates unique questions for 7 architectural disciplines
@@ -138,7 +146,7 @@ pip install -r requirements.txt
    TOGETHER_API_URL=https://api.together.xyz/v1
    ```
    
-   **Note**: Your API key should start with `tgp_` or `tgp_v1_` for Together.ai
+   **Note**: Your API key should start with `tgp_v1_` for Together.ai
    
    **Pro Tip**: The configuration files include comprehensive inline comments explaining every setting!
 
@@ -228,10 +236,11 @@ python daily.py
 
 ### **Common Issues**
 1. **API Key Issues**: 
-   - Ensure your Together.ai API key starts with `tgp_` or `tgp_v1_`
+   - Ensure your Together.ai API key starts with `tgp_v1_` (correct format)
    - Verify the key is properly set in `ask.env`
    - Check that `TOGETHER_API_BASE` and `TOGETHER_API_URL` are configured
    - The script validates API keys automatically and provides clear error messages
+   - **Fixed**: All format validation now correctly checks for `tgp_v1_` prefix
 2. **API Errors**: Check your Together.ai API key and rate limits
 3. **Image Generation Failures**: Verify API configuration and internet connection
 4. **Text Overlay Issues**: Ensure PIL/Pillow is properly installed
@@ -291,6 +300,6 @@ Whether you're:
 
 ---
 
-**Status**: Production Ready | **Last Updated**: December 2024 | **Version**: Instagram Story Generator v2.3
+**Status**: Production Ready | **Last Updated**: August 2025 | **Version**: Instagram Story Generator v2.4
 
 *Built with ❤️ for the architecture community*
