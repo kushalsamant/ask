@@ -784,3 +784,61 @@
 2025-08-14 03:55:56,895 - INFO - Image (planning): What would a city that grows food look like?
 2025-08-14 03:55:56,895 - INFO - Image (urbanism): What would a city in harmony with nature look like?
 2025-08-14 03:55:56,895 - INFO - ============================================================
+2025-08-14 04:02:47,593 - INFO - Starting Instagram Story Generation...
+2025-08-14 04:02:47,593 - INFO - ============================================================
+2025-08-14 04:02:47,593 - INFO - Starting Instagram Story Generation
+2025-08-14 04:02:47,593 - INFO - ============================================================
+2025-08-14 04:02:47,593 - INFO - Generating questions for each discipline...
+2025-08-14 04:02:47,607 - INFO - Generating Instagram stories...
+2025-08-14 04:02:47,608 - INFO - Starting image numbering from: 50
+2025-08-14 04:02:47,608 - INFO - Generating architecture story (Image #50)...
+2025-08-14 04:02:47,609 - INFO - Generating architecture image 50 with Brutalist style (attempt 1/3)
+2025-08-14 04:02:54,066 - INFO - Generated architecture image 50: images/ASK-50-architecture.jpg
+2025-08-14 04:02:54,449 - INFO - Added text overlay to image: images/ASK-50-architecture.jpg
+2025-08-14 04:02:54,451 - INFO - Logged architecture question and image to log.csv: ASK-50-architecture.jpg
+2025-08-14 04:03:04,451 - INFO - Generating construction story (Image #51)...
+2025-08-14 04:03:04,452 - INFO - Generating construction image 51 with Industrial style (attempt 1/3)
+2025-08-14 04:03:13,747 - INFO - Generated construction image 51: images/ASK-51-construction.jpg
+2025-08-14 04:03:13,920 - INFO - Added text overlay to image: images/ASK-51-construction.jpg
+2025-08-14 04:03:13,921 - INFO - Logged construction question and image to log.csv: ASK-51-construction.jpg
+2025-08-14 04:03:23,922 - INFO - Generating design story (Image #52)...
+2025-08-14 04:03:23,922 - INFO - Generating design image 52 with Contemporary style (attempt 1/3)
+2025-08-14 04:03:27,662 - INFO - Generated design image 52: images/ASK-52-design.jpg
+2025-08-14 04:03:27,713 - INFO - Added text overlay to image: images/ASK-52-design.jpg
+2025-08-14 04:03:27,715 - INFO - Logged design question and image to log.csv: ASK-52-design.jpg
+2025-08-14 04:03:37,716 - INFO - Generating engineering story (Image #53)...
+2025-08-14 04:03:37,716 - INFO - Generating engineering image 53 with Modern style (attempt 1/3)
+2025-08-14 04:03:41,669 - INFO - Generated engineering image 53: images/ASK-53-engineering.jpg
+2025-08-14 04:03:41,755 - INFO - Added text overlay to image: images/ASK-53-engineering.jpg
+2025-08-14 04:03:41,756 - INFO - Logged engineering question and image to log.csv: ASK-53-engineering.jpg
+2025-08-14 04:03:51,757 - INFO - Generating interiors story (Image #54)...
+2025-08-14 04:03:51,757 - INFO - Generating interiors image 54 with Modern Minimalist style (attempt 1/3)
+2025-08-14 04:03:57,214 - INFO - Generated interiors image 54: images/ASK-54-interiors.jpg
+2025-08-14 04:03:57,338 - INFO - Added text overlay to image: images/ASK-54-interiors.jpg
+2025-08-14 04:03:57,340 - INFO - Logged interiors question and image to log.csv: ASK-54-interiors.jpg
+2025-08-14 04:04:07,340 - INFO - Generating planning story (Image #55)...
+2025-08-14 04:04:07,341 - INFO - Generating planning image 55 with Neo-Modern style (attempt 1/3)
+2025-08-14 04:04:14,916 - INFO - Generated planning image 55: images/ASK-55-planning.jpg
+2025-08-14 04:04:15,010 - INFO - Added text overlay to image: images/ASK-55-planning.jpg
+2025-08-14 04:04:15,011 - INFO - Logged planning question and image to log.csv: ASK-55-planning.jpg
+2025-08-14 04:04:25,012 - INFO - Generating urbanism story (Image #56)...
+2025-08-14 04:04:25,012 - INFO - Generating urbanism image 56 with Postmodern style (attempt 1/3)
+2025-08-14 04:05:25,611 - ERROR - Timeout error generating urbanism image 56 (attempt 1/3)
+2025-08-14 04:05:25,611 - INFO - Retrying in 30 seconds...
+2025-08-14 04:05:55,611 - INFO - Generating urbanism image 56 with Neo-Futurist style (attempt 2/3)
+2025-08-14 04:06:07,573 - INFO - Generated urbanism image 56: images/ASK-56-urbanism.jpg
+2025-08-14 04:06:07,658 - INFO - Added text overlay to image: images/ASK-56-urbanism.jpg
+2025-08-14 04:06:07,659 - INFO - Logged urbanism question and image to log.csv: ASK-56-urbanism.jpg
+2025-08-14 04:06:17,659 - INFO - SUCCESS! All Instagram stories created successfully
+2025-08-14 04:06:17,660 - INFO - ============================================================
+2025-08-14 04:06:17,660 - INFO - SUCCESS! All Instagram stories created successfully
+2025-08-14 04:06:17,660 - INFO - Images generated: 7
+2025-08-14 04:06:17,660 - INFO - ============================================================
+2025-08-14 04:06:17,660 - INFO - Image (architecture): What makes a building feel like home?
+2025-08-14 04:06:17,660 - INFO - Image (construction): How can we make construction safer?
+2025-08-14 04:06:17,660 - INFO - Image (design): What makes a space feel magical?
+2025-08-14 04:06:17,660 - INFO - Image (engineering): How can we engineer buildings that generate their own energy?
+2025-08-14 04:06:17,660 - INFO - Image (interiors): What would a space that changes with the time of day look like?
+2025-08-14 04:06:17,660 - INFO - Image (planning): How can we plan for social equity?
+2025-08-14 04:06:17,660 - INFO - Image (urbanism): What would a city that celebrates diversity look like?
+2025-08-14 04:06:17,660 - INFO - ============================================================
