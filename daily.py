@@ -4,15 +4,16 @@ Instagram Story Generator
 Architecture Questions → Instagram Stories with Text Overlay
 """
 
-import os  # Operating system interface
-import time  # Time-related functions
-import logging  # Logging framework
-import requests  # HTTP library for API calls
-from datetime import datetime  # Date and time handling
-from pathlib import Path  # Path manipulation
-from dotenv import load_dotenv  # Environment variable loader
-from PIL import Image, ImageDraw, ImageFont  # Image processing library
-import random  # Random number generation
+import os
+import time
+import logging
+import requests
+from datetime import datetime
+from pathlib import Path
+from dotenv import load_dotenv
+from PIL import Image, ImageDraw, ImageFont
+import random
+import csv
 
 # Load environment variables from ask.env file
 load_dotenv('ask.env')

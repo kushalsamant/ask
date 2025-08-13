@@ -36,47 +36,13 @@ That's exactly what **ASK: Daily Architectural Research** delivers - an AI-power
 
 ---
 
-## 🚀 **The Technology Behind the Magic**
-
-### **🆕 Recent Improvements (v2.4)**
-- **Fixed API Key Validation**: Updated all format checks from `tgsk_` to `tgp_v1_` for correct Together.ai API key format
-- **Consistent Documentation**: All files now show the correct API key format (`tgp_v1_`)
-- **Streamlined Workflow**: Removed API connectivity testing for faster execution
-- **Simplified Architecture**: Direct image generation without pre-flight checks
-- **Enhanced Reliability**: Graceful handling of API issues during generation
-- **Self-Documenting Code**: Every line in `daily.py` includes inline comments
-- **Enhanced Configuration**: All settings in `ask.env` and `ask.env.template` are fully documented
-- **Comprehensive Logging**: Enhanced debugging information and error reporting
-- **Developer Experience**: Clear documentation and easier troubleshooting
-
-### **�� Recent Fixes (v2.4)**
-- **API Key Format Validation**: Fixed validation to check for correct `tgp_v1_` format instead of incorrect `tgsk_`
-- **Consistent Documentation**: Updated all files to show correct Together.ai API key format
-- **Eliminated Misleading Warnings**: No more false format validation warnings
-- **Improved User Experience**: Clean execution without format-related error messages
-
-### **Core Features**
-- **Multi-Discipline Questions**: Generates unique questions for 7 architectural disciplines
-- **AI-Powered Image Generation**: Creates stunning Instagram stories using Together.ai FLUX.1 model
-- **Professional Text Overlays**: Adds beautiful typography with prompts, branding, and image numbers
-- **Automated Pipeline**: Complete workflow from question generation to final Instagram stories
-
-### **Technical Excellence**
-- **Sequential Numbering**: Continuous image numbering across all runs
-- **Immediate Logging**: Real-time tracking of generated content
-- **Error Recovery**: Robust retry logic and failure handling
-- **API Validation**: Built-in API key validation with format checking
-- **Self-Documenting Code**: Comprehensive inline comments throughout the codebase
-- **Permanent Storage**: All content committed to repository with full history
-
----
-
 ## 📊 **Content Generation Stats**
 
 ### **Daily Output**
-- **28 Stories Per Week** (4 runs × 7 days)
-- **120 Stories Per Month** (4 runs × 30 days)  
-- **1,460 Stories Per Year** (4 runs × 365 days)
+- **28 Stories Per Day** (4 runs × 7 stories per run)
+- **196 Stories Per Week** (4 runs × 7 stories × 7 days)
+- **840 Stories Per Month** (4 runs × 7 stories × 30 days)  
+- **10,220 Stories Per Year** (4 runs × 7 stories × 365 days)
 
 ### **Performance Metrics**
 - **Image Generation**: ~30-60 seconds per image
@@ -112,19 +78,7 @@ Each Instagram story features:
 
 ---
 
-## 🔧 **Technical Implementation**
-
-### **GitHub Actions Automation**
-The project includes a fully automated GitHub Actions workflow that:
-- **Runs 4 times daily** at scheduled intervals
-- **Validates API keys** before execution with format checking
-- **Handles errors gracefully** with detailed debugging information
-- **Commits generated content** to the repository automatically
-- **Provides comprehensive logging** for troubleshooting
-- **Validates configuration** and provides clear error messages
-- **Streamlined execution** without pre-flight API connectivity tests
-
-### **Quick Start for Developers**
+## 🔧 **Quick Start**
 
 #### **Prerequisites**
 - Python 3.8+
@@ -147,8 +101,6 @@ pip install -r requirements.txt
    ```
    
    **Note**: Your API key should start with `tgp_v1_` for Together.ai
-   
-   **Pro Tip**: The configuration files include comprehensive inline comments explaining every setting!
 
 #### **Generate Instagram Stories**
 ```bash
@@ -168,67 +120,17 @@ This will:
 
 ```
 ask/
-├── 📄 daily.py                    # Main Instagram story generator (fully commented)
-├── 📄 ask.env                     # Environment variables with inline documentation
-├── 📄 ask.env.template            # Environment template with detailed comments
+├── 📄 daily.py                    # Main Instagram story generator
+├── 📄 ask.env                     # Environment variables
+├── 📄 ask.env.template            # Environment template
 ├── 📄 requirements.txt            # Python dependencies
 ├── 📄 README.md                   # This file
 ├── 📄 .gitignore                  # Git ignore rules
 ├── 📄 log.csv                     # Generated questions log
 ├── 📁 images/                     # Generated Instagram stories
 ├── 📁 logs/                       # Application logs
-├── 📁 .git/                       # Git repository
 └── 📁 .github/                    # GitHub workflows
 ```
-
----
-
-## 🎯 **Configuration Options**
-
-### **Environment Variables**
-```bash
-# API Configuration
-TOGETHER_API_KEY=your_api_key
-TOGETHER_API_BASE=https://api.together.xyz/v1
-TOGETHER_API_URL=https://api.together.xyz/v1
-
-# AI Model
-IMAGE_MODEL=black-forest-labs/FLUX.1-schnell-free
-
-# Image Generation Settings
-INFERENCE_STEPS=4
-GUIDANCE_SCALE=7.5
-RATE_LIMIT_DELAY=10.0
-
-# Directories
-LOG_DIR=logs
-IMAGES_DIR=images
-
-# Questions by Discipline (105 total questions)
-ARCHITECTURE_QUESTIONS=question1|question2|...
-CONSTRUCTION_QUESTIONS=question1|question2|...
-# ... (7 disciplines with 15 questions each)
-```
-
-### **📝 Self-Documenting Configuration**
-Every configuration file includes comprehensive inline comments:
-- **`ask.env.template`**: Template with detailed explanations for each setting
-- **`ask.env`**: Your local configuration with inline documentation
-- **`daily.py`**: Fully commented code explaining every function and line
-
----
-
-## 🧪 **Testing & Quality Assurance**
-
-### **Run the Generator**
-```bash
-python daily.py
-```
-
-### **Check Output**
-- Verify 7 images are generated in `images/` directory
-- Check `log.csv` for generated questions
-- Review `logs/` for any errors
 
 ---
 
@@ -236,21 +138,16 @@ python daily.py
 
 ### **Common Issues**
 1. **API Key Issues**: 
-   - Ensure your Together.ai API key starts with `tgp_v1_` (correct format)
+   - Ensure your Together.ai API key starts with `tgp_v1_`
    - Verify the key is properly set in `ask.env`
-   - Check that `TOGETHER_API_BASE` and `TOGETHER_API_URL` are configured
-   - The script validates API keys automatically and provides clear error messages
-   - **Fixed**: All format validation now correctly checks for `tgp_v1_` prefix
 2. **API Errors**: Check your Together.ai API key and rate limits
 3. **Image Generation Failures**: Verify API configuration and internet connection
 4. **Text Overlay Issues**: Ensure PIL/Pillow is properly installed
 5. **Permission Errors**: Check write permissions for `images/` and `logs/` directories
-6. **Configuration Issues**: All settings are documented with inline comments in the config files
 
 ### **Logs**
 - **Application Logs**: Check `logs/execution.log`
 - **Questions Log**: Review `log.csv` for generated content
-- **Error Details**: Full error messages in log files
 
 ---
 
@@ -260,29 +157,13 @@ python daily.py
 2. Create a feature branch
 3. Make your changes
 4. Test thoroughly with `python daily.py`
-5. Ensure all code includes inline comments for clarity
-6. Submit a pull request
-
-### **Code Quality Standards**
-- **Inline Comments**: Every line should be self-documenting
-- **Configuration Documentation**: All settings should have clear explanations
-- **Error Handling**: Comprehensive error messages and logging
-- **API Validation**: Proper validation and testing of external services
+5. Submit a pull request
 
 ---
 
 ## 📄 **License**
 
 This project is licensed under the MIT License.
-
----
-
-## 🆘 **Support**
-
-For issues related to:
-- **Image Generation**: Check API configuration and logs
-- **Text Overlays**: Verify PIL installation and font availability
-- **Questions**: Review `log.csv` for generated content
 
 ---
 
