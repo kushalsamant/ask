@@ -1,167 +1,143 @@
-# 🏗️ ASK: Daily Architectural Research
-## *AI-Powered Instagram Stories for Architecture Enthusiasts*
+# ASK: Architectural Research Catalyst
+## *Daily Research Questions Generator for the Built Environment*
 
----
+Generate focused research questions across architecture, construction, design, engineering, interiors, planning, and urbanism — paired with AI-generated visuals for inspiration and deeper thinking.
 
-## 🎯 **The Vision**
+## 🎯 What ASK Does
 
-Wake up to fresh, thought-provoking architectural content every day.  
-**ASK: Daily Architectural Research** is an AI-powered Instagram story generator that creates stunning visuals and questions across 7 architectural disciplines daily.
+ASK is a Python-based tool that:
+- Generates targeted research questions across 7 built environment disciplines
+- Creates AI-generated architectural imagery using Together.ai's FLUX.1
+- Combines questions and images in Instagram story format (1072×1792px)
+- Logs all generated questions for future reference
+- Can run multiple times daily (5-10 minutes per run)
 
----
+## 🎓 Who Can Benefit?
 
-## 🌟 **Features**
+### Researchers
+- Find new research angles
+- Discover unexplored questions
+- Get daily inspiration for investigations
+- Build interdisciplinary connections
+- Document research ideas systematically
 
-- **AI-Powered Visuals:** Uses Together.ai's FLUX.1 model for architectural images.
-- **Intelligent Questions:** 105 unique questions, 7 disciplines.
-- **Professional Design:** Automated text overlays, branding, and numbering.
+### Educators
+- Source discussion topics for seminars
+- Generate student assignments
+- Inspire thesis directions
+- Create visual teaching aids
+- Facilitate critical thinking
 
----
+### Practitioners
+- Question current practices
+- Explore new approaches
+- Document professional inquiries
+- Inspire team discussions
+- Build research repositories
 
-## 🏛️ **Disciplines Covered**
+## 💡 Use Cases
 
-- Architecture
-- Construction
-- Design
-- Engineering
-- Interiors
-- Planning
-- Urbanism
+### Research Development
+- Daily research journaling
+- Team brainstorming sessions
+- Literature review guidance
+- Research proposal development
+- Interdisciplinary exploration
 
----
+### Education
+- Classroom discussions
+- Student assignments
+- Workshop activities
+- Design critiques
+- Research seminars
 
-## 📊 **Content Generation**
+### Practice
+- Team meetings
+- Project kickoffs
+- Design reviews
+- Process evaluation
+- Strategic planning
 
-- **Daily:** 7 stories (7 disciplines)
-- **Weekly:** 49 stories
-- **Monthly:** 210 stories
-- **Yearly:** 2,555 stories
+## 🔧 Technical Features
 
-**Performance:**  
-- Image generation: ~30–60s/image  
-- Full run: ~5–10min  
-- API response: <2s  
-- Text overlay: <5s/image
+### Question Generation
+- 7 disciplines covered
+- 1 unique question per discipline per run
+- Questions logged in CSV format
+- Run as often as needed
 
----
+### Visual Component
+- AI-generated architectural imagery
+- Instagram story format
+- Professional text overlay
+- Sequential numbering
+- Consistent branding
 
-## 🎨 **Sample Story**
+### Performance
+- 5-10 minutes per complete run
+- 7 images per run
+- Theoretical maximum: 288 runs per day
+- Up to 2,016 unique question-image pairs daily
 
-Each Instagram story includes:
-- AI-generated architectural visual
-- Thought-provoking question
-- Branding: "ASK: Daily Architectural Research"
-- Sequential numbering (#01, #02, ...)
+## 🚀 Getting Started
 
----
-
-## 💡 **Why Use ASK?**
-
-- **Inspiration:** Daily architectural ideas.
-- **Education:** Learn about disciplines.
-- **Visual Learning:** AI-generated concepts.
-- **Community:** Questions spark discussion.
-
----
-
-## 🔧 **Quick Start**
-
-### Prerequisites
-- Python 3.8+
-- Together.ai API key (starts with `tgp_v1_`)
-
-### Installation
 ```sh
 git clone <repository-url>
 cd ask
 pip install -r requirements.txt
 ```
 
-### Configuration
-1. Copy `ask.env.template` to `ask.env`:
-   ```sh
-   cp ask.env.template ask.env
-   ```
-2. Add your Together.ai API key to `ask.env`:
-   ```
-   TOGETHER_API_KEY=your_api_key_here
-   ```
+### Requirements
+- Python 3.8+
+- Together.ai API key (starts with `tgp_v1_`)
+- Internet connection for API access
 
-### Generate Instagram Stories
+### Configuration
+1. Copy template:
+```sh
+cp ask.env.template ask.env
+```
+
+2. Add API key to `ask.env`:
+```
+TOGETHER_API_KEY=your_api_key_here
+```
+
+### Run
 ```sh
 python daily.py
 ```
-This will:
-- Generate 7 questions (one per discipline)
-- Create Instagram story images (1072×1792px)
-- Add text overlays and branding
-- Save images to `images/`
-- Log questions to `log.csv`
 
----
+### Output
+- Questions saved to `log.csv`
+- Images saved to `images/` directory
+- Execution logs in `logs/execution.log`
 
-## 📁 **Project Structure**
+## 📁 Project Structure
 
 ```
 ask/
-├── daily.py           # Main generator script
-├── ask.env            # Environment variables
-├── ask.env.template   # Example config
-├── requirements.txt   # Python dependencies
-├── README.md          # This file
-├── .gitignore         # Git ignore rules
-├── log.csv            # Generated questions log
-├── images/            # Generated stories
-├── logs/              # Application logs
-└── .github/           # GitHub workflows
+├── daily.py           # Main generator
+├── ask.env           # Configuration
+├── ask.env.template  # Config template
+├── requirements.txt  # Dependencies
+├── README.md        # Documentation
+├── log.csv         # Question archive
+├── images/         # Generated visuals
+└── logs/          # System logs
 ```
 
----
+## 🤝 Contributing
 
-## 🔍 **Troubleshooting**
-
-- **API Key Issues:**  
-  - Key must start with `tgp_v1_`
-  - Set in `ask.env`
-- **API Errors:**  
-  - Check key and rate limits
-- **Image Generation Failures:**  
-  - Verify API config and internet
-- **Text Overlay Issues:**  
-  - Ensure Pillow is installed
-- **Permission Errors:**  
-  - Check write access to `images/` and `logs/`
-
-**Logs:**  
-- Application: `logs/execution.log`  
-- Questions: `log.csv`
-
----
-
-## 🤝 **Contributing**
-
-1. Fork the repo
+1. Fork the repository
 2. Create a feature branch
-3. Make changes
-4. Test with `python daily.py`
+3. Make your changes
+4. Test thoroughly
 5. Submit a pull request
 
 ---
 
-## 📄 **License**
+**Version:** 2.0  
+**Updated:** August 2025
 
-MIT License
-
----
-
-## 🌟 **Join the ASK Community**
-
-Whether you’re a student, creator, developer, or enthusiast—ASK brings architectural thinking to everyone.
-
----
-
-**Status:** Production Ready  
-**Last Updated:** August 2025  
-**Version:** Instagram Story Generator v2.0
-
-*Built with ❤️ for the architecture community*
+*Better questions lead to better research.*
