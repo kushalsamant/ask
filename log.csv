@@ -1,57 +1,57 @@
-timestamp,discipline,question,image_filename
-2025-08-10 12:44:49,architecture,What would a building that breathes look like?,ASK-01-architecture.jpg
-2025-08-10 12:45:04,construction,What would prefabrication look like for complex forms?,ASK-02-construction.jpg
-2025-08-10 12:45:37,design,How can we create spaces that heal?,ASK-03-design.jpg
-2025-08-10 12:47:31,engineering,How can we make buildings more resilient to disasters?,ASK-04-engineering.jpg
-2025-08-10 12:47:45,interiors,What makes a space feel luxurious yet comfortable?,ASK-05-interiors.jpg
-2025-08-10 12:48:16,planning,How can we plan for cultural preservation?,ASK-06-planning.jpg
-2025-08-10 12:48:31,urbanism,How can we design cities for human interaction?,ASK-07-urbanism.jpg
-2025-08-10 13:05:42,architecture,How can architecture foster community?,ASK-08-architecture.jpg
-2025-08-10 13:05:56,construction,What would construction look like in space?,ASK-09-construction.jpg
-2025-08-10 13:06:11,design,How can we design buildings that tell stories?,ASK-10-design.jpg
-2025-08-10 13:06:38,engineering,What would buildings that float look like?,ASK-11-engineering.jpg
-2025-08-10 13:06:52,interiors,What would a space that responds to mood look like?,ASK-12-interiors.jpg
-2025-08-10 13:07:07,planning,What would a walkable city look like?,ASK-13-planning.jpg
-2025-08-10 13:07:34,urbanism,How can we design cities for sustainability?,ASK-14-urbanism.jpg
-2025-08-10 13:28:24,architecture,What makes a building timeless?,ASK-15-architecture.jpg
-2025-08-10 13:28:38,construction,How can we make construction more sustainable?,ASK-16-construction.jpg
-2025-08-10 13:28:53,design,How can we design for the unexpected?,ASK-17-design.jpg
-2025-08-10 13:30:38,engineering,What would buildings that communicate look like?,ASK-18-engineering.jpg
-2025-08-10 13:30:53,interiors,How can interiors create a sense of flow?,ASK-19-interiors.jpg
-2025-08-10 13:31:22,planning,How can we plan for renewable energy?,ASK-20-planning.jpg
-2025-08-10 13:31:37,urbanism,What makes a city feel like home?,ASK-21-urbanism.jpg
-2025-08-10 17:34:16,architecture,How can we create buildings that age gracefully?,ASK-22-architecture.jpg
-2025-08-10 17:34:30,construction,What would 3D printed buildings look like?,ASK-23-construction.jpg
-2025-08-10 17:34:45,design,What makes a design truly innovative?,ASK-24-design.jpg
-2025-08-10 17:35:13,engineering,What would buildings that harvest resources look like?,ASK-25-engineering.jpg
-2025-08-10 17:35:28,interiors,How can we design interiors for wellness?,ASK-26-interiors.jpg
-2025-08-10 17:35:42,planning,How can we plan for the future while preserving history?,ASK-27-planning.jpg
-2025-08-10 17:35:56,urbanism,What makes a city feel authentic?,ASK-28-urbanism.jpg
-2025-08-10 19:49:04,architecture,How can we design for human scale in large structures?,ASK-29-architecture.jpg
-2025-08-10 19:49:20,construction,What would modular construction look like at scale?,ASK-30-construction.jpg
-2025-08-10 19:49:43,design,What makes a space memorable?,ASK-31-design.jpg
-2025-08-10 19:50:01,engineering,How can we engineer for extreme climates?,ASK-32-engineering.jpg
-2025-08-10 19:50:25,interiors,How can we design interiors that adapt to users?,ASK-33-interiors.jpg
-2025-08-10 19:51:13,planning,How can we plan for mixed-use development?,ASK-34-planning.jpg
-2025-08-10 19:51:37,urbanism,How can we create vibrant public spaces?,ASK-35-urbanism.jpg
-2025-08-12 17:45:07,architecture,What would a building that adapts to seasons look like?,ASK-36-architecture.jpg
-2025-08-12 17:45:22,construction,How can we make building maintenance easier?,ASK-37-construction.jpg
-2025-08-12 17:45:37,design,What makes a design sustainable?,ASK-38-design.jpg
-2025-08-12 17:45:53,engineering,What would earthquake-resistant architecture look like?,ASK-39-engineering.jpg
-2025-08-12 17:46:08,interiors,What makes a space feel sophisticated?,ASK-40-interiors.jpg
-2025-08-12 17:46:42,planning,How can we plan for public transportation?,ASK-41-planning.jpg
-2025-08-12 17:46:57,urbanism,How can we design cities for the future?,ASK-42-urbanism.jpg
-2025-08-14 03:54:01,architecture,How can we design for the future while respecting the past?,ASK-43-architecture.jpg
-2025-08-14 03:54:21,construction,What would construction look like with robots and AI?,ASK-44-construction.jpg
-2025-08-14 03:54:38,design,How can we design spaces that connect people?,ASK-45-design.jpg
-2025-08-14 03:54:56,engineering,How can we make buildings that clean the air?,ASK-46-engineering.jpg
-2025-08-14 03:55:11,interiors,What makes a space feel intimate yet open?,ASK-47-interiors.jpg
-2025-08-14 03:55:28,planning,What would a city that grows food look like?,ASK-48-planning.jpg
-2025-08-14 03:55:46,urbanism,What would a city in harmony with nature look like?,ASK-49-urbanism.jpg
-2025-08-14 04:02:54,architecture,What makes a building feel like home?,ASK-50-architecture.jpg
-2025-08-14 04:03:13,construction,How can we make construction safer?,ASK-51-construction.jpg
-2025-08-14 04:03:27,design,What makes a space feel magical?,ASK-52-design.jpg
-2025-08-14 04:03:41,engineering,How can we engineer buildings that generate their own energy?,ASK-53-engineering.jpg
-2025-08-14 04:03:57,interiors,What would a space that changes with the time of day look like?,ASK-54-interiors.jpg
-2025-08-14 04:04:15,planning,How can we plan for social equity?,ASK-55-planning.jpg
-2025-08-14 04:06:07,urbanism,What would a city that celebrates diversity look like?,ASK-56-urbanism.jpg
+timestamp,discipline,question,image_filename,is_used,style,blurb
+2025-08-10 12:44:49,architecture,What would a building that breathes look like?,ASK-01-architecture.jpg,True,,
+2025-08-10 12:45:04,construction,What would prefabrication look like for complex forms?,ASK-02-construction.jpg,True,,
+2025-08-10 12:45:37,design,How can we create spaces that heal?,ASK-03-design.jpg,True,,
+2025-08-10 12:47:31,engineering,How can we make buildings more resilient to disasters?,ASK-04-engineering.jpg,True,,
+2025-08-10 12:47:45,interiors,What makes a space feel luxurious yet comfortable?,ASK-05-interiors.jpg,True,,
+2025-08-10 12:48:16,planning,How can we plan for cultural preservation?,ASK-06-planning.jpg,True,,
+2025-08-10 12:48:31,urbanism,How can we design cities for human interaction?,ASK-07-urbanism.jpg,True,,
+2025-08-10 13:05:42,architecture,How can architecture foster community?,ASK-08-architecture.jpg,True,,
+2025-08-10 13:05:56,construction,What would construction look like in space?,ASK-09-construction.jpg,True,,
+2025-08-10 13:06:11,design,How can we design buildings that tell stories?,ASK-10-design.jpg,True,,
+2025-08-10 13:06:38,engineering,What would buildings that float look like?,ASK-11-engineering.jpg,True,,
+2025-08-10 13:06:52,interiors,What would a space that responds to mood look like?,ASK-12-interiors.jpg,True,,
+2025-08-10 13:07:07,planning,What would a walkable city look like?,ASK-13-planning.jpg,True,,
+2025-08-10 13:07:34,urbanism,How can we design cities for sustainability?,ASK-14-urbanism.jpg,True,,
+2025-08-10 13:28:24,architecture,What makes a building timeless?,ASK-15-architecture.jpg,True,,
+2025-08-10 13:28:38,construction,How can we make construction more sustainable?,ASK-16-construction.jpg,True,,
+2025-08-10 13:28:53,design,How can we design for the unexpected?,ASK-17-design.jpg,True,,
+2025-08-10 13:30:38,engineering,What would buildings that communicate look like?,ASK-18-engineering.jpg,True,,
+2025-08-10 13:30:53,interiors,How can interiors create a sense of flow?,ASK-19-interiors.jpg,True,,
+2025-08-10 13:31:22,planning,How can we plan for renewable energy?,ASK-20-planning.jpg,True,,
+2025-08-10 13:31:37,urbanism,What makes a city feel like home?,ASK-21-urbanism.jpg,True,,
+2025-08-10 17:34:16,architecture,How can we create buildings that age gracefully?,ASK-22-architecture.jpg,True,,
+2025-08-10 17:34:30,construction,What would 3D printed buildings look like?,ASK-23-construction.jpg,True,,
+2025-08-10 17:34:45,design,What makes a design truly innovative?,ASK-24-design.jpg,True,,
+2025-08-10 17:35:13,engineering,What would buildings that harvest resources look like?,ASK-25-engineering.jpg,True,,
+2025-08-10 17:35:28,interiors,How can we design interiors for wellness?,ASK-26-interiors.jpg,True,,
+2025-08-10 17:35:42,planning,How can we plan for the future while preserving history?,ASK-27-planning.jpg,True,,
+2025-08-10 17:35:56,urbanism,What makes a city feel authentic?,ASK-28-urbanism.jpg,True,,
+2025-08-10 19:49:04,architecture,How can we design for human scale in large structures?,ASK-29-architecture.jpg,True,,
+2025-08-10 19:49:20,construction,What would modular construction look like at scale?,ASK-30-construction.jpg,True,,
+2025-08-10 19:49:43,design,What makes a space memorable?,ASK-31-design.jpg,True,,
+2025-08-10 19:50:01,engineering,How can we engineer for extreme climates?,ASK-32-engineering.jpg,True,,
+2025-08-10 19:50:25,interiors,How can we design interiors that adapt to users?,ASK-33-interiors.jpg,True,,
+2025-08-10 19:51:13,planning,How can we plan for mixed-use development?,ASK-34-planning.jpg,True,,
+2025-08-10 19:51:37,urbanism,How can we create vibrant public spaces?,ASK-35-urbanism.jpg,True,,
+2025-08-12 17:45:07,architecture,What would a building that adapts to seasons look like?,ASK-36-architecture.jpg,True,,
+2025-08-12 17:45:22,construction,How can we make building maintenance easier?,ASK-37-construction.jpg,True,,
+2025-08-12 17:45:37,design,What makes a design sustainable?,ASK-38-design.jpg,True,,
+2025-08-12 17:45:53,engineering,What would earthquake-resistant architecture look like?,ASK-39-engineering.jpg,True,,
+2025-08-12 17:46:08,interiors,What makes a space feel sophisticated?,ASK-40-interiors.jpg,True,,
+2025-08-12 17:46:42,planning,How can we plan for public transportation?,ASK-41-planning.jpg,True,,
+2025-08-12 17:46:57,urbanism,How can we design cities for the future?,ASK-42-urbanism.jpg,True,,
+2025-08-14 03:54:01,architecture,How can we design for the future while respecting the past?,ASK-43-architecture.jpg,True,,
+2025-08-14 03:54:21,construction,What would construction look like with robots and AI?,ASK-44-construction.jpg,True,,
+2025-08-14 03:54:38,design,How can we design spaces that connect people?,ASK-45-design.jpg,True,,
+2025-08-14 03:54:56,engineering,How can we make buildings that clean the air?,ASK-46-engineering.jpg,True,,
+2025-08-14 03:55:11,interiors,What makes a space feel intimate yet open?,ASK-47-interiors.jpg,True,,
+2025-08-14 03:55:28,planning,What would a city that grows food look like?,ASK-48-planning.jpg,True,,
+2025-08-14 03:55:46,urbanism,What would a city in harmony with nature look like?,ASK-49-urbanism.jpg,True,,
+2025-08-14 04:02:54,architecture,What makes a building feel like home?,ASK-50-architecture.jpg,True,,
+2025-08-14 04:03:13,construction,How can we make construction safer?,ASK-51-construction.jpg,True,,
+2025-08-14 04:03:27,design,What makes a space feel magical?,ASK-52-design.jpg,True,,
+2025-08-14 04:03:41,engineering,How can we engineer buildings that generate their own energy?,ASK-53-engineering.jpg,True,,
+2025-08-14 04:03:57,interiors,What would a space that changes with the time of day look like?,ASK-54-interiors.jpg,True,,
+2025-08-14 04:04:15,planning,How can we plan for social equity?,ASK-55-planning.jpg,True,,
+2025-08-14 04:06:07,urbanism,What would a city that celebrates diversity look like?,ASK-56-urbanism.jpg,True,,

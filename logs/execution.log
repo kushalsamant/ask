@@ -842,3 +842,89 @@
 2025-08-14 04:06:17,660 - INFO - Image (planning): How can we plan for social equity?
 2025-08-14 04:06:17,660 - INFO - Image (urbanism): What would a city that celebrates diversity look like?
 2025-08-14 04:06:17,660 - INFO - ============================================================
+2025-08-14 12:57:07,073 - INFO - Starting Instagram Story Generation...
+2025-08-14 12:57:07,088 - INFO - ============================================================
+2025-08-14 12:57:07,088 - INFO - Starting Instagram Story Generation
+2025-08-14 12:57:07,088 - INFO - ============================================================
+2025-08-14 12:57:07,088 - INFO - Configuration:
+2025-08-14 12:57:07,088 - INFO - - Required questions per run: 100
+2025-08-14 12:57:07,088 - INFO - - Required disciplines: architecture, construction, design, engineering, interiors, planning, urbanism
+2025-08-14 12:57:07,088 - INFO - - Enforce discipline count: True
+2025-08-14 12:57:07,088 - INFO - ============================================================
+2025-08-14 12:57:07,088 - INFO - Generating questions for each discipline...
+2025-08-14 12:57:07,175 - ERROR - Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 12:57:07,175 - ERROR - Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 12:57:07,175 - ERROR - Error in main function: Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 12:57:07,175 - ERROR - Error in main function: Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:18:23,062 - INFO - Starting Instagram Story Generation...
+2025-08-14 13:18:23,083 - INFO - ============================================================
+2025-08-14 13:18:23,083 - INFO - Starting Instagram Story Generation
+2025-08-14 13:18:23,083 - INFO - ============================================================
+2025-08-14 13:18:23,083 - INFO - Configuration:
+2025-08-14 13:18:23,083 - INFO - - Required questions per run: 100
+2025-08-14 13:18:23,083 - INFO - - Required disciplines: architecture, construction, design, engineering, interiors, planning, urbanism
+2025-08-14 13:18:23,083 - INFO - - Enforce discipline count: True
+2025-08-14 13:18:23,083 - INFO - ============================================================
+2025-08-14 13:18:23,083 - INFO - Generating questions for each discipline...
+2025-08-14 13:18:23,117 - ERROR - Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:18:23,117 - ERROR - Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:18:23,117 - ERROR - Error in main function: Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:18:23,118 - ERROR - Error in main function: Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:25:48,712 - INFO - Generating new questions for architecture...
+2025-08-14 13:25:48,713 - INFO - Generating questions for architecture...
+2025-08-14 13:25:49,681 - ERROR - API error for architecture: 404 - {
+  "id": "o76KKgW-2kFHot-96eee481ec7a3bd4",
+  "error": {
+    "message": "Unable to access model togethercomputer/llama-3.3-70b-instruct-turbo. Please visit https://api.together.ai/models to view the 
+2025-08-14 13:25:49,682 - ERROR - Failed to generate questions for architecture
+2025-08-14 13:25:49,682 - INFO - Generating questions for construction...
+2025-08-14 13:25:50,210 - ERROR - API error for construction: 404 - {
+  "id": "o76KKr1-2kFHot-96eee485be181eed",
+  "error": {
+    "message": "Unable to access model togethercomputer/llama-3.3-70b-instruct-turbo. Please visit https://api.together.ai/models to view the 
+2025-08-14 13:25:50,210 - ERROR - Failed to generate questions for construction
+2025-08-14 13:25:50,210 - INFO - Generating questions for design...
+2025-08-14 13:25:50,762 - ERROR - API error for design: 404 - {
+  "id": "o76KL1P-2kFHot-96eee48908da48ef",
+  "error": {
+    "message": "Unable to access model togethercomputer/llama-3.3-70b-instruct-turbo. Please visit https://api.together.ai/models to view the 
+2025-08-14 13:25:50,762 - ERROR - Failed to generate questions for design
+2025-08-14 13:25:50,762 - INFO - Generating questions for engineering...
+2025-08-14 13:25:51,314 - ERROR - API error for engineering: 404 - {
+  "id": "o76KLB1-2kFHot-96eee48c7a8740e7",
+  "error": {
+    "message": "Unable to access model togethercomputer/llama-3.3-70b-instruct-turbo. Please visit https://api.together.ai/models to view the 
+2025-08-14 13:25:51,315 - ERROR - Failed to generate questions for engineering
+2025-08-14 13:25:51,315 - INFO - Generating questions for interiors...
+2025-08-14 13:25:51,664 - ERROR - API error for interiors: 404 - {
+  "id": "o76KLH2-2kFHot-96eee48fdb6d3aec",
+  "error": {
+    "message": "Unable to access model togethercomputer/llama-3.3-70b-instruct-turbo. Please visit https://api.together.ai/models to view the 
+2025-08-14 13:25:51,665 - ERROR - Failed to generate questions for interiors
+2025-08-14 13:25:51,665 - INFO - Generating questions for planning...
+2025-08-14 13:25:52,093 - ERROR - API error for planning: 404 - {
+  "id": "o76KLQM-2kFHot-96eee4921d1a3b46",
+  "error": {
+    "message": "Unable to access model togethercomputer/llama-3.3-70b-instruct-turbo. Please visit https://api.together.ai/models to view the 
+2025-08-14 13:25:52,093 - ERROR - Failed to generate questions for planning
+2025-08-14 13:25:52,093 - INFO - Generating questions for urbanism...
+2025-08-14 13:25:52,593 - ERROR - API error for urbanism: 404 - {
+  "id": "o76KLYq-2kFHot-96eee494ad8a3a4d",
+  "error": {
+    "message": "Unable to access model togethercomputer/llama-3.3-70b-instruct-turbo. Please visit https://api.together.ai/models to view the 
+2025-08-14 13:25:52,594 - ERROR - Failed to generate questions for urbanism
+2025-08-14 13:25:52,594 - INFO - Added 0 new questions to log.csv
+2025-08-14 13:25:52,594 - INFO - Starting Instagram Story Generation...
+2025-08-14 13:25:52,594 - INFO - ============================================================
+2025-08-14 13:25:52,594 - INFO - Starting Instagram Story Generation
+2025-08-14 13:25:52,594 - INFO - ============================================================
+2025-08-14 13:25:52,595 - INFO - Configuration:
+2025-08-14 13:25:52,595 - INFO - - Required questions per run: 100
+2025-08-14 13:25:52,595 - INFO - - Required disciplines: architecture, construction, design, engineering, interiors, planning, urbanism
+2025-08-14 13:25:52,595 - INFO - - Enforce discipline count: True
+2025-08-14 13:25:52,595 - INFO - ============================================================
+2025-08-14 13:25:52,595 - INFO - Generating questions for each discipline...
+2025-08-14 13:25:52,596 - ERROR - Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:25:52,596 - ERROR - Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:25:52,596 - ERROR - Error in main function: Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
+2025-08-14 13:25:52,596 - ERROR - Error in main function: Number of disciplines with available questions (7) does not match QUESTIONS_PER_RUN (100)
