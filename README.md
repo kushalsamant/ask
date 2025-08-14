@@ -135,9 +135,10 @@ ask/
 4. Test thoroughly
 5. Submit a pull request
 
----
+[---
+Get today's updates here
+---](https://patreon.com/c/kvshvl)
 
 **Version:** 2.0  
 **Updated:** August 2025
-
 *Better questions lead to better research.*
