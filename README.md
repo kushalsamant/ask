@@ -1,8 +1,8 @@
-# 🏗️ ASK: Daily Architectural Research
+# 🏗️ ASK: Daily Research
 
-**AI-Powered Architectural Research Content Generation System**
+**AI-Powered Research Content Generation System**
 
-Generate professional architectural research questions, create stunning visual content, and produce comprehensive image publications with advanced cross-disciplinary research capabilities.
+Generate professional research questions, create stunning visual content, and produce comprehensive image publications with advanced cross-disciplinary research capabilities.
 
 ---
 
@@ -151,7 +151,7 @@ Q3: "How can real-time collaboration tools enhance sustainable material selectio
 ```bash
 python main.py cross-disciplinary
 ```
-**What it does**: Explores intersections between architectural themes
+**What it does**: Explores intersections between research themes
 - Connects multiple themes in single questions
 - Finds innovative solutions at theme boundaries
 - Creates broader, more comprehensive content
@@ -159,10 +159,10 @@ python main.py cross-disciplinary
 
 **Example Questions**:
 - "How can Urban Planning and Digital Technology create innovative city solutions?"
-- "What synergies emerge when combining Architectural Design, Construction Technology, and Digital Technology?"
-- "How do Interior Environments and Engineering Systems work together for optimal building performance?"
-- "What innovative approaches emerge when integrating Sustainable Design with Smart Building Technologies?"
-- "How can Heritage Preservation and Modern Construction Techniques create adaptive reuse solutions?"
+- "What synergies emerge when combining Design Research, Technology Innovation, and Digital Technology?"
+- "How do Environmental Design and Engineering Systems work together for optimal performance?"
+- "What innovative approaches emerge when integrating Sustainability Science with Smart Technologies?"
+- "How can Heritage Preservation and Modern Technology create adaptive solutions?"
 
 #### **4. Chained Mode**
 ```bash
@@ -176,25 +176,25 @@ python main.py chained
 
 **Example Chain**:
 ```
-Theme: architectural_design
-Q1: "How can we design sustainable buildings?"
-A1: "Sustainable building design involves energy efficiency, renewable materials, and passive design strategies..."
+Theme: design_research
+Q1: "How can we design sustainable systems?"
+A1: "Sustainable design involves energy efficiency, renewable materials, and passive strategies..."
 
-Q2: "What are the most effective passive design strategies for energy efficiency?"
-A2: "Passive design strategies include orientation, thermal mass, natural ventilation..."
+Q2: "What are the most effective passive strategies for energy efficiency?"
+A2: "Passive strategies include orientation, thermal mass, natural ventilation..."
 
-Q3: "How can natural ventilation be optimized in urban environments?"
-A3: "Urban natural ventilation requires careful consideration of wind patterns, building heights..."
+Q3: "How can natural systems be optimized in urban environments?"
+A3: "Urban natural systems require careful consideration of patterns, heights, and flows..."
 
-Theme: construction_technology
-Q1: "What are the latest innovations in construction materials?"
-A1: "Advanced materials include high-performance concrete, sustainable timber, and smart materials..."
+Theme: technology_innovation
+Q1: "What are the latest innovations in materials science?"
+A1: "Advanced materials include high-performance composites, sustainable materials, and smart materials..."
 
-Q2: "How do advanced materials improve building performance?"
+Q2: "How do advanced materials improve system performance?"
 A2: "Advanced materials enhance durability, energy efficiency, and structural integrity..."
 
-Q3: "What construction techniques optimize material efficiency?"
-A3: "Efficient techniques include prefabrication, modular construction, and digital fabrication..."
+Q3: "What techniques optimize material efficiency?"
+A3: "Efficient techniques include prefabrication, modular systems, and digital fabrication..."
 ```
 
 ### **Quick Reference Commands**
@@ -437,7 +437,7 @@ ERROR_MAX_FAILURES=10
 | **Hybrid** | `HYBRID_CHAIN_LENGTH` | `2` | Questions per chain (5 themes × 2 chains = 10 Q&A pairs) |
 | **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `10` | Number of themes (10 themes = 10 Q&A pairs) |
 | **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 themes × 5 chains = 10 Q&A pairs) |
-| **Chained** | `CATEGORIES_TO_GENERATE` | `architectural_design,construction_technology` | Themes to use |
+| **Chained** | `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes to use |
 
 ### **Enhanced Features Configuration**
 
@@ -648,10 +648,10 @@ Breakthrough opps     Intelligent theme     Brand integration     Layout managem
 - **Unprecedented Research Coverage**: 2,667 themes cover every possible research direction
 - **AI-Powered Intelligence**: Research analysis and breakthrough discovery
 - **Professional Documentation**: High-quality image outputs for publication
-- **Cross-Disciplinary Excellence**: Bridge multiple architectural domains
+- **Cross-Disciplinary Excellence**: Bridge multiple research domains
 
 ### **For Professionals:**
-- **Innovation Discovery**: Find breakthrough opportunities at category intersections
+- **Innovation Discovery**: Find breakthrough opportunities at theme intersections
 - **Client Presentations**: Professional visual content for meetings
 - **Strategic Insights**: AI-powered analysis for decision making
 - **Competitive Advantage**: Unique research capabilities
@@ -767,4 +767,4 @@ LOG_LEVEL=DEBUG
 
 **This creates unlimited research possibilities and maximum innovation discovery!** 🚀
 
-**Transform your architectural research with AI-powered intelligence and professional image documentation!** 🎯
+**Transform your research with AI-powered intelligence and professional image documentation!** 🎯

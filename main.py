@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ASK: Daily Architectural Research - Unified Pipeline
+ASK: Daily Research - Unified Pipeline
 Enhanced main pipeline with all modes and features from simple_pipeline.py
 """
 
@@ -70,13 +70,13 @@ class SimplePipeline:
     def __init__(self):
         """Initialize the pipeline"""
         self.themes = [
-            'architectural_design',
-            'construction_technology', 
-            'design_innovation',
+            'design_research',
+            'technology_innovation', 
+            'sustainability_science',
             'engineering_systems',
-            'interior_environments',
+            'environmental_design',
             'urban_planning',
-            'urban_design',
+            'spatial_design',
             'digital_technology'
         ]
         self.log_file = 'log.csv'
@@ -426,7 +426,7 @@ def generate_cover_images_if_enabled(qa_pairs):
         console_logger.info(f"📚 Creating volume cover for Volume {current_volume}...")
         try:
             volume_cover = image_system.create_cover_image(
-                title=f"ASK: Daily Architectural Research - Volume {current_volume}",
+                title=f"ASK: Daily Research - Volume {current_volume}",
                 subtitle="Comprehensive Research Collection",
                 volume_number=current_volume
             )
@@ -652,7 +652,7 @@ def run_chained_mode():
         
         # If no specific themes, use default themes
         if not themes_to_generate or themes_to_generate == ['']:
-            themes_to_generate = ['architectural_design', 'construction_technology']
+            themes_to_generate = ['design_research', 'technology_innovation']
         
         console_logger.info(f"Configuration: {chain_length} questions per chain, {len(themes_to_generate)} themes")
         
@@ -696,7 +696,7 @@ def run_chained_mode():
 
 def show_help():
     """Show help information for available modes"""
-    console_logger.info("🎯 ASK: Daily Architectural Research - Available Modes")
+    console_logger.info("🎯 ASK: Daily Research - Available Modes")
     console_logger.info("=" * 60)
     console_logger.info("  python main.py                    - Simple 12-step pipeline (default)")
     console_logger.info("  python main.py hybrid             - Hybrid cross-disciplinary chained content")
@@ -707,7 +707,7 @@ def show_help():
     console_logger.info("🎨 Mode Descriptions:")
     console_logger.info("  • Simple: Classic 12-step Q&A generation")
     console_logger.info("  • Hybrid: Combines cross-disciplinary themes with chained questions")
-    console_logger.info("  • Cross-disciplinary: Explores intersections between architectural themes")
+    console_logger.info("  • Cross-disciplinary: Explores intersections between research themes")
     console_logger.info("  • Chained: Creates connected questions that build upon each other")
     console_logger.info("")
     console_logger.info("⚙️  Configuration: Edit ask.env to customize each mode")
