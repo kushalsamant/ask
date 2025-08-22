@@ -226,3 +226,40 @@ def export_questions_to_csv(output_filename='questions_export.csv'):
     except Exception as e:
         log.error(f"Error exporting questions: {e}")
         return False
+
+def read_log_csv():
+    """Read Q&A pairs from log.csv in format expected by image generation system"""
+    qa_pairs = []
+    
+    try:
+        if not os.path.exists(LOG_CSV_FILE):
+            log.warning(f"{LOG_CSV_FILE} does not exist")
+            return qa_pairs
+            
+        with open(LOG_CSV_FILE, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                category = row.get('category', '').strip()
+                question = row.get('question', '').strip()
+                answer = row.get('answer', '').strip()
+                
+                if category and question:
+                    qa_pair = {
+                        'category': category,
+                        'question': question,
+                        'answer': answer,
+                        'question_number': row.get('question_number', ''),
+                        'question_image': row.get('question_image', ''),
+                        'answer_image': row.get('answer_image', ''),
+                        'style': row.get('style', ''),
+                        'is_used': row.get('is_used', '').lower() == 'true',
+                        'created_timestamp': row.get('created_timestamp', '')
+                    }
+                    qa_pairs.append(qa_pair)
+                    
+        log.info(f"Read {len(qa_pairs)} Q&A pairs from {LOG_CSV_FILE}")
+        return qa_pairs
+        
+    except Exception as e:
+        log.error(f"Error reading Q&A pairs from {LOG_CSV_FILE}: {e}")
+        return qa_pairs

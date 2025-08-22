@@ -44,7 +44,6 @@ class ImageGenerationConfig:
     TOC_SORT_CATEGORIES_ALPHABETICALLY: bool = True
     TOC_UNKNOWN_CATEGORY_NAME: str = "Uncategorized"
     TOC_IMAGE_NUMBER_SPACE: int = 50
-    TOC_QUESTION_PREVIEW_LENGTH: int = 0
     
     # TOC Templates (converted from PDF TOC templates)
     TOC_MAIN_TITLE_TEMPLATE: str = "ASK: Daily Architectural Research - Volume {volume_number}"
@@ -80,7 +79,6 @@ class ImageGenerationConfig:
     FOOTER_CATEGORY_Y_OFFSET: int = 20
     FOOTER_IMAGE_X_OFFSET: int = 40
     FOOTER_IMAGE_Y_OFFSET: int = 20
-    MARGIN_BOTTOM: int = 200
     
     # Typography Settings (converted from PDF Typography)
     FONT_FAMILY_PRIMARY: str = "Helvetica"
@@ -106,7 +104,7 @@ class ImageGenerationConfig:
     COLOR_CATEGORY_HEADER: str = "#8E44AD"
     COLOR_MUTED: str = "#7F8C8D"
     COLOR_BRAND: str = "#34495E"
-    TEXT_COLOR: str = "#FFFFFF"
+    TEXT_COLOR: str = "#F0F0F0"
     FOOTER_BACKGROUND_COLOR: str = "0.1,0.1,0.1"
     
     # Spacing Settings (converted from PDF Spacing)
@@ -165,10 +163,7 @@ class ImageGenerationConfig:
     ERROR_RETRY_ATTEMPTS: int = 3
     ERROR_RETRY_DELAY: float = 1.0
     ERROR_FALLBACK_STRATEGY: str = "graceful"
-    ERROR_CREATE_PLACEHOLDER: bool = True
     ERROR_PLACEHOLDER_TEXT: str = "Content Unavailable"
-    ERROR_MAX_FAILURES: int = 10
-    ERROR_NOTIFY_ON_FAILURE: bool = True
     
     # Volume Configuration (converted from PDF Volume)
     VOLUME_NUMBER: int = 1
@@ -200,7 +195,6 @@ class ImageGenerationConfig:
     BRAND_Y_OFFSET: int = 100
     TEXT_LEFT_MARGIN: int = 40
     SHADOW_OFFSET: int = 2
-    TEXT_COLOR: str = "#F0F0F0"
     
     # Font Settings
     FONT_FILE_PATH: str = "fonts/arial.ttf"
@@ -947,7 +941,6 @@ def main():
         TOC_SORT_CATEGORIES_ALPHABETICALLY=os.getenv('TOC_SORT_CATEGORIES_ALPHABETICALLY', 'true').lower() == 'true',
         TOC_UNKNOWN_CATEGORY_NAME=os.getenv('TOC_UNKNOWN_CATEGORY_NAME', 'Uncategorized'),
         TOC_IMAGE_NUMBER_SPACE=int(os.getenv('TOC_IMAGE_NUMBER_SPACE', '50')),
-        TOC_QUESTION_PREVIEW_LENGTH=int(os.getenv('TOC_QUESTION_PREVIEW_LENGTH', '0')),
         
         # TOC Templates (converted from PDF TOC templates)
         TOC_MAIN_TITLE_TEMPLATE=os.getenv('TOC_MAIN_TITLE_TEMPLATE', 'ASK: Daily Architectural Research - Volume {volume_number}'),
@@ -983,7 +976,6 @@ def main():
         FOOTER_CATEGORY_Y_OFFSET=int(os.getenv('FOOTER_CATEGORY_Y_OFFSET', '20')),
         FOOTER_IMAGE_X_OFFSET=int(os.getenv('FOOTER_IMAGE_X_OFFSET', '40')),
         FOOTER_IMAGE_Y_OFFSET=int(os.getenv('FOOTER_IMAGE_Y_OFFSET', '20')),
-        MARGIN_BOTTOM=int(os.getenv('MARGIN_BOTTOM', '200')),
         
         # Typography Settings (converted from PDF Typography)
         FONT_FAMILY_PRIMARY=os.getenv('FONT_FAMILY_PRIMARY', 'Helvetica'),
@@ -1009,7 +1001,7 @@ def main():
         COLOR_CATEGORY_HEADER=os.getenv('COLOR_CATEGORY_HEADER', '#8E44AD'),
         COLOR_MUTED=os.getenv('COLOR_MUTED', '#7F8C8D'),
         COLOR_BRAND=os.getenv('COLOR_BRAND', '#34495E'),
-        TEXT_COLOR=os.getenv('TEXT_COLOR', '#FFFFFF'),
+        TEXT_COLOR=os.getenv('TEXT_COLOR', '#F0F0F0'),
         FOOTER_BACKGROUND_COLOR=os.getenv('FOOTER_BACKGROUND_COLOR', '0.1,0.1,0.1'),
         
         # Spacing Settings (converted from PDF Spacing)
@@ -1100,7 +1092,6 @@ def main():
         BRAND_Y_OFFSET=int(os.getenv('BRAND_Y_OFFSET', '100')),
         TEXT_LEFT_MARGIN=int(os.getenv('TEXT_LEFT_MARGIN', '40')),
         SHADOW_OFFSET=int(os.getenv('SHADOW_OFFSET', '2')),
-        TEXT_COLOR=os.getenv('TEXT_COLOR', '#F0F0F0'),
         
         # Font Settings
         FONT_FILE_PATH=os.getenv('FONT_FILE_PATH', 'fonts/arial.ttf'),
