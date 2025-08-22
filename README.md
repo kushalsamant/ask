@@ -436,8 +436,18 @@ ERROR_MAX_FAILURES=10
 | **Hybrid** | `HYBRID_THEME_COUNT` | `5` | Number of themes to explore (5 themes × 2 chains = 10 Q&A pairs) |
 | **Hybrid** | `HYBRID_CHAIN_LENGTH` | `2` | Questions per chain (5 themes × 2 chains = 10 Q&A pairs) |
 | **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `10` | Number of themes (10 themes = 10 Q&A pairs) |
+| **Simple** | `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
 | **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 themes × 5 chains = 10 Q&A pairs) |
-| **Chained** | `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes to use |
+| **Chained** | `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
+| **Chained** | `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
+
+### **Theme Configuration**
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
+| `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
+| `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
 
 ### **Enhanced Features Configuration**
 
@@ -754,7 +764,7 @@ LOG_LEVEL=DEBUG
 
 1. **Start Simple**: Use simple mode first to test your setup
 2. **Gradual Progression**: Move to advanced modes as you need them
-3. **Customize Themes**: Edit `ask.env` to change theme counts and chain lengths
+3. **Customize Themes**: Edit `ask.env` to configure themes for different modes
 4. **Enable Covers**: Set `SIMPLE_PIPELINE_GENERATE_COVERS=true` for professional output
 5. **Export Data**: Set `SIMPLE_PIPELINE_EXPORT_DATA=true` to save your content
 6. **Check Backups**: Look for `log.csv.backup_*` files for data safety

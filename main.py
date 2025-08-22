@@ -69,16 +69,9 @@ class SimplePipeline:
     
     def __init__(self):
         """Initialize the pipeline"""
-        self.themes = [
-            'design_research',
-            'technology_innovation', 
-            'sustainability_science',
-            'engineering_systems',
-            'environmental_design',
-            'urban_planning',
-            'spatial_design',
-            'digital_technology'
-        ]
+        # Get themes from environment variable
+        themes_config = os.getenv('SIMPLE_MODE_THEMES', 'design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology')
+        self.themes = [theme.strip() for theme in themes_config.split(',') if theme.strip()]
         self.log_file = 'log.csv'
         self.image_counter = 1
         
@@ -650,9 +643,10 @@ def run_chained_mode():
         chain_length = int(os.getenv('CHAIN_LENGTH', '5'))
         themes_to_generate = os.getenv('CATEGORIES_TO_GENERATE', '').split(',') if os.getenv('CATEGORIES_TO_GENERATE') else []
         
-        # If no specific themes, use default themes
+        # If no specific themes, use default themes from environment
         if not themes_to_generate or themes_to_generate == ['']:
-            themes_to_generate = ['design_research', 'technology_innovation']
+            default_themes = os.getenv('DEFAULT_CHAINED_THEMES', 'design_research,technology_innovation')
+            themes_to_generate = [theme.strip() for theme in default_themes.split(',') if theme.strip()]
         
         console_logger.info(f"Configuration: {chain_length} questions per chain, {len(themes_to_generate)} themes")
         
