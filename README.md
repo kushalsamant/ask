@@ -201,9 +201,9 @@ python simple_pipeline.py help               # Get help
 | Mode | Command | Best For | Output |
 |------|---------|----------|---------|
 | **Simple** | `python simple_pipeline.py` | Quick Q&A pairs | 1 Q&A pair |
-| **Hybrid** | `python simple_pipeline.py hybrid` | Educational content | 6 Q&A pairs (2 themes × 3 chains) |
-| **Cross-Disciplinary** | `python simple_pipeline.py cross-disciplinary` | Innovative research | 3 Q&A pairs |
-| **Chained** | `python simple_pipeline.py chained` | Deep exploration | 6 Q&A pairs (2 categories × 3 chains) |
+| **Hybrid** | `python simple_pipeline.py hybrid` | Educational content | 10 Q&A pairs (5 themes × 2 chains) |
+| **Cross-Disciplinary** | `python simple_pipeline.py cross-disciplinary` | Innovative research | 10 Q&A pairs (10 themes) |
+| **Chained** | `python simple_pipeline.py chained` | Deep exploration | 10 Q&A pairs (2 categories × 5 chains) |
 
 ---
 
@@ -421,10 +421,10 @@ ERROR_MAX_FAILURES=10
 
 | Mode | Setting | Default | Description |
 |------|---------|---------|-------------|
-| **Hybrid** | `HYBRID_THEME_COUNT` | `2` | Number of themes to explore |
-| **Hybrid** | `HYBRID_CHAIN_LENGTH` | `3` | Questions per chain |
-| **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `3` | Number of themes |
-| **Chained** | `CHAIN_LENGTH` | `3` | Questions per chain |
+| **Hybrid** | `HYBRID_THEME_COUNT` | `5` | Number of themes to explore (5 themes × 2 chains = 10 Q&A pairs) |
+| **Hybrid** | `HYBRID_CHAIN_LENGTH` | `2` | Questions per chain (5 themes × 2 chains = 10 Q&A pairs) |
+| **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `10` | Number of themes (10 themes = 10 Q&A pairs) |
+| **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 categories × 5 chains = 10 Q&A pairs) |
 | **Chained** | `CATEGORIES_TO_GENERATE` | `architectural_design,construction_technology` | Categories to use |
 
 ### **Enhanced Features Configuration**
