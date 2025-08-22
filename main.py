@@ -32,9 +32,9 @@ load_dotenv('ask.env')
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(f"{os.getenv('LOG_DIR', 'logs')}/execution.log")
-    ]
+            handlers=[
+            logging.FileHandler(f"{os.getenv('LOG_DIR', 'logs')}/execution.log")
+        ]
 )
 log = logging.getLogger()
 
@@ -69,7 +69,7 @@ class SimplePipeline:
     
     def __init__(self):
         """Initialize the pipeline"""
-        self.categories = [
+        self.themes = [
             'architectural_design',
             'construction_technology', 
             'design_innovation',
@@ -86,34 +86,34 @@ class SimplePipeline:
         os.makedirs('images', exist_ok=True)
         os.makedirs('logs', exist_ok=True)
         
-    def step_1_pick_category(self) -> str:
-        """Step 1: Pick a category"""
-        category = random.choice(self.categories)
-        log.info(f"Step 1: Picked category: {category}")
-        console_logger.info(f"📋 Step 1: Category selected: {category.upper()}")
-        return category
+    def step_1_pick_theme(self) -> str:
+        """Step 1: Pick a theme"""
+        theme = random.choice(self.themes)
+        log.info(f"Step 1: Picked theme: {theme}")
+        console_logger.info(f"📋 Step 1: Theme selected: {theme.upper()}")
+        return theme
     
-    def step_2_create_question(self, category: str) -> str:
-        """Step 2: Create a question using category"""
-        log.info(f"Step 2: Creating question for category: {category}")
-        console_logger.info(f"❓ Step 2: Generating question for {category}...")
+    def step_2_create_question(self, theme: str) -> str:
+        """Step 2: Create a question using theme"""
+        log.info(f"Step 2: Creating question for theme: {theme}")
+        console_logger.info(f"❓ Step 2: Generating question for {theme}...")
         
-        question = generate_single_question_for_category(category)
+        question = generate_single_question_for_category(theme)
         if not question:
-            raise Exception(f"Failed to generate question for category: {category}")
+            raise Exception(f"Failed to generate question for theme: {theme}")
             
         log.info(f"Step 2: Generated question: {question[:100]}...")
         console_logger.info(f"✅ Step 2: Question created: {question[:80]}...")
         return question
     
-    def step_3_log_question(self, question: str, category: str) -> None:
+    def step_3_log_question(self, question: str, theme: str) -> None:
         """Step 3: Paste the question text in the log"""
         log.info(f"Step 3: Logging question to {self.log_file}")
         console_logger.info(f"📝 Step 3: Logging question to CSV...")
         
         # Use the proper CSV manager function
         success = log_single_question(
-            category=category,
+            category=theme,
             question=question,
             image_filename='',  # Will be updated later
             style=None,
@@ -127,14 +127,14 @@ class SimplePipeline:
         else:
             raise Exception("Failed to log question to CSV")
     
-    def step_4_create_question_image(self, question: str, category: str) -> str:
+    def step_4_create_question_image(self, question: str, theme: str) -> str:
         """Step 4: Create an image using question as a prompt"""
         log.info(f"Step 4: Creating image using question as prompt")
         console_logger.info(f"🎨 Step 4: Generating base image for question...")
         
         image_path, _ = generate_image_with_retry(
             prompt=question,
-            category=category,
+            category=theme,
             image_number=self.image_counter,
             image_type="q"
         )
@@ -146,7 +146,7 @@ class SimplePipeline:
         console_logger.info(f"✅ Step 4: Base image created: {os.path.basename(image_path)}")
         return image_path
     
-    def step_5_add_text_to_question_image(self, image_path: str, question: str, category: str) -> str:
+    def step_5_add_text_to_question_image(self, image_path: str, question: str, theme: str) -> str:
         """Step 5: Add text overlay to the question image"""
         log.info(f"Step 5: Adding text overlay to question image")
         console_logger.info(f"📝 Step 5: Adding text overlay to question image...")
@@ -154,7 +154,7 @@ class SimplePipeline:
         final_image_path = add_text_overlay(
             image_path=image_path,
             text=question,
-            category=category,
+            category=theme,
             image_number=self.image_counter,
             image_type="q"
         )
@@ -167,12 +167,12 @@ class SimplePipeline:
         console_logger.info(f"✅ Step 6: Final question image created: {os.path.basename(final_image_path)}")
         return final_image_path
     
-    def step_7_create_answer(self, question: str, category: str) -> str:
+    def step_7_create_answer(self, question: str, theme: str) -> str:
         """Step 7: Create an answer using the question"""
         log.info(f"Step 7: Creating answer for question")
         console_logger.info(f"❓ Step 7: Generating answer for question...")
         
-        answer = generate_answer(question, category)
+        answer = generate_answer(question, theme)
         if not answer:
             raise Exception("Failed to generate answer")
             
@@ -180,7 +180,7 @@ class SimplePipeline:
         console_logger.info(f"✅ Step 7: Answer generated: {answer[:80]}...")
         return answer
     
-    def step_8_log_answer(self, answer: str, category: str) -> None:
+    def step_8_log_answer(self, answer: str, theme: str) -> None:
         """Step 8: Log the answer to CSV"""
         log.info(f"Step 8: Logging answer to {self.log_file}")
         console_logger.info(f"📝 Step 8: Logging answer to CSV...")
@@ -202,13 +202,13 @@ class SimplePipeline:
         else:
             raise Exception("Failed to log answer to CSV")
     
-    def step_8b_mark_question_as_used(self, question: str, category: str) -> None:
+    def step_8b_mark_question_as_used(self, question: str, theme: str) -> None:
         """Step 8b: Mark question as used to prevent duplicates"""
         try:
             from research_csv_manager import mark_questions_as_used
             
             # Create a dictionary to mark this question as used
-            questions_dict = {category: question}
+            questions_dict = {theme: question}
             marked_count = mark_questions_as_used(questions_dict)
             
             if marked_count > 0:
@@ -222,14 +222,14 @@ class SimplePipeline:
             log.error(f"Step 8b: Error marking question as used: {e}")
             console_logger.warning(f"⚠️  Step 8b: Could not mark question as used: {e}")
     
-    def step_9_create_answer_image(self, answer: str, category: str) -> str:
+    def step_9_create_answer_image(self, answer: str, theme: str) -> str:
         """Step 9: Create an image using answer as a prompt"""
         log.info(f"Step 9: Creating image using answer as prompt")
         console_logger.info(f"🎨 Step 9: Generating base image for answer...")
         
         image_path, _ = generate_image_with_retry(
             prompt=answer,
-            category=category,
+            category=theme,
             image_number=self.image_counter,
             image_type="a"
         )
@@ -241,7 +241,7 @@ class SimplePipeline:
         console_logger.info(f"✅ Step 9: Base image created: {os.path.basename(image_path)}")
         return image_path
     
-    def step_10_add_text_to_answer_image(self, image_path: str, answer: str, category: str) -> str:
+    def step_10_add_text_to_answer_image(self, image_path: str, answer: str, theme: str) -> str:
         """Step 10: Add text overlay to the answer image"""
         log.info(f"Step 10: Adding text overlay to answer image")
         console_logger.info(f"📝 Step 10: Adding text overlay to answer image...")
@@ -249,7 +249,7 @@ class SimplePipeline:
         final_image_path = add_text_overlay(
             image_path=image_path,
             text=answer,
-            category=category,
+            category=theme,
             image_number=self.image_counter,
             image_type="a"
         )
@@ -280,35 +280,35 @@ class SimplePipeline:
             current_volume, qa_pairs_in_volume, total_qa_pairs = get_current_volume_info()
             console_logger.info(f"📚 Starting at Volume {current_volume}: {qa_pairs_in_volume} Q&A pairs, {total_qa_pairs} total")
             
-            # Step 1: Pick a category
-            category = self.step_1_pick_category()
+            # Step 1: Pick a theme
+            theme = self.step_1_pick_theme()
             
             # Step 2: Create a question
-            question = self.step_2_create_question(category)
+            question = self.step_2_create_question(theme)
             
             # Step 3: Log the question
-            self.step_3_log_question(question, category)
+            self.step_3_log_question(question, theme)
             
             # Step 4: Create question image
-            question_image_path = self.step_4_create_question_image(question, category)
+            question_image_path = self.step_4_create_question_image(question, theme)
             
             # Step 5: Add text to question image
-            final_question_image = self.step_5_add_text_to_question_image(question_image_path, question, category)
+            final_question_image = self.step_5_add_text_to_question_image(question_image_path, question, theme)
             
             # Step 7: Create an answer
-            answer = self.step_7_create_answer(question, category)
+            answer = self.step_7_create_answer(question, theme)
             
             # Step 8: Log the answer
-            self.step_8_log_answer(answer, category)
+            self.step_8_log_answer(answer, theme)
             
             # Step 8b: Mark question as used
-            self.step_8b_mark_question_as_used(question, category)
+            self.step_8b_mark_question_as_used(question, theme)
             
             # Step 9: Create answer image
-            answer_image_path = self.step_9_create_answer_image(answer, category)
+            answer_image_path = self.step_9_create_answer_image(answer, theme)
             
             # Step 10: Add text to answer image
-            final_answer_image = self.step_10_add_text_to_answer_image(answer_image_path, answer, category)
+            final_answer_image = self.step_10_add_text_to_answer_image(answer_image_path, answer, theme)
             
             # Step 12: Increment counter
             self.step_12_increment_counter()
@@ -324,7 +324,7 @@ class SimplePipeline:
             console_logger.info(f"📚 Volume {current_volume}: {qa_pairs_in_volume} Q&A pairs, {total_qa_pairs} total")
             
             return {
-                'category': category,
+                'category': theme,
                 'question': question,
                 'answer': answer,
                 'question_image': final_question_image,
@@ -648,16 +648,16 @@ def run_chained_mode():
         
         # Get configuration
         chain_length = int(os.getenv('CHAIN_LENGTH', '5'))
-        categories_to_generate = os.getenv('CATEGORIES_TO_GENERATE', '').split(',') if os.getenv('CATEGORIES_TO_GENERATE') else []
+        themes_to_generate = os.getenv('CATEGORIES_TO_GENERATE', '').split(',') if os.getenv('CATEGORIES_TO_GENERATE') else []
         
-        # If no specific categories, use default categories
-        if not categories_to_generate or categories_to_generate == ['']:
-            categories_to_generate = ['architectural_design', 'construction_technology']
+        # If no specific themes, use default themes
+        if not themes_to_generate or themes_to_generate == ['']:
+            themes_to_generate = ['architectural_design', 'construction_technology']
         
-        console_logger.info(f"Configuration: {chain_length} questions per chain, {len(categories_to_generate)} categories")
+        console_logger.info(f"Configuration: {chain_length} questions per chain, {len(themes_to_generate)} themes")
         
         # Generate chained Q&A pairs
-        qa_pairs = research_orchestrator.generate_chained_qa_pairs(categories_to_generate, chain_length)
+        qa_pairs = research_orchestrator.generate_chained_qa_pairs(themes_to_generate, chain_length)
         
         if not qa_pairs:
             console_logger.error("No chained Q&A pairs generated.")
@@ -689,7 +689,7 @@ def run_chained_mode():
         export_data_if_enabled(qa_pairs)
         
         console_logger.info("🎉 Chained content generation completed!")
-        
+
     except Exception as e:
         console_logger.error(f"❌ Chained pipeline failed: {e}")
         raise
@@ -707,7 +707,7 @@ def show_help():
     console_logger.info("🎨 Mode Descriptions:")
     console_logger.info("  • Simple: Classic 12-step Q&A generation")
     console_logger.info("  • Hybrid: Combines cross-disciplinary themes with chained questions")
-    console_logger.info("  • Cross-disciplinary: Explores intersections between architectural categories")
+    console_logger.info("  • Cross-disciplinary: Explores intersections between architectural themes")
     console_logger.info("  • Chained: Creates connected questions that build upon each other")
     console_logger.info("")
     console_logger.info("⚙️  Configuration: Edit ask.env to customize each mode")

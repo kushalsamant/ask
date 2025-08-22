@@ -151,9 +151,9 @@ Q3: "How can real-time collaboration tools enhance sustainable material selectio
 ```bash
 python main.py cross-disciplinary
 ```
-**What it does**: Explores intersections between architectural categories
-- Connects multiple categories in single questions
-- Finds innovative solutions at category boundaries
+**What it does**: Explores intersections between architectural themes
+- Connects multiple themes in single questions
+- Finds innovative solutions at theme boundaries
 - Creates broader, more comprehensive content
 - Explores new research directions
 
@@ -161,6 +161,8 @@ python main.py cross-disciplinary
 - "How can Urban Planning and Digital Technology create innovative city solutions?"
 - "What synergies emerge when combining Architectural Design, Construction Technology, and Digital Technology?"
 - "How do Interior Environments and Engineering Systems work together for optimal building performance?"
+- "What innovative approaches emerge when integrating Sustainable Design with Smart Building Technologies?"
+- "How can Heritage Preservation and Modern Construction Techniques create adaptive reuse solutions?"
 
 #### **4. Chained Mode**
 ```bash
@@ -168,12 +170,13 @@ python main.py chained
 ```
 **What it does**: Creates connected questions that build upon each other
 - Each question builds on the previous answer
-- Creates deep, progressive exploration
-- Develops comprehensive understanding
+- Creates deep, progressive exploration within themes
+- Develops comprehensive understanding of specific themes
 - Follows logical research paths
 
 **Example Chain**:
 ```
+Theme: architectural_design
 Q1: "How can we design sustainable buildings?"
 A1: "Sustainable building design involves energy efficiency, renewable materials, and passive design strategies..."
 
@@ -182,6 +185,16 @@ A2: "Passive design strategies include orientation, thermal mass, natural ventil
 
 Q3: "How can natural ventilation be optimized in urban environments?"
 A3: "Urban natural ventilation requires careful consideration of wind patterns, building heights..."
+
+Theme: construction_technology
+Q1: "What are the latest innovations in construction materials?"
+A1: "Advanced materials include high-performance concrete, sustainable timber, and smart materials..."
+
+Q2: "How do advanced materials improve building performance?"
+A2: "Advanced materials enhance durability, energy efficiency, and structural integrity..."
+
+Q3: "What construction techniques optimize material efficiency?"
+A3: "Efficient techniques include prefabrication, modular construction, and digital fabrication..."
 ```
 
 ### **Quick Reference Commands**
@@ -202,7 +215,7 @@ python main.py help               # Get help
 | **Simple** | `python main.py` | Quick Q&A pairs | 1 Q&A pair |
 | **Hybrid** | `python main.py hybrid` | Educational content | 10 Q&A pairs (5 themes × 2 chains) |
 | **Cross-Disciplinary** | `python main.py cross-disciplinary` | Innovative research | 10 Q&A pairs (10 themes) |
-| **Chained** | `python main.py chained` | Deep exploration | 10 Q&A pairs (2 categories × 5 chains) |
+| **Chained** | `python main.py chained` | Deep exploration | 10 Q&A pairs (2 themes × 5 chains) |
 
 ---
 
@@ -423,8 +436,8 @@ ERROR_MAX_FAILURES=10
 | **Hybrid** | `HYBRID_THEME_COUNT` | `5` | Number of themes to explore (5 themes × 2 chains = 10 Q&A pairs) |
 | **Hybrid** | `HYBRID_CHAIN_LENGTH` | `2` | Questions per chain (5 themes × 2 chains = 10 Q&A pairs) |
 | **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `10` | Number of themes (10 themes = 10 Q&A pairs) |
-| **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 categories × 5 chains = 10 Q&A pairs) |
-| **Chained** | `CATEGORIES_TO_GENERATE` | `architectural_design,construction_technology` | Categories to use |
+| **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 themes × 5 chains = 10 Q&A pairs) |
+| **Chained** | `CATEGORIES_TO_GENERATE` | `architectural_design,construction_technology` | Themes to use |
 
 ### **Enhanced Features Configuration**
 
