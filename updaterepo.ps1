@@ -12,4 +12,4 @@ git commit -m "$Message"
 Write-Host "Pushing to origin/main..."
 git push origin main
 
-Write-Host "✅ Repo updated!"
+Write-Host "SUCCESS: Repo updated!"

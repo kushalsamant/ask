@@ -70,3 +70,7 @@ Thumbs.db  # Windows thumbnail cache
 # Backup files
 *.bak  # Backup files
 *.backup  # Backup files
+
+# Development files
+prompt.txt  # Prompts for Development
+tree.txt  # Tree for Development
