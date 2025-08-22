@@ -438,7 +438,7 @@ ERROR_MAX_FAILURES=10
 | **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `10` | Number of themes (10 themes = 10 Q&A pairs) |
 | **Simple** | `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
 | **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 themes × 5 chains = 10 Q&A pairs) |
-| **Chained** | `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
+| **Chained** | `THEMES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
 | **Chained** | `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
 
 ### **Theme Configuration**
@@ -446,7 +446,7 @@ ERROR_MAX_FAILURES=10
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
-| `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
+| `THEMES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
 | `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
 
 ### **Enhanced Features Configuration**
@@ -768,7 +768,7 @@ LOG_LEVEL=DEBUG
 4. **Enable Covers**: Set `SIMPLE_PIPELINE_GENERATE_COVERS=true` for professional output
 5. **Export Data**: Set `SIMPLE_PIPELINE_EXPORT_DATA=true` to save your content
 6. **Check Backups**: Look for `log.csv.backup_*` files for data safety
-7. **Custom Categories**: Edit `CATEGORIES_TO_GENERATE` for chained mode
+7. **Custom Themes**: Edit `THEMES_TO_GENERATE` for chained mode
 8. **Longer Chains**: Increase `HYBRID_CHAIN_LENGTH` and `CHAIN_LENGTH` for deeper exploration
 
 ---

@@ -641,7 +641,7 @@ def run_chained_mode():
         
         # Get configuration
         chain_length = int(os.getenv('CHAIN_LENGTH', '5'))
-        themes_to_generate = os.getenv('CATEGORIES_TO_GENERATE', '').split(',') if os.getenv('CATEGORIES_TO_GENERATE') else []
+        themes_to_generate = os.getenv('THEMES_TO_GENERATE', '').split(',') if os.getenv('THEMES_TO_GENERATE') else []
         
         # If no specific themes, use default themes from environment
         if not themes_to_generate or themes_to_generate == ['']:
