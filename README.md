@@ -32,8 +32,7 @@ Generate professional architectural research questions, create stunning visual c
 
 ```
 ask/
-├── main.py                        # Main orchestration pipeline
-├── simple_pipeline.py             # Simple 12-step pipeline with advanced modes
+├── main.py                        # Unified pipeline with all modes (enhanced)
 ├── research_find_path.py          # Enhanced cross-disciplinary generator with research analysis
 ├── research_question_generator.py # Main question generation orchestration
 ├── research_question_prompts.py   # Prompt generation and validation for questions
@@ -121,7 +120,7 @@ The Simple Pipeline has been **completely upgraded** to include all advanced mod
 
 #### **1. Simple Mode (Default)**
 ```bash
-python simple_pipeline.py
+python main.py
 ```
 **What it does**: Classic 12-step Q&A generation with all enhancements
 - Volume tracking and statistics
@@ -132,7 +131,7 @@ python simple_pipeline.py
 
 #### **2. Hybrid Mode**
 ```bash
-python simple_pipeline.py hybrid
+python main.py hybrid
 ```
 **What it does**: Combines cross-disciplinary themes with chained questions
 - Starts with cross-disciplinary questions
@@ -150,7 +149,7 @@ Q3: "How can real-time collaboration tools enhance sustainable material selectio
 
 #### **3. Cross-Disciplinary Mode**
 ```bash
-python simple_pipeline.py cross-disciplinary
+python main.py cross-disciplinary
 ```
 **What it does**: Explores intersections between architectural categories
 - Connects multiple categories in single questions
@@ -165,7 +164,7 @@ python simple_pipeline.py cross-disciplinary
 
 #### **4. Chained Mode**
 ```bash
-python simple_pipeline.py chained
+python main.py chained
 ```
 **What it does**: Creates connected questions that build upon each other
 - Each question builds on the previous answer
@@ -189,21 +188,21 @@ A3: "Urban natural ventilation requires careful consideration of wind patterns, 
 
 ```bash
 # Basic Usage
-python simple_pipeline.py                    # Simple mode (default)
-python simple_pipeline.py hybrid             # Hybrid mode
-python simple_pipeline.py cross-disciplinary # Cross-disciplinary mode
-python simple_pipeline.py chained            # Chained mode
-python simple_pipeline.py help               # Get help
+python main.py                    # Simple mode (default)
+python main.py hybrid             # Hybrid mode
+python main.py cross-disciplinary # Cross-disciplinary mode
+python main.py chained            # Chained mode
+python main.py help               # Get help
 ```
 
 ### **Mode Comparison**
 
 | Mode | Command | Best For | Output |
 |------|---------|----------|---------|
-| **Simple** | `python simple_pipeline.py` | Quick Q&A pairs | 1 Q&A pair |
-| **Hybrid** | `python simple_pipeline.py hybrid` | Educational content | 10 Q&A pairs (5 themes × 2 chains) |
-| **Cross-Disciplinary** | `python simple_pipeline.py cross-disciplinary` | Innovative research | 10 Q&A pairs (10 themes) |
-| **Chained** | `python simple_pipeline.py chained` | Deep exploration | 10 Q&A pairs (2 categories × 5 chains) |
+| **Simple** | `python main.py` | Quick Q&A pairs | 1 Q&A pair |
+| **Hybrid** | `python main.py hybrid` | Educational content | 10 Q&A pairs (5 themes × 2 chains) |
+| **Cross-Disciplinary** | `python main.py cross-disciplinary` | Innovative research | 10 Q&A pairs (10 themes) |
+| **Chained** | `python main.py chained` | Deep exploration | 10 Q&A pairs (2 categories × 5 chains) |
 
 ---
 
@@ -477,11 +476,15 @@ ERROR_MAX_FAILURES=10
 
 ## 📈 **Recent Updates**
 
-### **Version 6.0 (Latest) - Documentation Consolidation**
-- ✅ **Merged all documentation**: Consolidated 8 .md files into comprehensive README.md
-- ✅ **Unified documentation**: Single source of truth for all system information
-- ✅ **Improved navigation**: Logical organization of all features and capabilities
-- ✅ **Complete coverage**: All system features documented in one place
+### **Version 7.0 (Latest) - Unified Pipeline**
+- ✅ **Merged simple_pipeline.py into main.py**: Unified pipeline with all modes and features
+- ✅ **Enhanced main.py**: All advanced features from simple_pipeline.py now in main.py
+- ✅ **Removed simple_pipeline.py**: Eliminated redundancy and confusion
+- ✅ **Updated documentation**: All references updated to use unified main.py
+- ✅ **Improved user experience**: Single entry point for all functionality
+- ✅ **Maintained backward compatibility**: All existing functionality preserved
+
+### **Version 6.0 (Previous) - Documentation Consolidation**
 
 ### **Version 5.9 (Previous) - Smart Merge**
 - ✅ **Environment consolidation**: Merged `image_generation_config.env` into `ask.env`
@@ -592,10 +595,10 @@ CREATE_COVER_IMAGE=true
 2. **Install dependencies**: `pip install -r requirements.txt`
 3. **Configure environment**: Copy `ask.env.template` to `ask.env` and add your API keys
 4. **Run the system**: 
-   - **Simple mode**: `python simple_pipeline.py`
-   - **Hybrid mode**: `python simple_pipeline.py hybrid`
-   - **Cross-disciplinary mode**: `python simple_pipeline.py cross-disciplinary`
-   - **Chained mode**: `python simple_pipeline.py chained`
+   - **Simple mode**: `python main.py`
+   - **Hybrid mode**: `python main.py hybrid`
+   - **Cross-disciplinary mode**: `python main.py cross-disciplinary`
+   - **Chained mode**: `python main.py chained`
 
 ---
 
@@ -688,7 +691,7 @@ Breakthrough opps     Intelligent theme     Brand integration     Layout managem
 1. Check your `ask.env` configuration
 2. Ensure all required modules are available
 3. Check the logs in `logs/execution.log`
-4. Try simple mode first: `python simple_pipeline.py`
+4. Try simple mode first: `python main.py`
 
 ### **To disable features**:
 ```bash
