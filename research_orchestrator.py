@@ -18,7 +18,6 @@ Research Orchestrator Module
 Focused wrapper for all research pipeline operations
 """
 
-
 # Import core research modules
     get_questions_and_styles_from_log,
     get_next_image_number,
@@ -587,5 +586,3 @@ class ResearchOrchestrator:
         except Exception as e:
             log.error(f"Error marking questions as used: {e}")
             return 0
-
-

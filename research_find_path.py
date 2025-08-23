@@ -11,7 +11,6 @@ Enhanced Cross-Disciplinary Generator with Research Explorer Integration
 Creates intelligent cross-disciplinary questions and analyzes research directions
 """
 
-
 # Setup logging
 log = logging.getLogger(__name__)
 
@@ -27,7 +26,7 @@ class EnhancedCrossDisciplinaryGenerator:
     def __init__(self):
         # Research exploration capabilities
         self.research_dimensions = {
-            'temporal': ['historical', 'contemporary', 'future', 'evolutionary'],
+            
             'spatial': ['urban', 'rural', 'global', 'local', 'regional'],
             'thematic': ['sustainability', 'technology', 'culture', 'economics', 'social'],
             'methodological': ['analytical', 'creative', 'experimental', 'theoretical', 'practical'],
@@ -158,9 +157,7 @@ class EnhancedCrossDisciplinaryGenerator:
             # Core Themes (7)
             'architecture': [
                 'residential', 'commercial', 'institutional', 'industrial', 'cultural', 'religious', 'educational',
-                'healthcare', 'hospitality', 'retail', 'office', 'mixed_use', 'temporary', 'adaptive_reuse',
-                'heritage', 'contemporary', 'modern', 'postmodern', 'deconstructivist', 'parametric',
-                'biomimetic', 'sustainable', 'net_zero', 'passive_house', 'smart_building', 'modular',
+
                 'prefabricated', '3d_printed', 'vernacular', 'regional', 'international'
             ],
             'construction': [
@@ -931,8 +928,6 @@ Return only the theme name: [/INST]'''
             log.error(f"Error getting theme for question: {e}")
             return random.choice(available_categories)
 
-
-
 # Convenience functions
 def generate_cross_disciplinary_question(primary_category, secondary_category=None, context=None):
     """Generate a cross-disciplinary question"""
@@ -1038,5 +1033,3 @@ def get_all_categories():
 def get_research_explorer():
     """Get enhanced cross-disciplinary generator instance"""
     return EnhancedCrossDisciplinaryGenerator()
-
-

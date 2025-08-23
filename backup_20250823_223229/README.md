@@ -198,7 +198,9 @@ python main.py hybrid
 **Example Flow**:
 ```
 Theme: 'sustainability_technology'
-
+Q1: "How do Architectural Design and Construction Technology work together in sustainable building?"
+Q2: "What specific BIM coordination strategies optimize the design-construction interface for sustainability?"
+Q3: "How can real-time collaboration tools enhance sustainable material selection during construction?"
 ```
 
 #### **3. Cross-Disciplinary Mode**
@@ -231,7 +233,24 @@ python main.py chained
 **Example Chain**:
 ```
 Theme: design_research
+Q1: "How can we design sustainable systems?"
+A1: "Sustainable design involves energy efficiency, renewable materials, and passive strategies..."
+
+Q2: "What are the most effective passive strategies for energy efficiency?"
+A2: "Passive strategies include orientation, thermal mass, natural ventilation..."
+
+Q3: "How can natural systems be optimized in urban environments?"
+A3: "Urban natural systems require careful consideration of patterns, heights, and flows..."
+
 Theme: technology_innovation
+Q1: "What are the latest innovations in materials science?"
+A1: "Advanced materials include high-performance composites, sustainable materials, and smart materials..."
+
+Q2: "How do advanced materials improve system performance?"
+A2: "Advanced materials enhance durability, energy efficiency, and structural integrity..."
+
+Q3: "What techniques optimize material efficiency?"
+A3: "Efficient techniques include prefabrication, modular systems, and digital fabrication..."
 ```
 
 ### **Quick Reference Commands**
@@ -815,32 +834,18 @@ LOG_LEVEL=DEBUG
 **This creates unlimited research possibilities and maximum innovation discovery!** 🚀
 
 **Transform your research with AI-powered intelligence and professional image documentation!** 🎯
-
- 
- - - - 
- 
- 
- 
- # #     * * C P U   I m a g e   G e n e r a t i o n   S y s t e m * * 
- 
- 
- 
- # #     * * I n s t a l l a t i o n   G u i d e * * 
- 
- 
- 
- # # #   * * S m a r t   I n s t a l l a t i o n   ( R e c o m m e n d e d ) * * 
- 
- 
- 
- T h e   s m a r t   i n s t a l l e r   a u t o m a t i c a l l y   d e t e c t s   y o u r   h a r d w a r e   a n d   i n s t a l l s   t h e   a p p r o p r i a t e   d e p e n d e n c i e s : 
- 
- 
- 
- * * W i n d o w s : * * 
- 
- `  a s h 
- 
- i n s t a l l . b a t 
- 
+ 
+ - - -  
+  
+ # #     * * C P U   I m a g e   G e n e r a t i o n   S y s t e m * *  
+  
+ # #     * * I n s t a l l a t i o n   G u i d e * *  
+  
+ # # #   * * S m a r t   I n s t a l l a t i o n   ( R e c o m m e n d e d ) * *  
+  
+ T h e   s m a r t   i n s t a l l e r   a u t o m a t i c a l l y   d e t e c t s   y o u r   h a r d w a r e   a n d   i n s t a l l s   t h e   a p p r o p r i a t e   d e p e n d e n c i e s :  
+  
+ * * W i n d o w s : * *  
+ `  a s h  
+ i n s t a l l . b a t  
  

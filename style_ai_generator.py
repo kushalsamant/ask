@@ -10,7 +10,6 @@ Style AI Generator Module
 Handles AI-powered architectural style generation and suggestions
 """
 
-
 # Setup logging
 log = logging.getLogger(__name__)
 

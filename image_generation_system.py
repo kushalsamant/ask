@@ -212,8 +212,7 @@ class ImageGenerationConfig:
     COMPILATION_MAX_IMAGES_PER_PAGE: int = 4
     COMPILATION_LAYOUT_GRID: bool = True
     COMPILATION_INCLUDE_CATEGORIES: bool = True
-    
-    # Placeholder Settings
+
     PLACEHOLDER_BACKGROUND_COLOR: str = "#f0f0f0"
     PLACEHOLDER_TEXT_COLOR: str = "#666666"
     PLACEHOLDER_TEXT: str = "Content Unavailable"
@@ -425,16 +424,14 @@ class ImageGenerationSystem:
     def _create_placeholder_image(self, image_number: int, theme: str, image_type: str) -> str:
         """Create placeholder image when generation fails"""
         placeholder_path = f"{self.output_dir}/temp/ASK-{image_number:02d}-{theme}-{image_type}-placeholder.jpg"
-        
-        # Create a simple placeholder image
+
         try:
             from PIL import Image, ImageDraw, ImageFont
             
             # Create blank image
             img = Image.new('RGB', (1072, 1792), color='#f0f0f0')
             draw = ImageDraw.Draw(img)
-            
-            # Add placeholder text
+
             text = f"Image {image_number}\n{theme.title()}\n{image_type.upper()}\n\nContent Unavailable"
             draw.text((536, 896), text, fill='#666666', anchor='mm')
             
@@ -1060,8 +1057,7 @@ def main():
         ERROR_RETRY_ATTEMPTS=int(os.getenv('ERROR_RETRY_ATTEMPTS', '3')),
         ERROR_RETRY_DELAY=float(os.getenv('ERROR_RETRY_DELAY', '1.0')),
         ERROR_FALLBACK_STRATEGY=os.getenv('ERROR_FALLBACK_STRATEGY', 'graceful'),
-        ERROR_PLACEHOLDER_TEXT=os.getenv('ERROR_PLACEHOLDER_TEXT', 'Content Unavailable'),
-        
+
         # Volume Configuration (converted from PDF Volume)
         VOLUME_NUMBER=int(os.getenv('VOLUME_NUMBER', '1')),
         VOLUME_FORMAT=os.getenv('VOLUME_FORMAT', '02d'),
@@ -1109,9 +1105,7 @@ def main():
         COMPILATION_MAX_IMAGES_PER_PAGE=int(os.getenv('COMPILATION_MAX_IMAGES_PER_PAGE', '4')),
         COMPILATION_LAYOUT_GRID=os.getenv('COMPILATION_LAYOUT_GRID', 'true').lower() == 'true',
         COMPILATION_INCLUDE_CATEGORIES=os.getenv('COMPILATION_INCLUDE_CATEGORIES', 'true').lower() == 'true',
-        
-        # Placeholder Settings
-        PLACEHOLDER_BACKGROUND_COLOR=os.getenv('PLACEHOLDER_BACKGROUND_COLOR', '#f0f0f0'),
+
         PLACEHOLDER_TEXT_COLOR=os.getenv('PLACEHOLDER_TEXT_COLOR', '#666666'),
         PLACEHOLDER_TEXT=os.getenv('PLACEHOLDER_TEXT', 'Content Unavailable'),
         

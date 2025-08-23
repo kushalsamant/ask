@@ -12,7 +12,6 @@ Text Overlay Module
 Professional text overlay using PDF layout standards
 """
 
-
 # Import image standards modules
 
 # Setup logging
@@ -164,8 +163,6 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
             shadow_offset = 2
             draw.text((text_x + shadow_offset, text_y + shadow_offset), line, font=main_font, fill=(0, 0, 0, 100))
             draw.text((text_x, text_y), line, font=main_font, fill=text_color)
-
-
 
         # Draw full brand text on LEFT with "ASK" in italics and bold
         brand_x = left_margin  # Left aligned within 1-inch margin

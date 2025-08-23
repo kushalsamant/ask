@@ -42,9 +42,7 @@ SUBCATEGORIES = {
     # Core Themes (7)
     'architecture': [
         'residential', 'commercial', 'institutional', 'industrial', 'cultural', 'religious', 'educational',
-        'healthcare', 'hospitality', 'retail', 'office', 'mixed_use', 'temporary', 'adaptive_reuse',
-        'heritage', 'contemporary', 'modern', 'postmodern', 'deconstructivist', 'parametric',
-        'biomimetic', 'sustainable', 'net_zero', 'passive_house', 'smart_building', 'modular',
+
         'prefabricated', '3d_printed', 'vernacular', 'regional', 'international'
     ],
     'construction': [
