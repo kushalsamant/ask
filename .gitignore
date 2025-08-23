@@ -1,76 +1,521 @@
-# Python bytecode and build artifacts
-__pycache__/  # Python cache directories
-*.py[cod]  # Python compiled files
-*$py.class  # Python class files
-*.so  # Shared object files
-.Python  # Python executable
-build/  # Build directory
-develop-eggs/  # Development eggs
-dist/  # Distribution directory
-downloads/  # Downloads directory
-eggs/  # Eggs directory
-.eggs/  # Hidden eggs directory
-lib/  # Library directory
-lib64/  # 64-bit library directory
-parts/  # Parts directory
-sdist/  # Source distribution
-var/  # Variable directory
-wheels/  # Wheel packages
-*.egg-info/  # Egg info directories
-.installed.cfg  # Installation configuration
-*.egg  # Egg packages
+# =============================================================================
+# ASK: Daily Research Tool - Comprehensive .gitignore
+# Optimized for heavy testing, development, and production
+# =============================================================================
 
-# Virtual environments
-venv/  # Virtual environment directory
-env/  # Environment directory
-ENV/  # Environment directory (uppercase)
+# =============================================================================
+# PYTHON DEVELOPMENT
+# =============================================================================
 
-# Environment files (contains API keys)
-.env  # Environment variables file
-.env.local  # Local environment file
-.env.production  # Production environment file
+# Bytecode and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Logs
-logs/  # Log directory
-*.log  # All log files
-log.csv  # Questions and images log
-logs/execution.log  # Main application execution log
+# PyInstaller
+*.manifest
+*.spec
 
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# =============================================================================
+# ASK-SPECIFIC FILES
+# =============================================================================
+
+# Environment and configuration files (contain sensitive data)
+.env
+.env.local
+.env.production
+.env.staging
+.env.test
+.env.development
+ask.env
+ask.env.*
+!ask.env.template
+
+# API keys and tokens
+*.token
+*.key
+api_keys.txt
+secrets.txt
+credentials.json
+
+# Logs and execution data
+logs/
+*.log
+log.csv
+log.csv.*
+execution.log
+debug.log
+error.log
+test.log
+performance.log
+
+# Generated content and outputs
+images/
+daily_pdfs/
+captions/
+instagram/
+output/
+results/
+exports/
+backups/
+temp/
+tmp/
+
+# Research data and databases
+*.db
+*.sqlite
+*.sqlite3
+research_data/
+data/
+datasets/
+
+# Volume and backup files
+volume_*.csv
+backup_*/
+*.backup
+*.bak
+
+# Development and testing files
+prompt.txt
+tree.txt
+test_*.py
+*_test.py
+test_results/
+test_output/
+test_images/
+test_logs/
+
+# =============================================================================
+# MACHINE LEARNING & AI MODELS
+# =============================================================================
+
+# Model files and caches
+models/
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.gguf
+*.ggml
+
+# Hugging Face cache
+.cache/
+huggingface/
+transformers_cache/
+diffusers_cache/
+
+# TensorFlow
+.tensorboard/
+tensorboard_logs/
+checkpoints/
+saved_models/
+
+# PyTorch
+*.pth
+*.pt
+checkpoints/
+runs/
+lightning_logs/
+
+# =============================================================================
+# IMAGE PROCESSING & GENERATION
+# =============================================================================
+
+# Generated images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.webp
+*.svg
+*.ico
+
+# Image processing temp files
+*.tmp
+*.temp
+temp_*
+*_temp
+*_tmp
+
+# Image generation outputs
+generated/
+samples/
+outputs/
+results/
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# =============================================================================
+# OPERATING SYSTEM
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# NETWORK & SECURITY
+# =============================================================================
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+
+# SSH keys
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+known_hosts
+
+# =============================================================================
+# ARCHIVES & COMPRESSED FILES
+# =============================================================================
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.zipx
+*.tgz
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+
+# =============================================================================
+# TESTING & QUALITY ASSURANCE
+# =============================================================================
+
+# Test coverage
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+.mypy_cache/
+
+# Performance testing
+perf_results/
+benchmark_results/
+*.prof
+*.profile
+
+# Load testing
+load_test_results/
+stress_test_results/
+
+# Security testing
+security_scan_results/
+vulnerability_reports/
+
+# =============================================================================
+# DEPLOYMENT & CI/CD
+# =============================================================================
+
+# Deployment files
+deploy/
+deployment/
+*.deploy
+*.env.production
+
+# CI/CD
+.github/workflows/*.log
+.gitlab-ci.yml.local
+.travis.yml.local
+
+# Docker
+Dockerfile.local
+docker-compose.override.yml
+.dockerignore
+
+# =============================================================================
+# MONITORING & ANALYTICS
+# =============================================================================
+
+# Monitoring data
+monitoring/
+metrics/
+analytics/
+telemetry/
+
+# Performance monitoring
+*.perf
+*.trace
+*.dump
+
+# =============================================================================
+# DOCUMENTATION BUILD
+# =============================================================================
+
+# Documentation builds
+docs/_build/
+docs/build/
+site/
+_site/
+
+# =============================================================================
+# TEMPORARY & CACHE FILES
+# =============================================================================
 
 # Temporary files
-temp_*  # Temporary files
-*.tmp  # Temporary files
-*.temp  # Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+.tmp/
+.temp/
 
-# Generated content
-daily_pdfs/*.pdf  # Generated PDF files
-images/  # Generated image directory
-captions/*/  # Generated caption directories
-instagram/*/  # Generated Instagram content
+# Cache directories
+.cache/
+cache/
+__pycache__/
+*.pyc
 
-# API tokens
-*.token  # API token files
-
-# IDE
-.vscode/  # Visual Studio Code settings
-.idea/  # IntelliJ IDEA settings
-*.swp  # Vim swap files
-*.swo  # Vim swap files
-
-# OS
-.DS_Store  # macOS system files
-Thumbs.db  # Windows thumbnail cache
-
-# Large files
-*.pdf  # PDF files
-*.zip  # ZIP archives
-*.tar.gz  # Compressed archives
+# =============================================================================
+# BACKUP & RECOVERY
+# =============================================================================
 
 # Backup files
-*.bak  # Backup files
-*.backup  # Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*.swp
+*.swo
+*~
 
-# Development files
-prompt.txt  # Prompts for Development
-tree.txt  # Tree for Development
+# Recovery files
+*.recovery
+*.restore
+
+# =============================================================================
+# CUSTOM ASK EXCEPTIONS
+# =============================================================================
+
+# Allow these specific files (even if they match patterns above)
+!ask.env.template
+!requirements.txt
+!README.md
+!.gitignore
+!LICENSE
+!main.py
+!*.py
+!install*.py
+!install*.bat
+!install*.sh
+
+# =============================================================================
+# END OF .gitignore
+# =============================================================================
