@@ -836,4 +836,6 @@ LOG_LEVEL=DEBUG
 **Transform your research with AI-powered intelligence and professional image documentation!** 🎯
  
  - - -  
+  
+ # #     * * C P U   I m a g e   G e n e r a t i o n   S y s t e m * *  
  
