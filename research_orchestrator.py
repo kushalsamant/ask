@@ -499,7 +499,7 @@ class ResearchOrchestrator:
             
         except Exception as e:
             log.error(f"Error generating chained cross-disciplinary question: {e}")
-            return None
+        return None
     
     def get_research_statistics(self) -> Dict[str, any]:
         """

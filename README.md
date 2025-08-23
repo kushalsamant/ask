@@ -53,6 +53,7 @@ ask/
 ├── image_layout_config.py         # Layout configuration
 ├── image_text_processor.py        # Text processing
 ├── image_typography_config.py     # Typography configuration
+├── style_manager.py               # Comprehensive style management & retrieval
 ├── style_data_manager.py          # Style data and characteristics management
 ├── style_ai_generator.py          # AI-powered style generation
 ├── style_trend_analyzer.py        # Style trend analysis and reporting
@@ -87,6 +88,14 @@ The system now features **perfect symmetry** between question and answer managem
 - **Priority System**: Configurable answer selection preferences
 - **Statistics**: Comprehensive answer analytics
 
+#### **Style Management (`style_manager.py`)**
+- **Style Retrieval**: Get latest styles from log.csv
+- **Theme Filtering**: Find styles by specific themes
+- **Popularity Analysis**: Track and analyze style usage trends
+- **Smart Selection**: Intelligent style selection for content generation
+- **Diversity Management**: Balance popular vs diverse style usage
+- **Trend Analysis**: Comprehensive style trend analytics
+
 #### **Key Features**
 - **Symmetrical APIs**: Consistent function naming and behavior
 - **Configurable Preferences**: Environment-based selection logic
@@ -103,6 +112,11 @@ QUESTION_PREFER_UNUSED=true        # Prefer unused questions
 
 # Answer Management  
 ANSWER_PREFER_SAME_CATEGORY=true   # Prefer answers from same theme
+
+# Style Management
+STYLE_PREFER_SAME_THEME=true       # Prefer styles from same theme
+STYLE_PREFER_POPULAR=true          # Prefer popular styles
+STYLE_PREFER_DIVERSE=false         # Prefer diverse styles
 ```
 
 ---
