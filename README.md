@@ -1,846 +1,437 @@
-# 🏗️ ASK: Daily Research
+# ASK: Daily Research Tool
 
-**AI-Powered Research Content Generation System**
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)]()
 
-Generate professional research questions, create stunning visual content, and produce comprehensive image publications with advanced cross-disciplinary research capabilities.
+> **Advanced Research & Image Generation Pipeline**  
+> Generate high-quality Q&A content with AI-powered image generation, supporting GPU, CPU, and API fallback systems.
 
----
+## 🚀 Overview
 
-## 🚀 **System Overview**
+ASK is a comprehensive research tool that combines AI-powered question generation, answer creation, and intelligent image generation. It features multiple generation modes, smart fallback systems, and professional output formatting.
 
-### **Core Capabilities:**
-- **AI-Powered Question Generation**: Creates intelligent architectural research questions
-- **Advanced Cross-Disciplinary Research**: 2,667 specific research themes for maximum flexibility
-- **Professional Visual Content**: Generates stunning architectural images with text overlay
-- **Comprehensive Image Generation**: Creates individual and compiled research publications
-- **Smart Content Chaining**: Links questions using historical insights from previous research
-- **Research Intelligence**: AI-powered analysis of research directions and breakthrough opportunities
+### ✨ Key Features
 
-### **Advanced AI Modules:**
-- **Research Path Finder**: Unified system combining cross-disciplinary questions with AI-powered research analysis
-- **Research Question Creator**: AI-powered architectural questions with theme-specific prompts
-- **Research Answer Creator**: Intelligent content summarization with style matching
-- **Image Creator**: AI-generated architectural visuals with text overlay
-- **Image Style Creator**: Dynamic style selection based on theme and content
-- **Image Cover Creator**: Professional cover pages with AI-generated background prompts
-- **Image TOC Creator**: Table of contents with AI-powered background visualization
-- **Layout Manager**: Unified design system for consistent spacing, typography, and layout
+- **🤖 AI-Powered Content**: Generate questions and answers using advanced language models
+- **🎨 Smart Image Generation**: GPU, CPU, and API fallback with professional styling
+- **📊 Multiple Modes**: Simple, Hybrid, Cross-Disciplinary, and Chained content generation
+- **🔄 Intelligent Fallback**: Automatic switching between generation methods
+- **📁 Professional Output**: Individual images, compilations, covers, and table of contents
+- **⚙️ Highly Configurable**: Extensive customization through environment variables
+- **📈 Progress Tracking**: Real-time progress monitoring and logging
+- **🛡️ Error Handling**: Robust error recovery and fallback strategies
 
----
+## 📋 Table of Contents
 
-## 📁 **Project Structure**
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Configuration](#-configuration)
+- [Usage Modes](#-usage-modes)
+- [Image Generation](#-image-generation)
+- [Project Structure](#-project-structure)
+- [API Reference](#-api-reference)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
 
-```
-ask/
-├── main.py                        # Unified pipeline with all modes (enhanced)
-├── research_find_path.py          # Enhanced cross-disciplinary generator with research analysis
-├── research_question_generator.py # Main question generation orchestration
-├── research_question_prompts.py   # Prompt generation and validation for questions
-├── research_answer_generator.py   # Main answer generation orchestration
-├── research_answer_prompts.py     # Prompt generation and validation for answers
-├── research_question_manager.py   # Question retrieval & chaining
-├── research_answer_manager.py     # Answer retrieval & chaining
-├── research_csv_manager.py        # Core CSV operations and data handling
-├── research_statistics.py         # Statistics and analytics
-├── research_backup_manager.py     # Backup and restore operations
-├── research_categories_data.py    # Theme data management
-├── research_theme_system.py       # Theme system
-├── image_generation_system.py     # Complete image generation system
-├── image_create_ai.py             # AI-powered image generation
-├── image_create_cover.py          # Cover image generation
-├── image_add_text.py              # Professional text overlay and typography
-├── image_layout_creator.py        # Layout creation
-├── image_layout_config.py         # Layout configuration
-├── image_text_processor.py        # Text processing
-├── image_typography_config.py     # Typography configuration
-├── style_manager.py               # Comprehensive style management & retrieval
-├── style_data_manager.py          # Style data and characteristics management
-├── style_ai_generator.py          # AI-powered style generation
-├── style_trend_analyzer.py        # Style trend analysis and reporting
-├── api_client.py                  # Unified API client
-├── volume_manager.py              # Volume management
-├── ask.env                        # Configuration
-├── ask.env.template               # Config template
-├── requirements.txt               # Python dependencies
-└── README.md                      # This file
+## 🛠️ Installation
+
+### Prerequisites
+
+- **Python 3.8+**
+- **Git**
+- **Together.ai API Key** (for AI content generation)
+
+### Automatic Installation
+
+**Windows:**
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/ask.git
+cd ask
+
+# Run automatic installer
+install.bat
 ```
 
----
+**Linux/macOS:**
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/ask.git
+cd ask
 
-## 🔄 **Question & Answer Management System**
+# Run automatic installer
+chmod +x install.sh
+./install.sh
+```
 
-### **Symmetrical Architecture**
-
-The system now features **perfect symmetry** between question and answer management:
-
-#### **Question Management (`research_question_manager.py`)**
-- **Question Retrieval**: Get latest questions from log.csv
-- **Theme Filtering**: Find questions by specific themes
-- **Usage Tracking**: Identify unused questions for reuse
-- **Smart Selection**: Intelligent question selection for answer generation
-- **Statistics**: Comprehensive question analytics
-- **Similarity Search**: Find similar questions to avoid duplicates
-
-#### **Answer Management (`research_answer_manager.py`)**
-- **Answer Retrieval**: Get latest answers from log.csv
-- **Theme Filtering**: Find answers by specific themes
-- **Chaining Logic**: Smart answer selection for question generation
-- **Priority System**: Configurable answer selection preferences
-- **Statistics**: Comprehensive answer analytics
-
-#### **Style Management (`style_manager.py`)**
-- **Style Retrieval**: Get latest styles from log.csv
-- **Theme Filtering**: Find styles by specific themes
-- **Popularity Analysis**: Track and analyze style usage trends
-- **Smart Selection**: Intelligent style selection for content generation
-- **Diversity Management**: Balance popular vs diverse style usage
-- **Trend Analysis**: Comprehensive style trend analytics
-
-#### **Key Features**
-- **Symmetrical APIs**: Consistent function naming and behavior
-- **Configurable Preferences**: Environment-based selection logic
-- **Error Handling**: Robust error recovery and logging
-- **Performance Optimized**: Efficient CSV operations
-- **Theme Consistency**: Unified theme terminology
-
-### **Configuration Options**
+### Manual Installation
 
 ```bash
-# Question Management
-QUESTION_PREFER_SAME_THEME=true    # Prefer questions from same theme
-QUESTION_PREFER_UNUSED=true        # Prefer unused questions
+# Clone the repository
+git clone https://github.com/yourusername/ask.git
+cd ask
 
-# Answer Management  
-ANSWER_PREFER_SAME_CATEGORY=true   # Prefer answers from same theme
+# Install dependencies
+pip install -r requirements.txt
 
-# Style Management
-STYLE_PREFER_SAME_THEME=true       # Prefer styles from same theme
-STYLE_PREFER_POPULAR=true          # Prefer popular styles
-STYLE_PREFER_DIVERSE=false         # Prefer diverse styles
+# Configure environment
+cp ask.env.template ask.env
+# Edit ask.env with your API key and preferences
 ```
 
----
+### Hardware Requirements
 
-## 🎯 **Enhanced Cross-Disciplinary Research System**
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| **RAM** | 8GB | 16GB+ |
+| **Storage** | 10GB | 50GB+ |
+| **GPU** | CPU-only | NVIDIA GTX 1650+ |
+| **CPU** | 4 cores | 8+ cores |
 
-### **Massive Theme System: 2,667 Research Themes**
+## ⚡ Quick Start
 
-Your system includes **2,667 cross-disciplinary themes**, creating the most comprehensive research framework ever built!
+### 1. Configuration Setup
 
-#### **Theme System Breakdown:**
-
-**Total Themes: 2,667**
-
-1. **2,580 Specific Focus Themes** (from subcategories)
-   - **Format**: `{main_category}_{subcategory}`
-   - **Example**: `architecture_residential`, `construction_steel_frame`, `design_user_centered`
-   - **Themes per theme**: 12 (main theme + 11 related themes)
-
-2. **86 Specific Focus Themes** (from main themes)
-   - **Format**: `main_{theme}`
-   - **Example**: `main_architecture`, `main_construction`, `main_design`
-   - **Themes per theme**: 12 (main theme + 11 related themes)
-
-3. **1 Comprehensive Theme** (all themes)
-   - **Format**: `all_categories`
-   - **Themes per theme**: 86 (all main themes)
-
-#### **Example Theme Questions:**
-
-**Subcategory Theme:**
-- **Theme**: `architecture_residential`
-- **Question**: "How do Architecture, Construction, and Design work together in residential architecture?"
-
-**Main Theme Theme:**
-- **Theme**: `main_construction`
-- **Question**: "How do Construction, Architecture, and Engineering work together in construction?"
-
-**All Themes Theme:**
-- **Theme**: `all_categories`
-- **Question**: "How do Architecture, Construction, and Design work together in comprehensive architectural research?"
-
-#### **System Capabilities:**
-
-- **Massive Theme Coverage**: 2,667 themes for maximum research flexibility
-- **Flexible Question Generation**: Simple (2-3), Mixed (3-5), Complex (4-6 themes)
-- **Smart Configuration**: Random theme selection from 2,667 available themes
-- **Research Excellence**: Granular to comprehensive research options
-
----
-
-## 🚀 **Upgraded Simple Pipeline**
-
-The Simple Pipeline has been **completely upgraded** to include all advanced modes from the main pipeline while maintaining its core simplicity. Now you have **4 powerful modes** in one unified interface:
-
-### **Available Modes**
-
-#### **1. Simple Mode (Default)**
 ```bash
-python main.py
+# Copy template and configure
+cp ask.env.template ask.env
+
+# Edit ask.env with your settings
+# Required: TOGETHER_API_KEY=your_api_key_here
 ```
-**What it does**: Classic 12-step Q&A generation with all enhancements
-- Volume tracking and statistics
-- Optional cover generation
-- Automatic backups
-- Research analysis
-- Data export capabilities
 
-#### **2. Hybrid Mode**
+### 2. Basic Usage
+
 ```bash
+# Simple mode (1 Q&A pair)
+python main.py simple
+
+# Hybrid mode (10 Q&A pairs)
 python main.py hybrid
-```
-**What it does**: Combines cross-disciplinary themes with chained questions
-- Starts with cross-disciplinary questions
-- Chains deeper questions that explore intersections
-- Creates progressive learning paths
-- Combines breadth and depth
 
-**Example Flow**:
-```
-Theme: 'sustainability_technology'
-
-```
-
-#### **3. Cross-Disciplinary Mode**
-```bash
+# Cross-disciplinary mode (10 Q&A pairs)
 python main.py cross-disciplinary
-```
-**What it does**: Explores intersections between research themes
-- Connects multiple themes in single questions
-- Finds innovative solutions at theme boundaries
-- Creates broader, more comprehensive content
-- Explores new research directions
 
-**Example Questions**:
-- "How can Urban Planning and Digital Technology create innovative city solutions?"
-- "What synergies emerge when combining Design Research, Technology Innovation, and Digital Technology?"
-- "How do Environmental Design and Engineering Systems work together for optimal performance?"
-- "What innovative approaches emerge when integrating Sustainability Science with Smart Technologies?"
-- "How can Heritage Preservation and Modern Technology create adaptive solutions?"
-
-#### **4. Chained Mode**
-```bash
+# Chained mode (10 Q&A pairs)
 python main.py chained
 ```
-**What it does**: Creates connected questions that build upon each other
-- Each question builds on the previous answer
-- Creates deep, progressive exploration within themes
-- Develops comprehensive understanding of specific themes
-- Follows logical research paths
 
-**Example Chain**:
-```
-Theme: design_research
-Theme: technology_innovation
-```
+### 3. View Results
 
-### **Quick Reference Commands**
+Generated content will be saved in:
+- `images/individual/` - Individual Q&A images
+- `images/compilations/` - Compilation images
+- `images/covers/` - Cover images
+- `images/toc/` - Table of contents
+- `log.csv` - Content database
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+The tool is configured through `ask.env`. Key settings include:
 
 ```bash
-# Basic Usage
-python main.py                    # Simple mode (default)
-python main.py hybrid             # Hybrid mode
-python main.py cross-disciplinary # Cross-disciplinary mode
-python main.py chained            # Chained mode
-python main.py help               # Get help
-```
+# API Configuration
+TOGETHER_API_KEY=your_api_key_here
+TOGETHER_API_BASE=https://api.together.xyz/v1
 
-### **Mode Comparison**
+# AI Models
+TEXT_MODEL=meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
+IMAGE_MODEL=black-forest-labs/FLUX.1-schnell-Free
 
-| Mode | Command | Best For | Output |
-|------|---------|----------|---------|
-| **Simple** | `python main.py` | Quick Q&A pairs | 1 Q&A pair |
-| **Hybrid** | `python main.py hybrid` | Educational content | 10 Q&A pairs (5 themes × 2 chains) |
-| **Cross-Disciplinary** | `python main.py cross-disciplinary` | Innovative research | 10 Q&A pairs (10 themes) |
-| **Chained** | `python main.py chained` | Deep exploration | 10 Q&A pairs (2 themes × 5 chains) |
-
----
-
-## 🎨 **Image Generation System**
-
-The **Image Generation System** converts all PDF generation features into comprehensive image generation functions. This system provides the same powerful features as the PDF system but generates images instead of PDFs, making it perfect for social media, presentations, and digital content creation.
-
-### **Features Converted from PDF to Images**
-
-#### **📄 Image Generation Features** (8 features converted)
-- `CREATE_INDIVIDUAL_IMAGES=true` - Create individual images for each Q&A pair
-- `CREATE_FINAL_COMPILATION=true` - Create final compilation image
-- `CREATE_AUTOMATIC_THEME_COMPILATIONS=false` - Create automatic theme compilations
-- `CREATE_COVER_IMAGE=true` - Create cover image for volume
-- `CREATE_TABLE_OF_CONTENTS=true` - Create table of contents image
-- `CREATE_SEQUENTIAL_TOC=true` - Create sequential table of contents
-- `CREATE_THEME_TOC=true` - Create theme table of contents
-- `PRESERVE_TEMP_FILES=true` - Preserve temporary files
-
-#### **📊 Table of Contents Features** (5 features converted)
-- `TOC_SHOW_FULL_QUESTIONS=true` - Show full questions in TOC
-- `TOC_BACKGROUND_PROMPT=true` - Use background prompt for TOC images
-- `TOC_THEME_GROUPING=true` - Group by theme in TOC
-- `TOC_GROUP_UNKNOWN_CATEGORIES=true` - Group unknown themes
-- `TOC_SORT_THEMES_ALPHABETICALLY=true` - Sort themes alphabetically
-
-#### **📝 Logging Features** (5 features converted)
-- `LOG_SUCCESS_MESSAGES=true` - Log success messages
-- `LOG_ERROR_MESSAGES=true` - Log error messages
-- `LOG_PROGRESS_MESSAGES=true` - Log progress messages
-- `LOG_DETAILED_ERRORS=true` - Log detailed error information
-- `LOG_TIMING=true` - Log timing information
-
-#### **📈 Progress Tracking Features** (8 features converted)
-- `PROGRESS_STEP_TRACKING=true` - Track progress steps
-- `PROGRESS_EMOJI_ENABLED=true` - Enable emoji in progress messages
-- `PROGRESS_VERBOSE=true` - Verbose progress output
-- `PROGRESS_STEP_NUMBERING=true` - Number progress steps
-- `PROGRESS_TIMING_DETAILED=true` - Detailed timing information
-- `PROGRESS_FILE_OPERATIONS=true` - Track file operations
-- `PROGRESS_IMAGE_OPERATIONS=true` - Track image operations
-- `PROGRESS_TEXT_OPERATIONS=true` - Track text operations
-
-#### **⚠️ Error Handling Features** (6 features converted)
-- `ERROR_HANDLING_ENABLED=true` - Enable error handling
-- `ERROR_CONTINUE_ON_FAILURE=true` - Continue processing on failure
-- `ERROR_SKIP_MISSING_FILES=true` - Skip missing files
-- `ERROR_LOG_DETAILED=true` - Log detailed error information
-- `ERROR_CREATE_PLACEHOLDER=true` - Create placeholder images on failure
-- `ERROR_NOTIFY_ON_FAILURE=true` - Notify on failure
-
-### **What Each Feature Generates**
-
-#### **Individual Images**
-- **Question Images**: AI-generated images with question text overlay
-- **Answer Images**: AI-generated images with answer text overlay
-- **Professional Layout**: Branded with ASK logo and consistent styling
-
-#### **Compilation Images**
-- **Final Compilation**: Single image showcasing all Q&A pairs
-- **Theme Compilations**: Separate images for each architectural theme
-- **Grid Layout**: Organized presentation of multiple Q&A pairs
-
-#### **Cover Images**
-- **Volume Covers**: Professional covers for each content volume
-- **Theme Covers**: Specialized covers for different architectural themes
-- **Branded Design**: Consistent ASK branding and professional appearance
-
-#### **Table of Contents Images**
-- **Main TOC**: Complete table of contents with all Q&A pairs
-- **Sequential TOC**: Numbered list of all content in order
-- **Theme TOC**: Organized by architectural themes
-- **Interactive Layout**: Easy-to-read format with theme grouping
-
-### **Usage**
-
-#### **Basic Usage**
-```python
-from image_generation_system import ImageGenerationSystem, ImageGenerationConfig
-
-# Initialize with default configuration
-image_system = ImageGenerationSystem()
-
-# Load Q&A pairs from log.csv
-qa_pairs = read_log_csv()
-
-# Generate complete image set
-results = image_system.generate_complete_image_set(qa_pairs, volume_number=1)
-```
-
-#### **Custom Configuration**
-```python
-# Custom configuration
-config = ImageGenerationConfig(
-    CREATE_INDIVIDUAL_IMAGES=True,
-    CREATE_FINAL_COMPILATION=True,
-    CREATE_COVER_IMAGE=True,
-    CREATE_TABLE_OF_CONTENTS=True,
-    PROGRESS_EMOJI_ENABLED=True,
-    ERROR_CREATE_PLACEHOLDER=True
-)
-
-image_system = ImageGenerationSystem(config)
-```
-
-#### **Command Line Usage**
-```bash
-# Run with default settings
-python image_generation_system.py
-
-# Run with custom environment file
-cp image_generation_config.env .env
-python image_generation_system.py
-```
-
-### **Output Structure**
-
-```
-images/
-├── covers/                    # Cover images
-│   ├── ASK-Volume-01-Cover.jpg
-│   └── ASK-architectural_design-Cover.jpg
-├── toc/                      # Table of contents
-│   ├── ASK-TOC-20241201_143022.jpg
-│   ├── ASK-Sequential-TOC-20241201_143022.jpg
-│   └── ASK-Theme-TOC-20241201_143022.jpg
-├── compilations/             # Compilation images
-│   ├── ASK-Compilation-Research.jpg
-│   └── ASK-architectural_design-Compilation.jpg
-├── temp/                     # Temporary files (if preserved)
-│   ├── ASK-01-architectural_design-q.jpg
-│   └── ASK-01-architectural_design-a.jpg
-└── individual/               # Individual Q&A images
-    ├── ASK-01-architectural_design-q-final.jpg
-    └── ASK-01-architectural_design-a-final.jpg
-```
-
-### **Configuration Options**
-
-#### **Image Generation Settings**
-```bash
-# Core features
-CREATE_INDIVIDUAL_IMAGES=true
-CREATE_FINAL_COMPILATION=true
-CREATE_COVER_IMAGE=true
-CREATE_TABLE_OF_CONTENTS=true
-
-# Image quality
+# Image Generation
 IMAGE_WIDTH=1072
 IMAGE_HEIGHT=1792
 IMAGE_QUALITY=95
-IMAGE_STYLE=photographic
 
-# Text overlay
-MAX_CHARS_PER_LINE=35
-MAX_TEXT_LINES_ANSWER=12
-TEXT_COLOR=#F0F0F0
+# Generation Modes
+HYBRID_THEME_COUNT=5
+CROSS_DISCIPLINARY_THEME_COUNT=10
+CHAIN_LENGTH=5
 ```
 
-#### **Progress and Logging**
+### Theme Configuration
+
+Configure themes in `ask.env`:
+
 ```bash
-# Progress tracking
-PROGRESS_STEP_TRACKING=true
-PROGRESS_EMOJI_ENABLED=true
-PROGRESS_VERBOSE=true
+# Simple mode themes
+SIMPLE_MODE_THEMES=design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology
 
-# Logging
-LOG_SUCCESS_MESSAGES=true
-LOG_ERROR_MESSAGES=true
-LOG_TIMING=true
+# Default chained themes
+DEFAULT_CHAINED_THEMES=design_research,technology_innovation
 ```
 
-#### **Error Handling**
+## 🎯 Usage Modes
+
+### Simple Mode
+Generate a single Q&A pair with image.
+
 ```bash
-# Error management
-ERROR_HANDLING_ENABLED=true
-ERROR_CONTINUE_ON_FAILURE=true
-ERROR_CREATE_PLACEHOLDER=true
-ERROR_MAX_FAILURES=10
+python main.py simple
 ```
 
-### **Benefits of Image Generation System**
+**Output**: 1 Q&A pair with individual image
 
-1. **Social Media Ready**: Perfect for Instagram, Twitter, LinkedIn
-2. **Presentation Friendly**: Ideal for slideshows and presentations
-3. **Digital Content**: Easy to share and embed in websites
-4. **Professional Quality**: High-resolution, branded images
-5. **Flexible Output**: Multiple formats and layouts
-6. **Automated Workflow**: Complete automation from Q&A to images
-7. **Error Resilient**: Robust error handling and recovery
-8. **Customizable**: Extensive configuration options
+### Hybrid Mode
+Generate content across multiple themes with chaining.
 
----
-
-## ⚙️ **Configuration**
-
-### **Smart Configuration Settings:**
-- `CROSS_DISCIPLINARY_ENABLED=true` - Turn it on/off
-- `CROSS_DISCIPLINARY_FREQUENCY=0.3` - 30% of questions will be cross-disciplinary
-- `CROSS_DISCIPLINARY_THEME_FREQUENCY=0.2` - 20% will be theme-based
-- `CROSS_DISCIPLINARY_SYNTHESIS_FREQUENCY=0.1` - 10% will synthesize from answers
-
-### **Question Generation:**
-- `QUESTIONS_PER_category=1` - Generate one question per theme
-- `QA_PAIRS_TO_GENERATE=2` - Number of Q&A pairs to generate
-- `CHAINED_FLOW_ENABLED=true` - Enable chained question generation
-
-### **Image Generation:**
-- `CREATE_INDIVIDUAL_IMAGES=true` - Create individual Q&A images
-- `CREATE_FINAL_COMPILATION=true` - Create compiled research volume
-- `VOLUME_NUMBER=1` - Volume number for research publications
-- `TOC_BACKGROUND_PROMPT=true` - Generate AI-powered TOC backgrounds
-
-### **Mode-Specific Configuration**
-
-| Mode | Setting | Default | Description |
-|------|---------|---------|-------------|
-| **Hybrid** | `HYBRID_THEME_COUNT` | `5` | Number of themes to explore (5 themes × 2 chains = 10 Q&A pairs) |
-| **Hybrid** | `HYBRID_CHAIN_LENGTH` | `2` | Questions per chain (5 themes × 2 chains = 10 Q&A pairs) |
-| **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `10` | Number of themes (10 themes = 10 Q&A pairs) |
-| **Simple** | `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
-| **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 themes × 5 chains = 10 Q&A pairs) |
-| **Chained** | `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
-| **Chained** | `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
-
-### **Theme Configuration**
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
-| `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
-| `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
-
-### **Enhanced Features Configuration**
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `SIMPLE_PIPELINE_GENERATE_COVERS` | `false` | Enable cover image generation |
-| `SIMPLE_PIPELINE_SHOW_STATISTICS` | `true` | Show detailed statistics |
-| `SIMPLE_PIPELINE_VOLUME_TRACKING` | `true` | Enable volume tracking |
-| `SIMPLE_PIPELINE_MARK_QUESTIONS_USED` | `true` | Mark questions as used to prevent duplicates |
-| `SIMPLE_PIPELINE_ANALYZE_DIRECTION` | `true` | Analyze research direction and trends |
-| `SIMPLE_PIPELINE_CREATE_BACKUP` | `true` | Create automatic backups of log.csv |
-| `SIMPLE_PIPELINE_EXPORT_DATA` | `false` | Export research data to CSV files |
-
----
-
-## 🎯 **Module Functions**
-
-### **Research Path Finder (`research_find_path.py`):**
-- **2,667 theme system**: Every subcategory and main theme becomes a research theme
-- **Question patterns**: 30 different types of cross-disciplinary question patterns
-- **Theme relationships**: 1,032+ intelligent connections between themes
-- **Synthesis capabilities**: Multi-domain insight integration
-- **Research direction analysis**: AI-powered insights into research gaps and opportunities
-- **Cross-disciplinary discovery**: Connection identification between themes
-- **Exploration patterns**: Systematic research approaches (temporal, spatial, thematic, etc.)
-- **Insights discovery**: AI-driven research findings and synthesis
-- **Intelligent question generation**: AI-guided theme selection based on research analysis
-
-### **Image Generation System (`image_generation_system.py`):**
-- **Complete image generation**: Individual Q&A images, compilations, covers, TOC
-- **Professional layout**: Consistent typography, spacing, and visual hierarchy
-- **AI-powered backgrounds**: Professional cover and TOC background images
-- **Error handling**: Robust error recovery and placeholder creation
-- **Progress tracking**: Detailed progress with emoji and step numbering
-- **Configuration management**: 150+ configuration options for customization
-
-### **Research Data Management:**
-- **`research_csv_manager.py`**: Core CSV operations, data reading/writing, image numbering, export functionality
-- **`research_statistics.py`**: Question statistics, theme analytics, usage tracking, comprehensive reporting
-- **`research_answer_manager.py`**: Answer retrieval, historical chaining, theme-specific answer selection, next question optimization
-- **`research_backup_manager.py`**: Data backup, restore operations, timestamped backups, data safety
-
-### **Image Creation System:**
-- **`image_create_ai.py`**: AI-powered image generation using Together.ai FLUX.1-schnell model, retry logic, error handling
-- **`image_create_cover.py`**: Cover image generation with different sizes (normal/double), file management
-- **`image_add_text.py`**: Professional text overlay, typography, gradient overlays, branding, image numbering
-
----
-
-## 📈 **Recent Updates**
-
-### **Version 7.0 (Latest) - Unified Pipeline**
-- ✅ **Merged simple_pipeline.py into main.py**: Unified pipeline with all modes and features
-- ✅ **Enhanced main.py**: All advanced features from simple_pipeline.py now in main.py
-- ✅ **Removed simple_pipeline.py**: Eliminated redundancy and confusion
-- ✅ **Updated documentation**: All references updated to use unified main.py
-- ✅ **Improved user experience**: Single entry point for all functionality
-- ✅ **Maintained backward compatibility**: All existing functionality preserved
-
-### **Version 6.0 (Previous) - Documentation Consolidation**
-
-### **Version 5.9 (Previous) - Smart Merge**
-- ✅ **Environment consolidation**: Merged `image_generation_config.env` into `ask.env`
-- ✅ **Configuration unification**: Single source of truth for all settings
-- ✅ **Reduced confusion**: Eliminated duplicate configuration options
-- ✅ **Improved maintainability**: One file to update for all settings
-
-### **Version 5.8 (Previous) - Repository Cleanup**
-- ✅ **Repository Cleanup**: Removed 11 unnecessary files for cleaner codebase
-- ✅ **Removed Backup/Temp Files**: Deleted `ask.env.backup`, `ask.env.temp`, `main.py.backup`
-- ✅ **Removed Utility Files**: Deleted `api_utils.py`, `check_models.py`, `main_simple.py`
-- ✅ **Removed Test Images**: Deleted 7 test image files for cleaner repository
-- ✅ **Maintained Core Functionality**: All essential modules and features preserved
-- ✅ **Focused Codebase**: Reduced from 48 to 37 files for better maintainability
-
-### **Version 5.7 (Previous) - Redundant Code Cleanup**
-- ✅ **Removed API Wrapper Modules**: Eliminated `research_question_api.py` and `research_answer_api.py`
-- ✅ **Merged Image Systems**: Consolidated `image_orchestrator.py` into `image_generation_system.py`
-- ✅ **Simplified Imports**: Direct API client usage across all modules
-- ✅ **Reduced Code Complexity**: 245+ lines of redundant code removed
-- ✅ **Better Architecture**: Unified functionality with single source of truth
-
-### **Version 5.6 (Previous) - PDF to Image Conversion**
-- ✅ **Complete PDF to Image Conversion**: All PDF features converted to image generation
-- ✅ **150+ Configuration Options**: Comprehensive image generation settings
-- ✅ **Professional Quality**: High-resolution, branded image output
-- ✅ **Social Media Ready**: Perfect for modern digital content
-- ✅ **Error Resilient**: Robust error handling and recovery
-- ✅ **PDF System Removed**: Clean conversion with no legacy code
-
-### **Version 5.5 (Previous) - Simple Pipeline Upgrade**
-- ✅ **4 Advanced Modes**: Simple, Hybrid, Cross-Disciplinary, Chained modes
-- ✅ **Enhanced Features**: Volume tracking, statistics, backups, exports
-- ✅ **Professional Polish**: Cover generation, research analysis
-- ✅ **Unified Interface**: All modes in one simple command
-- ✅ **Backward Compatibility**: Simple mode works exactly as before
-
----
-
-## 🎯 **Usage Examples**
-
-### **Cross-Disciplinary Question Generation:**
-```python
-# Generate theme-based question
-theme = "architecture_residential"
-question = generate_theme_based_question(theme)
-# Result: "How do Architecture, Construction, and Design work together in residential architecture?"
-
-# Generate synthesis question from multiple answers
-question = generate_synthesis_question_from_answers(answers, theme)
-# Result: "Given insights from Architecture and Construction, how can we apply these principles to advance Smart Cities?"
-
-# Generate intelligent theme question based on research analysis
-question = generate_intelligent_theme_question(research_context="sustainability", current_questions=previous_questions)
-# Result: AI-selected theme question targeting research gaps
+```bash
+python main.py hybrid
 ```
 
-### **Research Analysis:**
-```python
-# Analyze research direction for a theme
-analysis = analyze_research_direction("architecture", current_questions, previous_insights)
-# Result: AI-powered analysis of research gaps and opportunities
+**Output**: 10 Q&A pairs (5 themes × 2 chains each)
 
-# Discover cross-disciplinary insights
-insights = discover_cross_disciplinary_insights(categories_data)
-# Result: AI-identified cross-disciplinary patterns and synergies
+### Cross-Disciplinary Mode
+Generate content exploring connections between different themes.
 
-# Suggest next exploration path
-suggestion = suggest_exploration_path(current_category, available_categories)
-# Result: AI-guided recommendation for next research direction
+```bash
+python main.py cross-disciplinary
 ```
 
-### **Image Generation:**
+**Output**: 10 Q&A pairs across diverse themes
+
+### Chained Mode
+Generate deep exploration of specific themes through chaining.
+
+```bash
+python main.py chained
+```
+
+**Output**: 10 Q&A pairs (2 themes × 5 chains each)
+
+## 🎨 Image Generation
+
+### Generation Methods
+
+The tool supports multiple image generation methods with intelligent fallback:
+
+1. **GPU Generation** (Priority when enabled)
+   - Uses NVIDIA CUDA for fast generation
+   - Optimized for GTX 1650+ graphics cards
+   - High-quality output with memory optimization
+
+2. **CPU Generation** (Fallback)
+   - Uses Diffusers with LCM-SD15 model
+   - Memory-efficient for CPU-only systems
+   - Slower but fully offline
+
+3. **API Generation** (Fallback)
+   - Uses Together.ai FLUX.1 model
+   - High-quality cloud-based generation
+   - Requires internet connection
+
+4. **Placeholder Images** (Final fallback)
+   - Generated when all other methods fail
+   - Professional styling with error indication
+
+### Configuration
+
+```bash
+# GPU Settings
+GPU_IMAGE_GENERATION_ENABLED=true
+GPU_MODEL_ID=runwayml/stable-diffusion-v1-5
+GPU_DEFAULT_STEPS=20
+
+# CPU Settings
+CPU_IMAGE_GENERATION_ENABLED=false
+CPU_MODEL_ID=latent-consistency/lcm-sd15
+CPU_DEFAULT_STEPS=6
+```
+
+## 📁 Project Structure
+
+```
+ask/
+├── main.py                          # Main orchestration pipeline
+├── ask.env                          # Configuration file
+├── ask.env.template                 # Configuration template
+├── requirements.txt                 # Python dependencies
+├── install_dependencies.py          # Smart installer
+├── install.bat                      # Windows installer
+├── install.sh                       # Linux/macOS installer
+│
+├── Core Components/
+│   ├── research_orchestrator.py     # Research orchestration
+│   ├── research_question_generator.py # Question generation
+│   ├── research_answer_generator.py # Answer generation
+│   ├── research_csv_manager.py      # Data management
+│   └── volume_manager.py            # Volume management
+│
+├── Image Generation/
+│   ├── image_generation_system.py   # Main image system
+│   ├── smart_image_generator.py     # Smart fallback system
+│   ├── gpu_image_generator.py       # GPU generation
+│   ├── cpu_image_generator.py       # CPU generation
+│   ├── image_create_ai.py           # API generation
+│   ├── image_add_text.py            # Text overlay
+│   └── image_typography_config.py   # Typography settings
+│
+├── Management Systems/
+│   ├── research_question_manager.py # Question management
+│   ├── research_answer_manager.py   # Answer management
+│   ├── style_manager.py             # Style management
+│   └── research_theme_system.py     # Theme system
+│
+├── Output/
+│   ├── images/                      # Generated images
+│   │   ├── individual/              # Individual Q&A images
+│   │   ├── compilations/            # Compilation images
+│   │   ├── covers/                  # Cover images
+│   │   └── toc/                     # Table of contents
+│   ├── logs/                        # Log files
+│   └── log.csv                      # Content database
+│
+└── Tests/
+    └── test_image_generation.py     # Image generation tests
+```
+
+## 🔧 API Reference
+
+### Main Pipeline
+
 ```python
-# Generate complete image set
-from image_generation_system import ImageGenerationSystem
+from main import SimplePipeline
 
-image_system = ImageGenerationSystem()
-results = image_system.generate_complete_image_set(qa_pairs, volume_number=1)
+# Initialize pipeline
+pipeline = SimplePipeline()
 
-# Custom configuration
-config = ImageGenerationConfig(
-    CREATE_INDIVIDUAL_IMAGES=True,
-    CREATE_FINAL_COMPILATION=True,
-    CREATE_COVER_IMAGE=True,
-    PROGRESS_EMOJI_ENABLED=True
+# Run simple mode
+pipeline.run_simple_mode()
+
+# Run hybrid mode
+pipeline.run_hybrid_mode()
+```
+
+### Image Generation
+
+```python
+from smart_image_generator import generate_image_with_smart_fallback
+
+# Generate image with smart fallback
+image = generate_image_with_smart_fallback(
+    prompt="Your prompt here",
+    theme="design_research"
 )
 ```
 
-### **Smart Configuration:**
+### Research Orchestration
+
+```python
+from research_orchestrator import ResearchOrchestrator
+
+# Initialize orchestrator
+orchestrator = ResearchOrchestrator()
+
+# Generate chained content
+content = orchestrator.generate_chained_content(
+    themes=["design_research", "technology_innovation"],
+    chain_length=3
+)
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**1. API Key Error**
 ```bash
-# Enable cross-disciplinary features
-CROSS_DISCIPLINARY_ENABLED=true
-CROSS_DISCIPLINARY_FREQUENCY=0.3
-CROSS_DISCIPLINARY_THEME_FREQUENCY=0.2
-CROSS_DISCIPLINARY_SYNTHESIS_FREQUENCY=0.1
-
-# Enable AI-powered background generation
-TOC_BACKGROUND_PROMPT=true
-CREATE_COVER_IMAGE=true
+ERROR: TOGETHER_API_KEY environment variable is not set!
 ```
+**Solution**: Set your API key in `ask.env`
 
----
-
-## 🚀 **Getting Started**
-
-1. **Clone the repository**
-2. **Install dependencies**: `pip install -r requirements.txt`
-3. **Configure environment**: Copy `ask.env.template` to `ask.env` and add your API keys
-4. **Run the system**: 
-   - **Simple mode**: `python main.py`
-   - **Hybrid mode**: `python main.py hybrid`
-   - **Cross-disciplinary mode**: `python main.py cross-disciplinary`
-   - **Chained mode**: `python main.py chained`
-
----
-
-## 📊 **System Statistics**
-
-- **2,667 Cross-Disciplinary Themes**: Maximum research flexibility
-- **86 Main Themes**: Comprehensive architectural coverage
-- **1,032+ Theme Relationships**: Intelligent cross-disciplinary connections
-- **30 Question Patterns**: Diverse cross-disciplinary question types
-- **30 Context Areas**: Relevant research contexts
-- **Unlimited Research Combinations**: Any 2-6 themes per question
-- **AI-Powered Research Analysis**: Intelligent research direction guidance
-- **Professional Image Generation**: Complete publication system with AI backgrounds
-- **150+ Configuration Options**: Comprehensive customization capabilities
-
----
-
-## 🎯 **Research Pipeline Flow**
-
-```
-1. Research Analysis → 2. Question Generation → 3. Content Creation → 4. Image Compilation → 5. Publication
-     ↓                      ↓                      ↓                    ↓                    ↓
-AI-powered research   2,667 theme system    Professional images    Individual images    Final research
-gap identification    Cross-disciplinary    Text overlay          Cover & TOC          volume with
-Exploration paths     question patterns     Style matching        AI backgrounds      professional design
-Breakthrough opps     Intelligent theme     Brand integration     Layout management  Research intelligence
-```
-
----
-
-## 🏆 **System Benefits**
-
-### **For Researchers:**
-- **Unprecedented Research Coverage**: 2,667 themes cover every possible research direction
-- **AI-Powered Intelligence**: Research analysis and breakthrough discovery
-- **Professional Documentation**: High-quality image outputs for publication
-- **Cross-Disciplinary Excellence**: Bridge multiple research domains
-
-### **For Professionals:**
-- **Innovation Discovery**: Find breakthrough opportunities at theme intersections
-- **Client Presentations**: Professional visual content for meetings
-- **Strategic Insights**: AI-powered analysis for decision making
-- **Competitive Advantage**: Unique research capabilities
-
-### **For Educators:**
-- **Learning Enhancement**: Cross-disciplinary exploration of concepts
-- **Visual Learning**: Professional Q&A image pairs
-- **Research Skills**: Systematic research approach development
-- **Project Inspiration**: Innovative project ideas and directions
-
-### **For Innovators:**
-- **Market Opportunities**: Discover untapped research areas
-- **Technology Integration**: Explore emerging technology intersections
-- **Sustainability Solutions**: Cross-disciplinary sustainable approaches
-- **Strategic Planning**: AI-powered insights for innovation strategy
-
----
-
-## 🎯 **When to Use Each Mode**
-
-### **Use Simple Mode When**:
-- You want quick, single Q&A pairs
-- You're new to the system
-- You need straightforward content generation
-- You want to focus on one theme at a time
-
-### **Use Hybrid Mode When**:
-- You want sophisticated, connected content
-- You're creating educational materials
-- You need progressive learning paths
-- You want to explore theme intersections deeply
-
-### **Use Cross-Disciplinary Mode When**:
-- You want innovative, boundary-crossing content
-- You're exploring new research directions
-- You need broader perspectives
-- You want to find connections between fields
-
-### **Use Chained Mode When**:
-- You want deep exploration of topics
-- You're creating comprehensive guides
-- You need logical content progression
-- You want to build knowledge systematically
-
----
-
-## 🔧 **Troubleshooting**
-
-### **If a mode fails**:
-1. Check your `ask.env` configuration
-2. Ensure all required modules are available
-3. Check the logs in `logs/execution.log`
-4. Try simple mode first: `python main.py`
-
-### **To disable features**:
+**2. GPU Generation Fails**
 ```bash
-# Disable statistics
-SIMPLE_PIPELINE_SHOW_STATISTICS=false
-
-# Disable backups
-SIMPLE_PIPELINE_CREATE_BACKUP=false
-
-# Disable analysis
-SIMPLE_PIPELINE_ANALYZE_DIRECTION=false
+CUDA not available
 ```
+**Solution**: Install CUDA drivers or disable GPU generation
 
-### **Common Issues**:
-1. **Missing Fonts**: Ensure font files exist in the specified path
-2. **API Limits**: Check API rate limits and timeouts
-3. **Memory Issues**: Reduce batch size for large datasets
-4. **File Permissions**: Ensure write permissions for output directories
-
-### **Debug Mode**:
+**3. Memory Issues**
 ```bash
-# Enable debug mode for detailed information
+Out of memory error
+```
+**Solution**: Reduce image size or enable memory optimization
+
+**4. Import Errors**
+```bash
+ModuleNotFoundError
+```
+**Solution**: Run `pip install -r requirements.txt`
+
+### Performance Optimization
+
+**For GPU Users:**
+- Enable `GPU_IMAGE_GENERATION_ENABLED=true`
+- Set appropriate memory optimizations
+- Use `GPU_DEFAULT_STEPS=20` for quality
+
+**For CPU Users:**
+- Enable `CPU_IMAGE_GENERATION_ENABLED=true`
+- Use `CPU_DEFAULT_STEPS=6` for speed
+- Enable memory optimizations
+
+**For API Users:**
+- Ensure stable internet connection
+- Set appropriate rate limits
+- Monitor API usage
+
+### Logging
+
+Logs are stored in `logs/execution.log`. Enable debug mode for detailed logging:
+
+```bash
 DEBUG_MODE=true
-VERBOSE_OUTPUT=true
 LOG_LEVEL=DEBUG
 ```
 
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Setup
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/ask.git
+cd ask
+
+# Install development dependencies
+pip install -r requirements.txt
+
+# Run tests
+python test_image_generation.py
+
+# Check code quality
+python -m flake8 .
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Together.ai** for AI model access
+- **Diffusers** for image generation capabilities
+- **OpenAI** for inspiration and research methodologies
+- **Community contributors** for feedback and improvements
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/yourusername/ask/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/ask/discussions)
+- **Documentation**: [Wiki](https://github.com/yourusername/ask/wiki)
+
 ---
 
-## 📁 **Output Files**
+**Made with ❤️ for the research community**
 
-### **Images**: `images/` directory
-- `covers/` - Cover images
-- `toc/` - Table of contents
-- `compilations/` - Compilation images
-- `individual/` - Individual Q&A images
-- `temp/` - Temporary files
-
-### **Logs**: `logs/execution.log`
-### **Data**: `log.csv`
-### **Backups**: `log.csv.backup_*`
-### **Exports**: `research_export_*.csv` (if enabled)
-
----
-
-## 🎯 **Pro Tips**
-
-1. **Start Simple**: Use simple mode first to test your setup
-2. **Gradual Progression**: Move to advanced modes as you need them
-3. **Customize Themes**: Edit `ask.env` to configure themes for different modes
-4. **Enable Covers**: Set `SIMPLE_PIPELINE_GENERATE_COVERS=true` for professional output
-5. **Export Data**: Set `SIMPLE_PIPELINE_EXPORT_DATA=true` to save your content
-6. **Check Backups**: Look for `log.csv.backup_*` files for data safety
-7. **Custom Themes**: Edit `CATEGORIES_TO_GENERATE` for chained mode
-8. **Longer Chains**: Increase `HYBRID_CHAIN_LENGTH` and `CHAIN_LENGTH` for deeper exploration
-
----
-
-**Your system now has the most comprehensive cross-disciplinary research framework ever created, with 2,667 themes covering every possible research direction!** 🏗️✨
-
-**This creates unlimited research possibilities and maximum innovation discovery!** 🚀
-
-**Transform your research with AI-powered intelligence and professional image documentation!** 🎯
-
- 
- - - - 
- 
- 
- 
- # #     * * C P U   I m a g e   G e n e r a t i o n   S y s t e m * * 
- 
- 
- 
- # #     * * I n s t a l l a t i o n   G u i d e * * 
- 
- 
- 
- # # #   * * S m a r t   I n s t a l l a t i o n   ( R e c o m m e n d e d ) * * 
- 
- 
- 
- T h e   s m a r t   i n s t a l l e r   a u t o m a t i c a l l y   d e t e c t s   y o u r   h a r d w a r e   a n d   i n s t a l l s   t h e   a p p r o p r i a t e   d e p e n d e n c i e s : 
- 
- 
- 
- * * W i n d o w s : * * 
- 
- `  a s h 
- 
- i n s t a l l . b a t 
- 
- 
+*Last updated: August 2024*
