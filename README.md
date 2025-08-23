@@ -38,7 +38,8 @@ ask/
 ├── research_question_prompts.py   # Prompt generation and validation for questions
 ├── research_answer_generator.py   # Main answer generation orchestration
 ├── research_answer_prompts.py     # Prompt generation and validation for answers
-├── research_answer_manager.py     # Answer management
+├── research_question_manager.py   # Question retrieval & chaining
+├── research_answer_manager.py     # Answer retrieval & chaining
 ├── research_csv_manager.py        # Core CSV operations and data handling
 ├── research_statistics.py         # Statistics and analytics
 ├── research_backup_manager.py     # Backup and restore operations
@@ -61,6 +62,47 @@ ask/
 ├── ask.env.template               # Config template
 ├── requirements.txt               # Python dependencies
 └── README.md                      # This file
+```
+
+---
+
+## 🔄 **Question & Answer Management System**
+
+### **Symmetrical Architecture**
+
+The system now features **perfect symmetry** between question and answer management:
+
+#### **Question Management (`research_question_manager.py`)**
+- **Question Retrieval**: Get latest questions from log.csv
+- **Theme Filtering**: Find questions by specific themes
+- **Usage Tracking**: Identify unused questions for reuse
+- **Smart Selection**: Intelligent question selection for answer generation
+- **Statistics**: Comprehensive question analytics
+- **Similarity Search**: Find similar questions to avoid duplicates
+
+#### **Answer Management (`research_answer_manager.py`)**
+- **Answer Retrieval**: Get latest answers from log.csv
+- **Theme Filtering**: Find answers by specific themes
+- **Chaining Logic**: Smart answer selection for question generation
+- **Priority System**: Configurable answer selection preferences
+- **Statistics**: Comprehensive answer analytics
+
+#### **Key Features**
+- **Symmetrical APIs**: Consistent function naming and behavior
+- **Configurable Preferences**: Environment-based selection logic
+- **Error Handling**: Robust error recovery and logging
+- **Performance Optimized**: Efficient CSV operations
+- **Theme Consistency**: Unified theme terminology
+
+### **Configuration Options**
+
+```bash
+# Question Management
+QUESTION_PREFER_SAME_THEME=true    # Prefer questions from same theme
+QUESTION_PREFER_UNUSED=true        # Prefer unused questions
+
+# Answer Management  
+ANSWER_PREFER_SAME_CATEGORY=true   # Prefer answers from same theme
 ```
 
 ---
