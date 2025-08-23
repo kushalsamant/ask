@@ -9,26 +9,26 @@ import logging
 # Setup logging
 log = logging.getLogger(__name__)
 
-def create_category_question_prompt(category):
+def create_category_question_prompt(theme):
     """
-    Create a prompt for generating questions for a specific category
+    Create a prompt for generating questions for a specific theme
     
     Args:
-        category (str): Category name
+        theme (str): Theme name
     
     Returns:
         tuple: (prompt, system_prompt)
     """
     system_prompt = "You are an expert architectural research assistant specializing in question generation."
     
-    prompt = f"""You are an expert architectural researcher and educator. Generate 1 thought-provoking question about {category} in architecture.
+    prompt = f"""You are an expert architectural researcher and educator. Generate 1 thought-provoking question about {theme} in architecture.
 
-Context: This question will inspire architectural research and creative thinking. It should challenge conventional wisdom and explore the intersection of {category} with contemporary challenges.
+Context: This question will inspire architectural research and creative thinking. It should challenge conventional wisdom and explore the intersection of {theme} with contemporary challenges.
 
 Requirements:
 - Create an open-ended question that encourages deep thinking and discussion
 - Focus on innovation, sustainability, future trends, and societal impact
-- Address real-world challenges and opportunities in {category}
+- Address real-world challenges and opportunities in {theme}
 - Consider global perspectives and cross-cultural implications
 - Start the question with "How", "What", or "Why"
 - Use clear, professional language
@@ -38,33 +38,33 @@ Requirements:
 Example format:
 How can we design buildings that respond to climate change?
 
-Please generate 1 {category}-specific question that provokes meaningful architectural discourse:"""
+Please generate 1 {theme}-specific question that provokes meaningful architectural discourse:"""
     
     return prompt, system_prompt
 
-def create_answer_based_question_prompt(answer, category):
+def create_answer_based_question_prompt(answer, theme):
     """
     Create a prompt for generating questions based on previous answers
     
     Args:
         answer (str): Previous answer/insight
-        category (str): Category name
+        theme (str): Theme name
     
     Returns:
         tuple: (prompt, system_prompt)
     """
     system_prompt = "You are an expert architectural research assistant specializing in question generation."
     
-    prompt = f"""You are an expert architectural researcher and educator. Based on the following research insight, generate 1 thought-provoking question about {category} in architecture.
+    prompt = f"""You are an expert architectural researcher and educator. Based on the following research insight, generate 1 thought-provoking question about {theme} in architecture.
 
 Research Insight: {answer}
 
-Context: This question should build upon the research insight and explore related aspects of {category}. It should continue the research narrative and encourage further exploration.
+Context: This question should build upon the research insight and explore related aspects of {theme}. It should continue the research narrative and encourage further exploration.
 
 Requirements:
 - Create an open-ended question that builds upon the research insight
 - Focus on innovation, sustainability, future trends, and societal impact
-- Address real-world challenges and opportunities in {category}
+- Address real-world challenges and opportunities in {theme}
 - Consider global perspectives and cross-cultural implications
 - Start the question with "How", "What", or "Why"
 - Use clear, professional language
@@ -74,7 +74,7 @@ Requirements:
 Example format:
 How can we design buildings that respond to climate change?
 
-Please generate 1 {category}-specific question that builds upon the research insight:"""
+Please generate 1 {theme}-specific question that builds upon the research insight:"""
     
     return prompt, system_prompt
 

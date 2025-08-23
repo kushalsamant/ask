@@ -40,33 +40,33 @@ def generate_cross_themes():
     
     # 1. Generate subcategory-specific themes (2,580 themes)
     # Each subcategory becomes a theme
-    for category in main_categories:
-        subcategories = get_subcategories(category)
+    for theme in main_categories:
+        subcategories = get_subcategories(theme)
         for subcategory in subcategories:
-            theme_name = f"{category}_{subcategory}"
-            cross_themes[theme_name] = [category, subcategory]
+            theme_name = f"{theme}_{subcategory}"
+            cross_themes[theme_name] = [theme, subcategory]
     
-    # 2. Generate main category themes (86 themes)
-    # Each main category becomes a theme
-    for category in main_categories:
-        theme_name = f"main_{category}"
-        cross_themes[theme_name] = [category]
+    # 2. Generate main theme themes (86 themes)
+    # Each main theme becomes a theme
+    for theme in main_categories:
+        theme_name = f"main_{theme}"
+        cross_themes[theme_name] = [theme]
     
-    # 3. Generate "all categories" theme (1 theme)
-    # Single theme that includes all categories
+    # 3. Generate "all themes" theme (1 theme)
+    # Single theme that includes all themes
     cross_themes['all_categories'] = main_categories
     
     return cross_themes
 
 def get_theme_categories(theme_name):
     """
-    Get categories for a specific theme
+    Get themes for a specific theme
     
     Args:
         theme_name (str): Theme name
     
     Returns:
-        list: Categories for the theme
+        list: Themes for the theme
     """
     cross_themes = generate_cross_themes()
     return cross_themes.get(theme_name, [])
@@ -93,10 +93,10 @@ def get_subcategory_themes():
 
 def get_main_category_themes():
     """
-    Get all main category-based themes
+    Get all main theme-based themes
     
     Returns:
-        list: Main category theme names
+        list: Main theme theme names
     """
     cross_themes = generate_cross_themes()
     return [theme for theme in cross_themes.keys() if theme.startswith('main_')]
@@ -128,7 +128,7 @@ def select_random_theme(theme_type=None):
         theme_type (str): Type of theme to select ('subcategory', 'main_category', 'all')
     
     Returns:
-        tuple: (theme_name, categories)
+        tuple: (theme_name, themes)
     """
     cross_themes = generate_cross_themes()
     
@@ -145,9 +145,9 @@ def select_random_theme(theme_type=None):
         return None, []
     
     theme_name = random.choice(available_themes)
-    categories = cross_themes[theme_name]
+    themes = cross_themes[theme_name]
     
-    return theme_name, categories
+    return theme_name, themes
 
 def get_context_area():
     """

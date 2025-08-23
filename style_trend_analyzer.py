@@ -19,10 +19,10 @@ class StyleTrendAnalyzer:
     def __init__(self):
         pass
 
-    def analyze_style_trends(self, category, timeframe_days=30):
-        """Analyze style usage trends for a category"""
+    def analyze_style_trends(self, theme, timeframe_days=30):
+        """Analyze style usage trends for a theme"""
         try:
-            style_trends_data = style_data_manager.get_style_trends_data(category)
+            style_trends_data = style_data_manager.get_style_trends_data(theme)
             if not style_trends_data:
                 return {}
 
@@ -45,8 +45,8 @@ class StyleTrendAnalyzer:
             # Calculate trends
             trends = {
                 'most_popular': style_counts.most_common(5),
-                'trending_up': self.identify_trending_styles(category, style_counts),
-                'underutilized': self.identify_underutilized_styles(category, style_counts),
+                'trending_up': self.identify_trending_styles(theme, style_counts),
+                'underutilized': self.identify_underutilized_styles(theme, style_counts),
                 'total_usage': len(recent_styles)
             }
 
@@ -56,7 +56,7 @@ class StyleTrendAnalyzer:
             log.error(f"Error analyzing style trends: {e}")
             return {}
 
-    def identify_trending_styles(self, category, style_counts):
+    def identify_trending_styles(self, theme, style_counts):
         """Identify styles that are trending upward"""
         # Simple trending logic - styles used more than average
         if not style_counts:
@@ -66,26 +66,26 @@ class StyleTrendAnalyzer:
         trending = [style for style, count in style_counts.items() if count > avg_usage * 1.5]
         return trending[:3]
 
-    def identify_underutilized_styles(self, category, style_counts):
+    def identify_underutilized_styles(self, theme, style_counts):
         """Identify styles that are underutilized"""
-        all_styles = set(get_base_styles_for_category(category))
+        all_styles = set(get_base_styles_for_category(theme))
         used_styles = set(style_counts.keys())
         underutilized = all_styles - used_styles
         return list(underutilized)[:5]
 
-    def get_style_report(self, category):
+    def get_style_report(self, theme):
         """Generate comprehensive style analysis report"""
         try:
-            trends = self.analyze_style_trends(category)
+            trends = self.analyze_style_trends(theme)
 
             report = {
-                'category': category,
-                'total_styles': len(get_base_styles_for_category(category)),
+                'theme': theme,
+                'total_styles': len(get_base_styles_for_category(theme)),
                 'recent_usage': trends.get('total_usage', 0),
                 'most_popular': trends.get('most_popular', []),
                 'trending_up': trends.get('trending_up', []),
                 'underutilized': trends.get('underutilized', []),
-                'recommendations': self.generate_style_recommendations(category, trends)
+                'recommendations': self.generate_style_recommendations(theme, trends)
             }
 
             return report
@@ -94,7 +94,7 @@ class StyleTrendAnalyzer:
             log.error(f"Error generating style report: {e}")
             return {}
 
-    def generate_style_recommendations(self, category, trends):
+    def generate_style_recommendations(self, theme, trends):
         """Generate style recommendations based on trends"""
         recommendations = []
 
@@ -113,13 +113,13 @@ class StyleTrendAnalyzer:
 
         return recommendations
 
-    def get_style_usage_statistics(self, category, timeframe_days=30):
+    def get_style_usage_statistics(self, theme, timeframe_days=30):
         """Get detailed style usage statistics"""
         try:
-            trends = self.analyze_style_trends(category, timeframe_days)
+            trends = self.analyze_style_trends(theme, timeframe_days)
             
             stats = {
-                'category': category,
+                'theme': theme,
                 'timeframe_days': timeframe_days,
                 'total_usage': trends.get('total_usage', 0),
                 'unique_styles_used': len(set([style for style, _ in trends.get('most_popular', [])])),
@@ -135,14 +135,14 @@ class StyleTrendAnalyzer:
             log.error(f"Error getting style usage statistics: {e}")
             return {}
 
-    def compare_categories_trends(self, categories, timeframe_days=30):
-        """Compare style trends across multiple categories"""
+    def compare_categories_trends(self, themes, timeframe_days=30):
+        """Compare style trends across multiple themes"""
         try:
             comparison = {}
             
-            for category in categories:
-                trends = self.analyze_style_trends(category, timeframe_days)
-                comparison[category] = {
+            for theme in themes:
+                trends = self.analyze_style_trends(theme, timeframe_days)
+                comparison[theme] = {
                     'total_usage': trends.get('total_usage', 0),
                     'most_popular': trends.get('most_popular', []),
                     'trending_up': trends.get('trending_up', []),
@@ -152,25 +152,25 @@ class StyleTrendAnalyzer:
             return comparison
 
         except Exception as e:
-            log.error(f"Error comparing categories trends: {e}")
+            log.error(f"Error comparing themes trends: {e}")
             return {}
 
 # Global instance
 style_trend_analyzer = StyleTrendAnalyzer()
 
 # Convenience functions
-def analyze_style_trends(category, timeframe_days=30):
-    """Analyze style trends for a category"""
-    return style_trend_analyzer.analyze_style_trends(category, timeframe_days)
+def analyze_style_trends(theme, timeframe_days=30):
+    """Analyze style trends for a theme"""
+    return style_trend_analyzer.analyze_style_trends(theme, timeframe_days)
 
-def get_style_report(category):
+def get_style_report(theme):
     """Get comprehensive style report"""
-    return style_trend_analyzer.get_style_report(category)
+    return style_trend_analyzer.get_style_report(theme)
 
-def get_style_usage_statistics(category, timeframe_days=30):
+def get_style_usage_statistics(theme, timeframe_days=30):
     """Get detailed style usage statistics"""
-    return style_trend_analyzer.get_style_usage_statistics(category, timeframe_days)
+    return style_trend_analyzer.get_style_usage_statistics(theme, timeframe_days)
 
-def compare_categories_trends(categories, timeframe_days=30):
-    """Compare style trends across multiple categories"""
-    return style_trend_analyzer.compare_categories_trends(categories, timeframe_days)
+def compare_categories_trends(themes, timeframe_days=30):
+    """Compare style trends across multiple themes"""
+    return style_trend_analyzer.compare_categories_trends(themes, timeframe_days)

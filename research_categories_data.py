@@ -1,45 +1,45 @@
 #!/usr/bin/env python3
 """
-Research Categories Data Module
-Handles category and subcategory data structures
+Research Themes Data Module
+Handles theme and subcategory data structures
 """
 
-# All 86 main categories
+# All 86 main themes
 MAIN_CATEGORIES = [
-    # 7 core categories
+    # 7 core themes
     'architecture', 'construction', 'design', 'engineering', 'interiors', 'planning', 'urbanism',
     
-    # 18 specialized categories
+    # 18 specialized themes
     'landscape_architecture', 'structural_engineering', 'mechanical_engineering', 'electrical_engineering',
     'civil_engineering', 'environmental_engineering', 'transportation_engineering', 'geotechnical_engineering',
     'acoustical_engineering', 'lighting_design', 'furniture_design', 'product_design', 'graphic_design',
     'web_design', 'industrial_design', 'fashion_design', 'exhibition_design', 'stage_design', 'set_design',
     
-    # 18 emerging categories
+    # 18 emerging themes
     'digital_architecture', 'computational_design', 'parametric_design', 'generative_design',
     'biomimetic_design', 'smart_cities', 'sustainable_design', 'circular_design', 'regenerative_design',
     'biophilic_design', 'wellness_design', 'universal_design', 'inclusive_design', 'accessible_design',
     'resilient_design', 'adaptive_design', 'responsive_design', 'interactive_design', 'immersive_design',
     
-    # 13 business categories
+    # 13 business themes
     'marketing', 'branding', 'business_development', 'project_management', 'construction_management',
     'facility_management', 'real_estate_development', 'property_management', 'asset_management',
     'investment_analysis', 'market_research', 'client_relations', 'stakeholder_engagement',
     
-    # 16 technology categories
+    # 16 technology themes
     'bim_management', 'digital_twin', 'virtual_reality', 'augmented_reality', 'mixed_reality',
     'artificial_intelligence', 'machine_learning', 'data_analytics', 'iot_integration', 'smart_buildings',
     'automation', 'robotics', '3d_printing', 'prefabrication', 'modular_construction', 'offsite_construction',
     
-    # 14 research categories
+    # 14 research themes
     'architectural_research', 'design_research', 'material_science', 'building_physics', 'energy_modeling',
     'sustainability_research', 'urban_research', 'social_research', 'behavioral_research', 'post_occupancy_evaluation',
     'life_cycle_assessment', 'carbon_analysis', 'climate_research', 'resilience_research'
 ]
 
-# 30 subcategories for each of the 86 main categories (2,580 total subcategories)
+# 30 subcategories for each of the 86 main themes (2,580 total subcategories)
 SUBCATEGORIES = {
-    # Core Categories (7)
+    # Core Themes (7)
     'architecture': [
         'residential', 'commercial', 'institutional', 'industrial', 'cultural', 'religious', 'educational',
         'healthcare', 'hospitality', 'retail', 'office', 'mixed_use', 'temporary', 'adaptive_reuse',
@@ -96,9 +96,9 @@ SUBCATEGORIES = {
     ]
 }
 
-# Category relationship matrix (which categories work well together)
+# Theme relationship matrix (which themes work well together)
 CATEGORY_RELATIONSHIPS = {
-    # Core Architectural Categories (7)
+    # Core Architectural Themes (7)
     'architecture': ['construction', 'design', 'engineering', 'interiors', 'planning', 'urbanism', 'landscape_architecture', 'structural_engineering', 'digital_architecture', 'sustainability', 'materials', 'project_management'],
     'construction': ['architecture', 'engineering', 'structural_engineering', 'materials', 'project_management', 'bim_management', 'safety', 'quality_control', 'cost_management', 'sustainability', 'prefabrication', 'modular_construction'],
     'design': ['architecture', 'interiors', 'landscape_architecture', 'urbanism', 'visual_arts', 'graphic_design', 'industrial_design', 'furniture_design', 'lighting_design', 'acoustics', 'ergonomics', 'user_experience'],
@@ -109,33 +109,33 @@ CATEGORY_RELATIONSHIPS = {
 }
 
 def get_main_categories():
-    """Get all main categories"""
+    """Get all main themes"""
     return MAIN_CATEGORIES.copy()
 
-def get_subcategories(category=None):
-    """Get subcategories for a category or all subcategories"""
-    if category:
-        return SUBCATEGORIES.get(category, [])
+def get_subcategories(theme=None):
+    """Get subcategories for a theme or all subcategories"""
+    if theme:
+        return SUBCATEGORIES.get(theme, [])
     return SUBCATEGORIES.copy()
 
-def get_category_relationships(category=None):
-    """Get relationships for a category or all relationships"""
-    if category:
-        return CATEGORY_RELATIONSHIPS.get(category, [])
+def get_category_relationships(theme=None):
+    """Get relationships for a theme or all relationships"""
+    if theme:
+        return CATEGORY_RELATIONSHIPS.get(theme, [])
     return CATEGORY_RELATIONSHIPS.copy()
 
-def get_related_categories(category, max_related=12):
-    """Get related categories for a given category"""
-    relationships = get_category_relationships(category)
+def get_related_categories(theme, max_related=12):
+    """Get related themes for a given theme"""
+    relationships = get_category_relationships(theme)
     if not relationships:
         return []
     
-    # Return up to max_related categories
+    # Return up to max_related themes
     return relationships[:max_related]
 
 def get_all_categories_with_subcategories():
-    """Get all categories with their subcategories"""
+    """Get all themes with their subcategories"""
     result = {}
-    for category in MAIN_CATEGORIES:
-        result[category] = get_subcategories(category)
+    for theme in MAIN_CATEGORIES:
+        result[theme] = get_subcategories(theme)
     return result

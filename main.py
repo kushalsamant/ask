@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-ASK: Daily Research - Unified Pipeline
-Enhanced main pipeline with all modes and features from simple_pipeline.py
-"""
-
 import os
 import time
 import logging
@@ -12,18 +6,28 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List
 from dotenv import load_dotenv
-
-# Import focused orchestrators
 from research_orchestrator import ResearchOrchestrator
 from image_generation_system import ImageGenerationSystem
 from volume_manager import get_next_volume_number, log_volume_info, get_current_volume_info
-
-# Import simple pipeline components
 from research_question_generator import generate_single_question_for_category
 from research_answer_generator import generate_answer
 from image_create_ai import generate_image_with_retry
 from image_add_text import add_text_overlay
 from research_csv_manager import log_single_question
+import sys
+            from research_csv_manager import mark_questions_as_used
+        from research_backup_manager import create_backup
+        from research_csv_manager import export_questions_to_csv
+#!/usr/bin/env python3
+"""
+ASK: Daily Research - Unified Pipeline
+Enhanced main pipeline with all modes and features from simple_pipeline.py
+"""
+
+
+# Import focused orchestrators
+
+# Import simple pipeline components
 
 # Load environment variables from ask.env file
 load_dotenv('ask.env')
@@ -50,19 +54,18 @@ TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY')
 RATE_LIMIT_DELAY = float(os.getenv('RATE_LIMIT_DELAY', '10.0'))
 
 # Validate API key (only if not showing help)
-import sys
 if len(sys.argv) <= 1 or sys.argv[1].lower() != 'help':
-    if not TOGETHER_API_KEY:
-        log.error("ERROR: TOGETHER_API_KEY environment variable is not set!")
-        console_logger.error("ERROR: TOGETHER_API_KEY environment variable is not set!")
-        exit(1)
+if not TOGETHER_API_KEY:
+    log.error("ERROR: TOGETHER_API_KEY environment variable is not set!")
+    console_logger.error("ERROR: TOGETHER_API_KEY environment variable is not set!")
+    exit(1)
 
-    if not TOGETHER_API_KEY.startswith('tgp_'):
-        log.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
-        console_logger.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
+if not TOGETHER_API_KEY.startswith('tgp_'):
+    log.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
+    console_logger.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
 
-    log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
-    console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
 
 class SimplePipeline:
     """Simple 12-step pipeline for Q&A image generation"""
@@ -106,7 +109,7 @@ class SimplePipeline:
         
         # Use the proper CSV manager function
         success = log_single_question(
-            category=theme,
+            theme=theme,
             question=question,
             image_filename='',  # Will be updated later
             style=None,
@@ -127,7 +130,7 @@ class SimplePipeline:
         
         image_path, _ = generate_image_with_retry(
             prompt=question,
-            category=theme,
+            theme=theme,
             image_number=self.image_counter,
             image_type="q"
         )
@@ -147,7 +150,7 @@ class SimplePipeline:
         final_image_path = add_text_overlay(
             image_path=image_path,
             text=question,
-            category=theme,
+            theme=theme,
             image_number=self.image_counter,
             image_type="q"
         )
@@ -180,7 +183,7 @@ class SimplePipeline:
         
         # Use the proper CSV manager function
         success = log_single_question(
-            category=category,
+            theme=theme,
             question='',  # Question was already logged in step 3
             answer=answer,
             image_filename='',  # Will be updated later
@@ -198,7 +201,6 @@ class SimplePipeline:
     def step_8b_mark_question_as_used(self, question: str, theme: str) -> None:
         """Step 8b: Mark question as used to prevent duplicates"""
         try:
-            from research_csv_manager import mark_questions_as_used
             
             # Create a dictionary to mark this question as used
             questions_dict = {theme: question}
@@ -222,7 +224,7 @@ class SimplePipeline:
         
         image_path, _ = generate_image_with_retry(
             prompt=answer,
-            category=theme,
+            theme=theme,
             image_number=self.image_counter,
             image_type="a"
         )
@@ -242,7 +244,7 @@ class SimplePipeline:
         final_image_path = add_text_overlay(
             image_path=image_path,
             text=answer,
-            category=theme,
+            theme=theme,
             image_number=self.image_counter,
             image_type="a"
         )
@@ -317,7 +319,7 @@ class SimplePipeline:
             console_logger.info(f"📚 Volume {current_volume}: {qa_pairs_in_volume} Q&A pairs, {total_qa_pairs} total")
             
             return {
-                'category': theme,
+                'theme': theme,
                 'question': question,
                 'answer': answer,
                 'question_image': final_question_image,
@@ -358,11 +360,11 @@ def generate_enhanced_statistics(qa_pairs):
         
         # Basic statistics
         total_qa_pairs = len(qa_pairs)
-        categories_used = list(set([qa.get('category', 'Unknown') for qa in qa_pairs]))
+        categories_used = list(set([qa.get('theme', 'Unknown') for qa in qa_pairs]))
         
         console_logger.info(f"✅ Total Q&A pairs generated: {total_qa_pairs}")
-        console_logger.info(f"✅ Categories used: {len(categories_used)}")
-        console_logger.info(f"✅ Categories: {', '.join(categories_used)}")
+        console_logger.info(f"✅ Themes used: {len(categories_used)}")
+        console_logger.info(f"✅ Themes: {', '.join(categories_used)}")
         
         # Get current volume info
         current_volume, qa_pairs_in_volume, total_qa_pairs_db = get_current_volume_info()
@@ -384,9 +386,9 @@ def generate_enhanced_statistics(qa_pairs):
                 console_logger.info(f"✅ Used questions: {used_questions}")
                 
                 if questions_by_category:
-                    console_logger.info(f"✅ Questions by category:")
-                    for category, count in questions_by_category.items():
-                        console_logger.info(f"   • {category}: {count}")
+                    console_logger.info(f"✅ Questions by theme:")
+                    for theme, count in questions_by_category.items():
+                        console_logger.info(f"   • {theme}: {count}")
                 
         except Exception as e:
             log.debug(f"Could not load research statistics: {e}")
@@ -428,21 +430,21 @@ def generate_cover_images_if_enabled(qa_pairs):
         except Exception as e:
             console_logger.warning(f"⚠️  Could not create volume cover: {e}")
         
-        # Generate category covers
-        categories = list(set([qa.get('category', 'Unknown') for qa in qa_pairs]))
-        console_logger.info(f"📂 Creating category covers for {len(categories)} categories...")
+        # Generate theme covers
+        themes = list(set([qa.get('theme', 'Unknown') for qa in qa_pairs]))
+        console_logger.info(f"📂 Creating theme covers for {len(themes)} themes...")
         
-        for category in categories:
+        for theme in themes:
             try:
                 category_cover = image_system.create_cover_image(
-                    title=f"ASK: {category.replace('_', ' ').title()}",
+                    title=f"ASK: {theme.replace('_', ' ').title()}",
                     subtitle="Research Collection",
-                    category=category
+                    theme=theme
                 )
                 if category_cover:
-                    console_logger.info(f"✅ Category cover created for {category}: {os.path.basename(category_cover)}")
+                    console_logger.info(f"✅ Theme cover created for {theme}: {os.path.basename(category_cover)}")
             except Exception as e:
-                console_logger.warning(f"⚠️  Could not create category cover for {category}: {e}")
+                console_logger.warning(f"⚠️  Could not create theme cover for {theme}: {e}")
         
         console_logger.info(f"✅ Cover image generation completed")
         
@@ -461,7 +463,6 @@ def create_backup_if_enabled():
         console_logger.info(f"\n💾 CREATING BACKUP")
         console_logger.info(f"=" * 40)
         
-        from research_backup_manager import create_backup
         
         backup_file = create_backup()
         if backup_file:
@@ -484,7 +485,6 @@ def export_data_if_enabled(qa_pairs):
         console_logger.info(f"\n📤 EXPORTING DATA")
         console_logger.info(f"=" * 40)
         
-        from research_csv_manager import export_questions_to_csv
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         export_file = f"research_export_{timestamp}.csv"
@@ -641,7 +641,7 @@ def run_chained_mode():
         
         # Get configuration
         chain_length = int(os.getenv('CHAIN_LENGTH', '5'))
-        themes_to_generate = os.getenv('THEMES_TO_GENERATE', '').split(',') if os.getenv('THEMES_TO_GENERATE') else []
+        themes_to_generate = os.getenv('CATEGORIES_TO_GENERATE', '').split(',') if os.getenv('CATEGORIES_TO_GENERATE') else []
         
         # If no specific themes, use default themes from environment
         if not themes_to_generate or themes_to_generate == ['']:
@@ -709,24 +709,23 @@ def show_help():
 def main():
     """Main execution function - Enhanced with all modes"""
     try:
-        # Check command line arguments for different modes
-        import sys
+    # Check command line arguments for different modes
+    
+    if len(sys.argv) > 1:
+        mode = sys.argv[1].lower()
         
-        if len(sys.argv) > 1:
-            mode = sys.argv[1].lower()
-            
             if mode == "hybrid":
                 run_hybrid_mode()
             elif mode == "cross-disciplinary":
                 run_cross_disciplinary_mode()
-            elif mode == "chained":
+        elif mode == "chained":
                 run_chained_mode()
-            elif mode == "help":
-                show_help()
-            else:
-                console_logger.error(f"Unknown mode: {mode}")
+        elif mode == "help":
                 show_help()
         else:
+            console_logger.error(f"Unknown mode: {mode}")
+                show_help()
+    else:
             # Default mode: simple 12-step pipeline
             run_simple_mode()
         
@@ -735,4 +734,4 @@ def main():
         raise
 
 if __name__ == "__main__":
-    main()
+        main()

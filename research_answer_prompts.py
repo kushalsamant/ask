@@ -9,13 +9,13 @@ import logging
 # Setup logging
 log = logging.getLogger(__name__)
 
-def create_architectural_analysis_prompt(question, category):
+def create_architectural_analysis_prompt(question, theme):
     """
     Create a prompt for generating architectural analysis answers
     
     Args:
         question (str): The question to analyze
-        category (str): Category name
+        theme (str): Theme name
     
     Returns:
         tuple: (prompt, system_prompt)
@@ -24,13 +24,13 @@ def create_architectural_analysis_prompt(question, category):
     Provide insightful, academic analysis focusing on architectural principles, design theory, and practical implications."""
     
     prompt = f"""Question: {question}
-    category: {category}
+    theme: {theme}
 
     Analyze this architectural question and provide a comprehensive, academic response in approximately 200-250 words.
     Consider:
     - Key architectural principles and theories involved
     - Contemporary relevance and future implications
-    - Connection to {category} specifically
+    - Connection to {theme} specifically
     - Practical and theoretical considerations
     - Historical context and evolution
     - Cross-disciplinary implications
@@ -40,13 +40,13 @@ def create_architectural_analysis_prompt(question, category):
     
     return prompt, system_prompt
 
-def create_image_based_analysis_prompt(question, category, image_path):
+def create_image_based_analysis_prompt(question, theme, image_path):
     """
     Create a prompt for generating image-based architectural analysis
     
     Args:
         question (str): The question to analyze
-        category (str): Category name
+        theme (str): Theme name
         image_path (str): Path to the image
     
     Returns:
@@ -56,14 +56,14 @@ def create_image_based_analysis_prompt(question, category, image_path):
     Provide insightful, academic analysis focusing on architectural principles, design theory, and practical implications."""
     
     prompt = f"""Question: {question}
-    category: {category}
+    theme: {theme}
     image: {image_path}
 
     Analyze this architectural question in relation to the provided image and provide a comprehensive, academic response in approximately 200-250 words.
     Consider:
     - Key architectural principles and theories demonstrated in the image
     - Contemporary relevance and future implications
-    - Connection to {category} specifically
+    - Connection to {theme} specifically
     - Practical and theoretical considerations
     - Historical context and evolution
     - Cross-disciplinary implications

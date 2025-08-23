@@ -29,40 +29,40 @@ class ImageGenerationConfig:
     # Image Generation Features (converted from PDF Generation)
     CREATE_INDIVIDUAL_IMAGES: bool = True
     CREATE_FINAL_COMPILATION: bool = True
-    CREATE_AUTOMATIC_CATEGORY_COMPILATIONS: bool = False
+    CREATE_AUTOMATIC_THEME_COMPILATIONS: bool = False
     CREATE_COVER_IMAGE: bool = True
     CREATE_TABLE_OF_CONTENTS: bool = True
     CREATE_SEQUENTIAL_TOC: bool = True
-    CREATE_CATEGORY_TOC: bool = True
+    CREATE_THEME_TOC: bool = True
     PRESERVE_TEMP_FILES: bool = True
     TOC_SHOW_FULL_QUESTIONS: bool = True
     TOC_BACKGROUND_PROMPT: bool = True
     
     # Table of Contents Features (converted from PDF TOC)
-    TOC_CATEGORY_GROUPING: bool = True
+    TOC_THEME_GROUPING: bool = True
     TOC_GROUP_UNKNOWN_CATEGORIES: bool = True
-    TOC_SORT_CATEGORIES_ALPHABETICALLY: bool = True
-    TOC_UNKNOWN_CATEGORY_NAME: str = "Uncategorized"
+    TOC_SORT_THEMES_ALPHABETICALLY: bool = True
+    TOC_UNKNOWN_THEME_NAME: str = "Uncategorized"
     TOC_IMAGE_NUMBER_SPACE: int = 50
     
     # TOC Templates (converted from PDF TOC templates)
     TOC_MAIN_TITLE_TEMPLATE: str = "ASK: Daily Architectural Research - Volume {volume_number}"
     TOC_SEQUENTIAL_SUBTITLE: str = "Sequential Table of Contents"
-    TOC_CATEGORY_SUBTITLE: str = "Category Index"
+    TOC_THEME_SUBTITLE: str = "Theme Index"
     TOC_SEQUENTIAL_SECTION_TITLE: str = "Sequential Order"
-    TOC_CATEGORY_INFO_TEMPLATE: str = "{count} Q&A Pairs • Sequential Order"
+    TOC_THEME_INFO_TEMPLATE: str = "{count} Q&A Pairs • Sequential Order"
     TOC_TOTAL_COUNT_TEMPLATE: str = "Total Q&A Pairs: {count}"
-    TOC_CATEGORY_OVERVIEW_TEMPLATE: str = "Category Overview and Research Insights"
+    TOC_THEME_OVERVIEW_TEMPLATE: str = "Theme Overview and Research Insights"
     TOC_RESEARCH_INSIGHTS_TEMPLATE: str = "Research Insights: {insights}..."
     TOC_DATE_TEMPLATE: str = "Generated: {date}"
     TOC_TITLE_TEMPLATE: str = "Table of Contents"
     TOC_SUBTITLE_TEMPLATE: str = "ASK: Daily Architectural Research - Volume {volume_number}"
     TOC_IMAGE_NUMBER_TEMPLATE: str = "{image_number}"
-    TOC_SUMMARY_TEMPLATE: str = "Total Q&A Pairs: {qa_count} | Categories: {category_count}"
+    TOC_SUMMARY_TEMPLATE: str = "Total Q&A Pairs: {qa_count} | Themes: {category_count}"
     
     # Individual Image Settings (converted from PDF Individual)
-    INDIVIDUAL_FILENAME_TEMPLATE: str = "ASK_{image_number}_{category}.jpg"
-    INDIVIDUAL_FALLBACK_TEMPLATE: str = "ASK_QA_{category}.jpg"
+    INDIVIDUAL_FILENAME_TEMPLATE: str = "ASK_{image_number}_{theme}.jpg"
+    INDIVIDUAL_FALLBACK_TEMPLATE: str = "ASK_QA_{theme}.jpg"
     FOOTER_BRAND_TEXT: str = "ASK: Daily Architectural Research"
     FOOTER_IMAGE_NUMBER_TEMPLATE: str = "ASK-{image_number}"
     
@@ -76,7 +76,7 @@ class ImageGenerationConfig:
     FOOTER_HEIGHT: int = 80
     FOOTER_BRAND_X: int = 40
     FOOTER_BRAND_Y_OFFSET: int = 20
-    FOOTER_CATEGORY_Y_OFFSET: int = 20
+    FOOTER_THEME_Y_OFFSET: int = 20
     FOOTER_IMAGE_X_OFFSET: int = 40
     FOOTER_IMAGE_Y_OFFSET: int = 20
     
@@ -87,7 +87,7 @@ class ImageGenerationConfig:
     FONT_SIZE_TITLE: int = 36
     FONT_SIZE_SUBTITLE: int = 18
     FONT_SIZE_SECTION: int = 16
-    FONT_SIZE_CATEGORY_HEADER: int = 20
+    FONT_SIZE_THEME_HEADER: int = 20
     FONT_SIZE_ENTRY: int = 14
     FONT_SIZE_QUESTION: int = 12
     FONT_SIZE_DETAIL: int = 10
@@ -101,7 +101,7 @@ class ImageGenerationConfig:
     COLOR_PRIMARY: str = "#000000"
     COLOR_SECONDARY: str = "#2C3E50"
     COLOR_ACCENT: str = "#E74C3C"
-    COLOR_CATEGORY_HEADER: str = "#8E44AD"
+    COLOR_THEME_HEADER: str = "#8E44AD"
     COLOR_MUTED: str = "#7F8C8D"
     COLOR_BRAND: str = "#34495E"
     TEXT_COLOR: str = "#F0F0F0"
@@ -205,7 +205,7 @@ class ImageGenerationConfig:
     # TOC Content Settings
     TOC_MAX_QUESTIONS_PER_CATEGORY: int = 5
     TOC_QUESTION_PREVIEW_LENGTH: int = 50
-    TOC_SHOW_CATEGORY_COUNTS: bool = True
+    TOC_SHOW_THEME_COUNTS: bool = True
     TOC_SHOW_GENERATION_DATE: bool = True
     
     # Compilation Settings
@@ -362,16 +362,16 @@ class ImageGenerationSystem:
             return ""
             
         question = qa_pair.get('question', '')
-        category = qa_pair.get('category', 'unknown')
+        theme = qa_pair.get('theme', 'unknown')
         
         # Generate base image
-        image_path = f"{self.output_dir}/temp/ASK-{image_number:02d}-{category}-q.jpg"
+        image_path = f"{self.output_dir}/temp/ASK-{image_number:02d}-{theme}-q.jpg"
         
         try:
             # Generate AI image
             generated_path, _ = generate_image_with_retry(
                 prompt=question,
-                category=category,
+                theme=theme,
                 image_number=image_number,
                 image_type="q"
             )
@@ -386,7 +386,7 @@ class ImageGenerationSystem:
         except Exception as e:
             self._handle_error(e, "question image creation", f"Image {image_number}")
             if self.config.ERROR_CREATE_PLACEHOLDER:
-                return self._create_placeholder_image(image_number, category, "q")
+                return self._create_placeholder_image(image_number, theme, "q")
             raise
     
     def _create_answer_image(self, qa_pair: Dict, image_number: int) -> str:
@@ -395,16 +395,16 @@ class ImageGenerationSystem:
             return ""
             
         answer = qa_pair.get('answer', '')
-        category = qa_pair.get('category', 'unknown')
+        theme = qa_pair.get('theme', 'unknown')
         
         # Generate base image
-        image_path = f"{self.output_dir}/temp/ASK-{image_number:02d}-{category}-a.jpg"
+        image_path = f"{self.output_dir}/temp/ASK-{image_number:02d}-{theme}-a.jpg"
         
         try:
             # Generate AI image
             generated_path, _ = generate_image_with_retry(
                 prompt=answer,
-                category=category,
+                theme=theme,
                 image_number=image_number,
                 image_type="a"
             )
@@ -419,12 +419,12 @@ class ImageGenerationSystem:
         except Exception as e:
             self._handle_error(e, "answer image creation", f"Image {image_number}")
             if self.config.ERROR_CREATE_PLACEHOLDER:
-                return self._create_placeholder_image(image_number, category, "a")
+                return self._create_placeholder_image(image_number, theme, "a")
             raise
     
-    def _create_placeholder_image(self, image_number: int, category: str, image_type: str) -> str:
+    def _create_placeholder_image(self, image_number: int, theme: str, image_type: str) -> str:
         """Create placeholder image when generation fails"""
-        placeholder_path = f"{self.output_dir}/temp/ASK-{image_number:02d}-{category}-{image_type}-placeholder.jpg"
+        placeholder_path = f"{self.output_dir}/temp/ASK-{image_number:02d}-{theme}-{image_type}-placeholder.jpg"
         
         # Create a simple placeholder image
         try:
@@ -435,7 +435,7 @@ class ImageGenerationSystem:
             draw = ImageDraw.Draw(img)
             
             # Add placeholder text
-            text = f"Image {image_number}\n{category.title()}\n{image_type.upper()}\n\nContent Unavailable"
+            text = f"Image {image_number}\n{theme.title()}\n{image_type.upper()}\n\nContent Unavailable"
             draw.text((536, 896), text, fill='#666666', anchor='mm')
             
             img.save(placeholder_path)
@@ -467,39 +467,39 @@ class ImageGenerationSystem:
             return ""
     
     def create_automatic_category_compilations(self, qa_pairs: List[Dict]) -> List[str]:
-        """Create automatic category compilations"""
-        if not self.config.CREATE_AUTOMATIC_CATEGORY_COMPILATIONS:
+        """Create automatic theme compilations"""
+        if not self.config.CREATE_AUTOMATIC_THEME_COMPILATIONS:
             return []
             
-        self._log_progress("Creating category compilations", "📂", 3)
+        self._log_progress("Creating theme compilations", "📂", 3)
         start_time = time.time()
         
-        # Group Q&A pairs by category
-        categories = {}
+        # Group Q&A pairs by theme
+        themes = {}
         for qa_pair in qa_pairs:
-            category = qa_pair.get('category', 'unknown')
-            if category not in categories:
-                categories[category] = []
-            categories[category].append(qa_pair)
+            theme = qa_pair.get('theme', 'unknown')
+            if theme not in themes:
+                themes[theme] = []
+            themes[theme].append(qa_pair)
         
         compilation_paths = []
-        for category, category_qa_pairs in categories.items():
+        for theme, category_qa_pairs in themes.items():
             try:
-                if self.config.TOC_CATEGORY_GROUPING:
-                    self._log_progress(f"Creating compilation for {category}", "📁")
+                if self.config.TOC_THEME_GROUPING:
+                    self._log_progress(f"Creating compilation for {theme}", "📁")
                     
-                    compilation_path = create_category_cover(category, category_qa_pairs, f"{self.output_dir}/compilations")
+                    compilation_path = create_category_cover(theme, category_qa_pairs, f"{self.output_dir}/compilations")
                     compilation_paths.append(compilation_path)
                     
                     if self.config.LOG_SUCCESS_MESSAGES:
-                        log.info(f"✅ Category compilation created for {category}")
+                        log.info(f"✅ Theme compilation created for {theme}")
                         
             except Exception as e:
-                self._handle_error(e, "category compilation creation", category)
+                self._handle_error(e, "theme compilation creation", theme)
                 if not self.config.ERROR_CONTINUE_ON_FAILURE:
                     break
         
-        self._log_timing("Category compilations creation", start_time)
+        self._log_timing("Theme compilations creation", start_time)
         return compilation_paths
     
     def create_cover_image(self, volume_number: int, qa_pairs: List[Dict]) -> str:
@@ -560,7 +560,7 @@ class ImageGenerationSystem:
             
             generated_path, _ = generate_image_with_retry(
                 prompt=prompt,
-                category="toc",
+                theme="toc",
                 image_number=0,
                 image_type="toc"
             )
@@ -581,21 +581,21 @@ class ImageGenerationSystem:
         toc_lines.append("Table of Contents")
         toc_lines.append("")
         
-        # Group by category if enabled
-        if self.config.TOC_CATEGORY_GROUPING:
-            categories = {}
+        # Group by theme if enabled
+        if self.config.TOC_THEME_GROUPING:
+            themes = {}
             for qa_pair in qa_pairs:
-                category = qa_pair.get('category', 'unknown')
-                if category not in categories:
-                    categories[category] = []
-                categories[category].append(qa_pair)
+                theme = qa_pair.get('theme', 'unknown')
+                if theme not in themes:
+                    themes[theme] = []
+                themes[theme].append(qa_pair)
             
-            # Sort categories if enabled
-            if self.config.TOC_SORT_CATEGORIES_ALPHABETICALLY:
-                categories = dict(sorted(categories.items()))
+            # Sort themes if enabled
+            if self.config.TOC_SORT_THEMES_ALPHABETICALLY:
+                themes = dict(sorted(themes.items()))
             
-            for category, category_qa_pairs in categories.items():
-                toc_lines.append(f"📂 {category.replace('_', ' ').title()}")
+            for theme, category_qa_pairs in themes.items():
+                toc_lines.append(f"📂 {theme.replace('_', ' ').title()}")
                 toc_lines.append(f"   {len(category_qa_pairs)} Q&A pairs")
                 
                 for i, qa_pair in enumerate(category_qa_pairs[:5]):  # Show first 5
@@ -612,13 +612,13 @@ class ImageGenerationSystem:
             # Sequential listing
             for i, qa_pair in enumerate(qa_pairs):
                 question = qa_pair.get('question', '')
-                category = qa_pair.get('category', 'unknown')
+                theme = qa_pair.get('theme', 'unknown')
                 
                 if self.config.TOC_SHOW_FULL_QUESTIONS:
                     toc_lines.append(f"{i+1:02d}. {question}")
                 else:
                     toc_lines.append(f"{i+1:02d}. {question[:50]}...")
-                toc_lines.append(f"    Category: {category}")
+                toc_lines.append(f"    Theme: {theme}")
                 toc_lines.append("")
         
         toc_lines.append(f"Total Q&A Pairs: {len(qa_pairs)}")
@@ -640,20 +640,20 @@ class ImageGenerationSystem:
             
             for i, qa_pair in enumerate(qa_pairs):
                 question = qa_pair.get('question', '')
-                category = qa_pair.get('category', 'unknown')
+                theme = qa_pair.get('theme', 'unknown')
                 
                 if self.config.TOC_SHOW_FULL_QUESTIONS:
                     toc_content += f"{i+1:02d}. {question}\n"
                 else:
                     toc_content += f"{i+1:02d}. {question[:50]}...\n"
-                toc_content += f"    Category: {category}\n\n"
+                toc_content += f"    Theme: {theme}\n\n"
             
             # Generate sequential TOC image
             toc_path = f"{self.output_dir}/toc/ASK-Sequential-TOC-{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
             
             generated_path, _ = generate_image_with_retry(
                 prompt="Sequential table of contents with numbered list",
-                category="toc",
+                theme="toc",
                 image_number=0,
                 image_type="sequential_toc"
             )
@@ -671,31 +671,31 @@ class ImageGenerationSystem:
             return ""
     
     def create_category_toc(self, qa_pairs: List[Dict]) -> str:
-        """Create category table of contents"""
-        if not self.config.CREATE_CATEGORY_TOC:
+        """Create theme table of contents"""
+        if not self.config.CREATE_THEME_TOC:
             return ""
             
-        self._log_progress("Creating category TOC", "📂", 7)
+        self._log_progress("Creating theme TOC", "📂", 7)
         start_time = time.time()
         
         try:
-            # Group by category
-            categories = {}
+            # Group by theme
+            themes = {}
             for qa_pair in qa_pairs:
-                category = qa_pair.get('category', 'unknown')
-                if category not in categories:
-                    categories[category] = []
-                categories[category].append(qa_pair)
+                theme = qa_pair.get('theme', 'unknown')
+                if theme not in themes:
+                    themes[theme] = []
+                themes[theme].append(qa_pair)
             
-            # Sort categories if enabled
-            if self.config.TOC_SORT_CATEGORIES_ALPHABETICALLY:
-                categories = dict(sorted(categories.items()))
+            # Sort themes if enabled
+            if self.config.TOC_SORT_THEMES_ALPHABETICALLY:
+                themes = dict(sorted(themes.items()))
             
-            # Create category TOC content
+            # Create theme TOC content
             toc_content = "ASK: Daily Architectural Research\nCategory Table of Contents\n\n"
             
-            for category, category_qa_pairs in categories.items():
-                toc_content += f"📂 {category.replace('_', ' ').title()}\n"
+            for theme, category_qa_pairs in themes.items():
+                toc_content += f"📂 {theme.replace('_', ' ').title()}\n"
                 toc_content += f"   {len(category_qa_pairs)} Q&A pairs\n\n"
                 
                 for i, qa_pair in enumerate(category_qa_pairs):
@@ -706,12 +706,12 @@ class ImageGenerationSystem:
                         toc_content += f"   {i+1}. {question[:50]}...\n"
                 toc_content += "\n"
             
-            # Generate category TOC image
-            toc_path = f"{self.output_dir}/toc/ASK-Category-TOC-{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+            # Generate theme TOC image
+            toc_path = f"{self.output_dir}/toc/ASK-Theme-TOC-{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
             
             generated_path, _ = generate_image_with_retry(
-                prompt="Category table of contents with grouped sections",
-                category="toc",
+                prompt="Theme table of contents with grouped sections",
+                theme="toc",
                 image_number=0,
                 image_type="category_toc"
             )
@@ -719,13 +719,13 @@ class ImageGenerationSystem:
             final_path = add_text_overlay(generated_path, toc_content, 0, is_question=True)
             
             if self.config.LOG_SUCCESS_MESSAGES:
-                log.info(f"✅ Category TOC created: {final_path}")
+                log.info(f"✅ Theme TOC created: {final_path}")
             
-            self._log_timing("Category TOC creation", start_time)
+            self._log_timing("Theme TOC creation", start_time)
             return final_path
             
         except Exception as e:
-            self._handle_error(e, "category TOC creation")
+            self._handle_error(e, "theme TOC creation")
             return ""
     
     def cleanup_temp_files(self):
@@ -761,17 +761,17 @@ class ImageGenerationSystem:
         
         for i, qa_pair in enumerate(qa_pairs, 1):
             try:
-                category = qa_pair.get('category', 'Unknown')
+                theme = qa_pair.get('theme', 'Unknown')
                 question_text = qa_pair.get('question_text', '')
                 answer_text = qa_pair.get('answer_text', '')
                 image_number = qa_pair.get('image_number', str(i))
                 
-                log.info(f"Generating images for Q&A pair {i}/{len(qa_pairs)} ({category})")
+                log.info(f"Generating images for Q&A pair {i}/{len(qa_pairs)} ({theme})")
                 
                 # Generate question image
                 question_image_path, _ = generate_image_with_retry(
                     prompt=question_text,
-                    category=category,
+                    theme=theme,
                     image_number=image_number,
                     image_type="q"
                 )
@@ -784,7 +784,7 @@ class ImageGenerationSystem:
                 # Generate answer image
                 answer_image_path, _ = generate_image_with_retry(
                     prompt=answer_text,
-                    category=category,
+                    theme=theme,
                     image_number=image_number,
                     image_type="a"
                 )
@@ -841,8 +841,8 @@ class ImageGenerationSystem:
                 if results['final_compilation']:
                     results['total_images'] += 1
             
-            # Step 3: Create category compilations
-            if self.config.CREATE_AUTOMATIC_CATEGORY_COMPILATIONS:
+            # Step 3: Create theme compilations
+            if self.config.CREATE_AUTOMATIC_THEME_COMPILATIONS:
                 results['category_compilations'] = self.create_automatic_category_compilations(qa_pairs)
                 results['total_images'] += len(results['category_compilations'])
             
@@ -853,22 +853,22 @@ class ImageGenerationSystem:
                     results['total_images'] += 1
                     results['covers']['volume'] = results['cover_image']
                 
-                # Generate category covers (from ImageOrchestrator)
+                # Generate theme covers (from ImageOrchestrator)
                 try:
-                    categories = {}
+                    themes = {}
                     for qa_pair in qa_pairs:
-                        category = qa_pair.get('category', 'Unknown')
-                        if category not in categories:
-                            categories[category] = []
-                        categories[category].append(qa_pair)
+                        theme = qa_pair.get('theme', 'Unknown')
+                        if theme not in themes:
+                            themes[theme] = []
+                        themes[theme].append(qa_pair)
                     
-                    # Generate category covers
-                    for category, category_qa_pairs in categories.items():
-                        category_cover_path = create_category_cover(category, category_qa_pairs, self.output_dir)
+                    # Generate theme covers
+                    for theme, category_qa_pairs in themes.items():
+                        category_cover_path = create_category_cover(theme, category_qa_pairs, self.output_dir)
                         if category_cover_path:
-                            results['covers'][f'category_{category}'] = category_cover_path
+                            results['covers'][f'category_{theme}'] = category_cover_path
                             results['total_images'] += 1
-                            log.info(f"Generated category cover for {category}: {category_cover_path}")
+                            log.info(f"Generated theme cover for {theme}: {category_cover_path}")
                     
                     # Generate compilation cover
                     compilation_cover_path = create_compilation_cover('research', qa_pairs, self.output_dir)
@@ -892,8 +892,8 @@ class ImageGenerationSystem:
                 if results['sequential_toc']:
                     results['total_images'] += 1
             
-            # Step 7: Create category TOC
-            if self.config.CREATE_CATEGORY_TOC:
+            # Step 7: Create theme TOC
+            if self.config.CREATE_THEME_TOC:
                 results['category_toc'] = self.create_category_toc(qa_pairs)
                 if results['category_toc']:
                     results['total_images'] += 1
@@ -907,7 +907,7 @@ class ImageGenerationSystem:
                 log.info(f"📊 Total images created: {results['total_images']}")
                 log.info(f"📁 Individual images: {len(results['individual_images'])}")
                 log.info(f"📚 Final compilation: {'✅' if results['final_compilation'] else '❌'}")
-                log.info(f"📂 Category compilations: {len(results['category_compilations'])}")
+                log.info(f"📂 Theme compilations: {len(results['category_compilations'])}")
                 log.info(f"🖼️  Cover image: {'✅' if results['cover_image'] else '❌'}")
                 log.info(f"📋 Table of contents: {'✅' if results['table_of_contents'] else '❌'}")
             
@@ -926,40 +926,40 @@ def main():
         # Image Generation Features (converted from PDF Generation)
         CREATE_INDIVIDUAL_IMAGES=os.getenv('CREATE_INDIVIDUAL_IMAGES', 'true').lower() == 'true',
         CREATE_FINAL_COMPILATION=os.getenv('CREATE_FINAL_COMPILATION', 'true').lower() == 'true',
-        CREATE_AUTOMATIC_CATEGORY_COMPILATIONS=os.getenv('CREATE_AUTOMATIC_CATEGORY_COMPILATIONS', 'false').lower() == 'true',
+        CREATE_AUTOMATIC_THEME_COMPILATIONS=os.getenv('CREATE_AUTOMATIC_THEME_COMPILATIONS', 'false').lower() == 'true',
         CREATE_COVER_IMAGE=os.getenv('CREATE_COVER_IMAGE', 'true').lower() == 'true',
         CREATE_TABLE_OF_CONTENTS=os.getenv('CREATE_TABLE_OF_CONTENTS', 'true').lower() == 'true',
         CREATE_SEQUENTIAL_TOC=os.getenv('CREATE_SEQUENTIAL_TOC', 'true').lower() == 'true',
-        CREATE_CATEGORY_TOC=os.getenv('CREATE_CATEGORY_TOC', 'true').lower() == 'true',
+        CREATE_THEME_TOC=os.getenv('CREATE_THEME_TOC', 'true').lower() == 'true',
         PRESERVE_TEMP_FILES=os.getenv('PRESERVE_TEMP_FILES', 'true').lower() == 'true',
         
         # Table of Contents Features (converted from PDF TOC)
         TOC_SHOW_FULL_QUESTIONS=os.getenv('TOC_SHOW_FULL_QUESTIONS', 'true').lower() == 'true',
         TOC_BACKGROUND_PROMPT=os.getenv('TOC_BACKGROUND_PROMPT', 'true').lower() == 'true',
-        TOC_CATEGORY_GROUPING=os.getenv('TOC_CATEGORY_GROUPING', 'true').lower() == 'true',
+        TOC_THEME_GROUPING=os.getenv('TOC_THEME_GROUPING', 'true').lower() == 'true',
         TOC_GROUP_UNKNOWN_CATEGORIES=os.getenv('TOC_GROUP_UNKNOWN_CATEGORIES', 'true').lower() == 'true',
-        TOC_SORT_CATEGORIES_ALPHABETICALLY=os.getenv('TOC_SORT_CATEGORIES_ALPHABETICALLY', 'true').lower() == 'true',
-        TOC_UNKNOWN_CATEGORY_NAME=os.getenv('TOC_UNKNOWN_CATEGORY_NAME', 'Uncategorized'),
+        TOC_SORT_THEMES_ALPHABETICALLY=os.getenv('TOC_SORT_THEMES_ALPHABETICALLY', 'true').lower() == 'true',
+        TOC_UNKNOWN_THEME_NAME=os.getenv('TOC_UNKNOWN_THEME_NAME', 'Uncategorized'),
         TOC_IMAGE_NUMBER_SPACE=int(os.getenv('TOC_IMAGE_NUMBER_SPACE', '50')),
         
         # TOC Templates (converted from PDF TOC templates)
         TOC_MAIN_TITLE_TEMPLATE=os.getenv('TOC_MAIN_TITLE_TEMPLATE', 'ASK: Daily Architectural Research - Volume {volume_number}'),
         TOC_SEQUENTIAL_SUBTITLE=os.getenv('TOC_SEQUENTIAL_SUBTITLE', 'Sequential Table of Contents'),
-        TOC_CATEGORY_SUBTITLE=os.getenv('TOC_CATEGORY_SUBTITLE', 'Category Index'),
+        TOC_THEME_SUBTITLE=os.getenv('TOC_THEME_SUBTITLE', 'Theme Index'),
         TOC_SEQUENTIAL_SECTION_TITLE=os.getenv('TOC_SEQUENTIAL_SECTION_TITLE', 'Sequential Order'),
-        TOC_CATEGORY_INFO_TEMPLATE=os.getenv('TOC_CATEGORY_INFO_TEMPLATE', '{count} Q&A Pairs • Sequential Order'),
+        TOC_THEME_INFO_TEMPLATE=os.getenv('TOC_THEME_INFO_TEMPLATE', '{count} Q&A Pairs • Sequential Order'),
         TOC_TOTAL_COUNT_TEMPLATE=os.getenv('TOC_TOTAL_COUNT_TEMPLATE', 'Total Q&A Pairs: {count}'),
-        TOC_CATEGORY_OVERVIEW_TEMPLATE=os.getenv('TOC_CATEGORY_OVERVIEW_TEMPLATE', 'Category Overview and Research Insights'),
+        TOC_THEME_OVERVIEW_TEMPLATE=os.getenv('TOC_THEME_OVERVIEW_TEMPLATE', 'Theme Overview and Research Insights'),
         TOC_RESEARCH_INSIGHTS_TEMPLATE=os.getenv('TOC_RESEARCH_INSIGHTS_TEMPLATE', 'Research Insights: {insights}...'),
         TOC_DATE_TEMPLATE=os.getenv('TOC_DATE_TEMPLATE', 'Generated: {date}'),
         TOC_TITLE_TEMPLATE=os.getenv('TOC_TITLE_TEMPLATE', 'Table of Contents'),
         TOC_SUBTITLE_TEMPLATE=os.getenv('TOC_SUBTITLE_TEMPLATE', 'ASK: Daily Architectural Research - Volume {volume_number}'),
         TOC_IMAGE_NUMBER_TEMPLATE=os.getenv('TOC_IMAGE_NUMBER_TEMPLATE', '{image_number}'),
-        TOC_SUMMARY_TEMPLATE=os.getenv('TOC_SUMMARY_TEMPLATE', 'Total Q&A Pairs: {qa_count} | Categories: {category_count}'),
+        TOC_SUMMARY_TEMPLATE=os.getenv('TOC_SUMMARY_TEMPLATE', 'Total Q&A Pairs: {qa_count} | Themes: {category_count}'),
         
         # Individual Image Settings (converted from PDF Individual)
-        INDIVIDUAL_FILENAME_TEMPLATE=os.getenv('INDIVIDUAL_FILENAME_TEMPLATE', 'ASK_{image_number}_{category}.jpg'),
-        INDIVIDUAL_FALLBACK_TEMPLATE=os.getenv('INDIVIDUAL_FALLBACK_TEMPLATE', 'ASK_QA_{category}.jpg'),
+        INDIVIDUAL_FILENAME_TEMPLATE=os.getenv('INDIVIDUAL_FILENAME_TEMPLATE', 'ASK_{image_number}_{theme}.jpg'),
+        INDIVIDUAL_FALLBACK_TEMPLATE=os.getenv('INDIVIDUAL_FALLBACK_TEMPLATE', 'ASK_QA_{theme}.jpg'),
         FOOTER_BRAND_TEXT=os.getenv('FOOTER_BRAND_TEXT', 'ASK: Daily Architectural Research'),
         FOOTER_IMAGE_NUMBER_TEMPLATE=os.getenv('FOOTER_IMAGE_NUMBER_TEMPLATE', 'ASK-{image_number}'),
         
@@ -973,7 +973,7 @@ def main():
         FOOTER_HEIGHT=int(os.getenv('FOOTER_HEIGHT', '80')),
         FOOTER_BRAND_X=int(os.getenv('FOOTER_BRAND_X', '40')),
         FOOTER_BRAND_Y_OFFSET=int(os.getenv('FOOTER_BRAND_Y_OFFSET', '20')),
-        FOOTER_CATEGORY_Y_OFFSET=int(os.getenv('FOOTER_CATEGORY_Y_OFFSET', '20')),
+        FOOTER_THEME_Y_OFFSET=int(os.getenv('FOOTER_THEME_Y_OFFSET', '20')),
         FOOTER_IMAGE_X_OFFSET=int(os.getenv('FOOTER_IMAGE_X_OFFSET', '40')),
         FOOTER_IMAGE_Y_OFFSET=int(os.getenv('FOOTER_IMAGE_Y_OFFSET', '20')),
         
@@ -984,7 +984,7 @@ def main():
         FONT_SIZE_TITLE=int(os.getenv('FONT_SIZE_TITLE', '36')),
         FONT_SIZE_SUBTITLE=int(os.getenv('FONT_SIZE_SUBTITLE', '18')),
         FONT_SIZE_SECTION=int(os.getenv('FONT_SIZE_SECTION', '16')),
-        FONT_SIZE_CATEGORY_HEADER=int(os.getenv('FONT_SIZE_CATEGORY_HEADER', '20')),
+        FONT_SIZE_THEME_HEADER=int(os.getenv('FONT_SIZE_THEME_HEADER', '20')),
         FONT_SIZE_ENTRY=int(os.getenv('FONT_SIZE_ENTRY', '14')),
         FONT_SIZE_QUESTION=int(os.getenv('FONT_SIZE_QUESTION', '12')),
         FONT_SIZE_DETAIL=int(os.getenv('FONT_SIZE_DETAIL', '10')),
@@ -998,7 +998,7 @@ def main():
         COLOR_PRIMARY=os.getenv('COLOR_PRIMARY', '#000000'),
         COLOR_SECONDARY=os.getenv('COLOR_SECONDARY', '#2C3E50'),
         COLOR_ACCENT=os.getenv('COLOR_ACCENT', '#E74C3C'),
-        COLOR_CATEGORY_HEADER=os.getenv('COLOR_CATEGORY_HEADER', '#8E44AD'),
+        COLOR_THEME_HEADER=os.getenv('COLOR_THEME_HEADER', '#8E44AD'),
         COLOR_MUTED=os.getenv('COLOR_MUTED', '#7F8C8D'),
         COLOR_BRAND=os.getenv('COLOR_BRAND', '#34495E'),
         TEXT_COLOR=os.getenv('TEXT_COLOR', '#F0F0F0'),
@@ -1102,7 +1102,7 @@ def main():
         # TOC Content Settings
         TOC_MAX_QUESTIONS_PER_CATEGORY=int(os.getenv('TOC_MAX_QUESTIONS_PER_CATEGORY', '5')),
         TOC_QUESTION_PREVIEW_LENGTH=int(os.getenv('TOC_QUESTION_PREVIEW_LENGTH', '50')),
-        TOC_SHOW_CATEGORY_COUNTS=os.getenv('TOC_SHOW_CATEGORY_COUNTS', 'true').lower() == 'true',
+        TOC_SHOW_THEME_COUNTS=os.getenv('TOC_SHOW_THEME_COUNTS', 'true').lower() == 'true',
         TOC_SHOW_GENERATION_DATE=os.getenv('TOC_SHOW_GENERATION_DATE', 'true').lower() == 'true',
         
         # Compilation Settings

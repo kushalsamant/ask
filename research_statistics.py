@@ -10,13 +10,13 @@ from research_csv_manager import get_questions_and_styles_from_log
 # Setup logging
 log = logging.getLogger(__name__)
 
-def get_questions_by_category(category, limit=None):
-    """Get questions for a specific category"""
+def get_questions_by_category(theme, limit=None):
+    """Get questions for a specific theme"""
     try:
         questions_by_category, _, used_questions = get_questions_and_styles_from_log()
         
-        if category in questions_by_category:
-            questions = list(questions_by_category[category])
+        if theme in questions_by_category:
+            questions = list(questions_by_category[theme])
             # Filter out used questions
             available_questions = [q for q in questions if q not in used_questions]
             
@@ -26,7 +26,7 @@ def get_questions_by_category(category, limit=None):
         else:
             return []
     except Exception as e:
-        log.error(f"Error getting questions for category {category}: {e}")
+        log.error(f"Error getting questions for theme {theme}: {e}")
         return []
 
 def get_used_questions_count():
@@ -58,9 +58,9 @@ def get_questions_statistics():
             'total_questions': sum(len(questions) for questions in questions_by_category.values()),
             'used_questions': len(used_questions),
             'available_questions': sum(len(questions) for questions in questions_by_category.values()) - len(used_questions),
-            'categories_with_questions': {category: len(questions) for category, questions in questions_by_category.items()},
+            'categories_with_questions': {theme: len(questions) for theme, questions in questions_by_category.items()},
             'total_styles': sum(len(styles) for styles in styles_by_category.values()),
-            'categories_with_styles': {category: len(styles) for category, styles in styles_by_category.items()}
+            'categories_with_styles': {theme: len(styles) for theme, styles in styles_by_category.items()}
         }
         
         return stats

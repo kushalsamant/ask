@@ -1,15 +1,16 @@
-#!/usr/bin/env python3
-"""
-Enhanced Cross-Disciplinary Generator with Research Explorer Integration
-Creates intelligent cross-disciplinary questions and analyzes research directions
-"""
-
 import os
 import logging
 import random
 import requests
 from datetime import datetime
 from collections import defaultdict, Counter
+        from research_categories_data import get_related_categories
+#!/usr/bin/env python3
+"""
+Enhanced Cross-Disciplinary Generator with Research Explorer Integration
+Creates intelligent cross-disciplinary questions and analyzes research directions
+"""
+
 
 # Setup logging
 log = logging.getLogger(__name__)
@@ -35,7 +36,7 @@ class EnhancedCrossDisciplinaryGenerator:
         }
         
         self.exploration_patterns = {
-            'cross_pollination': 'Connecting insights across categories',
+            'cross_pollination': 'Connecting insights across themes',
             'temporal_analysis': 'Examining evolution and trends over time',
             'spatial_mapping': 'Understanding geographical and contextual variations',
             'thematic_synthesis': 'Identifying common themes and patterns',
@@ -50,10 +51,9 @@ class EnhancedCrossDisciplinaryGenerator:
         """Get research dimensions"""
         return self.research_dimensions
         
-    def get_categories_by_category(self, category):
-        """Get related categories for a given category"""
-        from research_categories_data import get_related_categories
-        return get_related_categories(category)
+    def get_categories_by_category(self, theme):
+        """Get related themes for a given theme"""
+        return get_related_categories(theme)
         # Cross-disciplinary question patterns (30 different types)
         self.question_patterns = {
             # 1-5: Basic Intersection and Connection Patterns
@@ -120,42 +120,42 @@ class EnhancedCrossDisciplinaryGenerator:
             'social equity', 'cultural preservation', 'inclusive design', 'community engagement', 'social sustainability'
         ]
         
-        # All 86 main categories
+        # All 86 main themes
         self.main_categories = [
-            # 7 core categories
+            # 7 core themes
             'architecture', 'construction', 'design', 'engineering', 'interiors', 'planning', 'urbanism',
             
-            # 18 specialized categories
+            # 18 specialized themes
             'landscape_architecture', 'structural_engineering', 'mechanical_engineering', 'electrical_engineering',
             'civil_engineering', 'environmental_engineering', 'transportation_engineering', 'geotechnical_engineering',
             'acoustical_engineering', 'lighting_design', 'furniture_design', 'product_design', 'graphic_design',
             'web_design', 'industrial_design', 'fashion_design', 'exhibition_design', 'stage_design', 'set_design',
             
-            # 18 emerging categories
+            # 18 emerging themes
             'digital_architecture', 'computational_design', 'parametric_design', 'generative_design',
             'biomimetic_design', 'smart_cities', 'sustainable_design', 'circular_design', 'regenerative_design',
             'biophilic_design', 'wellness_design', 'universal_design', 'inclusive_design', 'accessible_design',
             'resilient_design', 'adaptive_design', 'responsive_design', 'interactive_design', 'immersive_design',
             
-            # 13 business categories
+            # 13 business themes
             'marketing', 'branding', 'business_development', 'project_management', 'construction_management',
             'facility_management', 'real_estate_development', 'property_management', 'asset_management',
             'investment_analysis', 'market_research', 'client_relations', 'stakeholder_engagement',
             
-            # 16 technology categories
+            # 16 technology themes
             'bim_management', 'digital_twin', 'virtual_reality', 'augmented_reality', 'mixed_reality',
             'artificial_intelligence', 'machine_learning', 'data_analytics', 'iot_integration', 'smart_buildings',
             'automation', 'robotics', '3d_printing', 'prefabrication', 'modular_construction', 'offsite_construction',
             
-            # 14 research categories
+            # 14 research themes
             'architectural_research', 'design_research', 'material_science', 'building_physics', 'energy_modeling',
             'sustainability_research', 'urban_research', 'social_research', 'behavioral_research', 'post_occupancy_evaluation',
             'life_cycle_assessment', 'carbon_analysis', 'climate_research', 'resilience_research'
         ]
 
-        # 30 subcategories for each of the 86 main categories (2,580 total subcategories)
+        # 30 subcategories for each of the 86 main themes (2,580 total subcategories)
         self.subcategories = {
-            # Core Categories (7)
+            # Core Themes (7)
             'architecture': [
                 'residential', 'commercial', 'institutional', 'industrial', 'cultural', 'religious', 'educational',
                 'healthcare', 'hospitality', 'retail', 'office', 'mixed_use', 'temporary', 'adaptive_reuse',
@@ -212,9 +212,9 @@ class EnhancedCrossDisciplinaryGenerator:
             ]
         }
         
-        # Category relationship matrix (which categories work well together)
+        # Theme relationship matrix (which themes work well together)
         self.category_relationships = {
-            # Core Architectural Categories (7)
+            # Core Architectural Themes (7)
             'architecture': ['construction', 'design', 'engineering', 'interiors', 'planning', 'urbanism', 'landscape_architecture', 'structural_engineering', 'digital_architecture', 'sustainability', 'materials', 'project_management'],
             'construction': ['architecture', 'engineering', 'structural_engineering', 'materials', 'project_management', 'bim_management', 'safety', 'quality_control', 'cost_management', 'sustainability', 'prefabrication', 'modular_construction'],
             'design': ['architecture', 'interiors', 'landscape_architecture', 'urbanism', 'visual_arts', 'graphic_design', 'industrial_design', 'furniture_design', 'lighting_design', 'acoustics', 'ergonomics', 'user_experience'],
@@ -223,7 +223,7 @@ class EnhancedCrossDisciplinaryGenerator:
             'planning': ['urbanism', 'architecture', 'landscape_architecture', 'transportation', 'environmental_planning', 'community_development', 'social_impact', 'economic_development', 'infrastructure', 'zoning', 'public_policy', 'stakeholder_engagement'],
             'urbanism': ['planning', 'architecture', 'landscape_architecture', 'transportation', 'community_development', 'social_impact', 'smart_cities', 'public_spaces', 'urban_design', 'mobility', 'infrastructure', 'cultural_heritage'],
             
-            # Specialized Architectural Categories (18)
+            # Specialized Architectural Themes (18)
             'landscape_architecture': ['architecture', 'planning', 'urbanism', 'environmental_design', 'horticulture', 'ecology', 'sustainability', 'public_spaces', 'site_planning', 'stormwater_management', 'biodiversity', 'recreation_design'],
             'structural_engineering': ['architecture', 'construction', 'engineering', 'materials', 'safety', 'performance_analysis', 'seismic_design', 'foundation_design', 'structural_analysis', 'load_calculation', 'building_codes', 'risk_assessment'],
             'digital_architecture': ['architecture', 'computational_design', 'bim_management', 'virtual_reality', 'ai_in_architecture', 'parametric_design', 'digital_fabrication', '3d_modeling', 'simulation', 'data_visualization', 'algorithmic_design', 'cyber_physical_systems'],
@@ -243,7 +243,7 @@ class EnhancedCrossDisciplinaryGenerator:
             'inclusive_design': ['human_centered_design', 'accessibility', 'universal_design', 'social_equity', 'diversity', 'equity_inclusion', 'barrier_free_design', 'assistive_technology', 'aging_in_place', 'disability_rights', 'social_inclusion', 'community_access'],
             'accessibility': ['inclusive_design', 'universal_design', 'human_centered_design', 'barrier_free_design', 'assistive_technology', 'mobility_aids', 'visual_impairment', 'hearing_impairment', 'cognitive_accessibility', 'physical_accessibility', 'digital_accessibility', 'regulatory_compliance'],
             
-            # Emerging Technology Categories (18)
+            # Emerging Technology Themes (18)
             'machine_learning': ['ai_in_architecture', 'computational_design', 'data_analytics', 'predictive_modeling', 'pattern_recognition', 'optimization', 'automation', 'smart_buildings', 'urban_analytics', 'energy_optimization', 'maintenance_prediction', 'user_behavior_analysis'],
             'data_analytics': ['machine_learning', 'smart_cities', 'building_performance', 'urban_analytics', 'energy_analysis', 'occupant_behavior', 'predictive_modeling', 'performance_optimization', 'decision_support', 'trend_analysis', 'benchmarking', 'continuous_improvement'],
             'predictive_modeling': ['machine_learning', 'data_analytics', 'building_performance', 'energy_modeling', 'maintenance_prediction', 'risk_assessment', 'climate_modeling', 'urban_growth', 'infrastructure_planning', 'resource_optimization', 'disaster_preparedness', 'adaptive_systems'],
@@ -263,7 +263,7 @@ class EnhancedCrossDisciplinaryGenerator:
             'standards': ['certification', 'quality_control', 'compliance', 'building_codes', 'safety', 'performance_standards', 'accessibility_standards', 'sustainability_standards', 'interoperability', 'best_practices', 'industry_guidelines', 'regulatory_frameworks'],
             'compliance': ['standards', 'building_codes', 'safety', 'regulatory_requirements', 'certification', 'quality_control', 'legal_compliance', 'environmental_compliance', 'accessibility_compliance', 'fire_safety', 'energy_codes', 'zoning_regulations'],
             
-            # Business and Management Categories (13)
+            # Business and Management Themes (13)
             'marketing': ['branding', 'business_development', 'client_relations', 'market_research', 'competitive_analysis', 'digital_marketing', 'content_strategy', 'social_media', 'public_relations', 'stakeholder_engagement', 'value_proposition', 'market_positioning'],
             'branding': ['marketing', 'visual_identity', 'graphic_design', 'brand_strategy', 'corporate_identity', 'user_experience', 'brand_positioning', 'visual_communication', 'brand_guidelines', 'identity_systems', 'brand_experience', 'reputation_management'],
             'business_development': ['marketing', 'client_relations', 'strategic_planning', 'market_expansion', 'partnership_development', 'sales_strategy', 'growth_strategy', 'competitive_advantage', 'market_opportunity', 'value_creation', 'relationship_building', 'opportunity_identification'],
@@ -278,7 +278,7 @@ class EnhancedCrossDisciplinaryGenerator:
             'real_estate_development': ['investment_analysis', 'urban_planning', 'market_analysis', 'project_management', 'financial_planning', 'stakeholder_management', 'regulatory_compliance', 'market_research', 'development_strategy', 'risk_management', 'value_creation', 'sustainable_development'],
             'market_analysis': ['investment_analysis', 'real_estate_development', 'market_research', 'competitive_analysis', 'trend_analysis', 'demand_forecasting', 'market_positioning', 'opportunity_identification', 'risk_assessment', 'market_strategy', 'customer_segmentation', 'market_intelligence'],
             
-            # Technology and Digital Categories (16)
+            # Technology and Digital Themes (16)
             'bim_management': ['architecture', 'construction', 'digital_architecture', 'project_management', 'collaboration', 'information_management', 'model_coordination', 'clash_detection', 'quantity_takeoff', 'scheduling', 'facility_management', 'lifecycle_management'],
             'information_management': ['bim_management', 'data_management', 'knowledge_management', 'document_management', 'information_architecture', 'data_governance', 'information_security', 'data_quality', 'metadata_management', 'information_strategy', 'digital_transformation', 'information_systems'],
             'data_management': ['information_management', 'data_analytics', 'machine_learning', 'data_governance', 'data_quality', 'data_security', 'data_architecture', 'data_integration', 'data_warehousing', 'big_data', 'data_strategy', 'data_ops'],
@@ -296,7 +296,7 @@ class EnhancedCrossDisciplinaryGenerator:
             'animation': ['rendering', '3d_modeling', 'visualization', 'motion_graphics', 'storytelling', 'virtual_reality', 'augmented_reality', 'interactive_animation', 'simulation', 'visual_effects', 'character_animation', 'environmental_animation'],
             'simulation': ['3d_modeling', 'visualization', 'building_performance', 'energy_modeling', 'structural_analysis', 'acoustic_simulation', 'thermal_simulation', 'daylight_simulation', 'wind_simulation', 'occupant_behavior', 'emergency_evacuation', 'climate_simulation'],
             
-            # Research and Innovation Categories (14)
+            # Research and Innovation Themes (14)
             'architectural_research': ['research_methodology', 'design_research', 'building_science', 'performance_research', 'user_research', 'sustainability_research', 'material_research', 'technology_research', 'social_research', 'historical_research', 'theoretical_research', 'applied_research'],
             'research_methodology': ['architectural_research', 'data_analysis', 'qualitative_research', 'quantitative_research', 'mixed_methods', 'experimental_design', 'case_study_research', 'survey_research', 'observational_research', 'action_research', 'participatory_research', 'longitudinal_studies'],
             'design_research': ['architectural_research', 'user_research', 'design_thinking', 'prototype_development', 'iterative_design', 'design_validation', 'user_testing', 'design_innovation', 'design_strategy', 'design_process', 'design_outcomes', 'design_evaluation'],
@@ -313,7 +313,7 @@ class EnhancedCrossDisciplinaryGenerator:
             'innovation_management': ['applied_research', 'technology_research', 'design_research', 'innovation_strategy', 'research_development', 'intellectual_property', 'technology_transfer', 'innovation_ecosystems', 'startup_collaboration', 'open_innovation', 'innovation_culture', 'innovation_metrics']
         }
         
-        # Cross-disciplinary themes (2,667 themes: 2,580 subcategory themes + 86 main category themes + 1 all categories theme)
+        # Cross-disciplinary themes (2,667 themes: 2,580 subcategory themes + 86 main theme themes + 1 all themes theme)
         self.cross_themes = {}
         
         # 1. Create themes from all 2,580 subcategories
@@ -321,20 +321,20 @@ class EnhancedCrossDisciplinaryGenerator:
         for main_category, subcategories in self.subcategories.items():
             for subcategory in subcategories:
                 theme_name = f"{main_category}_{subcategory}"
-                # Each subcategory theme includes the main category plus related categories
+                # Each subcategory theme includes the main theme plus related themes
                 related_categories = self.get_category_relationships(main_category)
-                theme_categories = [main_category] + related_categories[:11]  # 12 total categories
+                theme_categories = [main_category] + related_categories[:11]  # 12 total themes
                 subcategory_themes[theme_name] = theme_categories
         
-        # 2. Create themes from all 86 main categories
+        # 2. Create themes from all 86 main themes
         main_category_themes = {}
         for main_category in self.main_categories:
             theme_name = f"main_{main_category}"
             related_categories = self.get_category_relationships(main_category)
-            theme_categories = [main_category] + related_categories[:11]  # 12 total categories
+            theme_categories = [main_category] + related_categories[:11]  # 12 total themes
             main_category_themes[theme_name] = theme_categories
         
-        # 3. Create "all categories" theme
+        # 3. Create "all themes" theme
         all_categories_theme = {
             'all_categories': self.main_categories
         }
@@ -352,26 +352,25 @@ class EnhancedCrossDisciplinaryGenerator:
             'total_themes': len(self.cross_themes)
         }
     
-    def get_category_relationships(self, category):
-        """Get categories that work well with the given category"""
-        return self.category_relationships.get(category, [])
+    def get_category_relationships(self, theme):
+        """Get themes that work well with the given theme"""
+        return self.category_relationships.get(theme, [])
     
     def get_cross_theme_categories(self, theme):
-        """Get categories for a specific cross-disciplinary theme"""
+        """Get themes for a specific cross-disciplinary theme"""
         return self.cross_themes.get(theme, [])
     
     def generate_cross_disciplinary_question(self, primary_category, secondary_category=None, context=None):
-        """Generate a cross-disciplinary question between two categories"""
+        """Generate a cross-disciplinary question between two themes"""
         try:
-            import requests
             
-            # If no secondary category provided, find a good match
+            # If no secondary theme provided, find a good match
             if not secondary_category:
                 related_categories = self.get_category_relationships(primary_category)
                 if related_categories:
                     secondary_category = random.choice(related_categories)
                 else:
-                    # Fallback to a random category
+                    # Fallback to a random theme
                     all_categories = list(self.category_relationships.keys())
                     secondary_category = random.choice([c for c in all_categories if c != primary_category])
             
@@ -407,18 +406,18 @@ class EnhancedCrossDisciplinaryGenerator:
             return None
     
     def generate_theme_based_question(self, theme):
-        """Generate a question based on a cross-disciplinary theme with any number of categories"""
+        """Generate a question based on a cross-disciplinary theme with any number of themes"""
         try:
-            categories = self.get_cross_theme_categories(theme)
-            if len(categories) < 2:
+            themes = self.get_cross_theme_categories(theme)
+            if len(themes) < 2:
                 return None
             
-            # Select 2-6 categories for the question (maximum flexibility)
-            max_categories = min(6, len(categories))  # Cap at 6 for readability
+            # Select 2-6 themes for the question (maximum flexibility)
+            max_categories = min(6, len(themes))  # Cap at 6 for readability
             num_categories = random.randint(2, max_categories)
-            selected_categories = random.sample(categories, num_categories)
+            selected_categories = random.sample(themes, num_categories)
             
-            # Create a theme-specific question based on the number of categories
+            # Create a theme-specific question based on the number of themes
             question = self._create_multi_category_question(selected_categories, theme, num_categories)
             
             # Add theme-specific enhancements
@@ -427,7 +426,7 @@ class EnhancedCrossDisciplinaryGenerator:
             return {
                 'question': question,
                 'theme': theme,
-                'categories': selected_categories,
+                'themes': selected_categories,
                 'num_categories': num_categories,
                 'is_cross_disciplinary': True
             }
@@ -436,11 +435,11 @@ class EnhancedCrossDisciplinaryGenerator:
             log.error(f"Error generating theme-based question: {e}")
             return None
     
-    def _create_multi_category_question(self, categories, theme, num_categories):
-        """Create questions for any number of categories (2-6)"""
+    def _create_multi_category_question(self, themes, theme, num_categories):
+        """Create questions for any number of themes (2-6)"""
         
-        # Format category names for display
-        formatted_categories = [c.replace('_', ' ').title() for c in categories]
+        # Format theme names for display
+        formatted_categories = [c.replace('_', ' ').title() for c in themes]
         theme_display = theme.replace('_', ' ').title()
         
         if num_categories == 2:
@@ -455,23 +454,23 @@ class EnhancedCrossDisciplinaryGenerator:
         elif num_categories == 5:
             return f"What innovative solutions can be developed by synthesizing {', '.join(formatted_categories[:-1])} and {formatted_categories[-1]} approaches in {theme_display}?"
         
-        else:  # 6 categories
+        else:  # 6 themes
             return f"How do {', '.join(formatted_categories[:-1])} and {formatted_categories[-1]} interact to address complex challenges in {theme_display}?"
     
     def generate_flexible_theme_question(self, theme, min_categories=2, max_categories=6):
-        """Generate a theme-based question with specified category range"""
+        """Generate a theme-based question with specified theme range"""
         try:
-            categories = self.get_cross_theme_categories(theme)
-            if len(categories) < min_categories:
+            themes = self.get_cross_theme_categories(theme)
+            if len(themes) < min_categories:
                 return None
             
-            # Select categories within the specified range
-            available_max = min(max_categories, len(categories))
+            # Select themes within the specified range
+            available_max = min(max_categories, len(themes))
             if min_categories > available_max:
                 min_categories = available_max
             
             num_categories = random.randint(min_categories, available_max)
-            selected_categories = random.sample(categories, num_categories)
+            selected_categories = random.sample(themes, num_categories)
             
             # Create the question
             question = self._create_multi_category_question(selected_categories, theme, num_categories)
@@ -480,7 +479,7 @@ class EnhancedCrossDisciplinaryGenerator:
             return {
                 'question': question,
                 'theme': theme,
-                'categories': selected_categories,
+                'themes': selected_categories,
                 'num_categories': num_categories,
                 'category_range': f"{min_categories}-{max_categories}",
                 'is_cross_disciplinary': True
@@ -496,26 +495,26 @@ class EnhancedCrossDisciplinaryGenerator:
             if not answers or len(answers) < 2:
                 return None
             
-            # Extract categories and insights from answers
-            categories = [answer.get('category', '') for answer in answers]
+            # Extract themes and insights from answers
+            themes = [answer.get('theme', '') for answer in answers]
             insights = [answer.get('answer_text', '') for answer in answers]
             
             # Remove duplicates and empty values
-            categories = list(set([c for c in categories if c]))
+            themes = list(set([c for c in themes if c]))
             insights = [i for i in insights if i.strip()]
             
-            if len(categories) < 2 or len(insights) < 2:
+            if len(themes) < 2 or len(insights) < 2:
                 return None
             
             # Create a synthesis question
-            question = f"Given insights from {', '.join(c.replace('_', ' ').title() for c in categories)}, how can we apply these principles to advance {target_category.replace('_', ' ').title()}?"
+            question = f"Given insights from {', '.join(c.replace('_', ' ').title() for c in themes)}, how can we apply these principles to advance {target_category.replace('_', ' ').title()}?"
             
             # Make it more specific
-            question = self._enhance_synthesis_question(question, categories, target_category)
+            question = self._enhance_synthesis_question(question, themes, target_category)
             
             return {
                 'question': question,
-                'source_categories': categories,
+                'source_categories': themes,
                 'target_category': target_category,
                 'synthesis_type': 'answer_based',
                 'is_cross_disciplinary': True
@@ -566,17 +565,17 @@ class EnhancedCrossDisciplinaryGenerator:
             
             # Extract relevant information
             question = question_data.get('question', '')
-            categories = []
+            themes = []
             
             if 'primary_category' in question_data:
-                categories.extend([question_data['primary_category'], question_data['secondary_category']])
-            elif 'categories' in question_data:
-                categories.extend(question_data['categories'])
+                themes.extend([question_data['primary_category'], question_data['secondary_category']])
+            elif 'themes' in question_data:
+                themes.extend(question_data['themes'])
             elif 'source_categories' in question_data:
-                categories.extend(question_data['source_categories'])
+                themes.extend(question_data['source_categories'])
             
-            # Filter answers by relevant categories
-            relevant_answers = [b for b in answers if b.get('category') in categories]
+            # Filter answers by relevant themes
+            relevant_answers = [b for b in answers if b.get('theme') in themes]
             
             if not relevant_answers:
                 return None
@@ -585,8 +584,8 @@ class EnhancedCrossDisciplinaryGenerator:
             synthesis_prompt = f"""
             Question: {question}
             
-            Relevant insights from different categories:
-            {chr(10).join(f"- {b.get('category', 'Unknown')}: {b.get('answer_text', '')[:200]}..." for b in relevant_answers[:3])}
+            Relevant insights from different themes:
+            {chr(10).join(f"- {b.get('theme', 'Unknown')}: {b.get('answer_text', '')[:200]}..." for b in relevant_answers[:3])}
             
             Please provide a cross-disciplinary synthesis that:
             1. Identifies common themes across these insights
@@ -602,7 +601,7 @@ class EnhancedCrossDisciplinaryGenerator:
             return {
                 'synthesis': synthesis,
                 'question': question,
-                'source_categories': categories,
+                'source_categories': themes,
                 'relevant_answers_count': len(relevant_answers),
                 'generated_at': datetime.now().isoformat()
             }
@@ -614,7 +613,6 @@ class EnhancedCrossDisciplinaryGenerator:
     def _generate_ai_synthesis(self, prompt):
         """Generate AI-powered synthesis"""
         try:
-            import requests
             
             url = os.getenv('TOGETHER_API_BASE', 'https://api.together.xyz/v1') + '/completions'
             headers = {
@@ -646,8 +644,8 @@ class EnhancedCrossDisciplinaryGenerator:
 
     # Research Analysis Methods (from research_explorer.py)
     
-    def analyze_research_direction(self, category, current_questions, previous_insights=None):
-        """Analyze and suggest research direction for a category"""
+    def analyze_research_direction(self, theme, current_questions, previous_insights=None):
+        """Analyze and suggest research direction for a theme"""
         try:
             url = os.getenv('TOGETHER_API_BASE', 'https://api.together.xyz/v1') + '/completions'
             headers = {
@@ -656,9 +654,9 @@ class EnhancedCrossDisciplinaryGenerator:
             }
             
             # Craft a comprehensive research analysis prompt
-            prompt = f'''[INST] You are an expert architectural research analyst. Analyze the research direction for {category} based on current questions and insights.
+            prompt = f'''[INST] You are an expert architectural research analyst. Analyze the research direction for {theme} based on current questions and insights.
 
-Current Questions in {category}:
+Current Questions in {theme}:
 {chr(10).join(f"- {q}" for q in current_questions[:5])}
 
 Previous Research Insights:
@@ -700,7 +698,7 @@ Format as structured analysis: [/INST]'''
                     
                     # Store the analysis
                     insight = {
-                        'category': category,
+                        'theme': theme,
                         'timestamp': datetime.now(),
                         'analysis': analysis,
                         'questions_analyzed': len(current_questions)
@@ -716,7 +714,7 @@ Format as structured analysis: [/INST]'''
                 return None
                 
         except Exception as e:
-            log.error(f"Error analyzing research direction for {category}: {e}")
+            log.error(f"Error analyzing research direction for {theme}: {e}")
             return None
 
     def discover_insights(self, categories_data):
@@ -728,19 +726,19 @@ Format as structured analysis: [/INST]'''
                 "Content-Type": "application/json"
             }
             
-            # Prepare category data for analysis
+            # Prepare theme data for analysis
             category_summary = []
-            for category, questions in categories_data.items():
+            for theme, questions in categories_data.items():
                 if questions:
-                    category_summary.append(f"{category}: {len(questions)} questions")
+                    category_summary.append(f"{theme}: {len(questions)} questions")
             
             prompt = f'''[INST] You are an expert architectural research analyst discovering cross-disciplinary insights.
 
-Categories and Question Counts:
+Themes and Question Counts:
 {chr(10).join(category_summary)}
 
 Please analyze and identify:
-1. Common themes across categories
+1. Common themes across themes
 2. Potential research synergies
 3. Emerging architectural paradigms
 4. Cross-pollination opportunities
@@ -787,8 +785,8 @@ Format as structured insights: [/INST]'''
             
             prompt = f'''[INST] You are an expert architectural research strategist. Suggest the optimal exploration path.
 
-Current category: {current_category}
-Available categories: {', '.join(available_categories)}
+Current theme: {current_category}
+Available themes: {', '.join(available_categories)}
 
 Research Dimensions:
 - Temporal: historical, contemporary, future, evolutionary
@@ -799,7 +797,7 @@ Research Dimensions:
 - Context: environmental, social, political, economic, cultural
 
 Please suggest:
-1. The next category to explore (from available list)
+1. The next theme to explore (from available list)
 2. Rationale for the choice
 3. Expected research synergies
 4. Potential breakthrough opportunities
@@ -847,7 +845,7 @@ Provide structured recommendation: [/INST]'''
         summary = {
             'total_insights': len(self.research_insights),
             'total_explorations': len(self.exploration_history),
-            'categories_analyzed': list(set(insight['category'] for insight in self.research_insights)),
+            'categories_analyzed': list(set(insight['theme'] for insight in self.research_insights)),
             'latest_insight': self.research_insights[-1] if self.research_insights else None,
             'latest_exploration': self.exploration_history[-1] if self.exploration_history else None
         }
@@ -882,7 +880,7 @@ Provide structured recommendation: [/INST]'''
             return self.generate_theme_based_question(random.choice(list(self.cross_themes.keys())))
 
     def get_category_for_question(self, question, available_categories=None):
-        """Analyze a question and suggest the best category for it"""
+        """Analyze a question and suggest the best theme for it"""
         try:
             if not available_categories:
                 available_categories = self.main_categories
@@ -893,16 +891,16 @@ Provide structured recommendation: [/INST]'''
                 "Content-Type": "application/json"
             }
             
-            prompt = f'''[INST] You are an expert architectural researcher. Analyze this question and suggest the most appropriate category.
+            prompt = f'''[INST] You are an expert architectural researcher. Analyze this question and suggest the most appropriate theme.
 
 Question: {question}
 
-Available categories: {', '.join(available_categories)}
+Available themes: {', '.join(available_categories)}
 
-Please select the single most appropriate category from the available list.
+Please select the single most appropriate theme from the available list.
 Consider the question's focus, scope, and primary domain.
 
-Return only the category name: [/INST]'''
+Return only the theme name: [/INST]'''
             
             payload = {
                 "model": TEXT_MODEL,
@@ -930,7 +928,7 @@ Return only the category name: [/INST]'''
                 return random.choice(available_categories)
                 
         except Exception as e:
-            log.error(f"Error getting category for question: {e}")
+            log.error(f"Error getting theme for question: {e}")
             return random.choice(available_categories)
 
 
@@ -957,22 +955,22 @@ def get_cross_disciplinary_insights(question_data, answers):
     return generator.get_cross_disciplinary_insights(question_data, answers)
 
 def generate_flexible_theme_question(theme, min_categories=2, max_categories=6):
-    """Generate theme-based question with specified category range"""
+    """Generate theme-based question with specified theme range"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return generator.generate_flexible_theme_question(theme, min_categories, max_categories)
 
 def generate_simple_theme_question(theme):
-    """Generate theme-based question with 2-3 categories (simple combinations)"""
+    """Generate theme-based question with 2-3 themes (simple combinations)"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return generator.generate_flexible_theme_question(theme, 2, 3)
 
 def generate_complex_theme_question(theme):
-    """Generate theme-based question with 4-6 categories (complex combinations)"""
+    """Generate theme-based question with 4-6 themes (complex combinations)"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return generator.generate_flexible_theme_question(theme, 4, 6)
 
 def generate_mixed_theme_question(theme):
-    """Generate theme-based question with 3-5 categories (balanced combinations)"""
+    """Generate theme-based question with 3-5 themes (balanced combinations)"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return generator.generate_flexible_theme_question(theme, 3, 5)
 
@@ -992,20 +990,20 @@ def get_subcategory_themes():
     return [theme for theme in generator.cross_themes.keys() if '_' in theme and not theme.startswith('main_') and theme != 'all_categories']
 
 def get_main_category_themes():
-    """Get all main category-based themes"""
+    """Get all main theme-based themes"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return [theme for theme in generator.cross_themes.keys() if theme.startswith('main_')]
 
 def get_theme_categories(theme_name):
-    """Get categories for a specific theme"""
+    """Get themes for a specific theme"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return generator.cross_themes.get(theme_name, [])
 
 # New research analysis convenience functions
-def analyze_research_direction(category, current_questions, previous_insights=None):
-    """Analyze research direction for a category"""
+def analyze_research_direction(theme, current_questions, previous_insights=None):
+    """Analyze research direction for a theme"""
     generator = EnhancedCrossDisciplinaryGenerator()
-    return generator.analyze_research_direction(category, current_questions, previous_insights)
+    return generator.analyze_research_direction(theme, current_questions, previous_insights)
 
 def discover_cross_disciplinary_insights(categories_data):
     """Discover cross-disciplinary insights"""
@@ -1028,12 +1026,12 @@ def generate_intelligent_theme_question(research_context=None, current_questions
     return generator.generate_intelligent_theme_question(research_context, current_questions)
 
 def get_category_for_question(question, available_categories=None):
-    """Get best category for a question"""
+    """Get best theme for a question"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return generator.get_category_for_question(question, available_categories)
 
 def get_all_categories():
-    """Get all main categories"""
+    """Get all main themes"""
     generator = EnhancedCrossDisciplinaryGenerator()
     return generator.main_categories
 

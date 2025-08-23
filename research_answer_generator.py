@@ -17,13 +17,13 @@ from research_answer_prompts import (
 # Setup logging
 log = logging.getLogger(__name__)
 
-def generate_answer(question, category, image_path):
+def generate_answer(question, theme, image_path):
     """
     Generate a 200-250 word answer analyzing the Question-Image pair using Llama 3.2 11B
     
     Args:
         question (str): The question to analyze
-        category (str): Category name
+        theme (str): Theme name
         image_path (str): Path to the image (optional)
     
     Returns:
@@ -32,9 +32,9 @@ def generate_answer(question, category, image_path):
     try:
         # Create appropriate prompt based on whether image is provided
         if image_path:
-            prompt, system_prompt = create_image_based_analysis_prompt(question, category, image_path)
+            prompt, system_prompt = create_image_based_analysis_prompt(question, theme, image_path)
         else:
-            prompt, system_prompt = create_architectural_analysis_prompt(question, category)
+            prompt, system_prompt = create_architectural_analysis_prompt(question, theme)
         
         # Call API
         raw_response = call_together_api_for_answer(prompt, system_prompt)
@@ -58,36 +58,36 @@ def generate_answer(question, category, image_path):
         # Format answer for storage
         formatted_answer = format_answer_for_storage(answer)
         
-        log.info(f"✅ Generated answer for {category}: {formatted_answer[:50]}...")
+        log.info(f"✅ Generated answer for {theme}: {formatted_answer[:50]}...")
         return formatted_answer
         
     except Exception as e:
         log.error(f"Error generating answer: {e}")
         return None
 
-def generate_answer_without_image(question, category):
+def generate_answer_without_image(question, theme):
     """
     Generate answer without image reference
     
     Args:
         question (str): The question to analyze
-        category (str): Category name
+        theme (str): Theme name
     
     Returns:
         str: Generated answer or None if failed
     """
-    return generate_answer(question, category, None)
+    return generate_answer(question, theme, None)
 
-def generate_answer_with_image(question, category, image_path):
+def generate_answer_with_image(question, theme, image_path):
     """
     Generate answer with image reference
     
     Args:
         question (str): The question to analyze
-        category (str): Category name
+        theme (str): Theme name
         image_path (str): Path to the image
     
     Returns:
         str: Generated answer or None if failed
     """
-    return generate_answer(question, category, image_path)
+    return generate_answer(question, theme, image_path)

@@ -45,8 +45,8 @@ class ImageLayoutConfig:
         self.BRAND_X_OFFSET = int(os.getenv('IMAGE_BRAND_X_OFFSET', '144'))         # From left
         self.BRAND_TEXT = os.getenv('IMAGE_BRAND_TEXT', 'ASK')
         
-        # Category and image number positioning
-        self.CATEGORY_Y_OFFSET = int(os.getenv('IMAGE_CATEGORY_Y_OFFSET', '120'))   # From bottom
+        # Theme and image number positioning
+        self.CATEGORY_Y_OFFSET = int(os.getenv('IMAGE_THEME_Y_OFFSET', '120'))   # From bottom
         self.IMAGE_NUMBER_Y_OFFSET = int(os.getenv('IMAGE_NUMBER_Y_OFFSET', '80'))  # From bottom
         self.IMAGE_NUMBER_X_OFFSET = int(os.getenv('IMAGE_NUMBER_X_OFFSET', '800')) # From right
         
@@ -124,7 +124,7 @@ class ImageLayoutConfig:
     
     def get_category_position(self) -> Tuple[int, int]:
         """
-        Get category text position
+        Get theme text position
         
         Returns:
             Tuple of (x, y) coordinates

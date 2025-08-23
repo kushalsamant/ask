@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 LOG_CSV_FILE = os.getenv('LOG_CSV_FILE', 'log.csv')
 
 def get_questions_and_styles_from_log():
-    """Read all questions and styles from log.csv and organize by category"""
+    """Read all questions and styles from log.csv and organize by theme"""
     questions_by_category = {}
     styles_by_category = {}
     used_questions = set()
@@ -26,7 +26,7 @@ def get_questions_and_styles_from_log():
             # Create log.csv with headers if it doesn't exist
             with open(LOG_CSV_FILE, 'w', encoding='utf-8', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow(['question_number', 'category', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp'])
+                writer.writerow(['question_number', 'theme', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp'])
             return questions_by_category, styles_by_category, used_questions
 
         with open(LOG_CSV_FILE, 'r', encoding='utf-8', newline='') as f:
@@ -62,26 +62,26 @@ def get_questions_and_styles_from_log():
             else:
                 rows = list(reader)
 
-            # Organize questions and styles by category
+            # Organize questions and styles by theme
             for row in rows:
-                category = row.get('category', '').strip()
+                theme = row.get('theme', '').strip()
                 question = row.get('question', '').strip()
                 is_used = row.get('is_used', '').lower() == 'true'
                 style = row.get('style', '').strip()
 
-                if category and question:
+                if theme and question:
                     # Organize questions
-                    if category not in questions_by_category:
-                        questions_by_category[category] = set()
-                    questions_by_category[category].add(question)
+                    if theme not in questions_by_category:
+                        questions_by_category[theme] = set()
+                    questions_by_category[theme].add(question)
                     if is_used:
                         used_questions.add(question)
 
                     # Organize styles
-                    if category not in styles_by_category:
-                        styles_by_category[category] = set()
+                    if theme not in styles_by_category:
+                        styles_by_category[theme] = set()
                     if style:
-                        styles_by_category[category].add(style)
+                        styles_by_category[theme].add(style)
 
     except Exception as e:
         log.error(f"Error reading from {LOG_CSV_FILE}: {e}")
@@ -89,14 +89,14 @@ def get_questions_and_styles_from_log():
 
     return questions_by_category, styles_by_category, used_questions
 
-def log_single_question(category, question, image_filename, style=None, is_answer=False, mark_as_used=False):
+def log_single_question(theme, question, image_filename, style=None, is_answer=False, mark_as_used=False):
     """Log a single question or answer to log.csv"""
     try:
         # Ensure log.csv exists with proper headers
         if not os.path.exists(LOG_CSV_FILE):
             with open(LOG_CSV_FILE, 'w', encoding='utf-8', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow(['question_number', 'category', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp'])
+                writer.writerow(['question_number', 'theme', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp'])
 
         # Read existing data
         rows = []
@@ -110,7 +110,7 @@ def log_single_question(category, question, image_filename, style=None, is_answe
         # Create new row
         new_row = {
             'question_number': next_question_number,
-            'category': category,
+            'theme': theme,
             'question': question,
             'question_image': image_filename if not is_answer else '',
             'style': style or '',
@@ -125,12 +125,12 @@ def log_single_question(category, question, image_filename, style=None, is_answe
 
         # Write back to file
         with open(LOG_CSV_FILE, 'w', encoding='utf-8', newline='') as f:
-            fieldnames = ['question_number', 'category', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp']
+            fieldnames = ['question_number', 'theme', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(rows)
 
-        log.info(f"Logged {'answer' if is_answer else 'question'} for {category}: {question[:50]}...")
+        log.info(f"Logged {'answer' if is_answer else 'question'} for {theme}: {question[:50]}...")
         return True
 
     except Exception as e:
@@ -153,18 +153,18 @@ def mark_questions_as_used(questions_dict):
         # Mark questions as used
         questions_marked = 0
         for row in rows:
-            category = row.get('category', '').strip()
+            theme = row.get('theme', '').strip()
             question = row.get('question', '').strip()
             
             # Check if this question should be marked as used
-            if category in questions_dict and questions_dict[category] == question:
+            if theme in questions_dict and questions_dict[theme] == question:
                 if row.get('is_used', '').lower() != 'true':
                     row['is_used'] = 'true'
                     questions_marked += 1
 
         # Write back to file
         with open(LOG_CSV_FILE, 'w', encoding='utf-8', newline='') as f:
-            fieldnames = ['question_number', 'category', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp']
+            fieldnames = ['question_number', 'theme', 'question', 'question_image', 'style', 'answer', 'answer_image', 'is_used', 'created_timestamp']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(rows)
@@ -213,13 +213,13 @@ def export_questions_to_csv(output_filename='questions_export.csv'):
         
         with open(output_filename, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(['category', 'question', 'is_used', 'available_styles'])
+            writer.writerow(['theme', 'question', 'is_used', 'available_styles'])
             
-            for category, questions in questions_by_category.items():
+            for theme, questions in questions_by_category.items():
                 for question in questions:
                     is_used = question in used_questions
-                    available_styles = ', '.join(styles_by_category.get(category, []))
-                    writer.writerow([category, question, is_used, available_styles])
+                    available_styles = ', '.join(styles_by_category.get(theme, []))
+                    writer.writerow([theme, question, is_used, available_styles])
         
         log.info(f"Exported questions to {output_filename}")
         return True
@@ -239,13 +239,13 @@ def read_log_csv():
         with open(LOG_CSV_FILE, 'r', encoding='utf-8', newline='') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                category = row.get('category', '').strip()
+                theme = row.get('theme', '').strip()
                 question = row.get('question', '').strip()
                 answer = row.get('answer', '').strip()
                 
-                if category and question:
+                if theme and question:
                     qa_pair = {
-                        'category': category,
+                        'theme': theme,
                         'question': question,
                         'answer': answer,
                         'question_number': row.get('question_number', ''),

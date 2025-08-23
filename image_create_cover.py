@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Cover Image Generator Module
-Creates professional cover images for volumes and categories
+Creates professional cover images for volumes and themes
 """
 
 import os
@@ -23,7 +23,7 @@ def generate_cover_image(cover_type, volume_number=None, output_dir="images"):
     Generate a professional cover image with only brand information
     
     Args:
-        cover_type (str): Type of cover ('volume', 'category', 'compilation')
+        cover_type (str): Type of cover ('volume', 'theme', 'compilation')
         volume_number (int): Volume number for brand text
         output_dir (str): Output directory
     
@@ -44,7 +44,7 @@ def generate_cover_image(cover_type, volume_number=None, output_dir="images"):
         # Generate image using AI
         generated_path, _ = generate_image_with_retry(
             prompt=prompt,
-            category="cover",
+            theme="cover",
             image_number="cover",
             image_type="cover"
         )
@@ -147,23 +147,23 @@ def create_volume_cover(volume_number, qa_pairs, output_dir="images"):
         log.error(f"Error creating volume cover: {e}")
         return None
 
-def create_category_cover(category, qa_pairs, output_dir="images"):
+def create_category_cover(theme, qa_pairs, output_dir="images"):
     """
-    Create a category cover image with only brand information
+    Create a theme cover image with only brand information
     
     Args:
-        category (str): Category name
-        qa_pairs (list): Q&A pairs for this category
+        theme (str): Theme name
+        qa_pairs (list): Q&A pairs for this theme
         output_dir (str): Output directory
     
     Returns:
         str: Path to cover image
     """
     try:
-        return generate_cover_image('category', None, output_dir)
+        return generate_cover_image('theme', None, output_dir)
         
     except Exception as e:
-        log.error(f"Error creating category cover: {e}")
+        log.error(f"Error creating theme cover: {e}")
         return None
 
 def create_compilation_cover(compilation_type, qa_pairs, output_dir="images"):

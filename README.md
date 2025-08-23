@@ -18,10 +18,10 @@ Generate professional research questions, create stunning visual content, and pr
 
 ### **Advanced AI Modules:**
 - **Research Path Finder**: Unified system combining cross-disciplinary questions with AI-powered research analysis
-- **Research Question Creator**: AI-powered architectural questions with category-specific prompts
+- **Research Question Creator**: AI-powered architectural questions with theme-specific prompts
 - **Research Answer Creator**: Intelligent content summarization with style matching
 - **Image Creator**: AI-generated architectural visuals with text overlay
-- **Image Style Creator**: Dynamic style selection based on category and content
+- **Image Style Creator**: Dynamic style selection based on theme and content
 - **Image Cover Creator**: Professional cover pages with AI-generated background prompts
 - **Image TOC Creator**: Table of contents with AI-powered background visualization
 - **Layout Manager**: Unified design system for consistent spacing, typography, and layout
@@ -42,7 +42,7 @@ ask/
 ├── research_csv_manager.py        # Core CSV operations and data handling
 ├── research_statistics.py         # Statistics and analytics
 ├── research_backup_manager.py     # Backup and restore operations
-├── research_categories_data.py    # Category data management
+├── research_categories_data.py    # Theme data management
 ├── research_theme_system.py       # Theme system
 ├── image_generation_system.py     # Complete image generation system
 ├── image_create_ai.py             # AI-powered image generation
@@ -78,16 +78,16 @@ Your system includes **2,667 cross-disciplinary themes**, creating the most comp
 1. **2,580 Specific Focus Themes** (from subcategories)
    - **Format**: `{main_category}_{subcategory}`
    - **Example**: `architecture_residential`, `construction_steel_frame`, `design_user_centered`
-   - **Categories per theme**: 12 (main category + 11 related categories)
+   - **Themes per theme**: 12 (main theme + 11 related themes)
 
-2. **86 Specific Focus Themes** (from main categories)
-   - **Format**: `main_{category}`
+2. **86 Specific Focus Themes** (from main themes)
+   - **Format**: `main_{theme}`
    - **Example**: `main_architecture`, `main_construction`, `main_design`
-   - **Categories per theme**: 12 (main category + 11 related categories)
+   - **Themes per theme**: 12 (main theme + 11 related themes)
 
-3. **1 Comprehensive Theme** (all categories)
+3. **1 Comprehensive Theme** (all themes)
    - **Format**: `all_categories`
-   - **Categories per theme**: 86 (all main categories)
+   - **Themes per theme**: 86 (all main themes)
 
 #### **Example Theme Questions:**
 
@@ -95,18 +95,18 @@ Your system includes **2,667 cross-disciplinary themes**, creating the most comp
 - **Theme**: `architecture_residential`
 - **Question**: "How do Architecture, Construction, and Design work together in residential architecture?"
 
-**Main Category Theme:**
+**Main Theme Theme:**
 - **Theme**: `main_construction`
 - **Question**: "How do Construction, Architecture, and Engineering work together in construction?"
 
-**All Categories Theme:**
+**All Themes Theme:**
 - **Theme**: `all_categories`
 - **Question**: "How do Architecture, Construction, and Design work together in comprehensive architectural research?"
 
 #### **System Capabilities:**
 
 - **Massive Theme Coverage**: 2,667 themes for maximum research flexibility
-- **Flexible Question Generation**: Simple (2-3), Mixed (3-5), Complex (4-6 categories)
+- **Flexible Question Generation**: Simple (2-3), Mixed (3-5), Complex (4-6 themes)
 - **Smart Configuration**: Random theme selection from 2,667 available themes
 - **Research Excellence**: Granular to comprehensive research options
 
@@ -228,19 +228,19 @@ The **Image Generation System** converts all PDF generation features into compre
 #### **📄 Image Generation Features** (8 features converted)
 - `CREATE_INDIVIDUAL_IMAGES=true` - Create individual images for each Q&A pair
 - `CREATE_FINAL_COMPILATION=true` - Create final compilation image
-- `CREATE_AUTOMATIC_CATEGORY_COMPILATIONS=false` - Create automatic category compilations
+- `CREATE_AUTOMATIC_THEME_COMPILATIONS=false` - Create automatic theme compilations
 - `CREATE_COVER_IMAGE=true` - Create cover image for volume
 - `CREATE_TABLE_OF_CONTENTS=true` - Create table of contents image
 - `CREATE_SEQUENTIAL_TOC=true` - Create sequential table of contents
-- `CREATE_CATEGORY_TOC=true` - Create category table of contents
+- `CREATE_THEME_TOC=true` - Create theme table of contents
 - `PRESERVE_TEMP_FILES=true` - Preserve temporary files
 
 #### **📊 Table of Contents Features** (5 features converted)
 - `TOC_SHOW_FULL_QUESTIONS=true` - Show full questions in TOC
 - `TOC_BACKGROUND_PROMPT=true` - Use background prompt for TOC images
-- `TOC_CATEGORY_GROUPING=true` - Group by category in TOC
-- `TOC_GROUP_UNKNOWN_CATEGORIES=true` - Group unknown categories
-- `TOC_SORT_CATEGORIES_ALPHABETICALLY=true` - Sort categories alphabetically
+- `TOC_THEME_GROUPING=true` - Group by theme in TOC
+- `TOC_GROUP_UNKNOWN_CATEGORIES=true` - Group unknown themes
+- `TOC_SORT_THEMES_ALPHABETICALLY=true` - Sort themes alphabetically
 
 #### **📝 Logging Features** (5 features converted)
 - `LOG_SUCCESS_MESSAGES=true` - Log success messages
@@ -276,19 +276,19 @@ The **Image Generation System** converts all PDF generation features into compre
 
 #### **Compilation Images**
 - **Final Compilation**: Single image showcasing all Q&A pairs
-- **Category Compilations**: Separate images for each architectural category
+- **Theme Compilations**: Separate images for each architectural theme
 - **Grid Layout**: Organized presentation of multiple Q&A pairs
 
 #### **Cover Images**
 - **Volume Covers**: Professional covers for each content volume
-- **Category Covers**: Specialized covers for different architectural categories
+- **Theme Covers**: Specialized covers for different architectural themes
 - **Branded Design**: Consistent ASK branding and professional appearance
 
 #### **Table of Contents Images**
 - **Main TOC**: Complete table of contents with all Q&A pairs
 - **Sequential TOC**: Numbered list of all content in order
-- **Category TOC**: Organized by architectural categories
-- **Interactive Layout**: Easy-to-read format with category grouping
+- **Theme TOC**: Organized by architectural themes
+- **Interactive Layout**: Easy-to-read format with theme grouping
 
 ### **Usage**
 
@@ -341,7 +341,7 @@ images/
 ├── toc/                      # Table of contents
 │   ├── ASK-TOC-20241201_143022.jpg
 │   ├── ASK-Sequential-TOC-20241201_143022.jpg
-│   └── ASK-Category-TOC-20241201_143022.jpg
+│   └── ASK-Theme-TOC-20241201_143022.jpg
 ├── compilations/             # Compilation images
 │   ├── ASK-Compilation-Research.jpg
 │   └── ASK-architectural_design-Compilation.jpg
@@ -419,7 +419,7 @@ ERROR_MAX_FAILURES=10
 - `CROSS_DISCIPLINARY_SYNTHESIS_FREQUENCY=0.1` - 10% will synthesize from answers
 
 ### **Question Generation:**
-- `QUESTIONS_PER_category=1` - Generate one question per category
+- `QUESTIONS_PER_category=1` - Generate one question per theme
 - `QA_PAIRS_TO_GENERATE=2` - Number of Q&A pairs to generate
 - `CHAINED_FLOW_ENABLED=true` - Enable chained question generation
 
@@ -438,7 +438,7 @@ ERROR_MAX_FAILURES=10
 | **Cross-Disciplinary** | `CROSS_DISCIPLINARY_THEME_COUNT` | `10` | Number of themes (10 themes = 10 Q&A pairs) |
 | **Simple** | `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
 | **Chained** | `CHAIN_LENGTH` | `5` | Questions per chain (2 themes × 5 chains = 10 Q&A pairs) |
-| **Chained** | `THEMES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
+| **Chained** | `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
 | **Chained** | `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
 
 ### **Theme Configuration**
@@ -446,7 +446,7 @@ ERROR_MAX_FAILURES=10
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `SIMPLE_MODE_THEMES` | `design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology` | Themes for simple mode |
-| `THEMES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
+| `CATEGORIES_TO_GENERATE` | `design_research,technology_innovation` | Themes for chained mode |
 | `DEFAULT_CHAINED_THEMES` | `design_research,technology_innovation` | Default themes for chained mode |
 
 ### **Enhanced Features Configuration**
@@ -466,12 +466,12 @@ ERROR_MAX_FAILURES=10
 ## 🎯 **Module Functions**
 
 ### **Research Path Finder (`research_find_path.py`):**
-- **2,667 theme system**: Every subcategory and main category becomes a research theme
+- **2,667 theme system**: Every subcategory and main theme becomes a research theme
 - **Question patterns**: 30 different types of cross-disciplinary question patterns
-- **Category relationships**: 1,032+ intelligent connections between categories
+- **Theme relationships**: 1,032+ intelligent connections between themes
 - **Synthesis capabilities**: Multi-domain insight integration
 - **Research direction analysis**: AI-powered insights into research gaps and opportunities
-- **Cross-disciplinary discovery**: Connection identification between categories
+- **Cross-disciplinary discovery**: Connection identification between themes
 - **Exploration patterns**: Systematic research approaches (temporal, spatial, thematic, etc.)
 - **Insights discovery**: AI-driven research findings and synthesis
 - **Intelligent question generation**: AI-guided theme selection based on research analysis
@@ -486,8 +486,8 @@ ERROR_MAX_FAILURES=10
 
 ### **Research Data Management:**
 - **`research_csv_manager.py`**: Core CSV operations, data reading/writing, image numbering, export functionality
-- **`research_statistics.py`**: Question statistics, category analytics, usage tracking, comprehensive reporting
-- **`research_answer_manager.py`**: Answer retrieval, historical chaining, category-specific answer selection, next question optimization
+- **`research_statistics.py`**: Question statistics, theme analytics, usage tracking, comprehensive reporting
+- **`research_answer_manager.py`**: Answer retrieval, historical chaining, theme-specific answer selection, next question optimization
 - **`research_backup_manager.py`**: Data backup, restore operations, timestamped backups, data safety
 
 ### **Image Creation System:**
@@ -557,7 +557,7 @@ question = generate_theme_based_question(theme)
 # Result: "How do Architecture, Construction, and Design work together in residential architecture?"
 
 # Generate synthesis question from multiple answers
-question = generate_synthesis_question_from_answers(answers, category)
+question = generate_synthesis_question_from_answers(answers, theme)
 # Result: "Given insights from Architecture and Construction, how can we apply these principles to advance Smart Cities?"
 
 # Generate intelligent theme question based on research analysis
@@ -567,7 +567,7 @@ question = generate_intelligent_theme_question(research_context="sustainability"
 
 ### **Research Analysis:**
 ```python
-# Analyze research direction for a category
+# Analyze research direction for a theme
 analysis = analyze_research_direction("architecture", current_questions, previous_insights)
 # Result: AI-powered analysis of research gaps and opportunities
 
@@ -628,11 +628,11 @@ CREATE_COVER_IMAGE=true
 ## 📊 **System Statistics**
 
 - **2,667 Cross-Disciplinary Themes**: Maximum research flexibility
-- **86 Main Categories**: Comprehensive architectural coverage
-- **1,032+ Category Relationships**: Intelligent cross-disciplinary connections
+- **86 Main Themes**: Comprehensive architectural coverage
+- **1,032+ Theme Relationships**: Intelligent cross-disciplinary connections
 - **30 Question Patterns**: Diverse cross-disciplinary question types
 - **30 Context Areas**: Relevant research contexts
-- **Unlimited Research Combinations**: Any 2-6 categories per question
+- **Unlimited Research Combinations**: Any 2-6 themes per question
 - **AI-Powered Research Analysis**: Intelligent research direction guidance
 - **Professional Image Generation**: Complete publication system with AI backgrounds
 - **150+ Configuration Options**: Comprehensive customization capabilities
@@ -686,13 +686,13 @@ Breakthrough opps     Intelligent theme     Brand integration     Layout managem
 - You want quick, single Q&A pairs
 - You're new to the system
 - You need straightforward content generation
-- You want to focus on one category at a time
+- You want to focus on one theme at a time
 
 ### **Use Hybrid Mode When**:
 - You want sophisticated, connected content
 - You're creating educational materials
 - You need progressive learning paths
-- You want to explore category intersections deeply
+- You want to explore theme intersections deeply
 
 ### **Use Cross-Disciplinary Mode When**:
 - You want innovative, boundary-crossing content
@@ -768,7 +768,7 @@ LOG_LEVEL=DEBUG
 4. **Enable Covers**: Set `SIMPLE_PIPELINE_GENERATE_COVERS=true` for professional output
 5. **Export Data**: Set `SIMPLE_PIPELINE_EXPORT_DATA=true` to save your content
 6. **Check Backups**: Look for `log.csv.backup_*` files for data safety
-7. **Custom Themes**: Edit `THEMES_TO_GENERATE` for chained mode
+7. **Custom Themes**: Edit `CATEGORIES_TO_GENERATE` for chained mode
 8. **Longer Chains**: Increase `HYBRID_CHAIN_LENGTH` and `CHAIN_LENGTH` for deeper exploration
 
 ---

@@ -15,12 +15,12 @@ log = logging.getLogger(__name__)
 
 # Environment variables
 IMAGES_DIR = os.getenv('IMAGES_DIR', 'images')
-IMAGE_FILENAME_TEMPLATE = os.getenv('IMAGE_FILENAME_TEMPLATE', 'ASK-{image_number:02d}-{category}-{image_type}.jpg')
+IMAGE_FILENAME_TEMPLATE = os.getenv('IMAGE_FILENAME_TEMPLATE', 'ASK-{image_number:02d}-{theme}-{image_type}.jpg')
 
-def generate_image_with_retry(prompt, category, image_number, max_retries=None, timeout=None, image_type="q"):
+def generate_image_with_retry(prompt, theme, image_number, max_retries=None, timeout=None, image_type="q"):
     """Generate Instagram story image using Together.ai API with retry logic"""
 
-    # Get style for category using advanced style generator
+    # Get style for theme using advanced style generator
     from research_csv_manager import get_questions_and_styles_from_log
     from style_data_manager import get_base_styles_for_category
     from style_ai_generator import get_ai_generated_style_suggestion, create_dynamic_style_combination
@@ -30,7 +30,7 @@ def generate_image_with_retry(prompt, category, image_number, max_retries=None, 
     # Get the question for context-aware style selection
     questions_data, _, _ = get_questions_and_styles_from_log()
     question = None
-    for q_data in questions_data.get(category, []):
+    for q_data in questions_data.get(theme, []):
         if isinstance(q_data, dict):
             question = q_data.get('question')
             break
@@ -39,29 +39,29 @@ def generate_image_with_retry(prompt, category, image_number, max_retries=None, 
             break
 
     # Get available styles
-    available_styles = get_base_styles_for_category(category)
+    available_styles = get_base_styles_for_category(theme)
     if not available_styles:
         style = 'Modern'  # Fallback
     else:
         # If question is provided, try AI suggestions
         if question:
-            ai_suggestions = get_ai_generated_style_suggestion(category, question)
+            ai_suggestions = get_ai_generated_style_suggestion(theme, question)
             if ai_suggestions:
                 selected_style = random.choice(ai_suggestions)
                 # Create dynamic combination
-                style = create_dynamic_style_combination(category, selected_style, question)
+                style = create_dynamic_style_combination(theme, selected_style, question)
             else:
                 # Fallback to random selection
                 style = random.choice(available_styles)
         else:
             # Fallback to random selection
             style = random.choice(available_styles)
-    log.info(f"Selected style for {category}: {style}")
+    log.info(f"Selected style for {theme}: {style}")
 
     # Craft a detailed prompt optimized for FLUX.1 schnell
     formatted_prompt = (
         f"Professional architectural visualization, {style} architectural style. "
-        f"Focus on {category} aspects. {prompt} "
+        f"Focus on {theme} aspects. {prompt} "
         f"High-quality, photorealistic, detailed, professional photography, architectural visualisation"
     )
 
@@ -73,14 +73,14 @@ def generate_image_with_retry(prompt, category, image_number, max_retries=None, 
     )
 
     if not image_url:
-        raise Exception(f"Failed to generate image URL for {category} image {image_number}")
+        raise Exception(f"Failed to generate image URL for {theme} image {image_number}")
 
     # Generate filename using template
-    filename = f"{IMAGES_DIR}/{IMAGE_FILENAME_TEMPLATE.format(image_number=int(image_number), category=category, image_type=image_type)}"
+    filename = f"{IMAGES_DIR}/{IMAGE_FILENAME_TEMPLATE.format(image_number=int(image_number), theme=theme, image_type=image_type)}"
 
     # Download and save image using the API client
     if api_client.download_image(image_url, filename):
-        log.info(f"Generated {category} image {image_number}: {filename}")
+        log.info(f"Generated {theme} image {image_number}: {filename}")
         return filename, style
     else:
-        raise Exception(f"Failed to download image for {category} image {image_number}")
+        raise Exception(f"Failed to download image for {theme} image {image_number}")

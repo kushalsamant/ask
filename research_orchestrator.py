@@ -1,35 +1,40 @@
+import os
+import logging
+from typing import List, Optional, Dict, Tuple
+from research_question_generator import generate_single_question_for_category, generate_question_from_answer
+from research_answer_generator import generate_answer
+from research_csv_manager import (
+from research_statistics import (
+from research_answer_manager import (
+from research_find_path import (
+            import random
+                import time
+            from research_question_api import call_together_api
+            from research_question_prompts import create_category_question_prompt
+            from research_question_api import process_question_response
 #!/usr/bin/env python3
 """
 Research Orchestrator Module
 Focused wrapper for all research pipeline operations
 """
 
-import os
-import logging
-from typing import List, Optional, Dict, Tuple
 
 # Import core research modules
-from research_question_generator import generate_single_question_for_category, generate_question_from_answer
-from research_answer_generator import generate_answer
-from research_csv_manager import (
     get_questions_and_styles_from_log,
     get_next_image_number,
     log_single_question,
     mark_questions_as_used,
     export_questions_to_csv
 )
-from research_statistics import (
     get_questions_by_category,
     get_used_questions_count,
     get_total_questions_count,
     get_questions_statistics
 )
-from research_answer_manager import (
     get_latest_answers_from_log,
     get_latest_answer_for_category,
     get_best_answer_for_next_question
 )
-from research_find_path import (
     generate_cross_disciplinary_question,
     generate_theme_based_question,
     get_cross_disciplinary_insights,
@@ -48,36 +53,36 @@ class ResearchOrchestrator:
         """Initialize research orchestrator"""
         self.log_file = log_file
     
-    def generate_qa_pairs(self, categories: List[str], questions_per_category: int = 1) -> List[dict]:
+    def generate_qa_pairs(self, themes: List[str], questions_per_category: int = 1) -> List[dict]:
         """
-        Generate Q&A pairs for specified categories
+        Generate Q&A pairs for specified themes
         
         Args:
-            categories: List of categories to generate Q&A pairs for
-            questions_per_category: Number of questions per category
+            themes: List of themes to generate Q&A pairs for
+            questions_per_category: Number of questions per theme
             
         Returns:
             List of Q&A pair dictionaries
         """
-        log.info(f"Generating Q&A pairs for {len(categories)} categories...")
+        log.info(f"Generating Q&A pairs for {len(themes)} themes...")
         
         qa_pairs = []
         
-        for category in categories:
+        for theme in themes:
             for i in range(questions_per_category):
                 try:
-                    log.info(f"Generating Q&A pair {i+1}/{questions_per_category} for {category}")
+                    log.info(f"Generating Q&A pair {i+1}/{questions_per_category} for {theme}")
                     
                     # Generate question
-                    question = self._generate_question_for_category(category)
+                    question = self._generate_question_for_category(theme)
                     if not question:
-                        log.error(f"Failed to generate question for {category}")
+                        log.error(f"Failed to generate question for {theme}")
                         continue
                     
                     # Generate answer
-                    answer = self._generate_answer_for_question(question, category)
+                    answer = self._generate_answer_for_question(question, theme)
                     if not answer:
-                        log.error(f"Failed to generate answer for {category}")
+                        log.error(f"Failed to generate answer for {theme}")
                         continue
                     
                     # Get next image number
@@ -85,7 +90,7 @@ class ResearchOrchestrator:
                     
                     # Create Q&A pair
                     qa_pair = {
-                        'category': category,
+                        'theme': theme,
                         'question_text': question,
                         'answer_text': answer,
                         'image_number': image_number
@@ -94,46 +99,46 @@ class ResearchOrchestrator:
                     qa_pairs.append(qa_pair)
                     
                     # Log to CSV
-                    log_single_question(category, question, answer, image_number)
+                    log_single_question(theme, question, answer, image_number)
                     
-                    log.info(f"✅ Generated Q&A pair for {category}: {question[:50]}...")
+                    log.info(f"✅ Generated Q&A pair for {theme}: {question[:50]}...")
                     
                 except Exception as e:
-                    log.error(f"Failed to generate Q&A pair for {category}: {e}")
+                    log.error(f"Failed to generate Q&A pair for {theme}: {e}")
         
         return qa_pairs
     
-    def generate_chained_qa_pairs(self, categories: List[str], chain_length: int = 2) -> List[dict]:
+    def generate_chained_qa_pairs(self, themes: List[str], chain_length: int = 2) -> List[dict]:
         """
         Generate chained Q&A pairs where each question builds on the previous answer
         
         Args:
-            categories: List of categories to generate Q&A pairs for
+            themes: List of themes to generate Q&A pairs for
             chain_length: Number of Q&A pairs in the chain
             
         Returns:
             List of Q&A pair dictionaries
         """
-        log.info(f"Generating chained Q&A pairs for {len(categories)} categories...")
+        log.info(f"Generating chained Q&A pairs for {len(themes)} themes...")
         
         qa_pairs = []
         
-        for category in categories:
+        for theme in themes:
             try:
-                log.info(f"Generating chained Q&A pairs for {category}")
+                log.info(f"Generating chained Q&A pairs for {theme}")
                 
                 # Generate initial question
-                current_question = self._generate_question_for_category(category)
+                current_question = self._generate_question_for_category(theme)
                 if not current_question:
-                    log.error(f"Failed to generate initial question for {category}")
+                    log.error(f"Failed to generate initial question for {theme}")
                     continue
                 
                 for i in range(chain_length):
                     try:
                         # Generate answer for current question
-                        current_answer = self._generate_answer_for_question(current_question, category)
+                        current_answer = self._generate_answer_for_question(current_question, theme)
                         if not current_answer:
-                            log.error(f"Failed to generate answer for {category} (step {i+1})")
+                            log.error(f"Failed to generate answer for {theme} (step {i+1})")
                             break
                         
                         # Get next image number
@@ -141,7 +146,7 @@ class ResearchOrchestrator:
                         
                         # Create Q&A pair
                         qa_pair = {
-                            'category': category,
+                            'theme': theme,
                             'question_text': current_question,
                             'answer_text': current_answer,
                             'image_number': image_number
@@ -150,23 +155,23 @@ class ResearchOrchestrator:
                         qa_pairs.append(qa_pair)
                         
                         # Log to CSV
-                        log_single_question(category, current_question, current_answer, image_number)
+                        log_single_question(theme, current_question, current_answer, image_number)
                         
-                        log.info(f"✅ Generated chained Q&A pair {i+1}/{chain_length} for {category}")
+                        log.info(f"✅ Generated chained Q&A pair {i+1}/{chain_length} for {theme}")
                         
                         # Generate next question based on answer (if not the last iteration)
                         if i < chain_length - 1:
-                            current_question = self._generate_question_from_answer(current_answer, category)
+                            current_question = self._generate_question_from_answer(current_answer, theme)
                             if not current_question:
-                                log.error(f"Failed to generate chained question for {category} (step {i+1})")
+                                log.error(f"Failed to generate chained question for {theme} (step {i+1})")
                                 break
                         
                     except Exception as e:
-                        log.error(f"Failed to generate chained Q&A pair {i+1} for {category}: {e}")
+                        log.error(f"Failed to generate chained Q&A pair {i+1} for {theme}: {e}")
                         break
                         
             except Exception as e:
-                log.error(f"Failed to generate chained Q&A pairs for {category}: {e}")
+                log.error(f"Failed to generate chained Q&A pairs for {theme}: {e}")
         
         return qa_pairs
     
@@ -192,7 +197,6 @@ class ResearchOrchestrator:
                 return qa_pairs
             
             # Select themes for cross-disciplinary exploration
-            import random
             selected_themes = random.sample(themes, min(theme_count, len(themes)))
             
             for i, theme in enumerate(selected_themes, 1):
@@ -216,7 +220,7 @@ class ResearchOrchestrator:
                     
                     # Create Q&A pair
                     qa_pair = {
-                        'category': 'cross_disciplinary',
+                        'theme': 'cross_disciplinary',
                         'question_text': question,
                         'answer_text': answer,
                         'image_number': image_number,
@@ -261,7 +265,6 @@ class ResearchOrchestrator:
                 return qa_pairs
             
             # Select themes for cross-disciplinary exploration
-            import random
             selected_themes = random.sample(themes, min(theme_count, len(themes)))
             
             for theme_idx, theme in enumerate(selected_themes, 1):
@@ -290,7 +293,7 @@ class ResearchOrchestrator:
                     
                     # Create initial Q&A pair
                     initial_qa_pair = {
-                        'category': 'cross_disciplinary',
+                        'theme': 'cross_disciplinary',
                         'question_text': initial_question,
                         'answer_text': initial_answer,
                         'image_number': image_number,
@@ -333,7 +336,7 @@ class ResearchOrchestrator:
                             
                             # Create chained Q&A pair
                             chained_qa_pair = {
-                                'category': 'cross_disciplinary',
+                                'theme': 'cross_disciplinary',
                                 'question_text': next_question,
                                 'answer_text': next_answer,
                                 'image_number': image_number,
@@ -370,73 +373,70 @@ class ResearchOrchestrator:
         log.info(f"✅ Generated {len(qa_pairs)} total Q&A pairs in hybrid chains")
         return qa_pairs
     
-    def _generate_question_for_category(self, category: str, max_retries: int = 5) -> Optional[str]:
-        """Generate question for specific category with retry logic"""
+    def _generate_question_for_category(self, theme: str, max_retries: int = 5) -> Optional[str]:
+        """Generate question for specific theme with retry logic"""
         # Fixed retry delays: 30, 60, 90, 120, 150 seconds
         retry_delays = [30, 60, 90, 120, 150]
         
         for attempt in range(max_retries):
             try:
-                question = generate_single_question_for_category(category)
+                question = generate_single_question_for_category(theme)
                 if question:
                     return question
-                log.warning(f"Attempt {attempt + 1}/{max_retries}: No question generated for {category}")
+                log.warning(f"Attempt {attempt + 1}/{max_retries}: No question generated for {theme}")
             except Exception as e:
-                log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating question for {category}: {e}")
+                log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating question for {theme}: {e}")
             
             if attempt < max_retries - 1:
-                import time
                 wait_time = retry_delays[attempt]
                 log.info(f"Waiting {wait_time} seconds before retry {attempt + 2}/{max_retries}")
                 time.sleep(wait_time)
         
-        log.error(f"Failed to generate question for {category} after {max_retries} attempts")
+        log.error(f"Failed to generate question for {theme} after {max_retries} attempts")
         return None
     
-    def _generate_question_from_answer(self, answer: str, category: str, max_retries: int = 5) -> Optional[str]:
+    def _generate_question_from_answer(self, answer: str, theme: str, max_retries: int = 5) -> Optional[str]:
         """Generate question based on previous answer with retry logic"""
         # Fixed retry delays: 30, 60, 90, 120, 150 seconds
         retry_delays = [30, 60, 90, 120, 150]
         
         for attempt in range(max_retries):
             try:
-                question = generate_question_from_answer(answer, category)
+                question = generate_question_from_answer(answer, theme)
                 if question:
                     return question
-                log.warning(f"Attempt {attempt + 1}/{max_retries}: No chained question generated for {category}")
+                log.warning(f"Attempt {attempt + 1}/{max_retries}: No chained question generated for {theme}")
             except Exception as e:
-                log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating chained question for {category}: {e}")
+                log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating chained question for {theme}: {e}")
             
             if attempt < max_retries - 1:
-                import time
                 wait_time = retry_delays[attempt]
                 log.info(f"Waiting {wait_time} seconds before retry {attempt + 2}/{max_retries}")
                 time.sleep(wait_time)
         
-        log.error(f"Failed to generate chained question for {category} after {max_retries} attempts")
+        log.error(f"Failed to generate chained question for {theme} after {max_retries} attempts")
         return None
     
-    def _generate_answer_for_question(self, question: str, category: str, max_retries: int = 5) -> Optional[str]:
+    def _generate_answer_for_question(self, question: str, theme: str, max_retries: int = 5) -> Optional[str]:
         """Generate answer for specific question with retry logic"""
         # Fixed retry delays: 30, 60, 90, 120, 150 seconds
         retry_delays = [30, 60, 90, 120, 150]
         
         for attempt in range(max_retries):
             try:
-                answer = generate_answer(question, category, None)  # Pass None for image_path
+                answer = generate_answer(question, theme, None)  # Pass None for image_path
                 if answer:
                     return answer
-                log.warning(f"Attempt {attempt + 1}/{max_retries}: No answer generated for {category}")
+                log.warning(f"Attempt {attempt + 1}/{max_retries}: No answer generated for {theme}")
             except Exception as e:
-                log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating answer for {category}: {e}")
+                log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating answer for {theme}: {e}")
             
             if attempt < max_retries - 1:
-                import time
                 wait_time = retry_delays[attempt]
                 log.info(f"Waiting {wait_time} seconds before retry {attempt + 2}/{max_retries}")
                 time.sleep(wait_time)
         
-        log.error(f"Failed to generate answer for {category} after {max_retries} attempts")
+        log.error(f"Failed to generate answer for {theme} after {max_retries} attempts")
         return None
     
     def _generate_chained_cross_disciplinary_question(self, previous_answer: str, theme: str, original_question_data: dict) -> Optional[str]:
@@ -452,24 +452,24 @@ class ResearchOrchestrator:
             Generated chained question or None if failed
         """
         try:
-            # Extract categories from original question data
-            categories = []
+            # Extract themes from original question data
+            themes = []
             if 'primary_category' in original_question_data:
-                categories.extend([original_question_data['primary_category'], original_question_data['secondary_category']])
-            elif 'categories' in original_question_data:
-                categories.extend(original_question_data['categories'])
+                themes.extend([original_question_data['primary_category'], original_question_data['secondary_category']])
+            elif 'themes' in original_question_data:
+                themes.extend(original_question_data['themes'])
             
             # Create a prompt for generating chained cross-disciplinary questions
             prompt = f"""
             Previous Cross-Disciplinary Question: {original_question_data.get('question', '')}
             Theme: {theme}
-            Categories Involved: {', '.join(categories)}
+            Themes Involved: {', '.join(themes)}
             Previous Answer: {previous_answer}
             
             Generate a follow-up question that:
             1. Builds upon the insights from the previous answer
             2. Explores deeper aspects of the cross-disciplinary intersection
-            3. Maintains the connection between the involved categories
+            3. Maintains the connection between the involved themes
             4. Advances the exploration of the theme
             5. Is specific and actionable
             
@@ -477,10 +477,8 @@ class ResearchOrchestrator:
             """
             
             # Use the existing question generation infrastructure
-            from research_question_api import call_together_api
-            from research_question_prompts import create_category_question_prompt
             
-            system_prompt = "You are an expert architectural researcher specializing in cross-disciplinary exploration. Generate insightful follow-up questions that build upon previous answers and explore deeper connections between architectural categories."
+            system_prompt = "You are an expert architectural researcher specializing in cross-disciplinary exploration. Generate insightful follow-up questions that build upon previous answers and explore deeper connections between architectural themes."
             
             # Call API to generate the chained question
             raw_response = call_together_api(prompt, system_prompt)
@@ -490,7 +488,6 @@ class ResearchOrchestrator:
                 return None
             
             # Process the response to extract the question
-            from research_question_api import process_question_response
             question = process_question_response(raw_response)
             
             if not question:
@@ -581,7 +578,7 @@ class ResearchOrchestrator:
             Number of questions marked as used
         """
         try:
-            questions_dict = {qa['category']: qa['question_text'] for qa in qa_pairs}
+            questions_dict = {qa['theme']: qa['question_text'] for qa in qa_pairs}
             marked_count = mark_questions_as_used(questions_dict)
             
             log.info(f"✅ Marked {marked_count} questions as used")

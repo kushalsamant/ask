@@ -1,59 +1,14 @@
-## **🎯 Complete List of Optional Features (True/False Configuration)**
+check every line in every file in the repo: 
+replace theme with theme
 
-### **🔧 API & System Configuration**
-- `API_EXPONENTIAL_BACKOFF=false` - Use fixed retry delays instead of exponential
+check every line in every file in the repo: 
+use themes with themes
 
-### **📚 Question Generation Features**
-- `ENFORCE_category_COUNT=true` - Enforce category count
-- `CHAINED_FLOW_ENABLED=true` - Enable chained flow
-- `ANSWER_SELECTION_FROM_LOG=true` - Use log.csv answers
-- `ANSWER_PREFER_SAME_CATEGORY=true` - Prefer same category
+check every line in every file in the repo: 
+is there a duplicate of this line?
 
-### **🎨 Style Generation Features**
-- `STYLE_GENERATION_ENABLED=true` - Enable style generation
-- `STYLE_CACHE_ENABLED=true` - Enable style cache
-- `STYLE_FALLBACK_ENABLED=true` - Enable style fallback
+check every line in every file in the repo: 
+is this line actually needed?
 
-### **🔍 Research Explorer Features**
-- `RESEARCH_EXPLORER_ENABLED=true` - Enable research explorer
-- `RESEARCH_DIMENSIONS_ENABLED=true` - Enable dimensions
-- `RESEARCH_INSIGHTS_ENABLED=true` - Enable insights
-
-### **💾 Data Management Features**
-- `LOG_BACKUP_ENABLED=true` - Enable backup
-
-### **🖼️ Image Configuration**
-- `IMAGE_NUMBER_INCLUDE_IN_QA_PAIRS=true` - Include in Q&A pairs
-
-### **�� Cross-Disciplinary Features**
-- `CROSS_DISCIPLINARY_ENABLED=true` - Enable cross-disciplinary mode
-
-### **🎯 Hybrid Mode Features**
-- `HYBRID_ENABLED=true` - Enable hybrid mode
-
-### **🚀 Simple Pipeline Enhancement Features**
-- `SIMPLE_PIPELINE_GENERATE_COVERS=false` - Enable cover image generation in simple pipeline
-- `SIMPLE_PIPELINE_SHOW_STATISTICS=true` - Show detailed statistics at the end
-- `SIMPLE_PIPELINE_VOLUME_TRACKING=true` - Enable volume tracking and display
-- `SIMPLE_PIPELINE_MARK_QUESTIONS_USED=true` - Mark questions as used to prevent duplicates
-- `SIMPLE_PIPELINE_ANALYZE_DIRECTION=true` - Analyze research direction and trends
-- `SIMPLE_PIPELINE_CREATE_BACKUP=true` - Create automatic backups of log.csv
-- `SIMPLE_PIPELINE_EXPORT_DATA=false` - Export research data to CSV files
-
-## **📊 Summary by Category**
-
-| **Category** | **Count** | **Examples** |
-|--------------|-----------|--------------|
-| **PDF Generation** | 15 | Individual PDFs, TOC, Cover images |
-| **PDF Progress/Logging** | 13 | Progress tracking, Error handling |
-| **Simple Pipeline** | 7 | Statistics, Backups, Cover generation |
-| **Question Generation** | 4 | Chained flow, Category enforcement |
-| **Style Generation** | 3 | Style cache, Fallback |
-| **Research Explorer** | 3 | Dimensions, Insights |
-| **System/API** | 2 | Exponential backoff, Log backup |
-| **Cross-Disciplinary** | 1 | Cross-disciplinary mode |
-| **Hybrid Mode** | 1 | Hybrid mode |
-
-## **�� Total: 49 Optional Features**
-
-The repository has **49 different optional features** that can be enabled/disabled using true/false configuration options in the `ask.env` file. These features span across PDF generation, progress tracking, error handling, content generation modes, and pipeline enhancements.
+check every line in every file in the repo: 
+replace _THEME_ with _THEME_

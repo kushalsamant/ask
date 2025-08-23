@@ -34,7 +34,7 @@ def get_latest_answers_from_log(limit=5):
             for row in answer_rows[:limit]:
                 answer_data = {
                     'answer_text': row.get('answer', '').strip(),
-                    'category': row.get('category', '').strip(),
+                    'theme': row.get('theme', '').strip(),
                     'question_number': int(row.get('question_number', 0)),
                     'created_timestamp': row.get('created_timestamp', ''),
                     'style': row.get('style', '').strip()
@@ -48,23 +48,23 @@ def get_latest_answers_from_log(limit=5):
         log.error(f"Error getting latest answers from {LOG_CSV_FILE}: {e}")
         return []
 
-def get_latest_answer_for_category(category, limit=3):
-    """Get the latest answers for a specific category from log.csv"""
+def get_latest_answer_for_category(theme, limit=3):
+    """Get the latest answers for a specific theme from log.csv"""
     try:
-        all_answers = get_latest_answers_from_log(limit * 2)  # Get more to filter by category
+        all_answers = get_latest_answers_from_log(limit * 2)  # Get more to filter by theme
         
-        # Filter answers by category
-        category_answers = [answer for answer in all_answers if answer['category'] == category]
+        # Filter answers by theme
+        category_answers = [answer for answer in all_answers if answer['theme'] == theme]
         
-        # Return the latest ones for this category
+        # Return the latest ones for this theme
         return category_answers[:limit]
         
     except Exception as e:
-        log.error(f"Error getting latest answers for category {category}: {e}")
+        log.error(f"Error getting latest answers for theme {theme}: {e}")
         return []
 
 def get_best_answer_for_next_question(target_category, limit=5):
-    """Get the best answer from log.csv to generate the next question for a target category"""
+    """Get the best answer from log.csv to generate the next question for a target theme"""
     try:
         latest_answers = get_latest_answers_from_log(limit)
         
@@ -76,21 +76,21 @@ def get_best_answer_for_next_question(target_category, limit=5):
         prefer_same_category = os.getenv('ANSWER_PREFER_SAME_CATEGORY', 'true').lower() == 'true'
         
         # Priority order for answer selection:
-        # 1. Latest answer from the same category (if prefer_same_category is true)
-        # 2. Latest answer from any category
+        # 1. Latest answer from the same theme (if prefer_same_category is true)
+        # 2. Latest answer from any theme
         # 3. Most recent answer overall
         
         if prefer_same_category:
-            # First, try to find answers from the same category
-            same_category_answers = [b for b in latest_answers if b['category'] == target_category]
+            # First, try to find answers from the same theme
+            same_category_answers = [b for b in latest_answers if b['theme'] == target_category]
             if same_category_answers:
-                best_answer = same_category_answers[0]  # Latest from same category
-                log.info(f"Using latest answer from same category ({target_category}) for next question")
+                best_answer = same_category_answers[0]  # Latest from same theme
+                log.info(f"Using latest answer from same theme ({target_category}) for next question")
                 return best_answer
         
-        # If no same category answers or prefer_same_category is false, use the most recent answer
+        # If no same theme answers or prefer_same_category is false, use the most recent answer
         best_answer = latest_answers[0]  # Most recent overall
-        log.info(f"Using latest answer from category {best_answer['category']} for next question in {target_category}")
+        log.info(f"Using latest answer from theme {best_answer['theme']} for next question in {target_category}")
         return best_answer
         
     except Exception as e:

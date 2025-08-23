@@ -1,14 +1,15 @@
+import os
+import logging
+import random
+import requests
+from style_data_manager import get_base_styles_for_category
+            from style_data_manager import get_style_characteristics
 #!/usr/bin/env python3
 """
 Style AI Generator Module
 Handles AI-powered architectural style generation and suggestions
 """
 
-import os
-import logging
-import random
-import requests
-from style_data_manager import get_base_styles_for_category
 
 # Setup logging
 log = logging.getLogger(__name__)
@@ -29,7 +30,7 @@ class StyleAIGenerator:
             'innovation_factor': 0.1
         }
 
-    def get_ai_generated_style_suggestion(self, category, question, context=None):
+    def get_ai_generated_style_suggestion(self, theme, question, context=None):
         """Generate AI-powered style suggestions based on question and context"""
         try:
             url = os.getenv('TOGETHER_API_BASE', 'https://api.together.xyz/v1') + '/chat/completions'
@@ -43,11 +44,11 @@ class StyleAIGenerator:
             context_info = f"Context: {context}" if context else ""
 
             prompt = f"""Question: {question}
-            category: {category}
+            theme: {theme}
             {context_info}
 
             Based on this architectural question, suggest 3-5 most appropriate architectural styles from this list:
-            {', '.join(get_base_styles_for_category(category))}
+            {', '.join(get_base_styles_for_category(theme))}
 
             Consider:
             - How the style relates to the question's theme
@@ -77,7 +78,7 @@ class StyleAIGenerator:
                     # Parse suggestions
                     suggested_styles = [s.strip() for s in suggestions.split(',')]
                     # Filter to valid styles
-                    valid_styles = [s for s in suggested_styles if s in get_base_styles_for_category(category)]
+                    valid_styles = [s for s in suggested_styles if s in get_base_styles_for_category(theme)]
                     return valid_styles[:3]  # Return top 3 suggestions
                 else:
                     log.warning("Invalid API response for style suggestions")
@@ -90,16 +91,15 @@ class StyleAIGenerator:
             log.error(f"Error generating AI style suggestions: {e}")
             return []
 
-    def create_dynamic_style_combination(self, category, base_style, question_context=None):
+    def create_dynamic_style_combination(self, theme, base_style, question_context=None):
         """Create dynamic style combinations based on context and trends"""
         try:
-            from style_data_manager import get_style_characteristics
             
             # Get base style characteristics
             style_characteristics = get_style_characteristics(base_style)
 
             # Find complementary styles
-            complementary_styles = self.find_complementary_styles(category, base_style)
+            complementary_styles = self.find_complementary_styles(theme, base_style)
 
             # Create combination
             if complementary_styles:
@@ -119,12 +119,11 @@ class StyleAIGenerator:
             log.error(f"Error creating dynamic style combination: {e}")
             return base_style
 
-    def find_complementary_styles(self, category, base_style):
+    def find_complementary_styles(self, theme, base_style):
         """Find styles that complement the base style"""
-        from style_data_manager import get_style_characteristics
         
         base_characteristics = get_style_characteristics(base_style)
-        available_styles = get_base_styles_for_category(category)
+        available_styles = get_base_styles_for_category(theme)
 
         complementary = []
         for style in available_styles:
@@ -159,10 +158,9 @@ class StyleAIGenerator:
                 return modifier
         return None
 
-    def get_style_variations(self, category, base_style, count=3):
+    def get_style_variations(self, theme, base_style, count=3):
         """Generate style variations for a given base style"""
         try:
-            from style_data_manager import get_style_characteristics
             
             variations = []
             base_characteristics = get_style_characteristics(base_style)
@@ -190,14 +188,14 @@ class StyleAIGenerator:
 style_ai_generator = StyleAIGenerator()
 
 # Convenience functions
-def get_ai_generated_style_suggestion(category, question, context=None):
+def get_ai_generated_style_suggestion(theme, question, context=None):
     """Get AI-generated style suggestions"""
-    return style_ai_generator.get_ai_generated_style_suggestion(category, question, context)
+    return style_ai_generator.get_ai_generated_style_suggestion(theme, question, context)
 
-def create_dynamic_style_combination(category, base_style, question_context=None):
+def create_dynamic_style_combination(theme, base_style, question_context=None):
     """Create dynamic style combinations"""
-    return style_ai_generator.create_dynamic_style_combination(category, base_style, question_context)
+    return style_ai_generator.create_dynamic_style_combination(theme, base_style, question_context)
 
-def get_style_variations(category, base_style, count=3):
+def get_style_variations(theme, base_style, count=3):
     """Generate style variations"""
-    return style_ai_generator.get_style_variations(category, base_style, count)
+    return style_ai_generator.get_style_variations(theme, base_style, count)

@@ -95,9 +95,9 @@ class StyleDataManager:
                 with open(log_csv_file, 'r', encoding='utf-8') as f:
                     reader = csv.DictReader(f)
                     for row in reader:
-                        if row.get('style') and row.get('category'):
+                        if row.get('style') and row.get('theme'):
                             timestamp = row.get('created_timestamp', '')
-                            self.style_trends[row['category']].append({
+                            self.style_trends[row['theme']].append({
                                 'style': row['style'],
                                 'timestamp': timestamp,
                                 'question': row.get('question', '')
@@ -106,9 +106,9 @@ class StyleDataManager:
         except Exception as e:
             log.warning(f"Could not load style history: {e}")
 
-    def get_base_styles_for_category(self, category):
-        """Get base styles for a specific category"""
-        return self.base_styles.get(category, [])
+    def get_base_styles_for_category(self, theme):
+        """Get base styles for a specific theme"""
+        return self.base_styles.get(theme, [])
 
     def get_style_characteristics(self, style):
         """Get characteristics of a given style"""
@@ -119,19 +119,19 @@ class StyleDataManager:
         })
 
     def get_all_categories(self):
-        """Get all available categories"""
+        """Get all available themes"""
         return list(self.base_styles.keys())
 
-    def get_style_trends_data(self, category):
-        """Get style trends data for a category"""
-        return self.style_trends.get(category, [])
+    def get_style_trends_data(self, theme):
+        """Get style trends data for a theme"""
+        return self.style_trends.get(theme, [])
 
-    def add_style_usage(self, category, style, question, timestamp=None):
+    def add_style_usage(self, theme, style, question, timestamp=None):
         """Add a style usage entry to trends"""
         if timestamp is None:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
-        self.style_trends[category].append({
+        self.style_trends[theme].append({
             'style': style,
             'timestamp': timestamp,
             'question': question
@@ -141,14 +141,14 @@ class StyleDataManager:
 style_data_manager = StyleDataManager()
 
 # Convenience functions
-def get_base_styles_for_category(category):
-    """Get base styles for a specific category"""
-    return style_data_manager.get_base_styles_for_category(category)
+def get_base_styles_for_category(theme):
+    """Get base styles for a specific theme"""
+    return style_data_manager.get_base_styles_for_category(theme)
 
 def get_style_characteristics(style):
     """Get characteristics of a given style"""
     return style_data_manager.get_style_characteristics(style)
 
 def get_all_categories():
-    """Get all available categories"""
+    """Get all available themes"""
     return style_data_manager.get_all_categories()

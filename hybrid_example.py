@@ -23,7 +23,7 @@ def demonstrate_hybrid_mode():
     print()
     
     print("📋 What This Does:")
-    print("1. Starts with cross-disciplinary questions that connect multiple architectural categories")
+    print("1. Starts with cross-disciplinary questions that connect multiple architectural themes")
     print("2. Chains deeper questions that explore the intersection progressively")
     print("3. Creates a logical flow from broad concepts to specific applications")
     print()
@@ -64,7 +64,7 @@ def demonstrate_hybrid_mode():
     print("✅ Creates progressive learning paths")
     print("✅ Explores intersections between architectural fields")
     print("✅ Builds comprehensive understanding of complex topics")
-    print("✅ Generates innovative insights at category boundaries")
+    print("✅ Generates innovative insights at theme boundaries")
     print()
     
     print("🚀 How to Use:")
@@ -86,7 +86,7 @@ def demonstrate_hybrid_mode():
     print("🎯 Perfect For:")
     print("• Educational content that builds progressively")
     print("• Research exploration of complex topics")
-    print("• Innovation discovery at category intersections")
+    print("• Innovation discovery at theme intersections")
     print("• Comprehensive coverage of architectural themes")
     print("• Creating connected content series")
     print()
@@ -109,7 +109,7 @@ def show_available_themes():
         main_themes = [t for t in themes if t.startswith('main_')]
         sub_themes = [t for t in themes if '_' in t and not t.startswith('main_') and t != 'all_categories']
         
-        print("🏗️  Main Category Themes:")
+        print("🏗️  Main Theme Themes:")
         for theme in main_themes[:5]:  # Show first 5
             print(f"  • {theme.replace('main_', '').replace('_', ' ').title()}")
         if len(main_themes) > 5:

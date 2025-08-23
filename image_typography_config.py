@@ -40,7 +40,7 @@ class ImageTypographyConfig:
         self.COLOR_PRIMARY = os.getenv('IMAGE_COLOR_PRIMARY', '#FFFFFF')           # White for dark overlays
         self.COLOR_SECONDARY = os.getenv('IMAGE_COLOR_SECONDARY', '#F0F0F0')       # Light gray
         self.COLOR_ACCENT = os.getenv('IMAGE_COLOR_ACCENT', '#E74C3C')             # Red accent
-        self.COLOR_CATEGORY_HEADER = os.getenv('IMAGE_COLOR_CATEGORY_HEADER', '#8E44AD')  # Purple
+        self.COLOR_THEME_HEADER = os.getenv('IMAGE_COLOR_THEME_HEADER', '#8E44AD')  # Purple
         self.COLOR_BRAND = os.getenv('IMAGE_COLOR_BRAND', '#34495E')               # Brand blue
         self.COLOR_FOOTER_TEXT = os.getenv('IMAGE_COLOR_FOOTER_TEXT', '#FFFFFF')   # White footer text
         self.COLOR_FOOTER_BG = os.getenv('IMAGE_COLOR_FOOTER_BG', '#2C3E50')       # Dark footer background
@@ -87,7 +87,7 @@ class ImageTypographyConfig:
                 'size': self.FONT_SIZE_SECTION,
                 'family': self.FONT_FAMILY_PRIMARY,
                 'weight': self.FONT_WEIGHT_BOLD,
-                'color': self.COLOR_CATEGORY_HEADER,
+                'color': self.COLOR_THEME_HEADER,
                 'line_spacing': self.LINE_SPACING_ONE_HALF,
                 'char_spacing': self.CHAR_SPACING_NORMAL
             },

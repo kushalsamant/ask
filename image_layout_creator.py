@@ -27,7 +27,7 @@ class ImageLayoutCreator:
         self._font_cache = {}
     
     def create_question_image(self, image_path: str, question_text: str, 
-                            category: str, image_number: str) -> Image.Image:
+                            theme: str, image_number: str) -> Image.Image:
         """Create question image using PDF layout standards"""
         try:
             img = Image.open(image_path)
@@ -45,7 +45,7 @@ class ImageLayoutCreator:
             
             # Draw text
             self._draw_text_with_styling(draw, lines, font, text_x, text_y, font_config)
-            self._add_footer(draw, category, image_number)
+            self._add_footer(draw, theme, image_number)
             
             return img
         except Exception as e:
@@ -53,7 +53,7 @@ class ImageLayoutCreator:
             return Image.open(image_path)
     
     def create_answer_image(self, image_path: str, answer_text: str, 
-                          category: str, image_number: str) -> Image.Image:
+                          theme: str, image_number: str) -> Image.Image:
         """Create answer image using PDF layout standards"""
         try:
             img = Image.open(image_path)
@@ -71,7 +71,7 @@ class ImageLayoutCreator:
             
             # Draw text
             self._draw_text_with_styling(draw, lines, font, text_x, text_y, font_config)
-            self._add_footer(draw, category, image_number)
+            self._add_footer(draw, theme, image_number)
             
             return img
         except Exception as e:
@@ -107,7 +107,7 @@ class ImageLayoutCreator:
         except Exception as e:
             log.error(f"Error drawing text: {e}")
     
-    def _add_footer(self, draw: ImageDraw.Draw, category: str, image_number: str):
+    def _add_footer(self, draw: ImageDraw.Draw, theme: str, image_number: str):
         """Add PDF-style footer"""
         try:
             footer_bounds = self.layout.get_footer_bounds()
@@ -128,9 +128,9 @@ class ImageLayoutCreator:
             brand_x, brand_y = self.layout.get_brand_position()
             draw.text((brand_x, brand_y), self.layout.BRAND_TEXT, font=footer_font, fill=footer_color)
             
-            # Category
+            # Theme
             category_x, category_y = self.layout.get_category_position()
-            draw.text((category_x, category_y), category.upper(), font=footer_font, fill=footer_color)
+            draw.text((category_x, category_y), theme.upper(), font=footer_font, fill=footer_color)
             
             # Image number
             number_x, number_y = self.layout.get_image_number_position()

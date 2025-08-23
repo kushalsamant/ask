@@ -1,16 +1,19 @@
+import os
+import logging
+from PIL import Image, ImageDraw, ImageFont
+from image_layout_creator import layout_creator
+from image_text_processor import text_processor
+    import re
+        from image_create_ai import generate_image_with_retry
+            import shutil
 #!/usr/bin/env python3
 """
 Text Overlay Module
 Professional text overlay using PDF layout standards
 """
 
-import os
-import logging
-from PIL import Image, ImageDraw, ImageFont
 
 # Import image standards modules
-from image_layout_creator import layout_creator
-from image_text_processor import text_processor
 
 # Setup logging
 log = logging.getLogger(__name__)
@@ -186,7 +189,7 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         # Draw the rest of the text
         draw.text((brand_x + ask_width, brand_y), rest_part, font=brand_font, fill=(255, 255, 255))
 
-        # Category text removed - no longer displaying category on images
+        # Theme text removed - no longer displaying theme on images
 
         # Draw image number on TOP RIGHT, right-aligned and bold within 1-inch margins
         # Handle image numbers that might contain dashes (e.g., "01-2")
@@ -313,7 +316,6 @@ def _add_ellipsis_safely(text):
 
 def _split_into_sentences(text):
     """Split text into sentences"""
-    import re
     # Split by sentence endings (.!?) followed by space or end of string
     sentences = re.split(r'(?<=[.!?])\s+', text)
     return [s.strip() for s in sentences if s.strip()]
@@ -321,16 +323,14 @@ def _split_into_sentences(text):
 def _create_new_image_for_chunk(chunk, image_number, original_image_path):
     """Create a new image for a text chunk"""
     try:
-        from image_create_ai import generate_image_with_retry
-        import os
         
-        # Extract category from original image path
+        # Extract theme from original image path
         filename = os.path.basename(original_image_path)
         parts = filename.split('-')
         if len(parts) >= 3:
-            category = parts[2]  # Extract category from filename
+            theme = parts[2]  # Extract theme from filename
         else:
-            category = 'architectural_design'  # Default
+            theme = 'architectural_design'  # Default
         
         # Generate new image for this chunk
         # image_number is now a simple integer string (e.g., "02", "03")
@@ -342,7 +342,7 @@ def _create_new_image_for_chunk(chunk, image_number, original_image_path):
         
         new_image_path, _ = generate_image_with_retry(
             prompt=chunk,
-            category=category,
+            theme=theme,
             image_number=image_number_int,
             image_type="a"
         )
@@ -352,7 +352,6 @@ def _create_new_image_for_chunk(chunk, image_number, original_image_path):
             return new_image_path
         else:
             # Fallback: copy original image with new number
-            import shutil
             new_path = original_image_path.replace('.jpg', f'-{image_number}.jpg')
             shutil.copy2(original_image_path, new_path)
             return new_path
@@ -360,7 +359,6 @@ def _create_new_image_for_chunk(chunk, image_number, original_image_path):
     except Exception as e:
         log.error(f"Error creating new image for chunk: {e}")
         # Fallback: copy original image with new number
-        import shutil
         new_path = original_image_path.replace('.jpg', f'-{image_number}.jpg')
         shutil.copy2(original_image_path, new_path)
         return new_path
