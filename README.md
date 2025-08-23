@@ -838,4 +838,14 @@ LOG_LEVEL=DEBUG
  - - -  
   
  # #     * * C P U   I m a g e   G e n e r a t i o n   S y s t e m * *  
+  
+ # #     * * I n s t a l l a t i o n   G u i d e * *  
+  
+ # # #   * * S m a r t   I n s t a l l a t i o n   ( R e c o m m e n d e d ) * *  
+  
+ T h e   s m a r t   i n s t a l l e r   a u t o m a t i c a l l y   d e t e c t s   y o u r   h a r d w a r e   a n d   i n s t a l l s   t h e   a p p r o p r i a t e   d e p e n d e n c i e s :  
+  
+ * * W i n d o w s : * *  
+ `  a s h  
+ i n s t a l l . b a t  
  

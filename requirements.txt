@@ -1,3 +1,19 @@
+# Core dependencies
 Pillow>=10.0.0  # Image processing and manipulation
 python-dotenv>=1.0.0  # Environment variable management
 requests>=2.31.0  # HTTP library for API calls
+
+# Image generation dependencies (CPU and GPU)
+torch>=2.0.0  # PyTorch - will be installed with appropriate CUDA version
+torchvision>=0.15.0  # PyTorch vision utilities
+torchaudio>=2.0.0  # PyTorch audio utilities
+diffusers>=0.24.0  # Hugging Face diffusers for image generation
+transformers>=4.35.0  # Hugging Face transformers
+accelerate>=0.24.0  # Hugging Face accelerate for optimization
+safetensors>=0.4.0  # Safe tensor serialization
+xformers>=0.0.22  # Memory efficient attention (GPU optimization)
+
+# Optional: Additional optimizations
+opencv-python>=4.8.0  # Computer vision utilities
+numpy>=1.24.0  # Numerical computing
+scipy>=1.11.0  # Scientific computing
