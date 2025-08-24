@@ -154,17 +154,47 @@ def generate_image_with_retry(prompt, theme, image_number, max_retries=None, tim
                 style = random.choice(available_styles)
         log.info(f"Selected style for {theme}: {style}")
 
-        # Craft a detailed prompt optimized for FLUX.1 schnell
-        formatted_prompt = (
-            f"Professional architectural visualization, {style} architectural style. "
-            f"Focus on {theme} aspects. {prompt} "
-            f"High-quality, photorealistic, detailed, professional photography, architectural visualisation"
-        )
+        # Craft a detailed prompt optimized for FLUX.1 schnell with contextual architectural focus
+        # Determine if theme benefits from architectural context
+        architectural_themes = {
+            'design_research', 'architectural_design', 'urban_planning', 'urban_design', 
+            'spatial_design', 'interior_environments', 'construction_technology', 
+            'engineering_systems', 'environmental_design'
+        }
+        
+        non_architectural_themes = {
+            'technology_innovation', 'digital_technology', 'sustainability_science'
+        }
+        
+        if theme.lower() in architectural_themes:
+            # Architectural focus for design/construction themes
+            formatted_prompt = (
+                f"Professional architectural visualization, {style} architectural style. "
+                f"Focus on {theme} aspects. {prompt} "
+                f"High-quality, photorealistic, detailed, professional photography, architectural visualisation, "
+                f"real-life objects, natural lighting, realistic materials, authentic architectural elements"
+            )
+        elif theme.lower() in non_architectural_themes:
+            # Broader focus for technology/innovation themes
+            formatted_prompt = (
+                f"Professional research visualization, {style} style. "
+                f"Focus on {theme} aspects. {prompt} "
+                f"High-quality, photorealistic, detailed, professional photography, "
+                f"real-life objects, natural lighting, realistic materials, modern technology, innovation"
+            )
+        else:
+            # Balanced approach for other themes
+            formatted_prompt = (
+                f"Professional research visualization, {style} style with architectural elements. "
+                f"Focus on {theme} aspects. {prompt} "
+                f"High-quality, photorealistic, detailed, professional photography, "
+                f"real-life objects, natural lighting, realistic materials, modern context"
+            )
 
         # Use the consolidated API client
         image_url = api_client.call_image_api(
             prompt=formatted_prompt,
-            negative_prompt="low quality, blurry, distorted, deformed, disfigured, bad proportions, watermark, signature, text",
+            negative_prompt="low quality, blurry, distorted, deformed, disfigured, bad proportions, watermark, signature, text, abstract, cartoon, illustration, painting, drawing, unrealistic, artificial, fake, synthetic",
             seed=random.randint(1, 999999999)
         )
 

@@ -219,7 +219,7 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         brand_y = bottom_margin - 100  # 100px from bottom margin
 
         # Calculate brand text height for proper spacing
-        brand_text = "ASK: Daily Architectural Research"
+        brand_text = "ASK: Daily Research"
         brand_bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
         brand_text_height = brand_bbox[3] - brand_bbox[1]
         
@@ -267,7 +267,7 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         
         # Split text to handle "ASK" in italics/bold
         ask_part = "ASK"
-        rest_part = ": Daily Architectural Research"
+        rest_part = ": Daily Research"
         
         # Draw "ASK" in bold/italics (if font supports it)
         try:

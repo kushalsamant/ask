@@ -5518,3 +5518,2012 @@ What role does ...
 2025-08-21 16:39:59,946 - ERROR - ERROR: TOGETHER_API_KEY environment variable is not set!
 2025-08-21 21:22:37,728 - ERROR - ERROR: TOGETHER_API_KEY environment variable is not set!
 2025-08-21 21:22:37,732 - ERROR - ERROR: TOGETHER_API_KEY environment variable is not set!
+2025-08-24 23:27:18,221 - INFO -  ASK: Daily Research - Available Modes
+2025-08-24 23:27:18,221 - INFO - ============================================================
+2025-08-24 23:27:18,221 - INFO -   python main.py                    - Simple 12-step pipeline (default)
+2025-08-24 23:27:18,221 - INFO -   python main.py hybrid             - Hybrid cross-disciplinary chained content
+2025-08-24 23:27:18,221 - INFO -   python main.py cross-disciplinary - Cross-disciplinary content
+2025-08-24 23:27:18,221 - INFO -   python main.py chained           - Chained content
+2025-08-24 23:27:18,221 - INFO -   python main.py help              - Show this help
+2025-08-24 23:27:18,221 - INFO - 
+2025-08-24 23:27:18,221 - INFO -  Mode Descriptions:
+2025-08-24 23:27:18,221 - INFO -   • Simple: Classic 12-step Q&A generation
+2025-08-24 23:27:18,221 - INFO -   • Hybrid: Combines cross-disciplinary themes with chained questions
+2025-08-24 23:27:18,221 - INFO -   • Cross-disciplinary: Explores intersections between research themes
+2025-08-24 23:27:18,221 - INFO -   • Chained: Creates connected questions that build upon each other
+2025-08-24 23:27:18,221 - INFO - 
+2025-08-24 23:27:18,221 - INFO -   Configuration: Edit ask.env to customize each mode
+2025-08-24 23:27:18,221 - INFO -   Offline-First: System runs without API key by default
+2025-08-25 00:13:45,221 - INFO -  ASK: Daily Research - Available Modes
+2025-08-25 00:13:45,221 - INFO - ============================================================
+2025-08-25 00:13:45,222 - INFO -   python main.py                    - Simple 12-step pipeline (default)
+2025-08-25 00:13:45,222 - INFO -   python main.py hybrid             - Hybrid cross-disciplinary chained content
+2025-08-25 00:13:45,223 - INFO -   python main.py cross-disciplinary - Cross-disciplinary content
+2025-08-25 00:13:45,223 - INFO -   python main.py chained           - Chained content
+2025-08-25 00:13:45,223 - INFO -   python main.py help              - Show this help
+2025-08-25 00:13:45,224 - INFO - 
+2025-08-25 00:13:45,224 - INFO -  Mode Descriptions:
+2025-08-25 00:13:45,224 - INFO -   • Simple: Classic 12-step Q&A generation
+2025-08-25 00:13:45,224 - INFO -   • Hybrid: Combines cross-disciplinary themes with chained questions
+2025-08-25 00:13:45,224 - INFO -   • Cross-disciplinary: Explores intersections between research themes
+2025-08-25 00:13:45,224 - INFO -   • Chained: Creates connected questions that build upon each other
+2025-08-25 00:13:45,225 - INFO - 
+2025-08-25 00:13:45,225 - INFO -   Configuration: Edit ask.env to customize each mode
+2025-08-25 00:13:45,225 - INFO -   Offline-First: System runs without API key by default
+2025-08-25 00:13:45,225 - INFO -   Lazy Loading: AI models downloaded only when needed
+2025-08-25 00:13:58,326 - INFO -  Validating offline-first setup...
+2025-08-25 00:13:58,326 - INFO -  GPU Generation: ENABLED (Primary Mode)
+2025-08-25 00:13:58,327 - INFO -  CPU Generation: ENABLED (First Fallback)
+2025-08-25 00:13:58,327 - INFO -  API Generation: DISABLED (Last Resort)
+2025-08-25 00:14:13,021 - WARNING -  CUDA not available - GPU generation will fallback to CPU
+2025-08-25 00:14:13,021 - INFO -  Running in offline-only mode (no API key required)
+2025-08-25 00:14:13,021 - INFO -  Offline-first validation complete!
+2025-08-25 00:14:13,021 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:14:13,021 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:14:13,021 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 00:14:13,021 - INFO - ==================================================
+2025-08-25 00:14:14,912 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 00:14:14,912 - WARNING - Invalid hex color format: 
+2025-08-25 00:14:14,912 - WARNING - Invalid hex color format: 
+2025-08-25 00:14:14,912 - WARNING - Invalid hex color format: 
+2025-08-25 00:14:14,912 - WARNING - Invalid hex color format: 
+2025-08-25 00:14:14,912 - WARNING - Invalid hex color format: 
+2025-08-25 00:14:14,912 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 00:14:14,919 - ERROR - Environment validation failed: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 00:14:14,919 - ERROR - Error in enhanced image layout configuration initialization: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 00:14:14,919 - ERROR -  Simple pipeline failed: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 00:14:14,919 - ERROR -  Pipeline failed: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 00:14:57,321 - INFO -  Validating offline-first setup...
+2025-08-25 00:14:57,321 - INFO -  GPU Generation: ENABLED (Primary Mode)
+2025-08-25 00:14:57,321 - INFO -  CPU Generation: ENABLED (First Fallback)
+2025-08-25 00:14:57,321 - INFO -  API Generation: DISABLED (Last Resort)
+2025-08-25 00:15:03,084 - WARNING -  CUDA not available - GPU generation will fallback to CPU
+2025-08-25 00:15:03,084 - INFO -  Running in offline-only mode (no API key required)
+2025-08-25 00:15:03,084 - INFO -  Offline-first validation complete!
+2025-08-25 00:15:03,084 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:15:03,084 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:15:03,084 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 00:15:03,084 - INFO - ==================================================
+2025-08-25 00:15:03,084 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 00:15:03,910 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 00:15:03,910 - WARNING - Invalid hex color format: 
+2025-08-25 00:15:03,910 - WARNING - Invalid hex color format: 
+2025-08-25 00:15:03,910 - WARNING - Invalid hex color format: 
+2025-08-25 00:15:03,910 - WARNING - Invalid hex color format: 
+2025-08-25 00:15:03,910 - WARNING - Invalid hex color format: 
+2025-08-25 00:15:03,910 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 00:15:03,923 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 00:15:03,923 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 00:15:03,934 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 00:15:03,937 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 00:15:03,970 - INFO - Reading from log.csv
+2025-08-25 00:15:03,970 - INFO - Volume info: Volume 2, 75/100 pairs in current volume, 175 total pairs
+2025-08-25 00:15:03,970 - INFO -  Starting at Volume 2: 75 Q&A pairs, 175 total
+2025-08-25 00:15:03,970 - INFO -  Step 1: Theme selected: URBAN_PLANNING
+2025-08-25 00:15:03,971 - INFO -  Step 2: Generating question for urban_planning...
+2025-08-25 00:15:03,971 - INFO - Generating question for theme: urban_planning
+2025-08-25 00:15:03,971 - INFO - Creating category question prompt for theme: urban_planning
+2025-08-25 00:15:03,971 - INFO -  Created category question prompt for 'urban_planning' in 0.000s
+2025-08-25 00:15:03,972 - INFO - Making text generation API call (attempt 1/5)
+2025-08-25 00:15:09,351 - ERROR - API error 401: {
+  "id": "o8U7D6F-4Yz4kd-974501546e3b444b",
+  "error": {
+    "message": "Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.",
+    "type": "invalid_reque
+2025-08-25 00:15:09,351 - ERROR - Invalid API response format for text generation
+2025-08-25 00:15:09,351 - WARNING - No API response generated for theme: urban_planning
+2025-08-25 00:15:09,351 - ERROR -  Failed to generate question
+2025-08-25 00:18:00,678 - INFO -  Validating offline-first setup...
+2025-08-25 00:18:00,678 - INFO -  GPU Generation: ENABLED (Primary Mode)
+2025-08-25 00:18:00,678 - INFO -  CPU Generation: ENABLED (First Fallback)
+2025-08-25 00:18:00,678 - INFO -  API Generation: DISABLED (Last Resort)
+2025-08-25 00:18:05,129 - WARNING -  CUDA not available - GPU generation will fallback to CPU
+2025-08-25 00:18:05,129 - INFO -  Running in offline-only mode (no API key required)
+2025-08-25 00:18:05,129 - INFO -  Offline-first validation complete!
+2025-08-25 00:18:05,129 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:18:05,129 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:18:05,138 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 00:18:05,138 - INFO - ==================================================
+2025-08-25 00:18:05,138 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 00:18:05,829 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 00:18:05,829 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:05,829 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:05,829 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:05,829 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:05,829 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:05,829 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 00:18:05,830 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 00:18:05,830 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 00:18:05,849 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 00:18:05,859 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 00:18:05,911 - INFO - Reading from log.csv
+2025-08-25 00:18:05,911 - INFO - Volume info: Volume 2, 75/100 pairs in current volume, 175 total pairs
+2025-08-25 00:18:05,911 - INFO -  Starting at Volume 2: 75 Q&A pairs, 175 total
+2025-08-25 00:18:05,911 - INFO -  Step 1: Theme selected: ENGINEERING_SYSTEMS
+2025-08-25 00:18:05,911 - INFO -  Step 2: Generating question for engineering_systems...
+2025-08-25 00:18:05,911 - INFO - Generating question for theme: engineering_systems
+2025-08-25 00:18:05,912 - INFO - Creating category question prompt for theme: engineering_systems
+2025-08-25 00:18:05,912 - INFO -  Created category question prompt for 'engineering_systems' in 0.000s
+2025-08-25 00:18:05,912 - INFO - Making text generation API call (attempt 1/5)
+2025-08-25 00:18:07,026 - ERROR - API error 401: {
+  "id": "o8U87uY-4Yz4kd-974505ab2a1d85f4",
+  "error": {
+    "message": "Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.",
+    "type": "invalid_reque
+2025-08-25 00:18:07,026 - ERROR - Invalid API response format for text generation
+2025-08-25 00:18:07,026 - WARNING - No API response generated for theme: engineering_systems
+2025-08-25 00:18:07,026 - INFO -  Using offline question generator for engineering_systems...
+2025-08-25 00:18:07,031 - INFO - Generating offline question for theme: engineering_systems
+2025-08-25 00:18:07,031 - INFO - Generated offline question for 'engineering_systems': What role does building automation play in system ...
+2025-08-25 00:18:07,031 - INFO -  Step 2: Question created: What role does building automation play in system integration?...
+2025-08-25 00:18:07,031 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 00:18:07,033 - ERROR - Error logging question: dict contains fields not in fieldnames: 'data_quality_score', 'version', 'last_modified', 'category'
+2025-08-25 00:18:07,033 - ERROR -  Failed to log question
+2025-08-25 00:18:36,256 - INFO -  Validating offline-first setup...
+2025-08-25 00:18:36,256 - INFO -  GPU Generation: ENABLED (Primary Mode)
+2025-08-25 00:18:36,257 - INFO -  CPU Generation: ENABLED (First Fallback)
+2025-08-25 00:18:36,257 - INFO -  API Generation: DISABLED (Last Resort)
+2025-08-25 00:18:41,079 - WARNING -  CUDA not available - GPU generation will fallback to CPU
+2025-08-25 00:18:41,079 - INFO -  Running in offline-only mode (no API key required)
+2025-08-25 00:18:41,080 - INFO -  Offline-first validation complete!
+2025-08-25 00:18:41,080 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:18:41,080 - INFO - Running in offline mode - API generation disabled
+2025-08-25 00:18:41,080 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 00:18:41,081 - INFO - ==================================================
+2025-08-25 00:18:41,081 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 00:18:43,127 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 00:18:43,128 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:43,128 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:43,128 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:43,128 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:43,129 - WARNING - Invalid hex color format: 
+2025-08-25 00:18:43,129 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 00:18:43,138 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 00:18:43,139 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 00:18:43,143 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 00:18:43,154 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 00:18:43,237 - INFO - Reading from log.csv
+2025-08-25 00:18:43,238 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-08-25 00:18:43,238 - INFO -  Starting at Volume 1: 0 Q&A pairs, 0 total
+2025-08-25 00:18:43,267 - INFO -  Step 1: Theme selected: ENGINEERING_SYSTEMS
+2025-08-25 00:18:43,272 - INFO -  Step 2: Generating question for engineering_systems...
+2025-08-25 00:18:43,272 - INFO - Generating question for theme: engineering_systems
+2025-08-25 00:18:43,272 - INFO - Creating category question prompt for theme: engineering_systems
+2025-08-25 00:18:43,272 - INFO -  Created category question prompt for 'engineering_systems' in 0.000s
+2025-08-25 00:18:43,273 - INFO - Making text generation API call (attempt 1/5)
+2025-08-25 00:18:47,907 - ERROR - API error 401: {
+  "id": "o8U8L4H-4Yz4kd-974506a999af97f6",
+  "error": {
+    "message": "Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.",
+    "type": "invalid_reque
+2025-08-25 00:18:47,907 - ERROR - Invalid API response format for text generation
+2025-08-25 00:18:47,907 - WARNING - No API response generated for theme: engineering_systems
+2025-08-25 00:18:47,907 - INFO -  Using offline question generator for engineering_systems...
+2025-08-25 00:18:48,006 - INFO - Generating offline question for theme: engineering_systems
+2025-08-25 00:18:48,006 - INFO - Generated offline question for 'engineering_systems': What impact does building envelope design have on ...
+2025-08-25 00:18:48,006 - INFO -  Step 2: Question created: What impact does building envelope design have on system performance?...
+2025-08-25 00:18:48,007 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 00:18:48,008 - INFO - Logged question for engineering_systems: What impact does building envelope design have on ...
+2025-08-25 00:18:48,008 - INFO -  Step 3: Question logged to CSV
+2025-08-25 00:18:48,010 - INFO -  Step 4: Generating base image for question...
+2025-08-25 00:18:48,011 - INFO - Starting smart fallback generation for theme 'engineering_systems', image 1
+2025-08-25 00:18:48,011 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 00:18:48,011 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 00:18:48,508 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 00:18:48,508 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 00:18:48,510 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 00:20:20,395 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 00:20:20,729 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 00:20:20,729 - WARNING - Generation attempt 1 failed
+2025-08-25 00:20:21,735 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 00:20:21,758 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 00:20:21,758 - WARNING - Generation attempt 2 failed
+2025-08-25 00:20:22,760 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 00:20:22,788 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 00:20:22,789 - WARNING - Generation attempt 3 failed
+2025-08-25 00:20:22,789 - WARNING - GPU generation failed: Failed to generate GPU image for engineering_systems image 1 after 3 attempts
+2025-08-25 00:20:22,789 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 00:20:22,792 - INFO - Downloading CPU model: latent-consistency/lcm-sd15
+2025-08-25 00:20:22,793 - INFO - Downloading CPU model: latent-consistency/lcm-sd15
+2025-08-25 00:20:22,793 - INFO - This may take a few minutes for the first run...
+2025-08-25 00:20:24,426 - ERROR - Failed to download cpu model: 404 Client Error. (Request ID: Root=1-68ab5ef2-7fb6381b1f65b79e4cf8d308;efb94b2e-d8a8-4830-99bb-b096ac5e22bc)
+
+Repository Not Found for url: https://huggingface.co/api/models/latent-consistency/lcm-sd15/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-08-25 00:20:24,446 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 00:20:24,446 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 00:20:24,645 - INFO - Created placeholder image: images\ASK-01-engineering_systems-q.jpg
+2025-08-25 00:20:24,645 - INFO -  Step 4: Base image created: ASK-01-engineering_systems-q.jpg
+2025-08-25 00:20:24,645 - INFO -  Step 4: Generation method: Placeholder
+2025-08-25 00:20:24,645 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 00:20:24,645 - ERROR -  Failed to add text overlay: add_text_overlay() got an unexpected keyword argument 'text'
+2025-08-25 01:25:44,642 - INFO -  ASK: Daily Research - Available Modes
+2025-08-25 01:25:44,644 - INFO - ============================================================
+2025-08-25 01:25:44,644 - INFO -   python main.py                    - Simple 12-step pipeline (default)
+2025-08-25 01:25:44,644 - INFO -   python main.py hybrid             - Hybrid cross-disciplinary chained content
+2025-08-25 01:25:44,644 - INFO -   python main.py cross-disciplinary - Cross-disciplinary content
+2025-08-25 01:25:44,644 - INFO -   python main.py chained           - Chained content
+2025-08-25 01:25:44,644 - INFO -   python main.py help              - Show this help
+2025-08-25 01:25:44,644 - INFO - 
+2025-08-25 01:25:44,644 - INFO -  Mode Descriptions:
+2025-08-25 01:25:44,644 - INFO -   • Simple: Classic 12-step Q&A generation
+2025-08-25 01:25:44,646 - INFO -   • Hybrid: Combines cross-disciplinary themes with chained questions
+2025-08-25 01:25:44,646 - INFO -   • Cross-disciplinary: Explores intersections between research themes
+2025-08-25 01:25:44,646 - INFO -   • Chained: Creates connected questions that build upon each other
+2025-08-25 01:25:44,647 - INFO - 
+2025-08-25 01:25:44,647 - INFO -   Configuration: Edit ask.env to customize each mode
+2025-08-25 01:25:44,647 - INFO -   Offline-First: System runs without API key by default
+2025-08-25 01:25:44,647 - INFO -   Lazy Loading: AI models downloaded only when needed
+2025-08-25 01:25:58,929 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:25:58,929 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:25:58,941 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:25:58,941 - INFO - ==================================================
+2025-08-25 01:26:05,119 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:26:05,978 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:26:05,978 - WARNING - Invalid hex color format: 
+2025-08-25 01:26:05,978 - WARNING - Invalid hex color format: 
+2025-08-25 01:26:05,978 - WARNING - Invalid hex color format: 
+2025-08-25 01:26:05,978 - WARNING - Invalid hex color format: 
+2025-08-25 01:26:05,978 - WARNING - Invalid hex color format: 
+2025-08-25 01:26:05,978 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:26:05,983 - ERROR - Environment validation failed: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 01:26:05,983 - ERROR - Error in enhanced image layout configuration initialization: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 01:26:05,983 - ERROR -  Simple pipeline failed: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 01:26:05,984 - ERROR -  Pipeline failed: Missing environment variables: ['IMAGE_TEXT_AREA_START_Y', 'IMAGE_TEXT_AREA_END_Y', 'IMAGE_BRAND_TEXT']
+2025-08-25 01:26:59,958 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:26:59,958 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:26:59,958 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:26:59,958 - INFO - ==================================================
+2025-08-25 01:27:03,351 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:27:03,957 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:27:03,957 - WARNING - Invalid hex color format: 
+2025-08-25 01:27:03,957 - WARNING - Invalid hex color format: 
+2025-08-25 01:27:03,957 - WARNING - Invalid hex color format: 
+2025-08-25 01:27:03,957 - WARNING - Invalid hex color format: 
+2025-08-25 01:27:03,957 - WARNING - Invalid hex color format: 
+2025-08-25 01:27:03,957 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:27:03,957 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 01:27:03,957 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 01:27:03,957 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 01:27:03,957 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 01:27:04,024 - INFO - Reading from log.csv
+2025-08-25 01:27:04,024 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-08-25 01:27:04,024 - INFO -  Starting at Volume 1: 0 Q&A pairs, 0 total
+2025-08-25 01:27:04,024 - INFO -  Step 1: Theme selected: DIGITAL_TECHNOLOGY
+2025-08-25 01:27:04,024 - INFO -  Step 2: Generating question for digital_technology...
+2025-08-25 01:27:04,024 - INFO - Generating question for theme: digital_technology
+2025-08-25 01:27:04,024 - INFO - Creating category question prompt for theme: digital_technology
+2025-08-25 01:27:04,024 - INFO -  Created category question prompt for 'digital_technology' in 0.000s
+2025-08-25 01:27:04,024 - INFO - Making text generation API call (attempt 1/5)
+2025-08-25 01:27:05,524 - ERROR - API error 401: {
+  "id": "o8UVLB3-62bZhn-97456ab44dcd77ba",
+  "error": {
+    "message": "Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.",
+    "type": "invalid_reque
+2025-08-25 01:27:05,535 - ERROR - Invalid API response format for text generation
+2025-08-25 01:27:05,535 - WARNING - No API response generated for theme: digital_technology
+2025-08-25 01:27:05,535 - ERROR -  Failed to generate question
+2025-08-25 01:42:34,826 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:42:34,828 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:42:34,844 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:42:34,847 - INFO - ==================================================
+2025-08-25 01:42:40,923 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:42:41,572 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:42:41,572 - WARNING - Invalid hex color format: 
+2025-08-25 01:42:41,572 - WARNING - Invalid hex color format: 
+2025-08-25 01:42:41,572 - WARNING - Invalid hex color format: 
+2025-08-25 01:42:41,572 - WARNING - Invalid hex color format: 
+2025-08-25 01:42:41,572 - WARNING - Invalid hex color format: 
+2025-08-25 01:42:41,572 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:42:41,574 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 01:42:41,574 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 01:42:41,576 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 01:42:41,576 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 01:42:41,681 - INFO - Reading from log.csv
+2025-08-25 01:42:41,685 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-08-25 01:42:41,687 - INFO -  Starting at Volume 1: 0 Q&A pairs, 0 total
+2025-08-25 01:42:41,688 - INFO -  Step 1: Theme selected: DIGITAL_TECHNOLOGY
+2025-08-25 01:42:41,688 - INFO -  Step 2: Generating question for digital_technology...
+2025-08-25 01:42:41,689 - INFO - Generated offline question for theme 'digital_technology': How does sustainable design improve analysis?
+2025-08-25 01:42:41,689 - INFO -  Step 2: Question created: How does sustainable design improve analysis?...
+2025-08-25 01:42:41,689 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 01:42:41,691 - INFO - Logged question for digital_technology: How does sustainable design improve analysis?...
+2025-08-25 01:42:41,693 - INFO -  Step 3: Question logged to CSV
+2025-08-25 01:42:41,694 - INFO -  Step 4: Generating base image for question...
+2025-08-25 01:42:41,697 - INFO - Starting smart fallback generation for theme 'digital_technology', image 1
+2025-08-25 01:42:41,697 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:42:41,697 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:42:41,725 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 01:42:41,725 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:42:41,725 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:42:59,505 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 01:42:59,583 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:42:59,585 - WARNING - Generation attempt 1 failed
+2025-08-25 01:43:00,585 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:43:00,593 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:43:00,593 - WARNING - Generation attempt 2 failed
+2025-08-25 01:43:01,597 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:43:01,608 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:43:01,608 - WARNING - Generation attempt 3 failed
+2025-08-25 01:43:01,608 - WARNING - GPU generation failed: Failed to generate GPU image for digital_technology image 1 after 3 attempts
+2025-08-25 01:43:01,608 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:43:01,665 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:43:01,667 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:43:01,739 - INFO - Created placeholder image: images\ASK-01-digital_technology-q.jpg
+2025-08-25 01:43:01,741 - INFO -  Step 4: Base image created: ASK-01-digital_technology-q.jpg
+2025-08-25 01:43:01,741 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 01:43:01,741 - ERROR -  Failed to add text overlay: add_text_overlay() got an unexpected keyword argument 'text'
+2025-08-25 01:43:54,190 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:43:54,192 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:43:54,193 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:43:54,193 - INFO - ==================================================
+2025-08-25 01:43:54,194 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 01:43:59,697 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:44:00,544 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:44:00,545 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:00,545 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:00,545 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:00,545 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:00,545 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:00,545 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:44:00,547 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 01:44:00,547 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 01:44:00,550 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 01:44:00,550 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 01:44:00,662 - INFO - Reading from log.csv
+2025-08-25 01:44:00,663 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-08-25 01:44:00,663 - INFO -  Starting at Volume 1: 0 Q&A pairs, 0 total
+2025-08-25 01:44:00,663 - INFO -  Step 1: Theme selected: SUSTAINABILITY_SCIENCE
+2025-08-25 01:44:00,663 - INFO -  Step 2: Generating question for sustainability_science...
+2025-08-25 01:44:00,663 - INFO - Generated offline question for theme 'sustainability_science': How can blockchain support biodiversity protection?
+2025-08-25 01:44:00,663 - INFO -  Step 2: Question created: How can blockchain support biodiversity protection?...
+2025-08-25 01:44:00,664 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 01:44:00,666 - INFO - Logged question for sustainability_science: How can blockchain support biodiversity protection...
+2025-08-25 01:44:00,666 - INFO -  Step 3: Question logged to CSV
+2025-08-25 01:44:00,667 - INFO -  Step 4: Generating base image for question...
+2025-08-25 01:44:00,667 - INFO - Starting smart fallback generation for theme 'sustainability_science', image 1
+2025-08-25 01:44:00,667 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:44:00,667 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:44:00,671 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 01:44:00,671 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:44:00,671 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:44:27,942 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 01:44:28,021 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:44:28,022 - WARNING - Generation attempt 1 failed
+2025-08-25 01:44:29,024 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:44:29,044 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:44:29,044 - WARNING - Generation attempt 2 failed
+2025-08-25 01:44:30,045 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:44:30,060 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:44:30,060 - WARNING - Generation attempt 3 failed
+2025-08-25 01:44:30,060 - WARNING - GPU generation failed: Failed to generate GPU image for sustainability_science image 1 after 3 attempts
+2025-08-25 01:44:30,060 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:44:30,076 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:44:30,076 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:44:30,159 - INFO - Created placeholder image: images\ASK-01-sustainability_science-q.jpg
+2025-08-25 01:44:30,159 - INFO -  Step 4: Base image created: ASK-01-sustainability_science-q.jpg
+2025-08-25 01:44:30,159 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 01:44:30,159 - INFO - Starting text overlay for images\ASK-01-sustainability_science-q.jpg with prompt: How can blockchain support biodiversity protection...
+2025-08-25 01:44:30,159 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 01:44:30,277 - INFO - Added fallback text overlay to image: images\ASK-01-sustainability_science-q.jpg
+2025-08-25 01:44:30,277 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 01:44:30,277 - INFO -  Step 6: Final question image created: ASK-01-sustainability_science-q.jpg
+2025-08-25 01:44:30,277 - INFO -  Step 7: Generating answer for question...
+2025-08-25 01:44:30,277 - INFO - Generated offline answer for theme 'sustainability_science': sustainable design represents a holistic response ...
+2025-08-25 01:44:30,277 - INFO -  Step 7: Answer generated: sustainable design represents a holistic response to soil degradation that integ...
+2025-08-25 01:44:30,277 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 01:44:30,277 - ERROR -  Simple pipeline failed: log_single_question() got an unexpected keyword argument 'answer'
+2025-08-25 01:44:30,277 - ERROR -  Pipeline failed: log_single_question() got an unexpected keyword argument 'answer'
+2025-08-25 01:44:52,009 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:44:52,009 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:44:52,010 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:44:52,010 - INFO - ==================================================
+2025-08-25 01:44:52,010 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 01:44:57,756 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:44:58,340 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:44:58,340 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:58,340 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:58,340 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:58,340 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:58,340 - WARNING - Invalid hex color format: 
+2025-08-25 01:44:58,340 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:44:58,340 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 01:44:58,340 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 01:44:58,340 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 01:44:58,349 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 01:44:58,402 - INFO - Reading from log.csv
+2025-08-25 01:44:58,402 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-08-25 01:44:58,402 - INFO -  Starting at Volume 1: 0 Q&A pairs, 0 total
+2025-08-25 01:44:58,403 - INFO -  Step 1: Theme selected: URBAN_PLANNING
+2025-08-25 01:44:58,403 - INFO -  Step 2: Generating question for urban_planning...
+2025-08-25 01:44:58,403 - INFO - Generated offline question for theme 'urban_planning': How does sustainable design address safety?
+2025-08-25 01:44:58,404 - INFO -  Step 2: Question created: How does sustainable design address safety?...
+2025-08-25 01:44:58,404 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 01:44:58,406 - INFO - Logged question for urban_planning: How does sustainable design address safety?...
+2025-08-25 01:44:58,407 - INFO -  Step 3: Question logged to CSV
+2025-08-25 01:44:58,407 - INFO -  Step 4: Generating base image for question...
+2025-08-25 01:44:58,408 - INFO - Starting smart fallback generation for theme 'urban_planning', image 1
+2025-08-25 01:44:58,408 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:44:58,408 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:44:58,411 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 01:44:58,411 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:44:58,411 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:45:18,888 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 01:45:18,954 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:18,954 - WARNING - Generation attempt 1 failed
+2025-08-25 01:45:19,956 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:45:19,969 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:19,970 - WARNING - Generation attempt 2 failed
+2025-08-25 01:45:20,971 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:45:20,988 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:20,996 - WARNING - Generation attempt 3 failed
+2025-08-25 01:45:20,996 - WARNING - GPU generation failed: Failed to generate GPU image for urban_planning image 1 after 3 attempts
+2025-08-25 01:45:20,996 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:45:21,010 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:21,010 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:45:21,069 - INFO - Created placeholder image: images\ASK-01-urban_planning-q.jpg
+2025-08-25 01:45:21,069 - INFO -  Step 4: Base image created: ASK-01-urban_planning-q.jpg
+2025-08-25 01:45:21,069 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 01:45:21,069 - INFO - Starting text overlay for images\ASK-01-urban_planning-q.jpg with prompt: How does sustainable design address safety?...
+2025-08-25 01:45:21,069 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 01:45:21,149 - INFO - Added fallback text overlay to image: images\ASK-01-urban_planning-q.jpg
+2025-08-25 01:45:21,150 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 01:45:21,152 - INFO -  Step 6: Final question image created: ASK-01-urban_planning-q.jpg
+2025-08-25 01:45:21,152 - INFO -  Step 7: Generating answer for question...
+2025-08-25 01:45:21,153 - INFO - Generated offline answer for theme 'urban_planning': Implementing pedestrian-friendly design to address...
+2025-08-25 01:45:21,153 - INFO -  Step 7: Answer generated: Implementing pedestrian-friendly design to address climate change requires under...
+2025-08-25 01:45:21,153 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 01:45:21,172 - INFO - Logged answer for urban_planning: Implementing pedestrian-friendly design to address...
+2025-08-25 01:45:21,172 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 01:45:21,173 - INFO -  Step 8b: Marking question as used...
+2025-08-25 01:45:21,223 - INFO - Marked 1 questions as used
+2025-08-25 01:45:21,223 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 01:45:21,223 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 01:45:21,223 - INFO - Starting smart fallback generation for theme 'urban_planning', image 1
+2025-08-25 01:45:21,223 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:45:21,223 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:45:21,223 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:45:21,242 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:21,242 - WARNING - Generation attempt 1 failed
+2025-08-25 01:45:22,243 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:45:22,255 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:22,255 - WARNING - Generation attempt 2 failed
+2025-08-25 01:45:23,260 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:45:23,270 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:23,270 - WARNING - Generation attempt 3 failed
+2025-08-25 01:45:23,270 - WARNING - GPU generation failed: Failed to generate GPU image for urban_planning image 1 after 3 attempts
+2025-08-25 01:45:23,270 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:45:23,286 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:45:23,286 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:45:23,299 - INFO - Created placeholder image: images\ASK-01-urban_planning-a.jpg
+2025-08-25 01:45:23,300 - INFO -  Step 9: Base image created: ASK-01-urban_planning-a.jpg
+2025-08-25 01:45:23,301 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 01:45:23,301 - INFO - Starting text overlay for images\ASK-01-urban_planning-a.jpg with prompt: Implementing pedestrian-friendly design to address...
+2025-08-25 01:45:23,301 - INFO - Long answer detected (738 chars), using multi-image approach
+2025-08-25 01:45:23,397 - INFO - Added fallback text overlay to image: images\ASK-01-urban_planning-a.jpg
+2025-08-25 01:45:23,399 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 01:45:23,399 - INFO -  Step 11: Final answer image created: ASK-01-urban_planning-a.jpg
+2025-08-25 01:45:23,399 - INFO - ============================================================
+2025-08-25 01:45:23,399 - INFO -  Cycle #1 completed successfully!
+2025-08-25 01:45:23,400 - INFO -  Question image: ASK-01-urban_planning-q.jpg
+2025-08-25 01:45:23,400 - INFO -  Answer image: ASK-01-urban_planning-a.jpg
+2025-08-25 01:45:23,400 - INFO -  Theme: urban_planning
+2025-08-25 01:45:23,400 - INFO -  Simple pipeline completed successfully!
+2025-08-25 01:48:06,761 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:48:06,761 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:48:06,761 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:48:06,761 - INFO - ==================================================
+2025-08-25 01:48:06,761 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 01:48:11,484 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:48:12,075 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:48:12,075 - WARNING - Invalid hex color format: 
+2025-08-25 01:48:12,075 - WARNING - Invalid hex color format: 
+2025-08-25 01:48:12,075 - WARNING - Invalid hex color format: 
+2025-08-25 01:48:12,075 - WARNING - Invalid hex color format: 
+2025-08-25 01:48:12,076 - WARNING - Invalid hex color format: 
+2025-08-25 01:48:12,076 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:48:12,077 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 01:48:12,078 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 01:48:12,080 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 01:48:12,082 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 01:48:12,144 - INFO - Reading from log.csv
+2025-08-25 01:48:12,144 - INFO - Volume info: Volume 1, 1/100 pairs in current volume, 1 total pairs
+2025-08-25 01:48:12,144 - INFO -  Starting at Volume 1: 1 Q&A pairs, 1 total
+2025-08-25 01:48:12,144 - INFO -  Step 1: Theme selected: SPATIAL_DESIGN
+2025-08-25 01:48:12,144 - INFO -  Step 2: Generating question for spatial_design...
+2025-08-25 01:48:12,144 - INFO - Generated offline question for theme 'spatial_design': What are the principles of variety in commercial districts?
+2025-08-25 01:48:12,144 - INFO -  Step 2: Question created: What are the principles of variety in commercial districts?...
+2025-08-25 01:48:12,144 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 01:48:12,146 - INFO - Logged question for spatial_design: What are the principles of variety in commercial d...
+2025-08-25 01:48:12,146 - INFO -  Step 3: Question logged to CSV
+2025-08-25 01:48:12,146 - INFO -  Step 4: Generating base image for question...
+2025-08-25 01:48:12,146 - INFO - Starting smart fallback generation for theme 'spatial_design', image 1
+2025-08-25 01:48:12,146 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:48:12,146 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:48:12,150 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 01:48:12,150 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:48:12,150 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:48:24,625 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 01:48:24,682 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:24,682 - WARNING - Generation attempt 1 failed
+2025-08-25 01:48:25,689 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:48:25,692 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:25,692 - WARNING - Generation attempt 2 failed
+2025-08-25 01:48:26,699 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:48:26,708 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:26,708 - WARNING - Generation attempt 3 failed
+2025-08-25 01:48:26,708 - WARNING - GPU generation failed: Failed to generate GPU image for spatial_design image 1 after 3 attempts
+2025-08-25 01:48:26,709 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:48:26,712 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:26,712 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:48:26,772 - INFO - Created placeholder image: images\ASK-01-spatial_design-q.jpg
+2025-08-25 01:48:26,772 - INFO -  Step 4: Base image created: ASK-01-spatial_design-q.jpg
+2025-08-25 01:48:26,772 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 01:48:26,773 - INFO - Starting text overlay for images\ASK-01-spatial_design-q.jpg with prompt: What are the principles of variety in commercial d...
+2025-08-25 01:48:26,773 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 01:48:26,841 - INFO - Added fallback text overlay to image: images\ASK-01-spatial_design-q.jpg
+2025-08-25 01:48:26,842 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 01:48:26,842 - INFO -  Step 6: Final question image created: ASK-01-spatial_design-q.jpg
+2025-08-25 01:48:26,842 - INFO -  Step 7: Generating answer for question...
+2025-08-25 01:48:26,842 - INFO - Generated offline answer for theme 'spatial_design': Creating plazas that influences work involves inte...
+2025-08-25 01:48:26,842 - INFO -  Step 7: Answer generated: Creating plazas that influences work involves integrating sustainable design wit...
+2025-08-25 01:48:26,843 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 01:48:26,857 - INFO - Logged answer for spatial_design: Creating plazas that influences work involves inte...
+2025-08-25 01:48:26,857 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 01:48:26,857 - INFO -  Step 8b: Marking question as used...
+2025-08-25 01:48:26,875 - INFO - Marked 1 questions as used
+2025-08-25 01:48:26,875 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 01:48:26,876 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 01:48:26,876 - INFO - Starting smart fallback generation for theme 'spatial_design', image 1
+2025-08-25 01:48:26,876 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:48:26,876 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:48:26,876 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:48:26,888 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:26,889 - WARNING - Generation attempt 1 failed
+2025-08-25 01:48:27,890 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:48:27,892 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:27,892 - WARNING - Generation attempt 2 failed
+2025-08-25 01:48:28,900 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:48:28,908 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:28,908 - WARNING - Generation attempt 3 failed
+2025-08-25 01:48:28,908 - WARNING - GPU generation failed: Failed to generate GPU image for spatial_design image 1 after 3 attempts
+2025-08-25 01:48:28,908 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:48:28,908 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:48:28,908 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:48:28,926 - INFO - Created placeholder image: images\ASK-01-spatial_design-a.jpg
+2025-08-25 01:48:28,926 - INFO -  Step 9: Base image created: ASK-01-spatial_design-a.jpg
+2025-08-25 01:48:28,926 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 01:48:28,926 - INFO - Starting text overlay for images\ASK-01-spatial_design-a.jpg with prompt: Creating plazas that influences work involves inte...
+2025-08-25 01:48:28,926 - INFO - Long answer detected (723 chars), using multi-image approach
+2025-08-25 01:48:29,017 - INFO - Added fallback text overlay to image: images\ASK-01-spatial_design-a.jpg
+2025-08-25 01:48:29,017 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 01:48:29,017 - INFO -  Step 11: Final answer image created: ASK-01-spatial_design-a.jpg
+2025-08-25 01:48:29,017 - INFO - ============================================================
+2025-08-25 01:48:29,017 - INFO -  Cycle #1 completed successfully!
+2025-08-25 01:48:29,017 - INFO -  Question image: ASK-01-spatial_design-q.jpg
+2025-08-25 01:48:29,018 - INFO -  Answer image: ASK-01-spatial_design-a.jpg
+2025-08-25 01:48:29,018 - INFO -  Theme: spatial_design
+2025-08-25 01:48:29,018 - INFO -  Simple pipeline completed successfully!
+2025-08-25 01:49:10,040 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:49:10,040 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:49:10,040 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:49:10,040 - INFO - ==================================================
+2025-08-25 01:49:10,040 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 01:49:14,822 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:49:15,491 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:49:15,491 - WARNING - Invalid hex color format: 
+2025-08-25 01:49:15,491 - WARNING - Invalid hex color format: 
+2025-08-25 01:49:15,491 - WARNING - Invalid hex color format: 
+2025-08-25 01:49:15,491 - WARNING - Invalid hex color format: 
+2025-08-25 01:49:15,491 - WARNING - Invalid hex color format: 
+2025-08-25 01:49:15,491 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:49:15,491 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 01:49:15,491 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 01:49:15,491 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 01:49:15,502 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 01:49:15,546 - INFO - Reading from log.csv
+2025-08-25 01:49:15,546 - INFO - Volume info: Volume 1, 2/100 pairs in current volume, 2 total pairs
+2025-08-25 01:49:15,546 - INFO -  Starting at Volume 1: 2 Q&A pairs, 2 total
+2025-08-25 01:49:15,547 - INFO -  Step 1: Theme selected: DIGITAL_TECHNOLOGY
+2025-08-25 01:49:15,547 - INFO -  Step 2: Generating question for digital_technology...
+2025-08-25 01:49:15,547 - INFO - Generated offline question for theme 'digital_technology': What are the implications of blockchain for manufacturing?
+2025-08-25 01:49:15,547 - INFO -  Step 2: Question created: What are the implications of blockchain for manufacturing?...
+2025-08-25 01:49:15,547 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 01:49:15,550 - INFO - Logged question for digital_technology: What are the implications of blockchain for manufa...
+2025-08-25 01:49:15,550 - INFO -  Step 3: Question logged to CSV
+2025-08-25 01:49:15,551 - INFO -  Step 4: Generating base image for question...
+2025-08-25 01:49:15,551 - INFO - Starting smart fallback generation for theme 'digital_technology', image 1
+2025-08-25 01:49:15,551 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:49:15,551 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:49:15,553 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 01:49:15,553 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:49:15,553 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:49:31,672 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 01:49:31,741 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:31,741 - WARNING - Generation attempt 1 failed
+2025-08-25 01:49:32,744 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:49:32,756 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:32,756 - WARNING - Generation attempt 2 failed
+2025-08-25 01:49:33,757 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:49:33,772 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:33,772 - WARNING - Generation attempt 3 failed
+2025-08-25 01:49:33,772 - WARNING - GPU generation failed: Failed to generate GPU image for digital_technology image 1 after 3 attempts
+2025-08-25 01:49:33,772 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:49:33,787 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:33,787 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:49:33,854 - INFO - Created placeholder image: images\ASK-01-digital_technology-q.jpg
+2025-08-25 01:49:33,854 - INFO -  Step 4: Base image created: ASK-01-digital_technology-q.jpg
+2025-08-25 01:49:33,856 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 01:49:33,856 - INFO - Starting text overlay for images\ASK-01-digital_technology-q.jpg with prompt: What are the implications of blockchain for manufa...
+2025-08-25 01:49:33,856 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 01:49:33,932 - INFO - Added fallback text overlay to image: images\ASK-01-digital_technology-q.jpg
+2025-08-25 01:49:33,932 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 01:49:33,933 - INFO -  Step 6: Final question image created: ASK-01-digital_technology-q.jpg
+2025-08-25 01:49:33,933 - INFO -  Step 7: Generating answer for question...
+2025-08-25 01:49:33,934 - INFO - Generated offline answer for theme 'digital_technology': sustainable design transforms transportation by in...
+2025-08-25 01:49:33,934 - INFO -  Step 7: Answer generated: sustainable design transforms transportation by introducing simulation that enha...
+2025-08-25 01:49:33,934 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 01:49:33,950 - INFO - Logged answer for digital_technology: sustainable design transforms transportation by in...
+2025-08-25 01:49:33,950 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 01:49:33,952 - INFO -  Step 8b: Marking question as used...
+2025-08-25 01:49:33,968 - INFO - Marked 1 questions as used
+2025-08-25 01:49:33,969 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 01:49:33,969 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 01:49:33,970 - INFO - Starting smart fallback generation for theme 'digital_technology', image 1
+2025-08-25 01:49:33,970 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:49:33,970 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:49:33,970 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:49:33,986 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:33,987 - WARNING - Generation attempt 1 failed
+2025-08-25 01:49:34,988 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:49:35,001 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:35,002 - WARNING - Generation attempt 2 failed
+2025-08-25 01:49:36,013 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:49:36,053 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:36,054 - WARNING - Generation attempt 3 failed
+2025-08-25 01:49:36,054 - WARNING - GPU generation failed: Failed to generate GPU image for digital_technology image 1 after 3 attempts
+2025-08-25 01:49:36,054 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:49:36,068 - WARNING - CPU generation failed: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:49:36,068 - WARNING - All generation methods failed, creating placeholder...
+2025-08-25 01:49:36,076 - INFO - Created placeholder image: images\ASK-01-digital_technology-a.jpg
+2025-08-25 01:49:36,076 - INFO -  Step 9: Base image created: ASK-01-digital_technology-a.jpg
+2025-08-25 01:49:36,108 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 01:49:36,143 - INFO - Starting text overlay for images\ASK-01-digital_technology-a.jpg with prompt: sustainable design transforms transportation by in...
+2025-08-25 01:49:36,143 - INFO - Long answer detected (668 chars), using multi-image approach
+2025-08-25 01:49:36,402 - INFO - Added fallback text overlay to image: images\ASK-01-digital_technology-a.jpg
+2025-08-25 01:49:36,402 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 01:49:36,402 - INFO -  Step 11: Final answer image created: ASK-01-digital_technology-a.jpg
+2025-08-25 01:49:36,402 - INFO - ============================================================
+2025-08-25 01:49:36,403 - INFO -  Cycle #1 completed successfully!
+2025-08-25 01:49:36,403 - INFO -  Question image: ASK-01-digital_technology-q.jpg
+2025-08-25 01:49:36,403 - INFO -  Answer image: ASK-01-digital_technology-a.jpg
+2025-08-25 01:49:36,403 - INFO -  Theme: digital_technology
+2025-08-25 01:49:36,403 - INFO -  Simple pipeline completed successfully!
+2025-08-25 01:58:10,100 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:58:10,103 - INFO - Running in offline mode - API generation disabled
+2025-08-25 01:58:10,103 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 01:58:10,103 - INFO - ==================================================
+2025-08-25 01:58:10,103 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 01:58:16,055 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 01:58:17,157 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 01:58:17,157 - WARNING - Invalid hex color format: 
+2025-08-25 01:58:17,157 - WARNING - Invalid hex color format: 
+2025-08-25 01:58:17,157 - WARNING - Invalid hex color format: 
+2025-08-25 01:58:17,157 - WARNING - Invalid hex color format: 
+2025-08-25 01:58:17,157 - WARNING - Invalid hex color format: 
+2025-08-25 01:58:17,157 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 01:58:17,160 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 01:58:17,160 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 01:58:17,167 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 01:58:17,170 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 01:58:17,308 - INFO - Reading from log.csv
+2025-08-25 01:58:17,308 - INFO - Volume info: Volume 1, 3/100 pairs in current volume, 3 total pairs
+2025-08-25 01:58:17,308 - INFO -  Starting at Volume 1: 3 Q&A pairs, 3 total
+2025-08-25 01:58:17,308 - INFO -  Step 1: Theme selected: DIGITAL_TECHNOLOGY
+2025-08-25 01:58:17,308 - INFO -  Step 2: Generating question for digital_technology...
+2025-08-25 01:58:17,308 - INFO - Generated offline question for theme 'digital_technology': What are the future applications of machine learning?
+2025-08-25 01:58:17,308 - INFO -  Step 2: Question created: What are the future applications of machine learning?...
+2025-08-25 01:58:17,309 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 01:58:17,313 - INFO - Logged question for digital_technology: What are the future applications of machine learni...
+2025-08-25 01:58:17,315 - INFO -  Step 3: Question logged to CSV
+2025-08-25 01:58:17,318 - INFO -  Step 4: Generating base image for question...
+2025-08-25 01:58:17,318 - INFO - Starting smart fallback generation for theme 'digital_technology', image 1
+2025-08-25 01:58:17,318 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:58:17,318 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:58:17,322 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 01:58:17,322 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:58:17,322 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:58:42,519 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 01:58:42,683 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:58:42,684 - WARNING - Generation attempt 1 failed
+2025-08-25 01:58:43,685 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:58:43,935 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:58:43,936 - WARNING - Generation attempt 2 failed
+2025-08-25 01:58:44,937 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:58:44,967 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:58:44,967 - WARNING - Generation attempt 3 failed
+2025-08-25 01:58:44,967 - WARNING - GPU generation failed: Failed to generate GPU image for digital_technology image 1 after 3 attempts
+2025-08-25 01:58:44,967 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:58:45,364 - INFO - Created AI-style image: images\ASK-01-digital_technology-q.jpg
+2025-08-25 01:58:45,364 - INFO - CPU generation successful
+2025-08-25 01:58:45,364 - INFO -  Step 4: Base image created: ASK-01-digital_technology-q.jpg
+2025-08-25 01:58:45,364 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 01:58:45,364 - INFO - Starting text overlay for images\ASK-01-digital_technology-q.jpg with prompt: What are the future applications of machine learni...
+2025-08-25 01:58:45,364 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 01:58:45,547 - INFO - Added fallback text overlay to image: images\ASK-01-digital_technology-q.jpg
+2025-08-25 01:58:45,547 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 01:58:45,547 - INFO -  Step 6: Final question image created: ASK-01-digital_technology-q.jpg
+2025-08-25 01:58:45,547 - INFO -  Step 7: Generating answer for question...
+2025-08-25 01:58:45,547 - INFO - Generated offline answer for theme 'digital_technology': The integration of cloud computing in construction...
+2025-08-25 01:58:45,547 - INFO -  Step 7: Answer generated: The integration of cloud computing in construction represents a paradigm shift t...
+2025-08-25 01:58:45,552 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 01:58:45,589 - INFO - Logged answer for digital_technology: The integration of cloud computing in construction...
+2025-08-25 01:58:45,589 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 01:58:45,589 - INFO -  Step 8b: Marking question as used...
+2025-08-25 01:58:45,617 - INFO - Marked 1 questions as used
+2025-08-25 01:58:45,617 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 01:58:45,617 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 01:58:45,618 - INFO - Starting smart fallback generation for theme 'digital_technology', image 1
+2025-08-25 01:58:45,618 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 01:58:45,618 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 01:58:45,618 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:58:45,632 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:58:45,633 - WARNING - Generation attempt 1 failed
+2025-08-25 01:58:46,634 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:58:46,651 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:58:46,652 - WARNING - Generation attempt 2 failed
+2025-08-25 01:58:47,652 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 01:58:47,668 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 01:58:47,668 - WARNING - Generation attempt 3 failed
+2025-08-25 01:58:47,668 - WARNING - GPU generation failed: Failed to generate GPU image for digital_technology image 1 after 3 attempts
+2025-08-25 01:58:47,668 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 01:58:48,018 - INFO - Created AI-style image: images\ASK-01-digital_technology-a.jpg
+2025-08-25 01:58:48,018 - INFO - CPU generation successful
+2025-08-25 01:58:48,018 - INFO -  Step 9: Base image created: ASK-01-digital_technology-a.jpg
+2025-08-25 01:58:48,018 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 01:58:48,018 - INFO - Starting text overlay for images\ASK-01-digital_technology-a.jpg with prompt: The integration of cloud computing in construction...
+2025-08-25 01:58:48,018 - INFO - Long answer detected (773 chars), using multi-image approach
+2025-08-25 01:58:48,167 - INFO - Added fallback text overlay to image: images\ASK-01-digital_technology-a.jpg
+2025-08-25 01:58:48,167 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 01:58:48,167 - INFO -  Step 11: Final answer image created: ASK-01-digital_technology-a.jpg
+2025-08-25 01:58:48,167 - INFO - ============================================================
+2025-08-25 01:58:48,167 - INFO -  Cycle #1 completed successfully!
+2025-08-25 01:58:48,167 - INFO -  Question image: ASK-01-digital_technology-q.jpg
+2025-08-25 01:58:48,178 - INFO -  Answer image: ASK-01-digital_technology-a.jpg
+2025-08-25 01:58:48,179 - INFO -  Theme: digital_technology
+2025-08-25 01:58:48,179 - INFO -  Simple pipeline completed successfully!
+2025-08-25 02:00:16,712 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:00:16,719 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:00:16,719 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:00:16,719 - INFO - ==================================================
+2025-08-25 02:00:16,719 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:09:11,252 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:09:11,252 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:09:11,253 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:09:11,253 - INFO - ==================================================
+2025-08-25 02:09:11,253 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:09:17,486 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:09:18,268 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 143)
+2025-08-25 02:09:18,269 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 143)
+2025-08-25 02:09:41,115 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:09:41,115 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:09:41,115 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:09:41,116 - INFO - ==================================================
+2025-08-25 02:09:41,116 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:09:46,064 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:09:46,627 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 160)
+2025-08-25 02:09:46,628 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 160)
+2025-08-25 02:10:22,884 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:10:22,884 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:10:22,885 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:10:22,886 - INFO - ==================================================
+2025-08-25 02:10:22,888 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:10:25,577 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:10:25,976 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 287)
+2025-08-25 02:10:25,976 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 287)
+2025-08-25 02:10:48,468 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:10:48,468 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:10:48,468 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:10:48,469 - INFO - ==================================================
+2025-08-25 02:10:48,469 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:10:52,175 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:10:52,822 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 285)
+2025-08-25 02:10:52,861 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 285)
+2025-08-25 02:11:17,731 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:11:17,731 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:11:17,731 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:11:17,731 - INFO - ==================================================
+2025-08-25 02:11:17,731 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:11:21,991 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:11:22,500 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 283)
+2025-08-25 02:11:22,501 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 283)
+2025-08-25 02:11:45,942 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:11:45,942 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:11:45,942 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:11:45,943 - INFO - ==================================================
+2025-08-25 02:11:45,943 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:11:48,581 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:11:49,014 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 283)
+2025-08-25 02:11:49,015 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 283)
+2025-08-25 02:12:08,062 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:12:08,062 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:12:08,062 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:12:08,062 - INFO - ==================================================
+2025-08-25 02:12:08,063 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:12:11,205 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:12:11,712 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 02:12:11,712 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:11,712 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:11,712 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:11,712 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:11,712 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:11,712 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 02:12:11,714 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 02:12:11,714 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 02:12:11,715 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 02:12:11,715 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 02:12:11,816 - INFO - Reading from log.csv
+2025-08-25 02:12:11,816 - INFO - Volume info: Volume 1, 4/100 pairs in current volume, 4 total pairs
+2025-08-25 02:12:11,816 - INFO -  Starting at Volume 1: 4 Q&A pairs, 4 total
+2025-08-25 02:12:11,816 - INFO -  Step 1: Theme selected: DIGITAL_TECHNOLOGY
+2025-08-25 02:12:11,816 - INFO -  Step 2: Generating question for digital_technology...
+2025-08-25 02:12:11,816 - INFO - Generated offline question for theme 'digital_technology': What are the future applications of digital twins?
+2025-08-25 02:12:11,816 - INFO -  Step 2: Question created: What are the future applications of digital twins?...
+2025-08-25 02:12:11,816 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 02:12:11,822 - INFO - Logged question for digital_technology: What are the future applications of digital twins?...
+2025-08-25 02:12:11,824 - INFO -  Step 3: Question logged to CSV
+2025-08-25 02:12:11,825 - INFO -  Step 4: Generating base image for question...
+2025-08-25 02:12:11,826 - INFO - Starting smart fallback generation for theme 'digital_technology', image 1
+2025-08-25 02:12:11,826 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 02:12:11,826 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 02:12:11,829 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 02:12:11,829 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:11,829 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:32,744 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 02:12:32,812 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:32,812 - WARNING - Generation attempt 1 failed
+2025-08-25 02:12:33,814 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:33,828 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:33,828 - WARNING - Generation attempt 2 failed
+2025-08-25 02:12:34,829 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:34,843 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:34,843 - WARNING - Generation attempt 3 failed
+2025-08-25 02:12:34,843 - WARNING - GPU generation failed: Failed to generate GPU image for digital_technology image 1 after 3 attempts
+2025-08-25 02:12:34,843 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 02:12:35,114 - INFO - Created AI-style image: images\ASK-01-digital_technology-q.jpg
+2025-08-25 02:12:35,114 - INFO - CPU generation successful
+2025-08-25 02:12:35,114 - INFO -  Step 4: Base image created: ASK-01-digital_technology-q.jpg
+2025-08-25 02:12:35,115 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 02:12:35,115 - INFO - Starting text overlay for images\ASK-01-digital_technology-q.jpg with prompt: What are the future applications of digital twins?...
+2025-08-25 02:12:35,115 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 02:12:35,257 - INFO - Added fallback text overlay to image: images\ASK-01-digital_technology-q.jpg
+2025-08-25 02:12:35,257 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 02:12:35,257 - INFO -  Step 6: Final question image created: ASK-01-digital_technology-q.jpg
+2025-08-25 02:12:35,257 - INFO -  Step 7: Generating answer for question...
+2025-08-25 02:12:35,257 - INFO - Generated offline answer for theme 'digital_technology': The integration of artificial intelligence in ener...
+2025-08-25 02:12:35,257 - INFO -  Step 7: Answer generated: The integration of artificial intelligence in energy represents a paradigm shift...
+2025-08-25 02:12:35,257 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 02:12:35,285 - INFO - Logged answer for digital_technology: The integration of artificial intelligence in ener...
+2025-08-25 02:12:35,285 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 02:12:35,291 - INFO -  Step 8b: Marking question as used...
+2025-08-25 02:12:35,312 - INFO - Marked 1 questions as used
+2025-08-25 02:12:35,313 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 02:12:35,313 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 02:12:35,313 - INFO - Starting smart fallback generation for theme 'digital_technology', image 1
+2025-08-25 02:12:35,314 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 02:12:35,314 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 02:12:35,314 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:35,323 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:35,323 - WARNING - Generation attempt 1 failed
+2025-08-25 02:12:36,331 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:36,343 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:36,344 - WARNING - Generation attempt 2 failed
+2025-08-25 02:12:37,345 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:37,358 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:37,358 - WARNING - Generation attempt 3 failed
+2025-08-25 02:12:37,358 - WARNING - GPU generation failed: Failed to generate GPU image for digital_technology image 1 after 3 attempts
+2025-08-25 02:12:37,358 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 02:12:37,637 - INFO - Created AI-style image: images\ASK-01-digital_technology-a.jpg
+2025-08-25 02:12:37,637 - INFO - CPU generation successful
+2025-08-25 02:12:37,637 - INFO -  Step 9: Base image created: ASK-01-digital_technology-a.jpg
+2025-08-25 02:12:37,639 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 02:12:37,640 - INFO - Starting text overlay for images\ASK-01-digital_technology-a.jpg with prompt: The integration of artificial intelligence in ener...
+2025-08-25 02:12:37,640 - INFO - Long answer detected (771 chars), using multi-image approach
+2025-08-25 02:12:37,775 - INFO - Added fallback text overlay to image: images\ASK-01-digital_technology-a.jpg
+2025-08-25 02:12:37,775 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 02:12:37,776 - INFO -  Step 11: Final answer image created: ASK-01-digital_technology-a.jpg
+2025-08-25 02:12:37,776 - INFO - ============================================================
+2025-08-25 02:12:37,776 - INFO -  Cycle #1 completed successfully!
+2025-08-25 02:12:37,776 - INFO -  Question image: ASK-01-digital_technology-q.jpg
+2025-08-25 02:12:37,776 - INFO -  Answer image: ASK-01-digital_technology-a.jpg
+2025-08-25 02:12:37,776 - INFO -  Theme: digital_technology
+2025-08-25 02:12:37,776 - INFO -  Simple pipeline completed successfully!
+2025-08-25 02:12:39,625 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:12:39,625 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:12:39,625 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:12:39,625 - INFO - ==================================================
+2025-08-25 02:12:39,626 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:12:44,188 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:12:44,745 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 02:12:44,745 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:44,745 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:44,745 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:44,745 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:44,745 - WARNING - Invalid hex color format: 
+2025-08-25 02:12:44,746 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 02:12:44,746 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 02:12:44,746 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 02:12:44,747 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 02:12:44,747 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 02:12:44,811 - INFO - Reading from log.csv
+2025-08-25 02:12:44,811 - INFO - Volume info: Volume 1, 5/100 pairs in current volume, 5 total pairs
+2025-08-25 02:12:44,811 - INFO -  Starting at Volume 1: 5 Q&A pairs, 5 total
+2025-08-25 02:12:44,811 - INFO -  Step 1: Theme selected: SUSTAINABILITY_SCIENCE
+2025-08-25 02:12:44,812 - INFO -  Step 2: Generating question for sustainability_science...
+2025-08-25 02:12:44,812 - INFO - Generated offline question for theme 'sustainability_science': What are the economic benefits of circular economy?
+2025-08-25 02:12:44,812 - INFO -  Step 2: Question created: What are the economic benefits of circular economy?...
+2025-08-25 02:12:44,812 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 02:12:44,814 - INFO - Logged question for sustainability_science: What are the economic benefits of circular economy...
+2025-08-25 02:12:44,814 - INFO -  Step 3: Question logged to CSV
+2025-08-25 02:12:44,814 - INFO -  Step 4: Generating base image for question...
+2025-08-25 02:12:44,814 - INFO - Starting smart fallback generation for theme 'sustainability_science', image 1
+2025-08-25 02:12:44,814 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 02:12:44,814 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 02:12:44,815 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 02:12:44,817 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:44,817 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:54,565 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 02:12:54,611 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:54,612 - WARNING - Generation attempt 1 failed
+2025-08-25 02:12:55,616 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:55,628 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:55,628 - WARNING - Generation attempt 2 failed
+2025-08-25 02:12:56,629 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:56,642 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:56,642 - WARNING - Generation attempt 3 failed
+2025-08-25 02:12:56,642 - WARNING - GPU generation failed: Failed to generate GPU image for sustainability_science image 1 after 3 attempts
+2025-08-25 02:12:56,642 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 02:12:56,912 - INFO - Created AI-style image: images\ASK-01-sustainability_science-q.jpg
+2025-08-25 02:12:56,912 - INFO - CPU generation successful
+2025-08-25 02:12:56,912 - INFO -  Step 4: Base image created: ASK-01-sustainability_science-q.jpg
+2025-08-25 02:12:56,913 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 02:12:56,914 - INFO - Starting text overlay for images\ASK-01-sustainability_science-q.jpg with prompt: What are the economic benefits of circular economy...
+2025-08-25 02:12:56,914 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 02:12:57,112 - INFO - Added fallback text overlay to image: images\ASK-01-sustainability_science-q.jpg
+2025-08-25 02:12:57,112 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 02:12:57,114 - INFO -  Step 6: Final question image created: ASK-01-sustainability_science-q.jpg
+2025-08-25 02:12:57,116 - INFO -  Step 7: Generating answer for question...
+2025-08-25 02:12:57,117 - INFO - Generated offline answer for theme 'sustainability_science': sustainable design represents a holistic response ...
+2025-08-25 02:12:57,117 - INFO -  Step 7: Answer generated: sustainable design represents a holistic response to waste accumulation that int...
+2025-08-25 02:12:57,118 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 02:12:57,143 - INFO - Logged answer for sustainability_science: sustainable design represents a holistic response ...
+2025-08-25 02:12:57,143 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 02:12:57,145 - INFO -  Step 8b: Marking question as used...
+2025-08-25 02:12:57,165 - INFO - Marked 1 questions as used
+2025-08-25 02:12:57,165 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 02:12:57,167 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 02:12:57,167 - INFO - Starting smart fallback generation for theme 'sustainability_science', image 1
+2025-08-25 02:12:57,167 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 02:12:57,168 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 02:12:57,168 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:57,182 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:57,182 - WARNING - Generation attempt 1 failed
+2025-08-25 02:12:58,189 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:58,226 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:58,228 - WARNING - Generation attempt 2 failed
+2025-08-25 02:12:59,338 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:12:59,396 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:12:59,396 - WARNING - Generation attempt 3 failed
+2025-08-25 02:12:59,396 - WARNING - GPU generation failed: Failed to generate GPU image for sustainability_science image 1 after 3 attempts
+2025-08-25 02:12:59,396 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 02:13:00,758 - INFO - Created AI-style image: images\ASK-01-sustainability_science-a.jpg
+2025-08-25 02:13:00,758 - INFO - CPU generation successful
+2025-08-25 02:13:00,758 - INFO -  Step 9: Base image created: ASK-01-sustainability_science-a.jpg
+2025-08-25 02:13:00,760 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 02:13:00,762 - INFO - Starting text overlay for images\ASK-01-sustainability_science-a.jpg with prompt: sustainable design represents a holistic response ...
+2025-08-25 02:13:00,762 - INFO - Long answer detected (768 chars), using multi-image approach
+2025-08-25 02:13:01,044 - INFO - Added fallback text overlay to image: images\ASK-01-sustainability_science-a.jpg
+2025-08-25 02:13:01,044 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 02:13:01,045 - INFO -  Step 11: Final answer image created: ASK-01-sustainability_science-a.jpg
+2025-08-25 02:13:01,045 - INFO - ============================================================
+2025-08-25 02:13:01,045 - INFO -  Cycle #1 completed successfully!
+2025-08-25 02:13:01,045 - INFO -  Question image: ASK-01-sustainability_science-q.jpg
+2025-08-25 02:13:01,046 - INFO -  Answer image: ASK-01-sustainability_science-a.jpg
+2025-08-25 02:13:01,046 - INFO -  Theme: sustainability_science
+2025-08-25 02:13:01,046 - INFO -  Simple pipeline completed successfully!
+2025-08-25 02:13:11,332 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:13:11,333 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:13:11,333 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:13:11,333 - INFO - ==================================================
+2025-08-25 02:13:11,333 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:13:14,707 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:13:15,252 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 732)
+2025-08-25 02:13:15,252 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 732)
+2025-08-25 02:13:42,473 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:13:42,473 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:13:42,473 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:13:42,473 - INFO - ==================================================
+2025-08-25 02:13:42,473 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:13:45,432 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 02:13:45,916 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 02:13:45,917 - WARNING - Invalid hex color format: 
+2025-08-25 02:13:45,917 - WARNING - Invalid hex color format: 
+2025-08-25 02:13:45,917 - WARNING - Invalid hex color format: 
+2025-08-25 02:13:45,917 - WARNING - Invalid hex color format: 
+2025-08-25 02:13:45,918 - WARNING - Invalid hex color format: 
+2025-08-25 02:13:45,918 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 02:13:45,921 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 02:13:45,921 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 02:13:45,922 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 02:13:45,922 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 02:13:46,014 - INFO - Reading from log.csv
+2025-08-25 02:13:46,014 - INFO - Volume info: Volume 1, 6/100 pairs in current volume, 6 total pairs
+2025-08-25 02:13:46,014 - INFO -  Starting at Volume 1: 6 Q&A pairs, 6 total
+2025-08-25 02:13:46,014 - INFO -  Step 1: Theme selected: ENGINEERING_SYSTEMS
+2025-08-25 02:13:46,016 - INFO -  Step 2: Generating question for engineering_systems...
+2025-08-25 02:13:46,017 - INFO - Generated offline question for theme 'engineering_systems': What are the safety considerations for building automation?
+2025-08-25 02:13:46,017 - INFO -  Step 2: Question created: What are the safety considerations for building automation?...
+2025-08-25 02:13:46,018 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 02:13:46,021 - INFO - Logged question for engineering_systems: What are the safety considerations for building au...
+2025-08-25 02:13:46,022 - INFO -  Step 3: Question logged to CSV
+2025-08-25 02:13:46,025 - INFO -  Step 4: Generating base image for question...
+2025-08-25 02:13:46,034 - INFO - Starting smart fallback generation for theme 'engineering_systems', image 1
+2025-08-25 02:13:46,034 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 02:13:46,035 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 02:13:46,038 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 02:13:46,038 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:13:46,039 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:14:00,718 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.7.1+cu126 with CUDA 1208 (you have 2.7.1+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 02:14:00,785 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:14:00,791 - WARNING - Generation attempt 1 failed
+2025-08-25 02:14:01,792 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:14:01,806 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:14:01,808 - WARNING - Generation attempt 2 failed
+2025-08-25 02:14:02,808 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:14:02,817 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:14:02,817 - WARNING - Generation attempt 3 failed
+2025-08-25 02:14:02,817 - WARNING - GPU generation failed: Failed to generate GPU image for engineering_systems image 1 after 3 attempts
+2025-08-25 02:14:02,817 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 02:14:03,095 - INFO - Created AI-style image: images\ASK-01-engineering_systems-q.jpg
+2025-08-25 02:14:03,095 - INFO - CPU generation successful
+2025-08-25 02:14:03,095 - INFO -  Step 4: Base image created: ASK-01-engineering_systems-q.jpg
+2025-08-25 02:14:03,095 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 02:14:03,095 - INFO - Starting text overlay for images\ASK-01-engineering_systems-q.jpg with prompt: What are the safety considerations for building au...
+2025-08-25 02:14:03,096 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 02:14:03,197 - INFO - Added fallback text overlay to image: images\ASK-01-engineering_systems-q.jpg
+2025-08-25 02:14:03,197 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 02:14:03,198 - INFO -  Step 6: Final question image created: ASK-01-engineering_systems-q.jpg
+2025-08-25 02:14:03,198 - INFO -  Step 7: Generating answer for question...
+2025-08-25 02:14:03,198 - INFO - Generated offline answer for theme 'engineering_systems': Optimizing sustainable design for sustainable desi...
+2025-08-25 02:14:03,198 - INFO -  Step 7: Answer generated: Optimizing sustainable design for sustainable design requires a systematic appro...
+2025-08-25 02:14:03,199 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 02:14:03,217 - INFO - Logged answer for engineering_systems: Optimizing sustainable design for sustainable desi...
+2025-08-25 02:14:03,217 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 02:14:03,218 - INFO -  Step 8b: Marking question as used...
+2025-08-25 02:14:03,234 - INFO - Marked 1 questions as used
+2025-08-25 02:14:03,235 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 02:14:03,235 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 02:14:03,235 - INFO - Starting smart fallback generation for theme 'engineering_systems', image 1
+2025-08-25 02:14:03,235 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 02:14:03,235 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 02:14:03,235 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:14:03,250 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:14:03,250 - WARNING - Generation attempt 1 failed
+2025-08-25 02:14:04,251 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:14:04,263 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:14:04,264 - WARNING - Generation attempt 2 failed
+2025-08-25 02:14:05,265 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:14:05,277 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 02:14:05,278 - WARNING - Generation attempt 3 failed
+2025-08-25 02:14:05,278 - WARNING - GPU generation failed: Failed to generate GPU image for engineering_systems image 1 after 3 attempts
+2025-08-25 02:14:05,278 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 02:14:05,549 - INFO - Created AI-style image: images\ASK-01-engineering_systems-a.jpg
+2025-08-25 02:14:05,549 - INFO - CPU generation successful
+2025-08-25 02:14:05,549 - INFO -  Step 9: Base image created: ASK-01-engineering_systems-a.jpg
+2025-08-25 02:14:05,549 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 02:14:05,549 - INFO - Starting text overlay for images\ASK-01-engineering_systems-a.jpg with prompt: Optimizing sustainable design for sustainable desi...
+2025-08-25 02:14:05,549 - INFO - Long answer detected (760 chars), using multi-image approach
+2025-08-25 02:14:05,683 - INFO - Added fallback text overlay to image: images\ASK-01-engineering_systems-a.jpg
+2025-08-25 02:14:05,690 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 02:14:05,693 - INFO -  Step 11: Final answer image created: ASK-01-engineering_systems-a.jpg
+2025-08-25 02:14:05,694 - INFO - ============================================================
+2025-08-25 02:14:05,694 - INFO -  Cycle #1 completed successfully!
+2025-08-25 02:14:05,694 - INFO -  Question image: ASK-01-engineering_systems-q.jpg
+2025-08-25 02:14:05,694 - INFO -  Answer image: ASK-01-engineering_systems-a.jpg
+2025-08-25 02:14:05,695 - INFO -  Theme: engineering_systems
+2025-08-25 02:14:05,695 - INFO -  Simple pipeline completed successfully!
+2025-08-25 02:21:40,362 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:21:40,362 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:21:40,363 - INFO - 
+2025-08-25 02:21:40,363 - INFO -  DOWNLOADING AI MODELS UPFRONT
+2025-08-25 02:21:40,364 - INFO - ==================================================
+2025-08-25 02:21:40,364 - INFO -  This ensures all models are ready before generation starts
+2025-08-25 02:21:40,368 - INFO - 
+2025-08-25 02:21:40,368 - INFO -  [1/3] Checking/Downloading: runwayml/stable-diffusion-v1-5
+2025-08-25 02:21:41,366 - INFO -  Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:21:41,371 - INFO -  [2/3] Checking/Downloading: latent-consistency/lcm-sd15
+2025-08-25 02:21:41,371 - INFO -  Downloading GPU model: latent-consistency/lcm-sd15
+2025-08-25 02:21:41,371 - INFO -  This may take a few minutes for the first run...
+2025-08-25 02:21:41,991 - ERROR -  Failed to download GPU model: 404 Client Error. (Request ID: Root=1-68ab7b5d-71ad5bdb4fb7f5ca6e842c27;9752f11d-efc1-4d59-9005-f85693f4d6ec)
+
+Repository Not Found for url: https://huggingface.co/api/models/latent-consistency/lcm-sd15/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-08-25 02:21:41,991 - INFO -  [3/3] Checking/Downloading: stabilityai/stable-diffusion-xl-base-1.0
+2025-08-25 02:21:41,991 - INFO -  Downloading GPU model: stabilityai/stable-diffusion-xl-base-1.0
+2025-08-25 02:21:41,991 - INFO -  This may take a few minutes for the first run...
+2025-08-25 02:21:43,789 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:44,440 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:44,477 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:44,514 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:44,603 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:44,743 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:45,095 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:45,477 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:21:45,838 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:22:41,552 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:22:46,127 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:27:08,611 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:31:23,654 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:31:25,449 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:31:25,978 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:31:30,679 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:31:55,364 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:32:06,109 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-08-25 02:44:56,013 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:44:56,013 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:44:56,014 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:44:56,014 - INFO - ==================================================
+2025-08-25 02:44:56,014 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:44:56,014 - INFO - 
+2025-08-25 02:44:56,020 - INFO - ----------------------------------------
+2025-08-25 02:44:56,021 - INFO - 
+2025-08-25 02:44:56,023 - INFO - ============================================================
+2025-08-25 02:44:56,023 - INFO - 
+2025-08-25 02:44:56,024 - INFO -  [1/3] Checking/Downloading: runwayml/stable-diffusion-v1-5
+2025-08-25 02:44:56,024 - INFO -  ==================================================
+2025-08-25 02:44:59,016 - INFO -  Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:44:59,016 - INFO - 
+2025-08-25 02:44:59,016 - INFO -  [2/3] Checking/Downloading: latent-consistency/lcm-sd15
+2025-08-25 02:44:59,016 - INFO -  ==================================================
+2025-08-25 02:44:59,016 - INFO -  Downloading GPU model: latent-consistency/lcm-sd15
+2025-08-25 02:44:59,016 - INFO -  This may take a few minutes for the first run...
+2025-08-25 02:44:59,700 - ERROR -  Failed to download GPU model: 404 Client Error. (Request ID: Root=1-68ab80d3-5115bfcc567895d04d89bf3d;edcb2946-19c5-4788-91ba-0b41af61c988)
+
+Repository Not Found for url: https://huggingface.co/api/models/latent-consistency/lcm-sd15/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-08-25 02:44:59,711 - INFO - 
+2025-08-25 02:44:59,711 - INFO -  [3/3] Checking/Downloading: stabilityai/stable-diffusion-xl-base-1.0
+2025-08-25 02:44:59,711 - INFO -  ==================================================
+2025-08-25 02:44:59,712 - INFO -  Using cached GPU model: stabilityai/stable-diffusion-xl-base-1.0
+2025-08-25 02:44:59,714 - INFO - 
+2025-08-25 02:44:59,715 - INFO -     Successfully prepared: 2/3 models
+2025-08-25 02:44:59,718 - INFO - 
+2025-08-25 02:45:39,000 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:45:39,000 - INFO - Running in offline mode - API generation disabled
+2025-08-25 02:45:39,000 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 02:45:39,001 - INFO - ==================================================
+2025-08-25 02:45:39,001 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 02:45:39,001 - INFO - 
+2025-08-25 02:45:39,001 - INFO -  Step 1: Preparing AI Models
+2025-08-25 02:45:39,002 - INFO - ----------------------------------------
+2025-08-25 02:45:39,002 - INFO - 
+2025-08-25 02:45:39,002 - INFO -  Pre-downloading AI Models for Optimal Performance
+2025-08-25 02:45:39,002 - INFO - ============================================================
+2025-08-25 02:45:39,003 - INFO - 
+2025-08-25 02:45:39,003 - INFO -  [1/3] Checking/Downloading: runwayml/stable-diffusion-v1-5
+2025-08-25 02:45:39,003 - INFO -  ==================================================
+2025-08-25 02:45:39,322 - INFO -  Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 02:45:39,323 - INFO -  [SUCCESS] Model 1/3 ready: runwayml/stable-diffusion-v1-5
+2025-08-25 02:45:39,323 - INFO - 
+2025-08-25 02:45:39,323 - INFO -  [2/3] Checking/Downloading: stabilityai/stable-diffusion-xl-base-1.0
+2025-08-25 02:45:39,323 - INFO -  ==================================================
+2025-08-25 02:45:39,324 - INFO -  Using cached GPU model: stabilityai/stable-diffusion-xl-base-1.0
+2025-08-25 02:45:39,324 - INFO -  [SUCCESS] Model 2/3 ready: stabilityai/stable-diffusion-xl-base-1.0
+2025-08-25 02:45:39,324 - INFO - 
+2025-08-25 02:45:39,324 - INFO -  [3/3] Checking/Downloading: CompVis/stable-diffusion-v1-4
+2025-08-25 02:45:39,324 - INFO -  ==================================================
+2025-08-25 02:45:39,325 - INFO -  Downloading GPU model: CompVis/stable-diffusion-v1-4
+2025-08-25 02:45:39,325 - INFO -  This may take a few minutes for the first run...
+2025-08-25 03:07:28,078 - INFO - Running in offline mode - API generation disabled
+2025-08-25 03:07:28,079 - INFO - Running in offline mode - API generation disabled
+2025-08-25 03:07:28,079 - INFO - 
+2025-08-25 03:07:28,079 - INFO -  *ASK*: Daily Research - Offline-First Pipeline
+2025-08-25 03:07:28,079 - INFO - ============================================================
+2025-08-25 03:07:28,079 - INFO -  Step 0: Downloading all required AI models upfront...
+2025-08-25 03:07:28,079 - INFO - ============================================================
+2025-08-25 03:07:28,079 - INFO -  DOWNLOADING ALL REQUIRED MODELS UPFRONT
+2025-08-25 03:07:28,079 - INFO - ============================================================
+2025-08-25 03:07:28,079 - INFO - 
+2025-08-25 03:07:28,079 - INFO -  [1/2] Checking GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:07:30,948 - INFO -    Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:07:30,961 - INFO - 
+2025-08-25 03:07:30,962 - INFO -  [2/2] Checking CPU model: latent-consistency/lcm-sd15
+2025-08-25 03:07:30,962 - INFO -    Downloading CPU model: latent-consistency/lcm-sd15
+2025-08-25 03:07:30,963 - INFO -    This may take a few minutes for the first run...
+2025-08-25 03:07:31,609 - ERROR -    Failed to download CPU model: 404 Client Error. (Request ID: Root=1-68ab861b-53a31d8b717188584ee65b57;2e1c1ef0-54b1-47f5-a0df-6db5e7f2cd03)
+
+Repository Not Found for url: https://huggingface.co/api/models/latent-consistency/lcm-sd15/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-08-25 03:07:31,609 - INFO - 
+2025-08-25 03:07:31,609 - INFO - ============================================================
+2025-08-25 03:07:31,615 - INFO -  Pipeline will use available models and fallbacks
+2025-08-25 03:07:31,615 - INFO - ============================================================
+2025-08-25 03:07:31,615 - INFO - 
+2025-08-25 03:07:31,615 - INFO - 
+2025-08-25 03:07:31,618 - INFO -  Step 1: Starting pipeline execution...
+2025-08-25 03:07:31,625 - INFO - ============================================================
+2025-08-25 03:07:31,625 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 03:07:31,626 - INFO - ==================================================
+2025-08-25 03:07:31,626 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 03:07:43,877 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 03:07:45,772 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 03:07:45,772 - WARNING - Invalid hex color format: 
+2025-08-25 03:07:45,772 - WARNING - Invalid hex color format: 
+2025-08-25 03:07:45,772 - WARNING - Invalid hex color format: 
+2025-08-25 03:07:45,772 - WARNING - Invalid hex color format: 
+2025-08-25 03:07:45,772 - WARNING - Invalid hex color format: 
+2025-08-25 03:07:45,772 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 03:07:45,787 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 03:07:45,787 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 03:07:45,797 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 03:07:45,837 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 03:07:45,903 - INFO - Reading from log.csv
+2025-08-25 03:07:45,903 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-08-25 03:07:45,904 - INFO -  Starting at Volume 1: 0 Q&A pairs, 0 total
+2025-08-25 03:07:45,904 - INFO -  Step 1: Theme selected: DESIGN_RESEARCH
+2025-08-25 03:07:45,904 - INFO -  Step 2: Generating question for design_research...
+2025-08-25 03:07:45,905 - INFO - Generated offline question for theme 'design_research': How can we design sustainable design that responds to resource scarcity?
+2025-08-25 03:07:45,905 - INFO -  Step 2: Question created: How can we design sustainable design that responds to resource scarcity?...
+2025-08-25 03:07:45,905 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 03:07:45,907 - INFO - Logged question for design_research: How can we design sustainable design that responds...
+2025-08-25 03:07:45,907 - INFO -  Step 3: Question logged to CSV
+2025-08-25 03:07:45,907 - INFO -  Step 4: Generating base image for question...
+2025-08-25 03:07:45,907 - INFO - Starting smart fallback generation for theme 'design_research', image 1
+2025-08-25 03:07:45,907 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 03:07:45,907 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 03:07:45,921 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 03:07:45,921 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:07:45,921 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:09:01,080 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.8.0+cu128 with CUDA 1208 (you have 2.8.0+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 03:09:12,245 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:09:12,245 - WARNING - Generation attempt 1 failed
+2025-08-25 03:09:13,247 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:09:13,276 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:09:13,277 - WARNING - Generation attempt 2 failed
+2025-08-25 03:09:14,277 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:09:14,278 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:09:14,278 - WARNING - Generation attempt 3 failed
+2025-08-25 03:09:14,278 - WARNING - GPU generation failed: Failed to generate GPU image for design_research image 1 after 3 attempts
+2025-08-25 03:09:14,278 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 03:09:14,712 - INFO - Created AI-style image: images\ASK-01-design_research-q.jpg
+2025-08-25 03:09:14,712 - INFO - CPU generation successful
+2025-08-25 03:09:14,712 - INFO -  Step 4: Base image created: ASK-01-design_research-q.jpg
+2025-08-25 03:09:14,712 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 03:09:14,712 - INFO - Starting text overlay for images\ASK-01-design_research-q.jpg with prompt: How can we design sustainable design that responds...
+2025-08-25 03:09:14,712 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 03:09:14,823 - INFO - Added fallback text overlay to image: images\ASK-01-design_research-q.jpg
+2025-08-25 03:09:14,824 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 03:09:14,824 - INFO -  Step 6: Final question image created: ASK-01-design_research-q.jpg
+2025-08-25 03:09:14,825 - INFO -  Step 7: Generating answer for question...
+2025-08-25 03:09:14,825 - INFO - Generated offline answer for theme 'design_research': The concept of generative design represents a fund...
+2025-08-25 03:09:14,825 - INFO -  Step 7: Answer generated: The concept of generative design represents a fundamental shift in how we approa...
+2025-08-25 03:09:14,826 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 03:09:14,828 - INFO - Logged answer for design_research: The concept of generative design represents a fund...
+2025-08-25 03:09:14,828 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 03:09:14,828 - INFO -  Step 8b: Marking question as used...
+2025-08-25 03:09:14,852 - INFO - Marked 1 questions as used
+2025-08-25 03:09:14,852 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 03:09:14,857 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 03:09:14,858 - INFO - Starting smart fallback generation for theme 'design_research', image 1
+2025-08-25 03:09:14,858 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 03:09:14,858 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 03:09:14,858 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:09:14,871 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:09:14,874 - WARNING - Generation attempt 1 failed
+2025-08-25 03:09:15,875 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:09:15,894 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:09:15,895 - WARNING - Generation attempt 2 failed
+2025-08-25 03:09:16,896 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:09:16,910 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:09:16,910 - WARNING - Generation attempt 3 failed
+2025-08-25 03:09:16,910 - WARNING - GPU generation failed: Failed to generate GPU image for design_research image 1 after 3 attempts
+2025-08-25 03:09:16,910 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 03:09:17,128 - INFO - Created AI-style image: images\ASK-01-design_research-a.jpg
+2025-08-25 03:09:17,128 - INFO - CPU generation successful
+2025-08-25 03:09:17,128 - INFO -  Step 9: Base image created: ASK-01-design_research-a.jpg
+2025-08-25 03:09:17,138 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 03:09:17,140 - INFO - Starting text overlay for images\ASK-01-design_research-a.jpg with prompt: The concept of generative design represents a fund...
+2025-08-25 03:09:17,140 - INFO - Long answer detected (817 chars), using multi-image approach
+2025-08-25 03:09:17,265 - INFO - Added fallback text overlay to image: images\ASK-01-design_research-a.jpg
+2025-08-25 03:09:17,265 - INFO - Created image 1/2: ASK-01-design_research-a.jpg
+2025-08-25 03:09:17,265 - ERROR - Environment validation failed: Missing TOGETHER_API_KEY
+2025-08-25 03:09:17,265 - ERROR - Error in enhanced image generation: Missing TOGETHER_API_KEY
+2025-08-25 03:09:17,265 - ERROR - Error in enhanced text overlay: Missing TOGETHER_API_KEY
+2025-08-25 03:09:17,265 - ERROR - Error in enhanced text overlay: name 'image_path' is not defined
+2025-08-25 03:09:17,265 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 03:09:17,265 - INFO -  Step 11: Final answer image created: ASK-01-design_research-a.jpg
+2025-08-25 03:09:17,265 - INFO - ============================================================
+2025-08-25 03:09:17,265 - INFO -  Cycle #1 completed successfully!
+2025-08-25 03:09:17,265 - INFO -  Question image: ASK-01-design_research-q.jpg
+2025-08-25 03:09:17,265 - INFO -  Answer image: ASK-01-design_research-a.jpg
+2025-08-25 03:09:17,265 - INFO -  Theme: design_research
+2025-08-25 03:09:17,265 - INFO -  Simple pipeline completed successfully!
+2025-08-25 03:11:06,934 - INFO - Running in offline mode - API generation disabled
+2025-08-25 03:11:06,934 - INFO - Running in offline mode - API generation disabled
+2025-08-25 03:11:06,934 - INFO - 
+2025-08-25 03:11:06,935 - INFO -  *ASK*: Daily Research - Offline-First Pipeline
+2025-08-25 03:11:06,935 - INFO - ============================================================
+2025-08-25 03:11:06,935 - INFO -  Step 0: Downloading all required AI models upfront...
+2025-08-25 03:11:06,935 - INFO - ============================================================
+2025-08-25 03:11:06,937 - INFO -  DOWNLOADING ALL REQUIRED MODELS UPFRONT
+2025-08-25 03:11:06,939 - INFO - ============================================================
+2025-08-25 03:11:06,941 - INFO - 
+2025-08-25 03:11:06,942 - INFO -  [1/2] Checking GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:11:07,631 - INFO -    Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:11:07,631 - INFO -  [OK] GPU model ready: runwayml/stable-diffusion-v1-5
+2025-08-25 03:11:07,632 - INFO - 
+2025-08-25 03:11:07,632 - INFO -  [2/2] Checking CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 03:11:07,632 - INFO -    Downloading CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 03:11:07,632 - INFO -    This may take a few minutes for the first run...
+2025-08-25 03:37:52,799 - WARNING - Error while downloading from https://cdn-lfs.hf.co/repos/a1/85/a185a17402d1e02a619f8b020c871b31d5ebe5091ea3cc46bd84337af1a0019b/ef99ccc336de0e79f247fcb3d1398b3f3d1a02796916b88a351d7a83f570a31a?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27model.onnx_data%3B+filename%3D%22model.onnx_data%22%3B&Expires=1756075273&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc1NjA3NTI3M319LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5oZi5jby9yZXBvcy9hMS84NS9hMTg1YTE3NDAyZDFlMDJhNjE5ZjhiMDIwYzg3MWIzMWQ1ZWJlNTA5MWVhM2NjNDZiZDg0MzM3YWYxYTAwMTliL2VmOTljY2MzMzZkZTBlNzlmMjQ3ZmNiM2QxMzk4YjNmM2QxYTAyNzk2OTE2Yjg4YTM1MWQ3YTgzZjU3MGEzMWE%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qIn1dfQ__&Signature=ZT11BSYTyPlSVjxXcrXil2P9SK5GpJaurbjED8-2NKTQcCulDeZGKLUMIIOaGtIIVLizDnwDYx2T0-UcO4acSwDDXpn7micDFXYBOTkvcCrLNaUsO8nTIK%7E336O%7EK9Mquqll6uY0aJZsXhhAXj5kGAL%7E8w-VmuXT3NS53HuWBEyBl7YAa9G8u-DqII9IH7yvUgHNp0dlRPDDm4zartNlMX4OQZuCTYx1OH5Ln5nEc7YGtKFUAd2lrZspLreG5cmLdbxBgWyJwvUbUTcoLo9SvP8foUWucPBqRCBT91jlDVUoTeb27tfFIfQXTj%7EeJiC5zmnoApGdYsxHgv-2ekzW1A__&Key-Pair-Id=K3RPWS32NSSJCE: HTTPSConnectionPool(host='cdn-lfs.hf.co', port=443): Read timed out.
+Trying to resume download...
+2025-08-25 03:37:52,802 - WARNING - Error while downloading from https://cdn-lfs.hf.co/repos/a1/85/a185a17402d1e02a619f8b020c871b31d5ebe5091ea3cc46bd84337af1a0019b/fb351a5ded815c3ff744968ad9c6b218d071b9d313d04f35e813b84b4c0ffde8?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27model.safetensors%3B+filename%3D%22model.safetensors%22%3B&Expires=1756075270&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc1NjA3NTI3MH19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5oZi5jby9yZXBvcy9hMS84NS9hMTg1YTE3NDAyZDFlMDJhNjE5ZjhiMDIwYzg3MWIzMWQ1ZWJlNTA5MWVhM2NjNDZiZDg0MzM3YWYxYTAwMTliL2ZiMzUxYTVkZWQ4MTVjM2ZmNzQ0OTY4YWQ5YzZiMjE4ZDA3MWI5ZDMxM2QwNGYzNWU4MTNiODRiNGMwZmZkZTg%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qIn1dfQ__&Signature=rsnZ-c1qZ%7EwrOWvLj-I8RwCG%7EguxPMfwMgzH6DJYZRFwk%7ESUcTz45v-2SykdEgfUrptpEtvHH-r%7ElOKxB3YoABcmdxVkn0ks1eY%7EtqQL7VQNpUDhrC8SoavufWwIvwvzy7IGQKjQJHhXnpyOO%7EM9X9ccDojsgfiuJ0jafaLnaOZ2kfPsr7x7CK2mSTSbKE2tM9STT7XI4oNKGN%7EqmRjgJF4iloVsstPJjHtNzqjSl5%7ERm30l05mc5QxJ-8lsQxi0hXt%7E925FVOfgN2wwDzKT81csye4VV%7EXK8CYV3%7EBNco3iCjOx6AQQWlzjD-nrPwEXuXPnpwVdSV7yLcRSRjWAZA__&Key-Pair-Id=K3RPWS32NSSJCE: HTTPSConnectionPool(host='cdn-lfs.hf.co', port=443): Read timed out.
+Trying to resume download...
+2025-08-25 03:37:52,803 - WARNING - Error while downloading from https://cdn-lfs.hf.co/repos/a1/85/a185a17402d1e02a619f8b020c871b31d5ebe5091ea3cc46bd84337af1a0019b/7be468469c513f8614a73423aa009581295fbd8c903703450632b2275c0145a9?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27diffusion_pytorch_model.safetensors%3B+filename%3D%22diffusion_pytorch_model.safetensors%22%3B&Expires=1756075272&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc1NjA3NTI3Mn19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5oZi5jby9yZXBvcy9hMS84NS9hMTg1YTE3NDAyZDFlMDJhNjE5ZjhiMDIwYzg3MWIzMWQ1ZWJlNTA5MWVhM2NjNDZiZDg0MzM3YWYxYTAwMTliLzdiZTQ2ODQ2OWM1MTNmODYxNGE3MzQyM2FhMDA5NTgxMjk1ZmJkOGM5MDM3MDM0NTA2MzJiMjI3NWMwMTQ1YTk%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qIn1dfQ__&Signature=hUHvaL-erLoz2daISrWreHxE--Wecx13AmrdxRrObck37Wt8Hw3UC-huesDMnob37NStIPEfWJUXvbXZIqDSYFKiTEfIng1%7E1IysfETS0I8Ai0dKJTC-eeglf%7ERFCbA9V95epvklEESEr3QZHv%7EEab12t8E%7ERO5pwTbva-GqfvFyzP5V0jCDF02Ag8dUVEfCebMIGkqDd-p5yVxCTaTcirLdQRhP1PGyD%7EpEMKm9KPw2Oe6qpUaehT6kI9Jb4gjXcG7BmC1-Z2qZ2RRqurdd7BsEX5jtOjHY2k6F8FzZ7H4RaIM82JYrgxffCEtfKu%7E5W93auJ7U9e4tMsl-iqsEcQ__&Key-Pair-Id=K3RPWS32NSSJCE: HTTPSConnectionPool(host='cdn-lfs.hf.co', port=443): Read timed out.
+Trying to resume download...
+2025-08-25 03:37:52,803 - WARNING - Error while downloading from https://cdn-lfs.hf.co/repos/a1/85/a185a17402d1e02a619f8b020c871b31d5ebe5091ea3cc46bd84337af1a0019b/84feab3a32f1d36108b762b25dad483ca9e37f719b23e0cfd0fdc4ad3fd5409b?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27LCM_Dreamshaper_v7_4k.safetensors%3B+filename%3D%22LCM_Dreamshaper_v7_4k.safetensors%22%3B&Expires=1756075269&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc1NjA3NTI2OX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5oZi5jby9yZXBvcy9hMS84NS9hMTg1YTE3NDAyZDFlMDJhNjE5ZjhiMDIwYzg3MWIzMWQ1ZWJlNTA5MWVhM2NjNDZiZDg0MzM3YWYxYTAwMTliLzg0ZmVhYjNhMzJmMWQzNjEwOGI3NjJiMjVkYWQ0ODNjYTllMzdmNzE5YjIzZTBjZmQwZmRjNGFkM2ZkNTQwOWI%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qIn1dfQ__&Signature=MVfRsz6Y2Ya11E4MH%7ExcnZvOB8Eqgmga72v3Ey8YQqYzCyKFRW1Tm9O4dDJj6KV8smm3aMX-GcMrcr82qUjl9KYJnwMm5xStqIwCx2Yj3BCqqvR6Bi82XNf5yQPs1OEcBKltLg4%7EULYVrnnKzb3mIJEQZWRq22V4z8HiK%7E9XLgOXKpFTIapvLtFLLP6B5E4PoWEIJyka4xjxcFUezvVPauslKx8ZD2j%7E0r7oSzzCU8UWPr6qD8prpRa9dqxFjyuWNn6NkhtTzL9SoOwg0r86SdNCElg28P7SqwxlupYIsXO9cgXp%7Eex3jv-rCaEmgbSMEV4Gz3JsPTnUbtI-qCDNlA__&Key-Pair-Id=K3RPWS32NSSJCE: HTTPSConnectionPool(host='cdn-lfs.hf.co', port=443): Read timed out.
+Trying to resume download...
+2025-08-25 03:58:50,925 - INFO -    CPU model downloaded successfully!
+2025-08-25 03:58:50,944 - INFO -  [OK] CPU model ready: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 03:58:50,946 - INFO - 
+2025-08-25 03:58:50,946 - INFO - ============================================================
+2025-08-25 03:58:50,946 - INFO -  [SUCCESS] ALL MODELS READY! (2/2)
+2025-08-25 03:58:50,946 - INFO -  Pipeline can now run completely offline!
+2025-08-25 03:58:50,946 - INFO - ============================================================
+2025-08-25 03:58:50,946 - INFO - 
+2025-08-25 03:58:50,951 - INFO - 
+2025-08-25 03:58:50,952 - INFO -  Step 1: Starting pipeline execution...
+2025-08-25 03:58:50,952 - INFO - ============================================================
+2025-08-25 03:58:50,955 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 03:58:50,955 - INFO - ==================================================
+2025-08-25 03:58:50,964 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 03:59:00,592 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 03:59:01,111 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 03:59:01,111 - WARNING - Invalid hex color format: 
+2025-08-25 03:59:01,111 - WARNING - Invalid hex color format: 
+2025-08-25 03:59:01,111 - WARNING - Invalid hex color format: 
+2025-08-25 03:59:01,111 - WARNING - Invalid hex color format: 
+2025-08-25 03:59:01,111 - WARNING - Invalid hex color format: 
+2025-08-25 03:59:01,111 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 03:59:01,113 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 03:59:01,113 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 03:59:01,113 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 03:59:01,128 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 03:59:01,147 - INFO - Reading from log.csv
+2025-08-25 03:59:01,147 - INFO - Volume info: Volume 1, 1/100 pairs in current volume, 1 total pairs
+2025-08-25 03:59:01,147 - INFO -  Starting at Volume 1: 1 Q&A pairs, 1 total
+2025-08-25 03:59:01,147 - INFO -  Step 1: Theme selected: TECHNOLOGY_INNOVATION
+2025-08-25 03:59:01,147 - INFO -  Step 2: Generating question for technology_innovation...
+2025-08-25 03:59:01,147 - INFO - Generated offline question for theme 'technology_innovation': What role does sensors play in work?
+2025-08-25 03:59:01,147 - INFO -  Step 2: Question created: What role does sensors play in work?...
+2025-08-25 03:59:01,147 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 03:59:01,147 - INFO - Logged question for technology_innovation: What role does sensors play in work?...
+2025-08-25 03:59:01,147 - INFO -  Step 3: Question logged to CSV
+2025-08-25 03:59:01,147 - INFO -  Step 4: Generating base image for question...
+2025-08-25 03:59:01,147 - INFO - Starting smart fallback generation for theme 'technology_innovation', image 1
+2025-08-25 03:59:01,147 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 03:59:01,147 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 03:59:01,147 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 03:59:01,147 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:59:01,147 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:59:17,714 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.8.0+cu128 with CUDA 1208 (you have 2.8.0+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 03:59:17,780 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:59:17,780 - WARNING - Generation attempt 1 failed
+2025-08-25 03:59:18,784 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:59:18,798 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:59:18,798 - WARNING - Generation attempt 2 failed
+2025-08-25 03:59:19,801 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:59:19,819 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:59:19,821 - WARNING - Generation attempt 3 failed
+2025-08-25 03:59:19,821 - WARNING - GPU generation failed: Failed to generate GPU image for technology_innovation image 1 after 3 attempts
+2025-08-25 03:59:19,821 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 03:59:20,309 - INFO - Created AI-style image: images\ASK-01-technology_innovation-q.jpg
+2025-08-25 03:59:20,309 - INFO - CPU generation successful
+2025-08-25 03:59:20,309 - INFO -  Step 4: Base image created: ASK-01-technology_innovation-q.jpg
+2025-08-25 03:59:20,309 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 03:59:20,309 - INFO - Starting text overlay for images\ASK-01-technology_innovation-q.jpg with prompt: What role does sensors play in work?...
+2025-08-25 03:59:20,309 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 03:59:20,412 - INFO - Added fallback text overlay to image: images\ASK-01-technology_innovation-q.jpg
+2025-08-25 03:59:20,412 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 03:59:20,412 - INFO -  Step 6: Final question image created: ASK-01-technology_innovation-q.jpg
+2025-08-25 03:59:20,412 - INFO -  Step 7: Generating answer for question...
+2025-08-25 03:59:20,412 - INFO - Generated offline answer for theme 'technology_innovation': sustainable design is revolutionizing engineering ...
+2025-08-25 03:59:20,412 - INFO -  Step 7: Answer generated: sustainable design is revolutionizing engineering by enabling optimization that ...
+2025-08-25 03:59:20,412 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 03:59:20,461 - INFO - Logged answer for technology_innovation: sustainable design is revolutionizing engineering ...
+2025-08-25 03:59:20,461 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 03:59:20,462 - INFO -  Step 8b: Marking question as used...
+2025-08-25 03:59:20,484 - INFO - Marked 1 questions as used
+2025-08-25 03:59:20,484 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 03:59:20,484 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 03:59:20,485 - INFO - Starting smart fallback generation for theme 'technology_innovation', image 1
+2025-08-25 03:59:20,485 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 03:59:20,485 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 03:59:20,485 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:59:20,500 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:59:20,500 - WARNING - Generation attempt 1 failed
+2025-08-25 03:59:21,502 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:59:21,514 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:59:21,514 - WARNING - Generation attempt 2 failed
+2025-08-25 03:59:22,517 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 03:59:22,541 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 03:59:22,542 - WARNING - Generation attempt 3 failed
+2025-08-25 03:59:22,542 - WARNING - GPU generation failed: Failed to generate GPU image for technology_innovation image 1 after 3 attempts
+2025-08-25 03:59:22,542 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 03:59:22,779 - INFO - Created AI-style image: images\ASK-01-technology_innovation-a.jpg
+2025-08-25 03:59:22,779 - INFO - CPU generation successful
+2025-08-25 03:59:22,779 - INFO -  Step 9: Base image created: ASK-01-technology_innovation-a.jpg
+2025-08-25 03:59:22,779 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 03:59:22,779 - INFO - Starting text overlay for images\ASK-01-technology_innovation-a.jpg with prompt: sustainable design is revolutionizing engineering ...
+2025-08-25 03:59:22,779 - INFO - Long answer detected (791 chars), using multi-image approach
+2025-08-25 03:59:22,928 - INFO - Added fallback text overlay to image: images\ASK-01-technology_innovation-a.jpg
+2025-08-25 03:59:22,928 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 03:59:22,928 - INFO -  Step 11: Final answer image created: ASK-01-technology_innovation-a.jpg
+2025-08-25 03:59:22,928 - INFO - ============================================================
+2025-08-25 03:59:22,928 - INFO -  Cycle #1 completed successfully!
+2025-08-25 03:59:22,928 - INFO -  Question image: ASK-01-technology_innovation-q.jpg
+2025-08-25 03:59:22,928 - INFO -  Answer image: ASK-01-technology_innovation-a.jpg
+2025-08-25 03:59:22,928 - INFO -  Theme: technology_innovation
+2025-08-25 03:59:22,928 - INFO -  Simple pipeline completed successfully!
+2025-08-25 04:08:02,302 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:08:02,302 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:08:02,304 - INFO - 
+2025-08-25 04:08:02,306 - INFO -  *ASK*: Daily Research - Offline-First Pipeline
+2025-08-25 04:08:02,307 - INFO - ============================================================
+2025-08-25 04:08:02,308 - INFO -  Step 0: Downloading all required AI models upfront...
+2025-08-25 04:08:02,308 - INFO - ============================================================
+2025-08-25 04:08:02,308 - INFO -  DOWNLOADING ALL REQUIRED MODELS UPFRONT
+2025-08-25 04:08:02,308 - INFO - ============================================================
+2025-08-25 04:08:02,309 - INFO - 
+2025-08-25 04:08:02,309 - INFO -  [1/2] Checking GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:03,024 - INFO -    Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:03,025 - INFO -  [OK] GPU model ready: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:03,025 - INFO - 
+2025-08-25 04:08:03,025 - INFO -  [2/2] Checking CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:08:03,025 - INFO -    Using cached CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:08:03,026 - INFO -  [OK] CPU model ready: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:08:03,026 - INFO - 
+2025-08-25 04:08:03,026 - INFO - ============================================================
+2025-08-25 04:08:03,026 - INFO -  [SUCCESS] ALL MODELS READY! (2/2)
+2025-08-25 04:08:03,026 - INFO -  Pipeline can now run completely offline!
+2025-08-25 04:08:03,026 - INFO - ============================================================
+2025-08-25 04:08:03,026 - INFO - 
+2025-08-25 04:08:03,026 - INFO - 
+2025-08-25 04:08:03,026 - INFO -  Step 1: Starting pipeline execution...
+2025-08-25 04:08:03,026 - INFO - ============================================================
+2025-08-25 04:08:03,026 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 04:08:03,026 - INFO - ==================================================
+2025-08-25 04:08:03,026 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 04:08:05,732 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 04:08:06,110 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 04:08:06,110 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:06,110 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:06,110 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:06,110 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:06,110 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:06,110 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 04:08:06,110 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 04:08:06,110 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 04:08:06,110 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 04:08:06,125 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 04:08:06,173 - INFO - Reading from log.csv
+2025-08-25 04:08:06,173 - INFO - Volume info: Volume 1, 2/100 pairs in current volume, 2 total pairs
+2025-08-25 04:08:06,173 - INFO -  Starting at Volume 1: 2 Q&A pairs, 2 total
+2025-08-25 04:08:06,174 - INFO -  Step 1: Theme selected: TECHNOLOGY_INNOVATION
+2025-08-25 04:08:06,174 - INFO -  Step 2: Generating question for technology_innovation...
+2025-08-25 04:08:06,174 - INFO - Generated offline question for theme 'technology_innovation': How can blockchain improve design?
+2025-08-25 04:08:06,174 - INFO -  Step 2: Question created: How can blockchain improve design?...
+2025-08-25 04:08:06,174 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 04:08:06,175 - INFO - Logged question for technology_innovation: How can blockchain improve design?...
+2025-08-25 04:08:06,175 - INFO -  Step 3: Question logged to CSV
+2025-08-25 04:08:06,175 - INFO -  Step 4: Generating base image for question...
+2025-08-25 04:08:06,179 - INFO - Starting smart fallback generation for theme 'technology_innovation', image 1
+2025-08-25 04:08:06,179 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 04:08:06,179 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 04:08:06,191 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 04:08:06,191 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:06,191 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:18,040 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.8.0+cu128 with CUDA 1208 (you have 2.8.0+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 04:08:18,108 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:18,108 - WARNING - Generation attempt 1 failed
+2025-08-25 04:08:19,109 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:19,125 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:19,125 - WARNING - Generation attempt 2 failed
+2025-08-25 04:08:20,134 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:20,140 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:20,140 - WARNING - Generation attempt 3 failed
+2025-08-25 04:08:20,140 - WARNING - GPU generation failed: Failed to generate GPU image for technology_innovation image 1 after 3 attempts
+2025-08-25 04:08:20,140 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 04:08:20,406 - INFO - Created AI-style image: images\ASK-01-technology_innovation-q.jpg
+2025-08-25 04:08:20,406 - INFO - CPU generation successful
+2025-08-25 04:08:20,406 - INFO -  Step 4: Base image created: ASK-01-technology_innovation-q.jpg
+2025-08-25 04:08:20,406 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 04:08:20,406 - INFO - Starting text overlay for images\ASK-01-technology_innovation-q.jpg with prompt: How can blockchain improve design?...
+2025-08-25 04:08:20,406 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 04:08:20,506 - INFO - Added fallback text overlay to image: images\ASK-01-technology_innovation-q.jpg
+2025-08-25 04:08:20,506 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 04:08:20,506 - INFO -  Step 6: Final question image created: ASK-01-technology_innovation-q.jpg
+2025-08-25 04:08:20,506 - INFO -  Step 7: Generating answer for question...
+2025-08-25 04:08:20,506 - INFO - Generated offline answer for theme 'technology_innovation': The integration of machine learning in engineering...
+2025-08-25 04:08:20,506 - INFO -  Step 7: Answer generated: The integration of machine learning in engineering represents a paradigm shift t...
+2025-08-25 04:08:20,506 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 04:08:20,529 - INFO - Logged answer for technology_innovation: The integration of machine learning in engineering...
+2025-08-25 04:08:20,529 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 04:08:20,529 - INFO -  Step 8b: Marking question as used...
+2025-08-25 04:08:20,546 - INFO - Marked 1 questions as used
+2025-08-25 04:08:20,546 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 04:08:20,547 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 04:08:20,547 - INFO - Starting smart fallback generation for theme 'technology_innovation', image 1
+2025-08-25 04:08:20,547 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 04:08:20,547 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 04:08:20,547 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:20,564 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:20,565 - WARNING - Generation attempt 1 failed
+2025-08-25 04:08:21,565 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:21,585 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:21,587 - WARNING - Generation attempt 2 failed
+2025-08-25 04:08:22,587 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:22,611 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:22,611 - WARNING - Generation attempt 3 failed
+2025-08-25 04:08:22,611 - WARNING - GPU generation failed: Failed to generate GPU image for technology_innovation image 1 after 3 attempts
+2025-08-25 04:08:22,611 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 04:08:22,839 - INFO - Created AI-style image: images\ASK-01-technology_innovation-a.jpg
+2025-08-25 04:08:22,839 - INFO - CPU generation successful
+2025-08-25 04:08:22,839 - INFO -  Step 9: Base image created: ASK-01-technology_innovation-a.jpg
+2025-08-25 04:08:22,839 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 04:08:22,839 - INFO - Starting text overlay for images\ASK-01-technology_innovation-a.jpg with prompt: The integration of machine learning in engineering...
+2025-08-25 04:08:22,839 - INFO - Long answer detected (793 chars), using multi-image approach
+2025-08-25 04:08:23,010 - INFO - Added fallback text overlay to image: images\ASK-01-technology_innovation-a.jpg
+2025-08-25 04:08:23,010 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 04:08:23,011 - INFO -  Step 11: Final answer image created: ASK-01-technology_innovation-a.jpg
+2025-08-25 04:08:23,011 - INFO - ============================================================
+2025-08-25 04:08:23,011 - INFO -  Cycle #1 completed successfully!
+2025-08-25 04:08:23,011 - INFO -  Question image: ASK-01-technology_innovation-q.jpg
+2025-08-25 04:08:23,011 - INFO -  Answer image: ASK-01-technology_innovation-a.jpg
+2025-08-25 04:08:23,011 - INFO -  Theme: technology_innovation
+2025-08-25 04:08:23,011 - INFO -  Simple pipeline completed successfully!
+2025-08-25 04:08:32,812 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:08:32,812 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:08:32,812 - INFO - 
+2025-08-25 04:08:32,812 - INFO -  *ASK*: Daily Research - Offline-First Pipeline
+2025-08-25 04:08:32,812 - INFO - ============================================================
+2025-08-25 04:08:32,812 - INFO -  Step 0: Downloading all required AI models upfront...
+2025-08-25 04:08:32,813 - INFO - ============================================================
+2025-08-25 04:08:32,813 - INFO -  DOWNLOADING ALL REQUIRED MODELS UPFRONT
+2025-08-25 04:08:32,813 - INFO - ============================================================
+2025-08-25 04:08:32,813 - INFO - 
+2025-08-25 04:08:32,813 - INFO -  [1/2] Checking GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:33,277 - INFO -    Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:33,278 - INFO -  [OK] GPU model ready: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:33,278 - INFO - 
+2025-08-25 04:08:33,278 - INFO -  [2/2] Checking CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:08:33,278 - INFO -    Using cached CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:08:33,278 - INFO -  [OK] CPU model ready: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:08:33,279 - INFO - 
+2025-08-25 04:08:33,279 - INFO - ============================================================
+2025-08-25 04:08:33,279 - INFO -  [SUCCESS] ALL MODELS READY! (2/2)
+2025-08-25 04:08:33,279 - INFO -  Pipeline can now run completely offline!
+2025-08-25 04:08:33,279 - INFO - ============================================================
+2025-08-25 04:08:33,279 - INFO - 
+2025-08-25 04:08:33,279 - INFO - 
+2025-08-25 04:08:33,279 - INFO -  Step 1: Starting pipeline execution...
+2025-08-25 04:08:33,280 - INFO - ============================================================
+2025-08-25 04:08:33,280 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 04:08:33,280 - INFO - ==================================================
+2025-08-25 04:08:33,280 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 04:08:35,772 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 04:08:36,073 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 04:08:36,073 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:36,073 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:36,073 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:36,075 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:36,075 - WARNING - Invalid hex color format: 
+2025-08-25 04:08:36,075 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 04:08:36,075 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 04:08:36,075 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 04:08:36,075 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 04:08:36,077 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 04:08:36,105 - INFO - Reading from log.csv
+2025-08-25 04:08:36,105 - INFO - Volume info: Volume 1, 3/100 pairs in current volume, 3 total pairs
+2025-08-25 04:08:36,105 - INFO -  Starting at Volume 1: 3 Q&A pairs, 3 total
+2025-08-25 04:08:36,105 - INFO -  Step 1: Theme selected: SPATIAL_DESIGN
+2025-08-25 04:08:36,105 - INFO -  Step 2: Generating question for spatial_design...
+2025-08-25 04:08:36,105 - INFO - Generated offline question for theme 'spatial_design': What are the psychological effects of ergonomic layouts?
+2025-08-25 04:08:36,105 - INFO -  Step 2: Question created: What are the psychological effects of ergonomic layouts?...
+2025-08-25 04:08:36,105 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 04:08:36,105 - INFO - Logged question for spatial_design: What are the psychological effects of ergonomic la...
+2025-08-25 04:08:36,105 - INFO -  Step 3: Question logged to CSV
+2025-08-25 04:08:36,105 - INFO -  Step 4: Generating base image for question...
+2025-08-25 04:08:36,105 - INFO - Starting smart fallback generation for theme 'spatial_design', image 1
+2025-08-25 04:08:36,105 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 04:08:36,105 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 04:08:36,121 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 04:08:36,121 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:36,121 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:43,536 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.8.0+cu128 with CUDA 1208 (you have 2.8.0+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 04:08:43,581 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:43,581 - WARNING - Generation attempt 1 failed
+2025-08-25 04:08:44,582 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:44,603 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:44,603 - WARNING - Generation attempt 2 failed
+2025-08-25 04:08:45,604 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:45,619 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:45,619 - WARNING - Generation attempt 3 failed
+2025-08-25 04:08:45,619 - WARNING - GPU generation failed: Failed to generate GPU image for spatial_design image 1 after 3 attempts
+2025-08-25 04:08:45,619 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 04:08:45,850 - INFO - Created AI-style image: images\ASK-01-spatial_design-q.jpg
+2025-08-25 04:08:45,850 - INFO - CPU generation successful
+2025-08-25 04:08:45,851 - INFO -  Step 4: Base image created: ASK-01-spatial_design-q.jpg
+2025-08-25 04:08:45,851 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 04:08:45,851 - INFO - Starting text overlay for images\ASK-01-spatial_design-q.jpg with prompt: What are the psychological effects of ergonomic la...
+2025-08-25 04:08:45,851 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 04:08:45,936 - INFO - Added fallback text overlay to image: images\ASK-01-spatial_design-q.jpg
+2025-08-25 04:08:45,936 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 04:08:45,936 - INFO -  Step 6: Final question image created: ASK-01-spatial_design-q.jpg
+2025-08-25 04:08:45,936 - INFO -  Step 7: Generating answer for question...
+2025-08-25 04:08:45,936 - INFO - Generated offline answer for theme 'spatial_design': Designing districts to enhance creativity requires...
+2025-08-25 04:08:45,936 - INFO -  Step 7: Answer generated: Designing districts to enhance creativity requires understanding durability. Thi...
+2025-08-25 04:08:45,936 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 04:08:45,955 - INFO - Logged answer for spatial_design: Designing districts to enhance creativity requires...
+2025-08-25 04:08:45,955 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 04:08:45,956 - INFO -  Step 8b: Marking question as used...
+2025-08-25 04:08:45,971 - INFO - Marked 1 questions as used
+2025-08-25 04:08:45,972 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 04:08:45,972 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 04:08:45,972 - INFO - Starting smart fallback generation for theme 'spatial_design', image 1
+2025-08-25 04:08:45,972 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 04:08:45,972 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 04:08:45,972 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:45,986 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:45,986 - WARNING - Generation attempt 1 failed
+2025-08-25 04:08:46,987 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:46,990 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:46,997 - WARNING - Generation attempt 2 failed
+2025-08-25 04:08:47,999 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:08:48,032 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:08:48,032 - WARNING - Generation attempt 3 failed
+2025-08-25 04:08:48,033 - WARNING - GPU generation failed: Failed to generate GPU image for spatial_design image 1 after 3 attempts
+2025-08-25 04:08:48,033 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 04:08:48,276 - INFO - Created AI-style image: images\ASK-01-spatial_design-a.jpg
+2025-08-25 04:08:48,276 - INFO - CPU generation successful
+2025-08-25 04:08:48,278 - INFO -  Step 9: Base image created: ASK-01-spatial_design-a.jpg
+2025-08-25 04:08:48,278 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 04:08:48,278 - INFO - Starting text overlay for images\ASK-01-spatial_design-a.jpg with prompt: Designing districts to enhance creativity requires...
+2025-08-25 04:08:48,278 - INFO - Long answer detected (710 chars), using multi-image approach
+2025-08-25 04:08:48,386 - INFO - Added fallback text overlay to image: images\ASK-01-spatial_design-a.jpg
+2025-08-25 04:08:48,386 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 04:08:48,386 - INFO -  Step 11: Final answer image created: ASK-01-spatial_design-a.jpg
+2025-08-25 04:08:48,386 - INFO - ============================================================
+2025-08-25 04:08:48,386 - INFO -  Cycle #1 completed successfully!
+2025-08-25 04:08:48,386 - INFO -  Question image: ASK-01-spatial_design-q.jpg
+2025-08-25 04:08:48,386 - INFO -  Answer image: ASK-01-spatial_design-a.jpg
+2025-08-25 04:08:48,386 - INFO -  Theme: spatial_design
+2025-08-25 04:08:48,386 - INFO -  Simple pipeline completed successfully!
+2025-08-25 04:13:07,809 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:13:07,810 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:13:07,810 - INFO - 
+2025-08-25 04:13:07,810 - INFO -  *ASK*: Daily Research - Offline-First Pipeline
+2025-08-25 04:13:07,810 - INFO - ============================================================
+2025-08-25 04:13:07,810 - INFO -  Step 0: Downloading all required AI models upfront...
+2025-08-25 04:13:07,810 - INFO - ============================================================
+2025-08-25 04:13:07,811 - INFO -  DOWNLOADING ALL REQUIRED MODELS UPFRONT
+2025-08-25 04:13:07,811 - INFO - ============================================================
+2025-08-25 04:13:07,811 - INFO - 
+2025-08-25 04:13:07,811 - INFO -  [1/2] Checking GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:08,243 - INFO -    Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:08,243 - INFO -  [OK] GPU model ready: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:08,243 - INFO - 
+2025-08-25 04:13:08,244 - INFO -  [2/2] Checking CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:13:08,244 - INFO -    Using cached CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:13:08,244 - INFO -  [OK] CPU model ready: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:13:08,244 - INFO - 
+2025-08-25 04:13:08,244 - INFO - ============================================================
+2025-08-25 04:13:08,245 - INFO -  [SUCCESS] ALL MODELS READY! (2/2)
+2025-08-25 04:13:08,245 - INFO -  Pipeline can now run completely offline!
+2025-08-25 04:13:08,245 - INFO - ============================================================
+2025-08-25 04:13:08,245 - INFO - 
+2025-08-25 04:13:08,245 - INFO - 
+2025-08-25 04:13:08,251 - INFO -  Step 1: Starting pipeline execution...
+2025-08-25 04:13:08,251 - INFO - ============================================================
+2025-08-25 04:13:08,251 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 04:13:08,252 - INFO - ==================================================
+2025-08-25 04:13:08,252 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 04:13:10,569 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 04:13:10,835 - ERROR -  Simple pipeline failed: unexpected indent (image_generation_system.py, line 160)
+2025-08-25 04:13:10,835 - ERROR -  Pipeline failed: unexpected indent (image_generation_system.py, line 160)
+2025-08-25 04:13:46,171 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:13:46,171 - INFO - Running in offline mode - API generation disabled
+2025-08-25 04:13:46,171 - INFO - 
+2025-08-25 04:13:46,171 - INFO -  *ASK*: Daily Research - Offline-First Pipeline
+2025-08-25 04:13:46,171 - INFO - ============================================================
+2025-08-25 04:13:46,171 - INFO -  Step 0: Downloading all required AI models upfront...
+2025-08-25 04:13:46,171 - INFO - ============================================================
+2025-08-25 04:13:46,171 - INFO -  DOWNLOADING ALL REQUIRED MODELS UPFRONT
+2025-08-25 04:13:46,171 - INFO - ============================================================
+2025-08-25 04:13:46,171 - INFO - 
+2025-08-25 04:13:46,171 - INFO -  [1/2] Checking GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:46,581 - INFO -    Using cached GPU model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:46,581 - INFO -  [OK] GPU model ready: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:46,581 - INFO - 
+2025-08-25 04:13:46,581 - INFO -  [2/2] Checking CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:13:46,581 - INFO -    Using cached CPU model: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:13:46,581 - INFO -  [OK] CPU model ready: SimianLuo/LCM_Dreamshaper_v7
+2025-08-25 04:13:46,581 - INFO - 
+2025-08-25 04:13:46,581 - INFO - ============================================================
+2025-08-25 04:13:46,581 - INFO -  [SUCCESS] ALL MODELS READY! (2/2)
+2025-08-25 04:13:46,581 - INFO -  Pipeline can now run completely offline!
+2025-08-25 04:13:46,581 - INFO - ============================================================
+2025-08-25 04:13:46,581 - INFO - 
+2025-08-25 04:13:46,581 - INFO - 
+2025-08-25 04:13:46,581 - INFO -  Step 1: Starting pipeline execution...
+2025-08-25 04:13:46,581 - INFO - ============================================================
+2025-08-25 04:13:46,581 - INFO -  Starting Simple 12-Step Pipeline
+2025-08-25 04:13:46,581 - INFO - ==================================================
+2025-08-25 04:13:46,581 - INFO -  Offline-first mode: GPU -> CPU -> API (if enabled)
+2025-08-25 04:13:48,714 - INFO -  No GPU detected, will use CPU fallback
+2025-08-25 04:13:49,098 - WARNING - Font size hierarchy may not be optimal
+2025-08-25 04:13:49,098 - WARNING - Invalid hex color format: 
+2025-08-25 04:13:49,098 - WARNING - Invalid hex color format: 
+2025-08-25 04:13:49,098 - WARNING - Invalid hex color format: 
+2025-08-25 04:13:49,098 - WARNING - Invalid hex color format: 
+2025-08-25 04:13:49,098 - WARNING - Invalid hex color format: 
+2025-08-25 04:13:49,098 - INFO - ImageTypographyConfig initialized successfully
+2025-08-25 04:13:49,098 - INFO - Starting enhanced image layout configuration initialization...
+2025-08-25 04:13:49,098 - INFO - Enhanced image layout configuration initialization completed
+2025-08-25 04:13:49,098 - INFO - ImageTextProcessor initialized successfully
+2025-08-25 04:13:49,098 - INFO - ImageLayoutCreator initialized successfully
+2025-08-25 04:13:49,131 - INFO - Reading from log.csv
+2025-08-25 04:13:49,131 - INFO - Volume info: Volume 1, 4/100 pairs in current volume, 4 total pairs
+2025-08-25 04:13:49,131 - INFO -  Starting at Volume 1: 4 Q&A pairs, 4 total
+2025-08-25 04:13:49,131 - INFO -  Step 1: Theme selected: URBAN_PLANNING
+2025-08-25 04:13:49,131 - INFO -  Step 2: Generating question for urban_planning...
+2025-08-25 04:13:49,131 - INFO - Generated offline question for theme 'urban_planning': What are the social benefits of transit-oriented development?
+2025-08-25 04:13:49,131 - INFO -  Step 2: Question created: What are the social benefits of transit-oriented development?...
+2025-08-25 04:13:49,131 - INFO -  Step 3: Logging question to CSV...
+2025-08-25 04:13:49,131 - INFO - Logged question for urban_planning: What are the social benefits of transit-oriented d...
+2025-08-25 04:13:49,131 - INFO -  Step 3: Question logged to CSV
+2025-08-25 04:13:49,131 - INFO -  Step 4: Generating base image for question...
+2025-08-25 04:13:49,131 - INFO - Starting smart fallback generation for theme 'urban_planning', image 1
+2025-08-25 04:13:49,131 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 04:13:49,131 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 04:13:49,137 - WARNING - No CUDA GPU detected, falling back to CPU
+2025-08-25 04:13:49,137 - INFO - Enhanced GPU Image Generator initialized with model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:49,137 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:57,013 - WARNING - WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.8.0+cu128 with CUDA 1208 (you have 2.8.0+cpu)
+    Python  3.9.13 (you have 3.12.10)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+2025-08-25 04:13:57,046 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:13:57,046 - WARNING - Generation attempt 1 failed
+2025-08-25 04:13:58,050 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:58,079 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:13:58,080 - WARNING - Generation attempt 2 failed
+2025-08-25 04:13:59,080 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:59,108 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:13:59,109 - WARNING - Generation attempt 3 failed
+2025-08-25 04:13:59,109 - WARNING - GPU generation failed: Failed to generate GPU image for urban_planning image 1 after 3 attempts
+2025-08-25 04:13:59,110 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 04:13:59,363 - INFO - Created AI-style image: images\ASK-01-urban_planning-q.jpg
+2025-08-25 04:13:59,363 - INFO - CPU generation successful
+2025-08-25 04:13:59,363 - INFO -  Step 4: Base image created: ASK-01-urban_planning-q.jpg
+2025-08-25 04:13:59,363 - INFO -  Step 5: Adding text overlay to question image...
+2025-08-25 04:13:59,363 - INFO - Starting text overlay for images\ASK-01-urban_planning-q.jpg with prompt: What are the social benefits of transit-oriented d...
+2025-08-25 04:13:59,363 - INFO - Using fallback text overlay method to ensure text visibility
+2025-08-25 04:13:59,446 - INFO - Added fallback text overlay to image: images\ASK-01-urban_planning-q.jpg
+2025-08-25 04:13:59,446 - INFO -  Step 5: Text overlay added successfully
+2025-08-25 04:13:59,446 - INFO -  Step 6: Final question image created: ASK-01-urban_planning-q.jpg
+2025-08-25 04:13:59,446 - INFO -  Step 7: Generating answer for question...
+2025-08-25 04:13:59,446 - INFO - Generated offline answer for theme 'urban_planning': The development of cultural venues in public space...
+2025-08-25 04:13:59,446 - INFO -  Step 7: Answer generated: The development of cultural venues in public spaces involves integrating sustain...
+2025-08-25 04:13:59,446 - INFO -  Step 8: Logging answer to CSV...
+2025-08-25 04:13:59,466 - INFO - Logged answer for urban_planning: The development of cultural venues in public space...
+2025-08-25 04:13:59,466 - INFO -  Step 8: Answer logged to CSV
+2025-08-25 04:13:59,467 - INFO -  Step 8b: Marking question as used...
+2025-08-25 04:13:59,482 - INFO - Marked 1 questions as used
+2025-08-25 04:13:59,482 - INFO -  Step 8b: Question marked as used (prevents duplicates)
+2025-08-25 04:13:59,482 - INFO -  Step 9: Generating base image for answer...
+2025-08-25 04:13:59,482 - INFO - Starting smart fallback generation for theme 'urban_planning', image 1
+2025-08-25 04:13:59,482 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True, API enabled=False
+2025-08-25 04:13:59,482 - INFO - Attempting GPU image generation (priority method)...
+2025-08-25 04:13:59,483 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:13:59,497 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:13:59,497 - WARNING - Generation attempt 1 failed
+2025-08-25 04:14:00,498 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:14:00,516 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:14:00,516 - WARNING - Generation attempt 2 failed
+2025-08-25 04:14:01,519 - INFO - Loading model: runwayml/stable-diffusion-v1-5
+2025-08-25 04:14:01,547 - ERROR - Failed to load enhanced GPU model: Failed to import diffusers.pipelines.auto_pipeline because of the following error (look up to see its traceback):
+DLL load failed while importing _C: The specified module could not be found.
+2025-08-25 04:14:01,547 - WARNING - Generation attempt 3 failed
+2025-08-25 04:14:01,547 - WARNING - GPU generation failed: Failed to generate GPU image for urban_planning image 1 after 3 attempts
+2025-08-25 04:14:01,547 - INFO - Attempting CPU image generation (fallback method)...
+2025-08-25 04:14:01,778 - INFO - Created AI-style image: images\ASK-01-urban_planning-a.jpg
+2025-08-25 04:14:01,778 - INFO - CPU generation successful
+2025-08-25 04:14:01,778 - INFO -  Step 9: Base image created: ASK-01-urban_planning-a.jpg
+2025-08-25 04:14:01,778 - INFO -  Step 10: Adding text overlay to answer image...
+2025-08-25 04:14:01,778 - INFO - Starting text overlay for images\ASK-01-urban_planning-a.jpg with prompt: The development of cultural venues in public space...
+2025-08-25 04:14:01,778 - INFO - Long answer detected (782 chars), using multi-image approach
+2025-08-25 04:14:01,896 - INFO - Added fallback text overlay to image: images\ASK-01-urban_planning-a.jpg
+2025-08-25 04:14:01,896 - INFO -  Step 10: Text overlay added successfully
+2025-08-25 04:14:01,896 - INFO -  Step 11: Final answer image created: ASK-01-urban_planning-a.jpg
+2025-08-25 04:14:01,896 - INFO - ============================================================
+2025-08-25 04:14:01,896 - INFO -  Cycle #1 completed successfully!
+2025-08-25 04:14:01,896 - INFO -  Question image: ASK-01-urban_planning-q.jpg
+2025-08-25 04:14:01,896 - INFO -  Answer image: ASK-01-urban_planning-a.jpg
+2025-08-25 04:14:01,896 - INFO -  Theme: urban_planning
+2025-08-25 04:14:01,896 - INFO -  Simple pipeline completed successfully!

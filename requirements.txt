@@ -10,6 +10,7 @@ torchaudio>=2.0.0  # PyTorch audio utilities
 diffusers>=0.24.0  # Hugging Face diffusers for image generation
 transformers>=4.35.0  # Hugging Face transformers
 accelerate>=0.24.0  # Hugging Face accelerate for optimization
+huggingface_hub[hf_xet]>=0.19.0  # Hugging Face Hub with Xet Storage for faster downloads
 safetensors>=0.4.0  # Safe tensor serialization
 xformers>=0.0.22  # Memory efficient attention (GPU optimization)
 

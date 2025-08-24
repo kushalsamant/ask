@@ -202,9 +202,9 @@ def add_cover_brand_overlay(image_path, volume_number=None):
         
         # Create brand text with volume number
         if volume_number:
-            brand_text = f"ASK: Daily Architectural Research - VOL - {volume_number:02d}"
+            brand_text = f"ASK: Daily Research - VOL - {volume_number:02d}"
         else:
-            brand_text = "ASK: Daily Architectural Research"
+            brand_text = "ASK: Daily Research"
         
         # Calculate brand text position (bottom center)
         brand_bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
@@ -335,14 +335,14 @@ def get_cover_templates():
     return {
         'volume': {
             'prompt': 'Professional architectural research cover design. Modern, clean, minimalist design with architectural elements, professional typography, suitable for research publication. No text elements, just visual design.',
-            'brand_text': 'ASK: Daily Architectural Research - VOL - {volume_number:02d}'
+            'brand_text': 'ASK: Daily Research - VOL - {volume_number:02d}'
         },
         'theme': {
             'prompt': 'Professional architectural research cover design. Modern, clean, minimalist design with architectural elements, professional typography, suitable for research publication. No text elements, just visual design.',
-            'brand_text': 'ASK: Daily Architectural Research'
+            'brand_text': 'ASK: Daily Research'
         },
         'compilation': {
             'prompt': 'Professional architectural research cover design. Modern, clean, minimalist design with architectural elements, professional typography, suitable for research publication. No text elements, just visual design.',
-            'brand_text': 'ASK: Daily Architectural Research'
+            'brand_text': 'ASK: Daily Research'
         }
     }

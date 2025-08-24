@@ -263,7 +263,7 @@ class GPUImageGenerator:
             with torch.autocast("cuda" if self.device == "cuda" else "cpu"):
                 image = self.pipe(
                     prompt=formatted_prompt,
-                    negative_prompt="low quality, blurry, distorted, deformed, disfigured, bad proportions, watermark, signature, text, ugly, bad anatomy",
+                    negative_prompt="low quality, blurry, distorted, deformed, disfigured, bad proportions, watermark, signature, text, ugly, bad anatomy, abstract, cartoon, illustration, painting, drawing, unrealistic, artificial, fake, synthetic",
                     num_inference_steps=self.default_steps,
                     guidance_scale=self.default_guidance_scale,
                     height=self.default_height,
@@ -321,12 +321,42 @@ class GPUImageGenerator:
             return "Modern"  # Default fallback
     
     def _format_prompt(self, prompt: str, theme: str, style: str) -> str:
-        """Enhanced prompt formatting for GPU generation"""
-        return (
-            f"Professional architectural visualization, {style} architectural style. "
-            f"Focus on {theme} aspects. {prompt} "
-            f"High-quality, photorealistic, detailed, professional photography, architectural visualisation, 8k resolution"
-        )
+        """Enhanced prompt formatting for GPU generation with contextual architectural focus"""
+        # Determine if theme benefits from architectural context
+        architectural_themes = {
+            'design_research', 'architectural_design', 'urban_planning', 'urban_design', 
+            'spatial_design', 'interior_environments', 'construction_technology', 
+            'engineering_systems', 'environmental_design'
+        }
+        
+        non_architectural_themes = {
+            'technology_innovation', 'digital_technology', 'sustainability_science'
+        }
+        
+        if theme.lower() in architectural_themes:
+            # Architectural focus for design/construction themes
+            return (
+                f"Professional architectural visualization, {style} architectural style. "
+                f"Focus on {theme} aspects. {prompt} "
+                f"High-quality, photorealistic, detailed, professional photography, architectural visualisation, 8k resolution, "
+                f"real-life objects, natural lighting, realistic materials, authentic architectural elements"
+            )
+        elif theme.lower() in non_architectural_themes:
+            # Broader focus for technology/innovation themes
+            return (
+                f"Professional research visualization, {style} style. "
+                f"Focus on {theme} aspects. {prompt} "
+                f"High-quality, photorealistic, detailed, professional photography, 8k resolution, "
+                f"real-life objects, natural lighting, realistic materials, modern technology, innovation"
+            )
+        else:
+            # Balanced approach for other themes
+            return (
+                f"Professional research visualization, {style} style with architectural elements. "
+                f"Focus on {theme} aspects. {prompt} "
+                f"High-quality, photorealistic, detailed, professional photography, 8k resolution, "
+                f"real-life objects, natural lighting, realistic materials, modern context"
+            )
     
     def get_model_info(self) -> dict:
         """Enhanced model information retrieval"""

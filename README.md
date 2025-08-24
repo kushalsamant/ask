@@ -1,4 +1,4 @@
-# ASK: Daily Research Tool
+# *ASK*: Daily Research
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -9,7 +9,7 @@
 
 ## Overview
 
-ASK is a comprehensive research tool that combines AI-powered question generation, answer creation, and intelligent image generation. It operates primarily as an offline tool using GPU acceleration, with CPU fallback and API as last resort. It features multiple generation modes, smart fallback systems, and professional output formatting.
+*ASK* is a comprehensive research tool that combines AI-powered question generation, answer creation, and intelligent image generation. It operates primarily as an offline tool using GPU acceleration, with CPU fallback and API as last resort. It features multiple generation modes, smart fallback systems, and professional output formatting.
 
 ## Key Features
 
@@ -21,6 +21,8 @@ ASK is a comprehensive research tool that combines AI-powered question generatio
 - **Highly Configurable**: Extensive customization through environment variables
 - **Progress Tracking**: Real-time progress monitoring and logging
 - **Error Handling**: Robust error recovery and fallback strategies
+- **Offline-First**: Works completely offline with local AI models
+- **Lazy Loading**: Models downloaded only when needed
 
 ## Table of Contents
 
@@ -130,21 +132,26 @@ Copy `ask.env.template` to `ask.env` and configure:
 ```bash
 # API Configuration
 TOGETHER_API_KEY=your_api_key_here
+TOGETHER_API_BASE=https://api.together.xyz/v1
 
-# Theme Configuration
-THEME_1=your_first_theme
-THEME_2=your_second_theme
-THEME_3=your_third_theme
+# AI Model Configuration
+TEXT_MODEL=llama-3.3-70b-instruct-turbo-free
+IMAGE_MODEL=flux.1-schnell-free
+VISION_MODEL=llama-vision-free
 
-# Generation Settings
-HYBRID_THEME_COUNT=2
-CROSS_DISCIPLINARY_THEME_COUNT=3
-CHAIN_LENGTH=3
+# Image Generation Settings
+IMAGE_WIDTH=1072
+IMAGE_HEIGHT=1792
+IMAGE_QUALITY=95
+INFERENCE_STEPS=4
+GUIDANCE_SCALE=7.5
 
-# Image Generation
-IMAGE_QUALITY=high
-IMAGE_WIDTH=1200
-IMAGE_HEIGHT=800
+# CPU/GPU Configuration
+CPU_IMAGE_GENERATION_ENABLED=true
+GPU_IMAGE_GENERATION_ENABLED=true
+API_IMAGE_GENERATION_ENABLED=false
+CPU_MODEL_ID=SimianLuo/LCM_Dreamshaper_v7
+GPU_MODEL_ID=runwayml/stable-diffusion-v1-5
 ```
 
 ### Theme Configuration
@@ -153,11 +160,8 @@ Configure your research themes in `ask.env`:
 
 ```bash
 # Example themes
-THEME_1=Artificial Intelligence
-THEME_2=Sustainable Architecture
-THEME_3=Urban Planning
-THEME_4=Digital Transformation
-THEME_5=Climate Change
+SIMPLE_MODE_THEMES=design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology
+DEFAULT_CHAINED_THEMES=design_research,technology_innovation
 ```
 
 ### Hardware Configuration
@@ -166,23 +170,22 @@ Configure for your hardware:
 
 ```bash
 # GPU settings (primary mode)
-USE_GPU=true
-GPU_MEMORY_LIMIT=4GB
+GPU_IMAGE_GENERATION_ENABLED=true
+GPU_MODEL_ID=runwayml/stable-diffusion-v1-5
 
 # CPU settings (first fallback)
-USE_CPU=true
-CPU_THREADS=4
+CPU_IMAGE_GENERATION_ENABLED=true
+CPU_MODEL_ID=SimianLuo/LCM_Dreamshaper_v7
 
 # API settings (last resort fallback)
-API_FALLBACK=true
-PLACEHOLDER_FALLBACK=true
+API_IMAGE_GENERATION_ENABLED=false
 ```
 
 ## Usage Modes
 
 ### Simple Mode
 
-Generate basic Q&A content for a single theme.
+Generate basic Q&A content for research themes.
 
 ```bash
 python main.py simple
@@ -193,10 +196,11 @@ python main.py simple
 - 10 Q&A pairs
 - Basic image generation
 - Quick generation
+- Volume tracking
 
 ### Hybrid Mode
 
-Combine multiple themes in innovative ways.
+Combine multiple research themes in innovative ways.
 
 ```bash
 python main.py hybrid
@@ -207,6 +211,7 @@ python main.py hybrid
 - 10 Q&A pairs (2 themes × 5 chains)
 - Advanced content connections
 - Professional styling
+- Cross-disciplinary questions
 
 ### Cross-disciplinary Mode
 
@@ -235,6 +240,7 @@ python main.py chained
 - 10 Q&A pairs (2 categories × 5 chains)
 - Progressive complexity
 - Comprehensive coverage
+- Connected question chains
 
 ## Image Generation
 
@@ -247,12 +253,14 @@ The system operates as a primarily offline tool with intelligent fallback:
    - Fastest generation
    - Highest quality output
    - Completely offline operation
+   - Uses Stable Diffusion models
 
 2. **CPU Generation** (First Fallback)
    - CPU-based generation
    - Works when GPU unavailable
    - Moderate speed
    - Completely offline operation
+   - Uses lightweight LCM models
 
 3. **API Generation** (Last Resort Fallback)
    - Together.ai API
@@ -273,6 +281,12 @@ The system operates as a primarily offline tool with intelligent fallback:
 - **Cover Images**: Professional title pages
 - **Table of Contents**: Navigation and overview
 
+### Image Naming Convention
+
+Images follow the format:
+- Questions: `ASK-<question number>-<discipline>-q.jpg`
+- Answers: `ASK-<question number>-<discipline>-a.jpg`
+
 ## Project Structure
 
 ```
@@ -290,6 +304,7 @@ ask/
 ├── log.csv                   # Activity log
 ├── images/                   # Output directory
 ├── logs/                     # Application logs
+├── models/                   # AI model cache
 │
 ├── Research Modules (13 files)
 │   ├── research_orchestrator.py      # Research coordination
@@ -324,6 +339,10 @@ ask/
 │   ├── style_data_manager.py         # Style data management
 │   ├── style_manager.py              # Style management
 │   └── style_trend_analyzer.py       # Trend analysis
+│
+├── Offline Generation (2 files)
+│   ├── offline_question_generator.py # Offline question generation
+│   └── offline_answer_generator.py   # Offline answer generation
 │
 └── Volume Management (1 file)
     └── volume_manager.py              # Volume management
@@ -368,7 +387,8 @@ The image generation system handles all image creation:
 **Solution**: 
 1. Copy `ask.env.template` to `ask.env`
 2. Add your Together.ai API key
-3. Restart the application
+3. Set `API_IMAGE_GENERATION_ENABLED=false` for offline mode
+4. Restart the application
 
 #### Installation Issues
 
@@ -385,6 +405,7 @@ The image generation system handles all image creation:
 1. Check hardware configuration
 2. Verify fallback settings
 3. Check disk space
+4. Ensure models are downloaded
 
 #### Performance Issues
 
@@ -402,10 +423,11 @@ The image generation system handles all image creation:
 - **CPU Fallback**: CPU mode is slower but works when GPU unavailable
 - **Offline Operation**: System works completely offline with GPU/CPU modes
 - **API Usage**: Only used as last resort when local generation fails
+- **Model Caching**: Models are cached locally after first download
 
 ### Getting Help
 
-- Check the logs in `log.csv`
+- Check the logs in `logs/execution.log`
 - Review error messages
 - Verify configuration settings
 - Test with minimal settings
@@ -475,4 +497,4 @@ Check the wiki for detailed guides
 
 ---
 
-**Made with ❤️ by the ASK Community**
+**Made with ❤️ by the *ASK* Community**

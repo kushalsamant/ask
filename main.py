@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-ASK: Daily Research - Unified Pipeline (Offline-First)
-Enhanced main pipeline with all modes and features from simple_pipeline.py
+*ASK*: Daily Research - Unified Pipeline (Offline-First)
+Enhanced main pipeline with offline-first approach and lazy model downloads
 
 This module provides a comprehensive research pipeline with multiple modes:
 - Simple: Classic 12-step Q&A generation
-- Hybrid: Combines cross-disciplinary themes with chained questions
+- Hybrid: Cross-disciplinary themes with chained questions
 - Cross-disciplinary: Explores intersections between research themes
 - Chained: Creates connected questions that build upon each other
 
@@ -13,72 +13,49 @@ Offline-First Features:
 - Primarily GPU-based image generation (offline)
 - CPU fallback for image generation (offline)
 - API generation as last resort (requires internet)
+- Lazy model downloads (only when needed)
 - Comprehensive logging and error handling
 - Environment-based configuration
-- Image generation and text overlay
-- CSV logging and data management
-- Backup and export functionality
 
-Usage:
-    python main.py                    # Simple mode (default)
-    python main.py hybrid             # Hybrid mode
-    python main.py cross-disciplinary # Cross-disciplinary mode
-    python main.py chained           # Chained mode
-    python main.py help              # Show help
+Author: ASK Research Tool
+Last Updated: 2025-08-25
+Version: 3.0 (Offline-First with Lazy Loading)
 """
 
 import os
+import sys
 import time
-import logging
 import random
+import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 from dotenv import load_dotenv
-from research_orchestrator import ResearchOrchestrator
-from image_generation_system import ImageGenerationSystem
-from volume_manager import get_next_volume_number, log_volume_info, get_current_volume_info
-from research_question_generator import generate_single_question_for_category
-from research_answer_generator import generate_answer
-from image_create_ai import generate_image_with_retry
-from image_add_text import add_text_overlay
-from research_csv_manager import log_single_question
-import sys
-from research_csv_manager import mark_questions_as_used
-from research_backup_manager import create_backup
-from research_csv_manager import export_questions_to_csv
-#!/usr/bin/env python3
-"""
-ASK: Daily Research - Unified Pipeline
-Enhanced main pipeline with all modes and features from simple_pipeline.py
-"""
-
-# Import focused orchestrators
-
-# Import simple pipeline components
 
 # Load environment variables from ask.env file
 load_dotenv('ask.env')
 
-# Setup logging configuration
+# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-            logging.FileHandler(f"{os.getenv('LOG_DIR', 'logs')}/execution.log")
-        ]
+    handlers=[
+        logging.FileHandler(f"{os.getenv('LOG_DIR', 'logs')}/execution.log")
+    ]
 )
 log = logging.getLogger()
 
-# Console logger for user-friendly output
+# Setup console logging for user feedback
 console_logger = logging.getLogger('console')
-console_logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
-console_handler.setFormatter(logging.Formatter('%(message)s'))
+console_handler.setLevel(logging.INFO)
+console_formatter = logging.Formatter('%(message)s')
+console_handler.setFormatter(console_formatter)
 console_logger.addHandler(console_handler)
+console_logger.setLevel(logging.INFO)
 
 # Environment variables
-TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY')
+TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY', '')
 RATE_LIMIT_DELAY = float(os.getenv('RATE_LIMIT_DELAY', '10.0'))
 
 # Check if API generation is enabled (offline-first approach)
@@ -103,628 +80,122 @@ if len(sys.argv) <= 1 or sys.argv[1].lower() != 'help':
         log.info("Running in offline mode - API generation disabled")
         console_logger.info("Running in offline mode - API generation disabled")
 
-class SimplePipeline:
-    """Simple 12-step pipeline for Q&A image generation"""
+def download_all_models_upfront() -> bool:
+    """
+    Download all required AI models upfront before starting the pipeline
     
-    def __init__(self):
-        """Initialize the pipeline"""
-        # Get themes from environment variable
-        themes_config = os.getenv('SIMPLE_MODE_THEMES', 'design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology')
-        self.themes = [theme.strip() for theme in themes_config.split(',') if theme.strip()]
-        self.log_file = 'log.csv'
-        self.image_counter = 1
+    Returns:
+        bool: True if all models are available (cached or downloaded)
+    """
+    try:
+        console_logger.info("=" * 60)
+        console_logger.info(" DOWNLOADING ALL REQUIRED MODELS UPFRONT")
+        console_logger.info("=" * 60)
         
-        # Ensure directories exist
-        os.makedirs('images', exist_ok=True)
-        os.makedirs('logs', exist_ok=True)
+        # Get model IDs from environment variables
+        gpu_model_id = os.getenv("GPU_MODEL_ID", "runwayml/stable-diffusion-v1-5")
+        cpu_model_id = os.getenv("CPU_MODEL_ID", "latent-consistency/lcm-sd15")
         
-    def step_1_pick_theme(self) -> str:
-        """Step 1: Pick a theme"""
-        theme = random.choice(self.themes)
-        log.info(f"Step 1: Picked theme: {theme}")
-        console_logger.info(f" Step 1: Theme selected: {theme.upper()}")
-        return theme
-    
-    def step_2_create_question(self, theme: str) -> str:
-        """Step 2: Create a question using theme"""
-        log.info(f"Step 2: Creating question for theme: {theme}")
-        console_logger.info(f" Step 2: Generating question for {theme}...")
+        # List of all models to download
+        models_to_download = [
+            (gpu_model_id, "GPU"),
+            (cpu_model_id, "CPU"),
+        ]
         
-        question = generate_single_question_for_category(theme)
-        if not question:
-                raise
+        success_count = 0
+        total_models = len(models_to_download)
+        
+        for model_id, model_type in models_to_download:
+            console_logger.info(f"")
+            console_logger.info(f" [{success_count + 1}/{total_models}] Checking {model_type} model: {model_id}")
             
-        log.info(f"Step 2: Generated question: {question[:100]}...")
-        console_logger.info(f" Step 2: Question created: {question[:80]}...")
-        return question
-    
-    def step_3_log_question(self, question: str, theme: str) -> None:
-        """Step 3: Paste the question text in the log"""
-        log.info(f"Step 3: Logging question to {self.log_file}")
-        console_logger.info(f" Step 3: Logging question to CSV...")
+            if download_model_if_needed(model_id, model_type):
+                success_count += 1
+                console_logger.info(f" [OK] {model_type} model ready: {model_id}")
+            else:
+                console_logger.warning(f" [FAIL] {model_type} model failed: {model_id}")
         
-        # Use the proper CSV manager function
-        success = log_single_question(
-            theme=theme,
-            question=question,
-            image_filename='',  # Will be updated later
-            style=None,
-            is_answer=False,
-            mark_as_used=False
+        console_logger.info("")
+        console_logger.info("=" * 60)
+        if success_count == total_models:
+            console_logger.info(f" [SUCCESS] ALL MODELS READY! ({success_count}/{total_models})")
+            console_logger.info(" Pipeline can now run completely offline!")
+        else:
+            console_logger.warning(f" [WARNING] SOME MODELS MISSING ({success_count}/{total_models})")
+            console_logger.info(" Pipeline will use available models and fallbacks")
+        console_logger.info("=" * 60)
+        console_logger.info("")
+        
+        return success_count > 0  # Return True if at least one model is available
+        
+    except Exception as e:
+        console_logger.error(f" Model download process failed: {e}")
+        return False
+
+def download_model_if_needed(model_id: str, model_type: str = "gpu") -> bool:
+    """
+    Download AI model only when needed (lazy loading)
+    
+    Args:
+        model_id: HuggingFace model ID
+        model_type: "gpu" or "cpu"
+        
+    Returns:
+        bool: True if model is available (cached or downloaded)
+    """
+    try:
+        # Check if model is already cached
+        from huggingface_hub import snapshot_download
+        from huggingface_hub import HfApi
+        
+        # Get cache directory
+        cache_dir = os.path.expanduser("~/.cache/huggingface/hub")
+        model_path = os.path.join(cache_dir, model_id.replace("/", "_"))
+        
+        if os.path.exists(model_path):
+            console_logger.info(f"   Using cached {model_type.upper()} model: {model_id}")
+            return True
+        
+        # Model not cached, download it
+        console_logger.info(f"   Downloading {model_type.upper()} model: {model_id}")
+        console_logger.info(f"   This may take a few minutes for the first run...")
+        
+        # Download with progress tracking
+        snapshot_download(
+            repo_id=model_id,
+            cache_dir=cache_dir,
+            local_dir=model_path
         )
         
-        if success:
-            log.info(f"Step 3: Question logged successfully")
-            console_logger.info(f" Step 3: Question logged to CSV")
-                else:
-                raise
-    
-    def step_4_create_question_image(self, question: str, theme: str) -> str:
-        """Step 4: Create an image using question as a prompt"""
-        log.info(f"Step 4: Creating image using question as prompt")
-        console_logger.info(f" Step 4: Generating base image for question...")
+        console_logger.info(f"   {model_type.upper()} model downloaded successfully!")
+        return True
         
-        image_path, _ = generate_image_with_retry(
-            prompt=question,
-            theme=theme,
-            image_number=self.image_counter,
-            image_type="q"
-        )
-        
-        if not image_path:
-                raise
-            
-        log.info(f"Step 4: Question image created: {image_path}")
-        console_logger.info(f" Step 4: Base image created: {os.path.basename(image_path)}")
-        return image_path
-    
-    def step_5_add_text_to_question_image(self, image_path: str, question: str, theme: str) -> str:
-        """Step 5: Add text overlay to the question image"""
-        log.info(f"Step 5: Adding text overlay to question image")
-        console_logger.info(f" Step 5: Adding text overlay to question image...")
-        
-        final_image_path = add_text_overlay(
-            image_path=image_path,
-            text=question,
-            theme=theme,
-            image_number=self.image_counter,
-            image_type="q"
-        )
-        
-        if not final_image_path:
-                raise
-            
-        log.info(f"Step 5: Text overlay added successfully")
-        console_logger.info(f" Step 5: Text overlay added successfully")
-        console_logger.info(f" Step 6: Final question image created: {os.path.basename(final_image_path)}")
-        return final_image_path
-    
-    def step_7_create_answer(self, question: str, theme: str) -> str:
-        """Step 7: Create an answer using the question"""
-        log.info(f"Step 7: Creating answer for question")
-        console_logger.info(f" Step 7: Generating answer for question...")
-        
-        answer = generate_answer(question, theme)
-        if not answer:
-                raise
-            
-        log.info(f"Step 7: Generated answer: {answer[:100]}...")
-        console_logger.info(f" Step 7: Answer generated: {answer[:80]}...")
-        return answer
-    
-    def step_8_log_answer(self, answer: str, theme: str) -> None:
-        """Step 8: Log the answer to CSV"""
-        log.info(f"Step 8: Logging answer to {self.log_file}")
-        console_logger.info(f" Step 8: Logging answer to CSV...")
-        
-        # Use the proper CSV manager function
-        success = log_single_question(
-            theme=theme,
-            question='',  # Question was already logged in step 3
-            answer=answer,
-            image_filename='',  # Will be updated later
-            style=None,
-            is_answer=True,
-            mark_as_used=False
-        )
-        
-        if success:
-            log.info(f"Step 8: Answer logged successfully")
-            console_logger.info(f" Step 8: Answer logged to CSV")
-                else:
-                raise
-    
-    def step_8b_mark_question_as_used(self, question: str, theme: str) -> None:
-        """Step 8b: Mark question as used to prevent duplicates"""
-        try:
-            
-            # Create a dictionary to mark this question as used
-            questions_dict = {theme: question}
-            marked_count = mark_questions_as_used(questions_dict)
-            
-            if marked_count > 0:
-                log.info(f"Step 8b: Marked {marked_count} question as used")
-                console_logger.info(f"  Step 8b: Marking question as used...")
-                console_logger.info(f" Step 8b: Question marked as used (prevents duplicates)")
-                else:
-                log.warning(f"Step 8b: No questions marked as used")
-                
-        except Exception as e:
-            log.error(f"Step 8b: Error marking question as used: {e}")
-            console_logger.warning(f"  Step 8b: Could not mark question as used: {e}")
-    
-    def step_9_create_answer_image(self, answer: str, theme: str) -> str:
-        """Step 9: Create an image using answer as a prompt"""
-        log.info(f"Step 9: Creating image using answer as prompt")
-        console_logger.info(f" Step 9: Generating base image for answer...")
-        
-        image_path, _ = generate_image_with_retry(
-            prompt=answer,
-            theme=theme,
-            image_number=self.image_counter,
-            image_type="a"
-        )
-        
-        if not image_path:
-                raise
-            
-        log.info(f"Step 9: Answer image created: {image_path}")
-        console_logger.info(f" Step 9: Base image created: {os.path.basename(image_path)}")
-        return image_path
-    
-    def step_10_add_text_to_answer_image(self, image_path: str, answer: str, theme: str) -> str:
-        """Step 10: Add text overlay to the answer image"""
-        log.info(f"Step 10: Adding text overlay to answer image")
-        console_logger.info(f" Step 10: Adding text overlay to answer image...")
-        
-        final_image_path = add_text_overlay(
-            image_path=image_path,
-            text=answer,
-            theme=theme,
-            image_number=self.image_counter,
-            image_type="a"
-        )
-        
-        if not final_image_path:
-                raise
-            
-        log.info(f"Step 10: Text overlay added successfully")
-        console_logger.info(f" Step 10: Text overlay added successfully")
-        console_logger.info(f" Step 11: Final answer image created: {os.path.basename(final_image_path)}")
-        return final_image_path
-    
-    def step_12_increment_counter(self) -> None:
-        """Step 12: Increment counter and prepare for next cycle"""
-        log.info(f"Step 12: Incrementing counter")
-        console_logger.info(f" Step 12: Incrementing counter and preparing for next cycle...")
-        
-        self.image_counter += 1
-        log.info(f"Step 12: Counter incremented to {self.image_counter}")
-    
-    def run_single_cycle(self) -> Dict:
-        """Run a single complete cycle of the 12-step pipeline"""
-        try:
-            console_logger.info(f" Starting Cycle #{self.image_counter}")
-            console_logger.info("=" * 60)
-            
-            # Get current volume info
-            current_volume, qa_pairs_in_volume, total_qa_pairs = get_current_volume_info()
-            console_logger.info(f" Starting at Volume {current_volume}: {qa_pairs_in_volume} Q&A pairs, {total_qa_pairs} total")
-            
-            # Step 1: Pick a theme
-            theme = self.step_1_pick_theme()
-            
-            # Step 2: Create a question
-            question = self.step_2_create_question(theme)
-            
-            # Step 3: Log the question
-            self.step_3_log_question(question, theme)
-            
-            # Step 4: Create question image
-            question_image_path = self.step_4_create_question_image(question, theme)
-            
-            # Step 5: Add text to question image
-            final_question_image = self.step_5_add_text_to_question_image(question_image_path, question, theme)
-            
-            # Step 7: Create an answer
-            answer = self.step_7_create_answer(question, theme)
-            
-            # Step 8: Log the answer
-            self.step_8_log_answer(answer, theme)
-            
-            # Step 8b: Mark question as used
-            self.step_8b_mark_question_as_used(question, theme)
-            
-            # Step 9: Create answer image
-            answer_image_path = self.step_9_create_answer_image(answer, theme)
-            
-            # Step 10: Add text to answer image
-            final_answer_image = self.step_10_add_text_to_answer_image(answer_image_path, answer, theme)
-            
-            # Step 12: Increment counter
-            self.step_12_increment_counter()
-            
-            # Get updated volume info
-            current_volume, qa_pairs_in_volume, total_qa_pairs = get_current_volume_info()
-            
-            console_logger.info("=" * 60)
-            console_logger.info(f" Cycle #{self.image_counter-1} completed successfully!")
-            console_logger.info(f" Question image: {os.path.basename(final_question_image)}")
-            console_logger.info(f" Answer images: 1 images")
-            console_logger.info(f"    Answer image 1: {os.path.basename(final_answer_image)}")
-            console_logger.info(f" Volume {current_volume}: {qa_pairs_in_volume} Q&A pairs, {total_qa_pairs} total")
-            
-            return {
-                'theme': theme,
-                'question': question,
-                'answer': answer,
-                'question_image': final_question_image,
-                'answer_image': final_answer_image,
-                'volume': current_volume
-            }
-            
-        except Exception as e:
-            log.error(f"Error in cycle {self.image_counter}: {e}")
-            console_logger.error(f" Cycle #{self.image_counter} failed: {e}")
-                raise
-    
-    def run_continuous(self, cycles: int = 1) -> List[Dict]:
-        """Run multiple cycles of the pipeline"""
-        results = []
-        
-        for i in range(cycles):
-            try:
-                result = self.run_single_cycle()
-                results.append(result)
-                
-                # Add delay between cycles if running multiple
-                if cycles > 1 and i < cycles - 1:
-                    time.sleep(RATE_LIMIT_DELAY)
-                    
-        except Exception as e:
-                log.error(f"Failed to complete cycle {i+1}: {e}")
-                console_logger.error(f" Failed to complete cycle {i+1}: {e}")
-                break
-        
-        return results
+    except Exception as e:
+        console_logger.error(f"   Failed to download {model_type.upper()} model: {e}")
+        return False
 
-def generate_enhanced_statistics(qa_pairs):
-    """Generate enhanced statistics for advanced modes"""
+def check_gpu_availability() -> bool:
+    """Check if GPU is available for image generation"""
     try:
-        console_logger.info(f"\n ENHANCED STATISTICS")
-        console_logger.info(f"=" * 40)
-        
-        # Basic statistics
-        total_qa_pairs = len(qa_pairs)
-        categories_used = list(set([qa.get('theme', 'Unknown') for qa in qa_pairs]))
-        
-        console_logger.info(f" Total Q&A pairs generated: {total_qa_pairs}")
-        console_logger.info(f" Themes used: {len(categories_used)}")
-        console_logger.info(f" Themes: {', '.join(categories_used)}")
-        
-        # Get current volume info
-        current_volume, qa_pairs_in_volume, total_qa_pairs_db = get_current_volume_info()
-        console_logger.info(f" Current volume: {current_volume}")
-        console_logger.info(f" Q&A pairs in current volume: {qa_pairs_in_volume}")
-        console_logger.info(f" Total Q&A pairs in database: {total_qa_pairs_db}")
-        
-        # Enhanced: Try to get research statistics if available
-        try:
-            research_orchestrator = ResearchOrchestrator()
-            stats = research_orchestrator.get_research_statistics()
-            
-            if stats:
-                total_questions = stats.get('total_questions', 0)
-                used_questions = stats.get('used_questions', 0)
-                questions_by_category = stats.get('questions_by_category', {})
-                
-                console_logger.info(f" Total questions in database: {total_questions}")
-                console_logger.info(f" Used questions: {used_questions}")
-                
-                if questions_by_category:
-                    console_logger.info(f" Questions by theme:")
-                    for theme, count in questions_by_category.items():
-                        console_logger.info(f"   • {theme}: {count}")
-                
-        except Exception as e:
-            log.debug(f"Could not load research statistics: {e}")
-        
-        console_logger.info(f"=" * 40)
-        
-        except Exception as e:
-        log.error(f"Error generating enhanced statistics: {e}")
-        console_logger.error(f" Error generating statistics: {e}")
+        import torch
+        if torch.cuda.is_available():
+            gpu_count = torch.cuda.device_count()
+            gpu_name = torch.cuda.get_device_name(0) if gpu_count > 0 else "Unknown"
+            console_logger.info(f" GPU detected: {gpu_name} ({gpu_count} device(s))")
+            return True
+        else:
+            console_logger.info(" No GPU detected, will use CPU fallback")
+            return False
+    except ImportError:
+        console_logger.warning(" PyTorch not available, GPU check skipped")
+        return False
+    except Exception as e:
+        console_logger.warning(f" GPU check failed: {e}")
+        return False
 
-def generate_cover_images_if_enabled(qa_pairs):
-    """Generate cover images if enabled"""
-    try:
-        # Check if cover generation is enabled
-        generate_covers = os.getenv('SIMPLE_PIPELINE_GENERATE_COVERS', 'false').lower() == 'true'
-        
-        if not generate_covers:
-            return
-        
-        console_logger.info(f"\n GENERATING COVER IMAGES")
-        console_logger.info(f"=" * 40)
-        
-        # Initialize image generation system
-        image_system = ImageGenerationSystem()
-        
-        # Get current volume info
-        current_volume, _, _ = get_current_volume_info()
-        
-        # Generate volume cover
-        console_logger.info(f" Creating volume cover for Volume {current_volume}...")
-        try:
-            volume_cover = image_system.create_cover_image(
-                title=f"ASK: Daily Research - Volume {current_volume}",
-                subtitle="Comprehensive Research Collection",
-                volume_number=current_volume
-            )
-            if volume_cover:
-                console_logger.info(f" Volume cover created: {os.path.basename(volume_cover)}")
-        except Exception as e:
-            console_logger.warning(f"  Could not create volume cover: {e}")
-        
-        # Generate theme covers
-        themes = list(set([qa.get('theme', 'Unknown') for qa in qa_pairs]))
-        console_logger.info(f" Creating theme covers for {len(themes)} themes...")
-        
-        for theme in themes:
-            try:
-                category_cover = image_system.create_cover_image(
-                    title=f"ASK: {theme.replace('_', ' ').title()}",
-                    subtitle="Research Collection",
-                    theme=theme
-                )
-                if category_cover:
-                    console_logger.info(f" Theme cover created for {theme}: {os.path.basename(category_cover)}")
-        except Exception as e:
-                console_logger.warning(f"  Could not create theme cover for {theme}: {e}")
-        
-        console_logger.info(f" Cover image generation completed")
-        
-        except Exception as e:
-        log.error(f"Error generating cover images: {e}")
-        console_logger.error(f" Error generating cover images: {e}")
-
-def create_backup_if_enabled():
-    """Create backup if enabled"""
-    try:
-        create_backup = os.getenv('SIMPLE_PIPELINE_CREATE_BACKUP', 'true').lower() == 'true'
-        
-        if not create_backup:
-            return
-        
-        console_logger.info(f"\n CREATING BACKUP")
-        console_logger.info(f"=" * 40)
-
-        backup_file = create_backup()
-        if backup_file:
-            console_logger.info(f" Backup created: {os.path.basename(backup_file)}")
-                else:
-            console_logger.warning(f"  Could not create backup")
-        
-        except Exception as e:
-        log.error(f"Error creating backup: {e}")
-        console_logger.error(f" Error creating backup: {e}")
-
-def export_data_if_enabled(qa_pairs):
-    """Export data if enabled"""
-    try:
-        export_data = os.getenv('SIMPLE_PIPELINE_EXPORT_DATA', 'false').lower() == 'true'
-        
-        if not export_data:
-            return
-        
-        console_logger.info(f"\n EXPORTING DATA")
-        console_logger.info(f"=" * 40)
-
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        export_file = f"research_export_{timestamp}.csv"
-        
-        success = export_questions_to_csv(export_file)
-        if success:
-            console_logger.info(f" Data exported: {export_file}")
-                else:
-            console_logger.warning(f"  Could not export data")
-        
-        except Exception as e:
-        log.error(f"Error exporting data: {e}")
-        console_logger.error(f" Error exporting data: {e}")
-
-def         run_simple_mode():
-    """Run the original simple 12-step pipeline"""
-    try:
-        console_logger.info(" Starting Simple 12-Step Pipeline")
-        console_logger.info("=" * 50)
-        
-        # Initialize pipeline
-        pipeline = SimplePipeline()
-        
-        # Run single cycle (can be changed to run multiple cycles)
-        cycles = int(os.getenv('PIPELINE_CYCLES', '1'))
-        results = pipeline.run_continuous(cycles)
-        
-        console_logger.info(f" Simple pipeline completed successfully!")
-        console_logger.info(f" Generated {len(results)} Q&A pairs")
-        
-        except Exception as e:
-        console_logger.error(f" Simple pipeline failed: {e}")
-                raise
-
-def run_hybrid_mode():
-    """Run hybrid cross-disciplinary chained content generation"""
-    try:
-        console_logger.info(" Starting Hybrid Cross-Disciplinary Chained Pipeline")
-        console_logger.info("=" * 50)
-        
-        # Initialize orchestrators
-        research_orchestrator = ResearchOrchestrator()
-        image_system = ImageGenerationSystem()
-        
-        # Get configuration
-        theme_count = int(os.getenv('HYBRID_THEME_COUNT', '5'))
-        chain_length = int(os.getenv('HYBRID_CHAIN_LENGTH', '2'))
-        
-        console_logger.info(f"Configuration: {theme_count} themes, {chain_length} questions per chain")
-        
-        # Generate hybrid cross-disciplinary chained Q&A pairs
-        qa_pairs = research_orchestrator.generate_hybrid_cross_disciplinary_chain(
-            theme_count=theme_count,
-            chain_length=chain_length
-        )
-        
-        if not qa_pairs:
-            console_logger.error("No hybrid Q&A pairs generated.")
-            return
-        
-        console_logger.info(f" Generated {len(qa_pairs)} hybrid Q&A pairs")
-        
-        # Get current volume number
-        current_volume, qa_pairs_in_volume, total_qa_pairs = get_current_volume_info()
-        console_logger.info(f" Current Volume: {current_volume}")
-        
-        # Generate images for all Q&A pairs
-        console_logger.info("Generating images for hybrid content...")
-        qa_pairs_with_images = image_system.generate_qa_images(qa_pairs)
-        
-        if qa_pairs_with_images:
-            console_logger.info(f" Generated images for {len(qa_pairs_with_images)} Q&A pairs")
-        
-        # Generate enhanced statistics
-        generate_enhanced_statistics(qa_pairs)
-        
-        # Generate cover images if enabled
-        generate_cover_images_if_enabled(qa_pairs)
-        
-        # Create backup
-        create_backup_if_enabled()
-        
-        # Export data if enabled
-        export_data_if_enabled(qa_pairs)
-        
-        console_logger.info(" Hybrid cross-disciplinary chained content generation completed!")
-        
-        except Exception as e:
-        console_logger.error(f" Hybrid pipeline failed: {e}")
-                raise
-
-def run_cross_disciplinary_mode():
-    """Run cross-disciplinary content generation"""
-    try:
-        console_logger.info(" Starting Cross-Disciplinary Pipeline")
-        console_logger.info("=" * 50)
-        
-        # Initialize orchestrators
-        research_orchestrator = ResearchOrchestrator()
-        image_system = ImageGenerationSystem()
-        
-        # Get configuration
-        theme_count = int(os.getenv('CROSS_DISCIPLINARY_THEME_COUNT', '10'))
-        
-        console_logger.info(f"Configuration: {theme_count} themes")
-        
-        # Generate cross-disciplinary Q&A pairs
-        qa_pairs = research_orchestrator.generate_cross_disciplinary_qa_pairs(theme_count)
-        
-        if not qa_pairs:
-            console_logger.error("No cross-disciplinary Q&A pairs generated.")
-            return
-        
-        console_logger.info(f" Generated {len(qa_pairs)} cross-disciplinary Q&A pairs")
-        
-        # Get current volume number
-        current_volume, qa_pairs_in_volume, total_qa_pairs = get_current_volume_info()
-        console_logger.info(f" Current Volume: {current_volume}")
-        
-        # Generate images for all Q&A pairs
-        console_logger.info("Generating images for cross-disciplinary content...")
-        qa_pairs_with_images = image_system.generate_qa_images(qa_pairs)
-        
-        if qa_pairs_with_images:
-            console_logger.info(f" Generated images for {len(qa_pairs_with_images)} Q&A pairs")
-        
-        # Generate enhanced statistics
-        generate_enhanced_statistics(qa_pairs)
-        
-        # Generate cover images if enabled
-        generate_cover_images_if_enabled(qa_pairs)
-        
-        # Create backup
-        create_backup_if_enabled()
-        
-        # Export data if enabled
-        export_data_if_enabled(qa_pairs)
-        
-        console_logger.info(" Cross-disciplinary content generation completed!")
-        
-        except Exception as e:
-        console_logger.error(f" Cross-disciplinary pipeline failed: {e}")
-                raise
-
-def run_chained_mode():
-    """Run chained content generation"""
-    try:
-        console_logger.info(" Starting Chained Content Pipeline")
-        console_logger.info("=" * 50)
-        
-        # Initialize orchestrators
-        research_orchestrator = ResearchOrchestrator()
-        image_system = ImageGenerationSystem()
-        
-        # Get configuration
-        chain_length = int(os.getenv('CHAIN_LENGTH', '5'))
-        themes_to_generate = os.getenv('CATEGORIES_TO_GENERATE', '').split(',') if os.getenv('CATEGORIES_TO_GENERATE') else []
-        
-        # If no specific themes, use default themes from environment
-        if not themes_to_generate or themes_to_generate == ['']:
-            default_themes = os.getenv('DEFAULT_CHAINED_THEMES', 'design_research,technology_innovation')
-            themes_to_generate = [theme.strip() for theme in default_themes.split(',') if theme.strip()]
-        
-        console_logger.info(f"Configuration: {chain_length} questions per chain, {len(themes_to_generate)} themes")
-        
-        # Generate chained Q&A pairs
-        qa_pairs = research_orchestrator.generate_chained_qa_pairs(themes_to_generate, chain_length)
-        
-        if not qa_pairs:
-            console_logger.error("No chained Q&A pairs generated.")
-            return
-        
-        console_logger.info(f" Generated {len(qa_pairs)} chained Q&A pairs")
-        
-        # Get current volume number
-        current_volume, qa_pairs_in_volume, total_qa_pairs = get_current_volume_info()
-        console_logger.info(f" Current Volume: {current_volume}")
-        
-        # Generate images for all Q&A pairs
-        console_logger.info("Generating images for chained content...")
-        qa_pairs_with_images = image_system.generate_qa_images(qa_pairs)
-        
-        if qa_pairs_with_images:
-            console_logger.info(f" Generated images for {len(qa_pairs_with_images)} Q&A pairs")
-        
-        # Generate enhanced statistics
-        generate_enhanced_statistics(qa_pairs)
-        
-        # Generate cover images if enabled
-        generate_cover_images_if_enabled(qa_pairs)
-        
-        # Create backup
-        create_backup_if_enabled()
-        
-        # Export data if enabled
-        export_data_if_enabled(qa_pairs)
-        
-        console_logger.info(" Chained content generation completed!")
-
-        except Exception as e:
-        console_logger.error(f" Chained pipeline failed: {e}")
-                raise
-
-def             show_help():
+def show_help():
     """Show help information for available modes"""
-    console_logger.info(" ASK: Daily Research - Available Modes")
+    console_logger.info(" *ASK*: Daily Research - Available Modes")
     console_logger.info("=" * 60)
     console_logger.info("  python main.py                    - Simple 12-step pipeline (default)")
     console_logger.info("  python main.py hybrid             - Hybrid cross-disciplinary chained content")
@@ -739,33 +210,244 @@ def             show_help():
     console_logger.info("  • Chained: Creates connected questions that build upon each other")
     console_logger.info("")
     console_logger.info("  Configuration: Edit ask.env to customize each mode")
+    console_logger.info("  Offline-First: System runs without API key by default")
+    console_logger.info("  Lazy Loading: AI models downloaded only when needed")
 
-def     main():
+def run_simple_mode():
+    """Run the original simple 12-step pipeline"""
+    try:
+        console_logger.info(" Starting Simple 12-Step Pipeline")
+        console_logger.info("=" * 50)
+        console_logger.info(" Offline-first mode: GPU -> CPU -> API (if enabled)")
+        
+        # Check hardware availability
+        gpu_available = check_gpu_availability()
+        
+        # Import required modules
+        try:
+            from research_orchestrator import ResearchOrchestrator
+            from image_generation_system import ImageGenerationSystem
+            from volume_manager import get_current_volume_info
+            from offline_question_generator import generate_single_question_for_category
+            from offline_answer_generator import generate_answer
+            from smart_image_generator import generate_image_with_smart_fallback
+            from image_add_text import add_text_overlay
+            from research_csv_manager import log_single_question, mark_questions_as_used
+        except ImportError as e:
+            console_logger.error(f" Import error: {e}")
+            console_logger.error(" Please ensure all required modules are available")
+            return
+        
+        # Initialize pipeline
+        themes_config = os.getenv('SIMPLE_MODE_THEMES', 'design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology')
+        themes = [theme.strip() for theme in themes_config.split(',') if theme.strip()]
+        
+        # Ensure directories exist
+        os.makedirs('images', exist_ok=True)
+        os.makedirs('logs', exist_ok=True)
+        
+        # Get current volume info
+        try:
+            current_volume, qa_pairs_in_volume, total_qa_pairs = get_current_volume_info()
+            console_logger.info(f" Starting at Volume {current_volume}: {qa_pairs_in_volume} Q&A pairs, {total_qa_pairs} total")
+        except Exception as e:
+            console_logger.warning(f" Could not get volume info: {e}")
+            current_volume = 1
+        
+        # Pick a theme
+        theme = random.choice(themes)
+        console_logger.info(f" Step 1: Theme selected: {theme.upper()}")
+        
+        # Generate question
+        console_logger.info(f" Step 2: Generating question for {theme}...")
+        question = generate_single_question_for_category(theme)
+        if not question:
+            console_logger.error(" Failed to generate question")
+            return
+        console_logger.info(f" Step 2: Question created: {question[:80]}...")
+        
+        # Log question
+        console_logger.info(f" Step 3: Logging question to CSV...")
+        success = log_single_question(
+            theme=theme,
+            question=question,
+            image_filename='',
+            style=None,
+            is_answer=False,
+            mark_as_used=False
+        )
+        if not success:
+            console_logger.error(" Failed to log question")
+            return
+        console_logger.info(f" Step 3: Question logged to CSV")
+        
+        # Generate question image using smart fallback
+        console_logger.info(f" Step 4: Generating base image for question...")
+        try:
+            image_path, style = generate_image_with_smart_fallback(
+                prompt=question,
+                theme=theme,
+                image_number=1,
+                image_type="q"
+            )
+            console_logger.info(f" Step 4: Base image created: {os.path.basename(image_path)}")
+        except Exception as e:
+            console_logger.error(f" Failed to create question image: {e}")
+            return
+        
+        # Add text overlay
+        console_logger.info(f" Step 5: Adding text overlay to question image...")
+        try:
+            final_image_path = add_text_overlay(
+                image_path=image_path,
+                prompt=question,
+                image_number=1,
+                is_question=True
+            )
+            console_logger.info(f" Step 5: Text overlay added successfully")
+            console_logger.info(f" Step 6: Final question image created: {os.path.basename(final_image_path)}")
+        except Exception as e:
+            console_logger.error(f" Failed to add text overlay: {e}")
+            return
+        
+        # Generate answer
+        console_logger.info(f" Step 7: Generating answer for question...")
+        answer = generate_answer(question, theme)
+        if not answer:
+            console_logger.error(" Failed to generate answer")
+            return
+        console_logger.info(f" Step 7: Answer generated: {answer[:80]}...")
+        
+        # Log answer
+        console_logger.info(f" Step 8: Logging answer to CSV...")
+        success = log_single_question(
+            theme=theme,
+            question=answer,
+            image_filename='',
+            style=None,
+            is_answer=True,
+            mark_as_used=False
+        )
+        if not success:
+            console_logger.error(" Failed to log answer")
+            return
+        console_logger.info(f" Step 8: Answer logged to CSV")
+        
+        # Mark question as used
+        console_logger.info(f" Step 8b: Marking question as used...")
+        try:
+            questions_dict = {theme: question}
+            marked_count = mark_questions_as_used(questions_dict)
+            if marked_count > 0:
+                console_logger.info(f" Step 8b: Question marked as used (prevents duplicates)")
+            else:
+                console_logger.warning(f" Step 8b: No questions marked as used")
+        except Exception as e:
+            console_logger.warning(f" Could not mark question as used: {e}")
+        
+        # Generate answer image
+        console_logger.info(f" Step 9: Generating base image for answer...")
+        try:
+            answer_image_path, answer_style = generate_image_with_smart_fallback(
+                prompt=answer,
+                theme=theme,
+                image_number=1,
+                image_type="a"
+            )
+            console_logger.info(f" Step 9: Base image created: {os.path.basename(answer_image_path)}")
+        except Exception as e:
+            console_logger.error(f" Failed to create answer image: {e}")
+            return
+        
+        # Add text overlay to answer image
+        console_logger.info(f" Step 10: Adding text overlay to answer image...")
+        try:
+            final_answer_image = add_text_overlay(
+                image_path=answer_image_path,
+                prompt=answer,
+                image_number=1,
+                is_question=False
+            )
+            console_logger.info(f" Step 10: Text overlay added successfully")
+            console_logger.info(f" Step 11: Final answer image created: {os.path.basename(final_answer_image)}")
+        except Exception as e:
+            console_logger.error(f" Failed to add text overlay to answer: {e}")
+            return
+        
+        # Completion summary
+        console_logger.info("=" * 60)
+        console_logger.info(f" Cycle #1 completed successfully!")
+        console_logger.info(f" Question image: {os.path.basename(final_image_path)}")
+        console_logger.info(f" Answer image: {os.path.basename(final_answer_image)}")
+        console_logger.info(f" Theme: {theme}")
+        console_logger.info(f" Simple pipeline completed successfully!")
+        
+    except Exception as e:
+        console_logger.error(f" Simple pipeline failed: {e}")
+        raise
+
+def run_hybrid_mode():
+    """Run hybrid cross-disciplinary chained content generation"""
+    console_logger.info(" Starting Hybrid Cross-Disciplinary Chained Pipeline")
+    console_logger.info("=" * 50)
+    console_logger.info(" This mode is not yet implemented in the simplified version")
+    console_logger.info(" Please use simple mode for now")
+
+def run_cross_disciplinary_mode():
+    """Run cross-disciplinary content generation"""
+    console_logger.info(" Starting Cross-Disciplinary Pipeline")
+    console_logger.info("=" * 50)
+    console_logger.info(" This mode is not yet implemented in the simplified version")
+    console_logger.info(" Please use simple mode for now")
+
+def run_chained_mode():
+    """Run chained content generation"""
+    console_logger.info(" Starting Chained Content Pipeline")
+    console_logger.info("=" * 50)
+    console_logger.info(" This mode is not yet implemented in the simplified version")
+    console_logger.info(" Please use simple mode for now")
+
+def main():
     """Main execution function - Enhanced with all modes"""
     try:
-    # Check command line arguments for different modes
-    
+        # Download all models upfront before starting any pipeline operations
+        console_logger.info("")
+        console_logger.info(" *ASK*: Daily Research - Offline-First Pipeline")
+        console_logger.info("=" * 60)
+        console_logger.info(" Step 0: Downloading all required AI models upfront...")
+        
+        models_ready = download_all_models_upfront()
+        
+        if not models_ready:
+            console_logger.warning(" [WARNING] No models available - pipeline may fail")
+            console_logger.info(" Continuing with fallback options...")
+        
+        console_logger.info("")
+        console_logger.info(" Step 1: Starting pipeline execution...")
+        console_logger.info("=" * 60)
+
+        # Check command line arguments for different modes
         if len(sys.argv) > 1:
-                mode = sys.argv[1].lower()
-        
-                if mode == "hybrid":
+            mode = sys.argv[1].lower()
+            
+            if mode == "hybrid":
                 run_hybrid_mode()
-                elif mode == "cross-disciplinary":
+            elif mode == "cross-disciplinary":
                 run_cross_disciplinary_mode()
-                elif mode == "chained":
+            elif mode == "chained":
                 run_chained_mode()
-                elif mode == "help":
-                        show_help()
-                else:
-                        console_logger.error(f"Unknown mode: {mode}")
-                        show_help()
-                else:
-                # Default mode: simple 12-step pipeline
-                run_simple_mode()
+            elif mode == "help":
+                show_help()
+            else:
+                console_logger.error(f"Unknown mode: {mode}")
+                show_help()
+        else:
+            # Default mode: simple 12-step pipeline
+            run_simple_mode()
         
-        except Exception as e:
-                console_logger.error(f" Pipeline failed: {e}")
-                raise
+    except Exception as e:
+        console_logger.error(f" Pipeline failed: {e}")
+        raise
 
 if __name__ == "__main__":
-        main()
+    main()

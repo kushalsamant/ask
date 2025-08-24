@@ -668,10 +668,10 @@ class ImageLayoutCreator:
             if self.layout and hasattr(self.layout, 'BRAND_TEXT'):
                 return self.layout.BRAND_TEXT
             else:
-                return "ASK: Daily Architectural Research"
+                return "*ASK*: Daily Research"
         except Exception as e:
             log.warning(f"Error getting brand text, using default: {e}")
-            return "ASK: Daily Architectural Research"
+            return "*ASK*: Daily Research"
     
     def get_performance_statistics(self) -> Dict[str, Any]:
         """

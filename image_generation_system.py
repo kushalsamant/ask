@@ -140,7 +140,7 @@ class ImageGenerationConfig:
     TOC_IMAGE_NUMBER_SPACE: int = 50
     
     # TOC Templates (converted from PDF TOC templates)
-    TOC_MAIN_TITLE_TEMPLATE: str = "ASK: Daily Architectural Research - Volume {volume_number}"
+    TOC_MAIN_TITLE_TEMPLATE: str = "*ASK*: Daily Research - Volume {volume_number}"
     TOC_SEQUENTIAL_SUBTITLE: str = "Sequential Table of Contents"
     TOC_THEME_SUBTITLE: str = "Theme Index"
     TOC_SEQUENTIAL_SECTION_TITLE: str = "Sequential Order"
@@ -150,14 +150,14 @@ class ImageGenerationConfig:
     TOC_RESEARCH_INSIGHTS_TEMPLATE: str = "Research Insights: {insights}..."
     TOC_DATE_TEMPLATE: str = "Generated: {date}"
     TOC_TITLE_TEMPLATE: str = "Table of Contents"
-    TOC_SUBTITLE_TEMPLATE: str = "ASK: Daily Architectural Research - Volume {volume_number}"
+    TOC_SUBTITLE_TEMPLATE: str = "*ASK*: Daily Research - Volume {volume_number}"
     TOC_IMAGE_NUMBER_TEMPLATE: str = "{image_number}"
     TOC_SUMMARY_TEMPLATE: str = "Total Q&A Pairs: {qa_count} | Themes: {category_count}"
     
     # Individual Image Settings (converted from PDF Individual)
     INDIVIDUAL_FILENAME_TEMPLATE: str = "ASK_{image_number}_{theme}.jpg"
     INDIVIDUAL_FALLBACK_TEMPLATE: str = "ASK_QA_{theme}.jpg"
-    FOOTER_BRAND_TEXT: str = "ASK: Daily Architectural Research"
+    FOOTER_BRAND_TEXT: str = "ASK: Daily Research"
     FOOTER_IMAGE_NUMBER_TEMPLATE: str = "ASK-{image_number}"
     
     # Page and Layout Settings (converted from PDF Page)
@@ -224,7 +224,7 @@ class ImageGenerationConfig:
     
     # Cover Generation Settings (converted from PDF Cover)
     COVER_PROMPT: str = "Professional architectural research compilation cover with modern design elements, typography, and visual hierarchy"
-    COVER_TITLE: str = "ASK: Daily Architectural Research"
+    COVER_TITLE: str = "*ASK*: Daily Research"
     COVER_TEXT_COLOR: str = "#000000"
     COVER_BRAND_COLOR: str = "#2C3E50"
     
@@ -284,7 +284,7 @@ class ImageGenerationConfig:
     MAX_TEXT_LINES_ANSWER: int = 12
     LINE_HEIGHT: int = 72
     TEXT_AREA_START: int = 40
-    BRAND_TEXT: str = "ASK: Daily Architectural Research"
+    BRAND_TEXT: str = "ASK: Daily Research"
     BRAND_X_POSITION: int = 40
     BRAND_Y_OFFSET: int = 100
     TEXT_LEFT_MARGIN: int = 40
@@ -729,7 +729,7 @@ class ImageGenerationSystem:
     def _create_toc_content(self, qa_pairs: List[Dict]) -> str:
         """Create table of contents content"""
         toc_lines = []
-        toc_lines.append("ASK: Daily Architectural Research")
+        toc_lines.append("*ASK*: Daily Research")
         toc_lines.append("Table of Contents")
         toc_lines.append("")
         
@@ -788,7 +788,7 @@ class ImageGenerationSystem:
         
         try:
             # Create sequential TOC content
-            toc_content = "ASK: Daily Architectural Research\nSequential Table of Contents\n\n"
+            toc_content = "*ASK*: Daily Research\nSequential Table of Contents\n\n"
             
             for i, qa_pair in enumerate(qa_pairs):
                 question = qa_pair.get('question', '')
@@ -848,7 +848,7 @@ class ImageGenerationSystem:
                 themes = dict(sorted(themes.items()))
             
             # Create theme TOC content
-            toc_content = "ASK: Daily Architectural Research\nCategory Table of Contents\n\n"
+            toc_content = "*ASK*: Daily Research\nCategory Table of Contents\n\n"
             
             for theme, category_qa_pairs in themes.items():
                 toc_content += f" {theme.replace('_', ' ').title()}\n"
@@ -1136,7 +1136,7 @@ def main():
         TOC_IMAGE_NUMBER_SPACE=int(os.getenv('TOC_IMAGE_NUMBER_SPACE', '50')),
         
         # TOC Templates (converted from PDF TOC templates)
-        TOC_MAIN_TITLE_TEMPLATE=os.getenv('TOC_MAIN_TITLE_TEMPLATE', 'ASK: Daily Architectural Research - Volume {volume_number}'),
+        TOC_MAIN_TITLE_TEMPLATE=os.getenv('TOC_MAIN_TITLE_TEMPLATE', '*ASK*: Daily Research - Volume {volume_number}'),
         TOC_SEQUENTIAL_SUBTITLE=os.getenv('TOC_SEQUENTIAL_SUBTITLE', 'Sequential Table of Contents'),
         TOC_THEME_SUBTITLE=os.getenv('TOC_THEME_SUBTITLE', 'Theme Index'),
         TOC_SEQUENTIAL_SECTION_TITLE=os.getenv('TOC_SEQUENTIAL_SECTION_TITLE', 'Sequential Order'),
@@ -1146,14 +1146,14 @@ def main():
         TOC_RESEARCH_INSIGHTS_TEMPLATE=os.getenv('TOC_RESEARCH_INSIGHTS_TEMPLATE', 'Research Insights: {insights}...'),
         TOC_DATE_TEMPLATE=os.getenv('TOC_DATE_TEMPLATE', 'Generated: {date}'),
         TOC_TITLE_TEMPLATE=os.getenv('TOC_TITLE_TEMPLATE', 'Table of Contents'),
-        TOC_SUBTITLE_TEMPLATE=os.getenv('TOC_SUBTITLE_TEMPLATE', 'ASK: Daily Architectural Research - Volume {volume_number}'),
+        TOC_SUBTITLE_TEMPLATE=os.getenv('TOC_SUBTITLE_TEMPLATE', '*ASK*: Daily Research - Volume {volume_number}'),
         TOC_IMAGE_NUMBER_TEMPLATE=os.getenv('TOC_IMAGE_NUMBER_TEMPLATE', '{image_number}'),
         TOC_SUMMARY_TEMPLATE=os.getenv('TOC_SUMMARY_TEMPLATE', 'Total Q&A Pairs: {qa_count} | Themes: {category_count}'),
         
         # Individual Image Settings (converted from PDF Individual)
         INDIVIDUAL_FILENAME_TEMPLATE=os.getenv('INDIVIDUAL_FILENAME_TEMPLATE', 'ASK_{image_number}_{theme}.jpg'),
         INDIVIDUAL_FALLBACK_TEMPLATE=os.getenv('INDIVIDUAL_FALLBACK_TEMPLATE', 'ASK_QA_{theme}.jpg'),
-        FOOTER_BRAND_TEXT=os.getenv('FOOTER_BRAND_TEXT', 'ASK: Daily Architectural Research'),
+                    FOOTER_BRAND_TEXT=os.getenv('FOOTER_BRAND_TEXT', 'ASK: Daily Research'),
         FOOTER_IMAGE_NUMBER_TEMPLATE=os.getenv('FOOTER_IMAGE_NUMBER_TEMPLATE', 'ASK-{image_number}'),
         
         # Page and Layout Settings (converted from PDF Page)
@@ -1220,7 +1220,7 @@ def main():
         
         # Cover Generation Settings (converted from PDF Cover)
         COVER_PROMPT=os.getenv('COVER_PROMPT', 'Professional architectural research compilation cover with modern design elements, typography, and visual hierarchy'),
-        COVER_TITLE=os.getenv('COVER_TITLE', 'ASK: Daily Architectural Research'),
+        COVER_TITLE=os.getenv('COVER_TITLE', '*ASK*: Daily Research'),
         COVER_TEXT_COLOR=os.getenv('COVER_TEXT_COLOR', '#000000'),
         COVER_BRAND_COLOR=os.getenv('COVER_BRAND_COLOR', '#2C3E50'),
         
@@ -1279,7 +1279,7 @@ def main():
         MAX_TEXT_LINES_ANSWER=int(os.getenv('MAX_TEXT_LINES_ANSWER', '12')),
         LINE_HEIGHT=int(os.getenv('LINE_HEIGHT', '72')),
         TEXT_AREA_START=int(os.getenv('TEXT_AREA_START', '40')),
-        BRAND_TEXT=os.getenv('BRAND_TEXT', 'ASK: Daily Architectural Research'),
+                    BRAND_TEXT=os.getenv('BRAND_TEXT', 'ASK: Daily Research'),
         BRAND_X_POSITION=int(os.getenv('BRAND_X_POSITION', '40')),
         BRAND_Y_OFFSET=int(os.getenv('BRAND_Y_OFFSET', '100')),
         TEXT_LEFT_MARGIN=int(os.getenv('TEXT_LEFT_MARGIN', '40')),

@@ -167,8 +167,8 @@ def generate_image_with_smart_fallback(
     if cpu_enabled:
         try:
             log.info("Attempting CPU image generation (fallback method)...")
-            from cpu_image_generator import generate_image_with_retry
-            result = generate_image_with_retry(prompt, theme, image_number, max_retries, timeout, image_type)
+            from simple_cpu_generator import generate_image_with_retry
+            result = generate_image_with_retry(prompt, theme, image_number, image_type)
             _performance_stats['cpu_successes'] += 1
             log.info("CPU generation successful")
             return result
