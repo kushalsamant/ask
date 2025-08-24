@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 """
-Smart Image Generation Module - Optimized Version
-Provides automatic fallback between API and CPU image generation with enhanced performance
+Smart Image Generation Module - Optimized Version (Offline-First)
+Provides automatic fallback between GPU, CPU, and API image generation with offline-first approach
 
 This module provides functionality to:
-- Generate images with smart fallback: GPU -> CPU -> API -> Placeholder
-- Handle multiple generation methods with priority ordering
+- Generate images with smart fallback: GPU (Primary) -> CPU (First Fallback) -> API (Last Resort) -> Placeholder (Emergency)
+- Handle multiple generation methods with offline-first priority ordering
 - Create placeholder images when all methods fail
 - Monitor generation method status and dependencies
 - Provide comprehensive error handling and logging
+
+Offline-First Architecture:
+- GPU Generation: Primary mode (offline, fastest, highest quality)
+- CPU Generation: First fallback (offline, slower but reliable)
+- API Generation: Last resort (requires internet, only when local fails)
+- Placeholder Images: Emergency fallback (offline, always available)
 
 Optimizations:
 - Enhanced error handling and recovery
@@ -20,7 +26,7 @@ Optimizations:
 
 Author: ASK Research Tool
 Last Updated: 2025-08-24
-Version: 2.0 (Heavily Optimized)
+Version: 2.0 (Heavily Optimized - Offline-First)
 """
 
 import os
@@ -138,14 +144,14 @@ def generate_image_with_smart_fallback(
     
     log.info(f"Starting smart fallback generation for theme '{theme}', image {image_number}")
     
-    # Check if different generation methods are enabled
-    gpu_enabled = os.getenv("GPU_IMAGE_GENERATION_ENABLED", "false").lower() == "true"
-    cpu_enabled = os.getenv("CPU_IMAGE_GENERATION_ENABLED", "false").lower() == "true"
+    # Check if different generation methods are enabled (offline-first defaults)
+    gpu_enabled = os.getenv("GPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
+    cpu_enabled = os.getenv("CPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
     api_enabled = bool(os.getenv("TOGETHER_API_KEY") and os.getenv("TOGETHER_API_KEY") != "your_api_key_here")
     
     log.info(f"Smart fallback: GPU enabled={gpu_enabled}, CPU enabled={cpu_enabled}, API enabled={api_enabled}")
     
-    # Method 1: Try GPU generation FIRST (when enabled)
+    # Method 1: Try GPU generation FIRST (Primary Mode - Offline)
     if gpu_enabled:
         try:
             log.info("Attempting GPU image generation (priority method)...")
@@ -157,7 +163,7 @@ def generate_image_with_smart_fallback(
         except Exception as e:
             log.warning(f"GPU generation failed: {e}")
     
-    # Method 2: Try CPU generation as fallback
+    # Method 2: Try CPU generation as fallback (First Fallback - Offline)
     if cpu_enabled:
         try:
             log.info("Attempting CPU image generation (fallback method)...")
@@ -169,7 +175,7 @@ def generate_image_with_smart_fallback(
         except Exception as e:
             log.warning(f"CPU generation failed: {e}")
     
-    # Method 3: Try API generation as fallback
+    # Method 3: Try API generation as fallback (Last Resort - Requires Internet)
     if api_enabled:
         try:
             log.info("Attempting API image generation (fallback method)...")
@@ -181,7 +187,7 @@ def generate_image_with_smart_fallback(
         except Exception as e:
             log.warning(f"API generation failed: {e}")
     
-    # Method 4: Create placeholder image
+    # Method 4: Create placeholder image (Emergency Fallback - Offline)
     log.warning("All generation methods failed, creating placeholder...")
     _performance_stats['placeholder_fallbacks'] += 1
     return create_placeholder_image(theme, image_number, image_type)
@@ -297,8 +303,8 @@ def get_generation_methods_status() -> Dict[str, Any]:
         dict: Status of all generation methods
     """
     try:
-        gpu_enabled = os.getenv("GPU_IMAGE_GENERATION_ENABLED", "false").lower() == "true"
-        cpu_enabled = os.getenv("CPU_IMAGE_GENERATION_ENABLED", "false").lower() == "true"
+        gpu_enabled = os.getenv("GPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
+        cpu_enabled = os.getenv("CPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
         api_enabled = bool(os.getenv("TOGETHER_API_KEY") and os.getenv("TOGETHER_API_KEY") != "your_api_key_here")
         
         status = {
@@ -428,8 +434,8 @@ def validate_environment() -> Dict[str, Any]:
             'writable': os.access(os.getenv("IMAGES_DIR", "images"), os.W_OK) if os.path.exists(os.getenv("IMAGES_DIR", "images")) else False
         },
         'environment_variables': {
-            'GPU_IMAGE_GENERATION_ENABLED': os.getenv("GPU_IMAGE_GENERATION_ENABLED", "false"),
-            'CPU_IMAGE_GENERATION_ENABLED': os.getenv("CPU_IMAGE_GENERATION_ENABLED", "false"),
+                    'GPU_IMAGE_GENERATION_ENABLED': os.getenv("GPU_IMAGE_GENERATION_ENABLED", "true"),
+        'CPU_IMAGE_GENERATION_ENABLED': os.getenv("CPU_IMAGE_GENERATION_ENABLED", "true"),
             'TOGETHER_API_KEY': bool(os.getenv("TOGETHER_API_KEY")),
             'CPU_DEFAULT_WIDTH': os.getenv("CPU_DEFAULT_WIDTH", "512"),
             'CPU_DEFAULT_HEIGHT': os.getenv("CPU_DEFAULT_HEIGHT", "512")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ASK: Daily Research - Unified Pipeline
+ASK: Daily Research - Unified Pipeline (Offline-First)
 Enhanced main pipeline with all modes and features from simple_pipeline.py
 
 This module provides a comprehensive research pipeline with multiple modes:
@@ -9,8 +9,10 @@ This module provides a comprehensive research pipeline with multiple modes:
 - Cross-disciplinary: Explores intersections between research themes
 - Chained: Creates connected questions that build upon each other
 
-Features:
-- Multiple pipeline modes for different research approaches
+Offline-First Features:
+- Primarily GPU-based image generation (offline)
+- CPU fallback for image generation (offline)
+- API generation as last resort (requires internet)
 - Comprehensive logging and error handling
 - Environment-based configuration
 - Image generation and text overlay
@@ -79,19 +81,27 @@ console_logger.addHandler(console_handler)
 TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY')
 RATE_LIMIT_DELAY = float(os.getenv('RATE_LIMIT_DELAY', '10.0'))
 
-# Validate API key (only if not showing help)
+# Check if API generation is enabled (offline-first approach)
+API_GENERATION_ENABLED = os.getenv('API_IMAGE_GENERATION_ENABLED', 'false').lower() == 'true'
+
+# Validate API key only if API generation is enabled (offline-first approach)
 if len(sys.argv) <= 1 or sys.argv[1].lower() != 'help':
+    if API_GENERATION_ENABLED:
         if not TOGETHER_API_KEY:
-            log.error("ERROR: TOGETHER_API_KEY environment variable is not set!")
-            console_logger.error("ERROR: TOGETHER_API_KEY environment variable is not set!")
+            log.error("ERROR: API generation is enabled but TOGETHER_API_KEY is not set!")
+            console_logger.error("ERROR: API generation is enabled but TOGETHER_API_KEY is not set!")
+            console_logger.info("To run in offline mode, set API_IMAGE_GENERATION_ENABLED=false in ask.env")
             exit(1)
 
         if not TOGETHER_API_KEY.startswith('tgp_'):
             log.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
             console_logger.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
 
-    log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
-    console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+        log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+        console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+    else:
+        log.info("Running in offline mode - API generation disabled")
+        console_logger.info("Running in offline mode - API generation disabled")
 
 class SimplePipeline:
     """Simple 12-step pipeline for Q&A image generation"""
