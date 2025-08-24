@@ -1,39 +1,49 @@
-import os
-import logging
-from typing import List, Optional, Dict, Tuple
-from research_question_generator import generate_single_question_for_category, generate_question_from_answer
-from research_answer_generator import generate_answer
-from research_csv_manager import (
-from research_statistics import (
-from research_answer_manager import (
-from research_find_path import (
-            import random
-                import time
-            from research_question_api import call_together_api
-            from research_question_prompts import create_category_question_prompt
-            from research_question_api import process_question_response
 #!/usr/bin/env python3
 """
 Research Orchestrator Module
 Focused wrapper for all research pipeline operations
+
+This module provides functionality to:
+- Generate Q&A pairs for research themes
+- Create chained Q&A sequences
+- Generate cross-disciplinary content
+- Provide hybrid research approaches
+- Manage research statistics and analysis
+- Export research data
+- Mark questions as used
+
+Author: ASK Research Tool
+Last Updated: 2025-08-24
 """
 
+import os
+import logging
+import random
+import time
+from typing import List, Optional, Dict, Tuple
+
 # Import core research modules
+from research_question_generator import generate_single_question_for_category, generate_question_from_answer
+from research_answer_generator import generate_answer
+from research_csv_manager import (
     get_questions_and_styles_from_log,
     get_next_image_number,
     log_single_question,
     mark_questions_as_used,
     export_questions_to_csv
 )
+from research_statistics import (
     get_questions_by_category,
     get_used_questions_count,
     get_total_questions_count,
     get_questions_statistics
 )
+from research_answer_manager import (
     get_latest_answers_from_log,
     get_latest_answer_for_category,
     get_best_answer_for_next_question
 )
+from research_find_path import (
     generate_cross_disciplinary_question,
     generate_theme_based_question,
     get_cross_disciplinary_insights,
@@ -41,6 +51,9 @@ Focused wrapper for all research pipeline operations
     get_all_categories,
     get_all_themes
 )
+from api_client import call_together_api
+from research_question_prompts import process_question_response
+from research_question_prompts import create_category_question_prompt
 
 # Setup logging
 log = logging.getLogger(__name__)
@@ -63,6 +76,14 @@ class ResearchOrchestrator:
         Returns:
             List of Q&A pair dictionaries
         """
+        # Validate input parameters
+        if themes is None:
+            themes = []
+        if not isinstance(themes, list):
+            themes = []
+        if questions_per_category is None or questions_per_category < 1:
+            questions_per_category = 1
+            
         log.info(f"Generating Q&A pairs for {len(themes)} themes...")
         
         qa_pairs = []
@@ -100,7 +121,7 @@ class ResearchOrchestrator:
                     # Log to CSV
                     log_single_question(theme, question, answer, image_number)
                     
-                    log.info(f"✅ Generated Q&A pair for {theme}: {question[:50]}...")
+                    log.info(f" Generated Q&A pair for {theme}: {question[:50]}...")
                     
                 except Exception as e:
                     log.error(f"Failed to generate Q&A pair for {theme}: {e}")
@@ -118,6 +139,14 @@ class ResearchOrchestrator:
         Returns:
             List of Q&A pair dictionaries
         """
+        # Validate input parameters
+        if themes is None:
+            themes = []
+        if not isinstance(themes, list):
+            themes = []
+        if chain_length is None or chain_length < 1:
+            chain_length = 2
+            
         log.info(f"Generating chained Q&A pairs for {len(themes)} themes...")
         
         qa_pairs = []
@@ -156,7 +185,7 @@ class ResearchOrchestrator:
                         # Log to CSV
                         log_single_question(theme, current_question, current_answer, image_number)
                         
-                        log.info(f"✅ Generated chained Q&A pair {i+1}/{chain_length} for {theme}")
+                        log.info(f" Generated chained Q&A pair {i+1}/{chain_length} for {theme}")
                         
                         # Generate next question based on answer (if not the last iteration)
                         if i < chain_length - 1:
@@ -203,9 +232,14 @@ class ResearchOrchestrator:
                     log.info(f"Generating cross-disciplinary Q&A pair {i}/{theme_count} for theme: {theme}")
                     
                     # Generate cross-disciplinary question
-                    question = generate_cross_disciplinary_question(theme)
-                    if not question:
+                    question_data = generate_cross_disciplinary_question(theme)
+                    if not question_data:
                         log.error(f"Failed to generate cross-disciplinary question for theme: {theme}")
+                        continue
+                    
+                    question = question_data.get('question', '')
+                    if not question:
+                        log.error(f"No question in cross-disciplinary data for theme: {theme}")
                         continue
                     
                     # Generate answer
@@ -223,7 +257,7 @@ class ResearchOrchestrator:
                         'question_text': question,
                         'answer_text': answer,
                         'image_number': image_number,
-                        'theme': theme
+                        'original_theme': theme
                     }
                     
                     qa_pairs.append(qa_pair)
@@ -231,7 +265,7 @@ class ResearchOrchestrator:
                     # Log to CSV
                     log_single_question('cross_disciplinary', question, answer, image_number)
                     
-                    log.info(f"✅ Generated cross-disciplinary Q&A pair {i}: {question[:50]}...")
+                    log.info(f" Generated cross-disciplinary Q&A pair {i}: {question[:50]}...")
                     
                 except Exception as e:
                     log.error(f"Failed to generate cross-disciplinary Q&A pair {i}: {e}")
@@ -296,7 +330,7 @@ class ResearchOrchestrator:
                         'question_text': initial_question,
                         'answer_text': initial_answer,
                         'image_number': image_number,
-                        'theme': theme,
+                        'original_theme': theme,
                         'chain_position': 1,
                         'chain_id': f"chain_{theme_idx}",
                         'is_cross_disciplinary': True
@@ -307,7 +341,7 @@ class ResearchOrchestrator:
                     # Log to CSV
                     log_single_question('cross_disciplinary', initial_question, initial_answer, image_number)
                     
-                    log.info(f"✅ Generated initial cross-disciplinary Q&A for theme {theme_idx}: {initial_question[:50]}...")
+                    log.info(f" Generated initial cross-disciplinary Q&A for theme {theme_idx}: {initial_question[:50]}...")
                     
                     # Step 3: Generate chained questions based on the cross-disciplinary answer
                     current_question = initial_question
@@ -339,7 +373,7 @@ class ResearchOrchestrator:
                                 'question_text': next_question,
                                 'answer_text': next_answer,
                                 'image_number': image_number,
-                                'theme': theme,
+                                'original_theme': theme,
                                 'chain_position': chain_step,
                                 'chain_id': f"chain_{theme_idx}",
                                 'is_cross_disciplinary': True,
@@ -351,7 +385,7 @@ class ResearchOrchestrator:
                             # Log to CSV
                             log_single_question('cross_disciplinary', next_question, next_answer, image_number)
                             
-                            log.info(f"✅ Generated chained Q&A {chain_step}/{chain_length} for theme {theme_idx}: {next_question[:50]}...")
+                            log.info(f" Generated chained Q&A {chain_step}/{chain_length} for theme {theme_idx}: {next_question[:50]}...")
                             
                             # Update for next iteration
                             current_question = next_question
@@ -361,7 +395,7 @@ class ResearchOrchestrator:
                             log.error(f"Failed to generate chained Q&A {chain_step} for theme {theme}: {e}")
                             break
                     
-                    log.info(f"✅ Completed hybrid chain {theme_idx}/{theme_count} for theme: {theme}")
+                    log.info(f" Completed hybrid chain {theme_idx}/{theme_count} for theme: {theme}")
                     
                 except Exception as e:
                     log.error(f"Failed to generate hybrid chain for theme {theme}: {e}")
@@ -369,7 +403,7 @@ class ResearchOrchestrator:
         except Exception as e:
             log.error(f"Failed to generate hybrid cross-disciplinary chains: {e}")
         
-        log.info(f"✅ Generated {len(qa_pairs)} total Q&A pairs in hybrid chains")
+        log.info(f" Generated {len(qa_pairs)} total Q&A pairs in hybrid chains")
         return qa_pairs
     
     def _generate_question_for_category(self, theme: str, max_retries: int = 5) -> Optional[str]:
@@ -476,7 +510,6 @@ class ResearchOrchestrator:
             """
             
             # Use the existing question generation infrastructure
-            
             system_prompt = "You are an expert architectural researcher specializing in cross-disciplinary exploration. Generate insightful follow-up questions that build upon previous answers and explore deeper connections between architectural themes."
             
             # Call API to generate the chained question
@@ -493,7 +526,7 @@ class ResearchOrchestrator:
                 log.warning("No valid question extracted from chained cross-disciplinary response")
                 return None
             
-            log.info(f"✅ Generated chained cross-disciplinary question: {question[:50]}...")
+            log.info(f" Generated chained cross-disciplinary question: {question[:50]}...")
             return question
             
         except Exception as e:
@@ -559,7 +592,7 @@ class ResearchOrchestrator:
         """
         try:
             export_questions_to_csv(output_file)
-            log.info(f"✅ Exported research data to {output_file}")
+            log.info(f" Exported research data to {output_file}")
             return True
             
         except Exception as e:
@@ -580,9 +613,50 @@ class ResearchOrchestrator:
             questions_dict = {qa['theme']: qa['question_text'] for qa in qa_pairs}
             marked_count = mark_questions_as_used(questions_dict)
             
-            log.info(f"✅ Marked {marked_count} questions as used")
+            log.info(f" Marked {marked_count} questions as used")
             return marked_count
             
         except Exception as e:
             log.error(f"Error marking questions as used: {e}")
             return 0
+
+# Convenience functions
+def generate_qa_pairs(themes: List[str], questions_per_category: int = 1) -> List[dict]:
+    """Generate Q&A pairs for specified themes"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.generate_qa_pairs(themes, questions_per_category)
+
+def generate_chained_qa_pairs(themes: List[str], chain_length: int = 2) -> List[dict]:
+    """Generate chained Q&A pairs for specified themes"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.generate_chained_qa_pairs(themes, chain_length)
+
+def generate_cross_disciplinary_qa_pairs(theme_count: int = 5) -> List[dict]:
+    """Generate cross-disciplinary Q&A pairs"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.generate_cross_disciplinary_qa_pairs(theme_count)
+
+def generate_hybrid_cross_disciplinary_chain(theme_count: int = 3, chain_length: int = 3) -> List[dict]:
+    """Generate hybrid cross-disciplinary chains"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.generate_hybrid_cross_disciplinary_chain(theme_count, chain_length)
+
+def get_research_statistics() -> Dict[str, any]:
+    """Get comprehensive research statistics"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.get_research_statistics()
+
+def analyze_research_direction(qa_pairs: List[dict]) -> Dict[str, any]:
+    """Analyze research direction based on Q&A pairs"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.analyze_research_direction(qa_pairs)
+
+def export_research_data(output_file: str = "research_export.csv"):
+    """Export research data to CSV"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.export_research_data(output_file)
+
+def mark_questions_as_used(qa_pairs: List[dict]) -> int:
+    """Mark questions as used in the research log"""
+    orchestrator = ResearchOrchestrator()
+    return orchestrator.mark_questions_as_used(qa_pairs)

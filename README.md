@@ -7,22 +7,22 @@
 > **Advanced Research & Image Generation Pipeline**  
 > Generate high-quality Q&A content with AI-powered image generation, supporting GPU, CPU, and API fallback systems.
 
-## 🚀 Overview
+#  Overview
 
 ASK is a comprehensive research tool that combines AI-powered question generation, answer creation, and intelligent image generation. It features multiple generation modes, smart fallback systems, and professional output formatting.
 
-### ✨ Key Features
+#  Key Features
 
-- **🤖 AI-Powered Content**: Generate questions and answers using advanced language models
-- **🎨 Smart Image Generation**: GPU, CPU, and API fallback with professional styling
-- **📊 Multiple Modes**: Simple, Hybrid, Cross-Disciplinary, and Chained content generation
-- **🔄 Intelligent Fallback**: Automatic switching between generation methods
-- **📁 Professional Output**: Individual images, compilations, covers, and table of contents
-- **⚙️ Highly Configurable**: Extensive customization through environment variables
-- **📈 Progress Tracking**: Real-time progress monitoring and logging
-- **🛡️ Error Handling**: Robust error recovery and fallback strategies
+- **AI-Powered Content**: Generate questions and answers using advanced language models
+- ** Smart Image Generation**: GPU, CPU, and API fallback with professional styling
+- ** Multiple Modes**: Simple, Hybrid, Cross-Disciplinary, and Chained content generation
+- ** Intelligent Fallback**: Automatic switching between generation methods
+- ** Professional Output**: Individual images, compilations, covers, and table of contents
+- ** Highly Configurable**: Extensive customization through environment variables
+- ** Progress Tracking**: Real-time progress monitoring and logging
+- ** Error Handling**: Robust error recovery and fallback strategies
 
-## 📋 Table of Contents
+#  Table of Contents
 
 - [Installation](#-installation)
 - [Quick Start](#-quick-start)
@@ -33,21 +33,23 @@ ASK is a comprehensive research tool that combines AI-powered question generatio
 - [API Reference](#-api-reference)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
 
-## 🛠️ Installation
+#  Installation
 
-### Prerequisites
+## Prerequisites
 
 - **Python 3.8+**
 - **Git**
 - **Together.ai API Key** (for AI content generation)
 
-### Automatic Installation
+# Automatic Installation
 
 **Windows:**
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ask.git
+git clone https://github.com/kushalsamant/ask.git
 cd ask
 
 # Run automatic installer
@@ -57,7 +59,7 @@ install.bat
 **Linux/macOS:**
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ask.git
+git clone https://github.com/kushalsamant/ask.git
 cd ask
 
 # Run automatic installer
@@ -65,11 +67,11 @@ chmod +x install.sh
 ./install.sh
 ```
 
-### Manual Installation
+# Manual Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ask.git
+git clone https://github.com/kushalsamant/ask.git
 cd ask
 
 # Install dependencies
@@ -80,7 +82,7 @@ cp ask.env.template ask.env
 # Edit ask.env with your API key and preferences
 ```
 
-### Hardware Requirements
+##  Hardware Requirements
 
 | Component | Minimum | Recommended |
 |-----------|---------|-------------|
@@ -89,349 +91,414 @@ cp ask.env.template ask.env
 | **GPU** | CPU-only | NVIDIA GTX 1650+ |
 | **CPU** | 4 cores | 8+ cores |
 
-## ⚡ Quick Start
+#  Quick Start
 
-### 1. Configuration Setup
+## 1. Configuration Setup
 
 ```bash
 # Copy template and configure
 cp ask.env.template ask.env
 
 # Edit ask.env with your settings
-# Required: TOGETHER_API_KEY=your_api_key_here
 ```
 
-### 2. Basic Usage
+## 2. Basic Usage
 
 ```bash
-# Simple mode (1 Q&A pair)
+# Run in simple mode
 python main.py simple
 
-# Hybrid mode (10 Q&A pairs)
+# Run in hybrid mode
 python main.py hybrid
 
-# Cross-disciplinary mode (10 Q&A pairs)
+# Run in cross-disciplinary mode
 python main.py cross-disciplinary
 
-# Chained mode (10 Q&A pairs)
+# Run in chained mode
 python main.py chained
 ```
 
-### 3. View Results
+#  Configuration
 
-Generated content will be saved in:
-- `images/individual/` - Individual Q&A images
-- `images/compilations/` - Compilation images
-- `images/covers/` - Cover images
-- `images/toc/` - Table of contents
-- `log.csv` - Content database
+## Environment Variables
 
-## ⚙️ Configuration
-
-### Environment Variables
-
-The tool is configured through `ask.env`. Key settings include:
+Copy `ask.env.template` to `ask.env` and configure:
 
 ```bash
 # API Configuration
 TOGETHER_API_KEY=your_api_key_here
-TOGETHER_API_BASE=https://api.together.xyz/v1
 
-# AI Models
-TEXT_MODEL=meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
-IMAGE_MODEL=black-forest-labs/FLUX.1-schnell-Free
+# Theme Configuration
+THEME_1=your_first_theme
+THEME_2=your_second_theme
+THEME_3=your_third_theme
+
+# Generation Settings
+HYBRID_THEME_COUNT=2
+CROSS_DISCIPLINARY_THEME_COUNT=3
+CHAIN_LENGTH=3
 
 # Image Generation
-IMAGE_WIDTH=1072
-IMAGE_HEIGHT=1792
-IMAGE_QUALITY=95
-
-# Generation Modes
-HYBRID_THEME_COUNT=5
-CROSS_DISCIPLINARY_THEME_COUNT=10
-CHAIN_LENGTH=5
+IMAGE_QUALITY=high
+IMAGE_WIDTH=1200
+IMAGE_HEIGHT=800
 ```
 
-### Theme Configuration
+# Theme Configuration
 
-Configure themes in `ask.env`:
+Configure your research themes in `ask.env`:
 
 ```bash
-# Simple mode themes
-SIMPLE_MODE_THEMES=design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology
-
-# Default chained themes
-DEFAULT_CHAINED_THEMES=design_research,technology_innovation
+# Example themes
+THEME_1=Artificial Intelligence
+THEME_2=Sustainable Architecture
+THEME_3=Urban Planning
+THEME_4=Digital Transformation
+THEME_5=Climate Change
 ```
 
-## 🎯 Usage Modes
+# API Configuration
 
-### Simple Mode
-Generate a single Q&A pair with image.
+Set up your Together.ai API key:
+
+```bash
+TOGETHER_API_KEY=your_actual_api_key_here
+```
+
+# Image Configuration
+
+Customize image generation settings:
+
+```bash
+# Quality settings
+IMAGE_QUALITY=high
+IMAGE_WIDTH=1200
+IMAGE_HEIGHT=800
+
+# Style settings
+FONT_SIZE=24
+TEXT_COLOR=#F0F0F0
+BACKGROUND_COLOR=#1a1a1a
+```
+
+# Hardware Configuration
+
+Configure for your hardware:
+
+```bash
+# GPU settings (if available)
+USE_GPU=true
+GPU_MEMORY_LIMIT=4GB
+
+# CPU settings
+USE_CPU=true
+CPU_THREADS=4
+
+# Fallback settings
+API_FALLBACK=true
+PLACEHOLDER_FALLBACK=true
+```
+
+#  Usage Modes
+
+##  Simple Mode
+
+Generate basic Q&A content for a single theme.
 
 ```bash
 python main.py simple
 ```
 
-**Output**: 1 Q&A pair with individual image
+**Features:**
+- Single theme focus
+- 10 Q&A pairs
+- Basic image generation
+- Quick generation
 
-### Hybrid Mode
-Generate content across multiple themes with chaining.
+#  Hybrid Mode
+
+Combine multiple themes in innovative ways.
 
 ```bash
 python main.py hybrid
 ```
 
-**Output**: 10 Q&A pairs (5 themes × 2 chains each)
+**Features:**
+- Multiple theme integration
+- 10 Q&A pairs (2 themes × 5 chains)
+- Advanced content connections
+- Professional styling
 
-### Cross-Disciplinary Mode
-Generate content exploring connections between different themes.
+#  Cross-disciplinary Mode
+
+Generate content that bridges multiple research themes, creating innovative connections and insights.
 
 ```bash
 python main.py cross-disciplinary
 ```
 
-**Output**: 10 Q&A pairs across diverse themes
+**Features:**
+- Combines multiple themes in single Q&A pairs
+- Creates interdisciplinary research questions
+- Generates innovative content connections
+- Produces 10 Q&A pairs with cross-theme integration
 
-### Chained Mode
-Generate deep exploration of specific themes through chaining.
+#  Chained Mode
+
+Create deep exploration content with chained questions.
 
 ```bash
 python main.py chained
 ```
 
-**Output**: 10 Q&A pairs (2 themes × 5 chains each)
+**Features:**
+- Deep theme exploration
+- 10 Q&A pairs (2 categories × 5 chains)
+- Progressive complexity
+- Comprehensive coverage
 
-## 🎨 Image Generation
+#  Image Generation
 
-### Generation Methods
+## Generation Methods
 
-The tool supports multiple image generation methods with intelligent fallback:
+The system supports multiple image generation methods with intelligent fallback:
 
 1. **GPU Generation** (Priority when enabled)
-   - Uses NVIDIA CUDA for fast generation
-   - Optimized for GTX 1650+ graphics cards
-   - High-quality output with memory optimization
+   - NVIDIA CUDA acceleration
+   - Fastest generation
+   - High quality output
 
-2. **CPU Generation** (Fallback)
-   - Uses Diffusers with LCM-SD15 model
-   - Memory-efficient for CPU-only systems
-   - Slower but fully offline
+2. **CPU Generation** (Priority when enabled)
+   - CPU-based generation
+   - Works on any system
+   - Moderate speed
 
 3. **API Generation** (Fallback)
-   - Uses Together.ai FLUX.1 model
-   - High-quality cloud-based generation
-   - Requires internet connection
+   - Together.ai API
+   - Reliable quality
+   - Requires internet
 
 4. **Placeholder Images** (Final fallback)
-   - Generated when all other methods fail
-   - Professional styling with error indication
+   - Local generation
+   - Always available
+   - Basic styling
 
-### Configuration
+# Output Types
 
-```bash
-# GPU Settings
-GPU_IMAGE_GENERATION_ENABLED=true
-GPU_MODEL_ID=runwayml/stable-diffusion-v1-5
-GPU_DEFAULT_STEPS=20
+- **Individual Images**: Each Q&A pair as separate image
+- **Compilations**: Multiple Q&A pairs in single image
+- **Cover Images**: Professional title pages
+- **Table of Contents**: Navigation and overview
 
-# CPU Settings
-CPU_IMAGE_GENERATION_ENABLED=false
-CPU_MODEL_ID=latent-consistency/lcm-sd15
-CPU_DEFAULT_STEPS=6
-```
-
-## 📁 Project Structure
+#  Project Structure
 
 ```
 ask/
-├── main.py                          # Main orchestration pipeline
-├── ask.env                          # Configuration file
-├── ask.env.template                 # Configuration template
-├── requirements.txt                 # Python dependencies
-├── install_dependencies.py          # Smart installer
-├── install.bat                      # Windows installer
-├── install.sh                       # Linux/macOS installer
-│
-├── Core Components/
-│   ├── research_orchestrator.py     # Research orchestration
-│   ├── research_question_generator.py # Question generation
-│   ├── research_answer_generator.py # Answer generation
-│   ├── research_csv_manager.py      # Data management
-│   └── volume_manager.py            # Volume management
-│
-├── Image Generation/
-│   ├── image_generation_system.py   # Main image system
-│   ├── smart_image_generator.py     # Smart fallback system
-│   ├── gpu_image_generator.py       # GPU generation
-│   ├── cpu_image_generator.py       # CPU generation
-│   ├── image_create_ai.py           # API generation
-│   ├── image_add_text.py            # Text overlay
-│   └── image_typography_config.py   # Typography settings
-│
-├── Management Systems/
-│   ├── research_question_manager.py # Question management
-│   ├── research_answer_manager.py   # Answer management
-│   ├── style_manager.py             # Style management
-│   └── research_theme_system.py     # Theme system
-│
-├── Output/
-│   ├── images/                      # Generated images
-│   │   ├── individual/              # Individual Q&A images
-│   │   ├── compilations/            # Compilation images
-│   │   ├── covers/                  # Cover images
-│   │   └── toc/                     # Table of contents
-│   ├── logs/                        # Log files
-│   └── log.csv                      # Content database
-│
-└── Tests/
-    └── test_image_generation.py     # Image generation tests
+ main.py                 # Main orchestration pipeline
+ ask.env                 # Configuration file
+ ask.env.template        # Configuration template
+ requirements.txt        # Python dependencies
+ install.bat            # Windows installer
+ install.sh             # Linux/macOS installer
+ install_dependencies.py # Smart dependency installer
+ README.md              # This file
+ LICENSE                # MIT License
+ .gitignore             # Git ignore rules
+ FUNDING.yml            # GitHub funding config
+ log.csv                # Activity log
+ test_comprehensive.py  # Comprehensive test suite
+ optimize_performance.py # Performance optimizer
+ api_client.py          # API client with optimizations
+ cpu_image_generator.py # CPU image generation
+ gpu_image_generator.py # GPU image generation
+ smart_image_generator.py # Smart fallback system
+ image_generation_system.py # Main image system
+ image_create_ai.py     # AI image creation
+ image_create_cover.py  # Cover image creation
+ image_add_text.py      # Text overlay system
+ image_layout_creator.py # Layout creation
+ image_layout_config.py # Layout configuration
+ image_text_processor.py # Text processing
+ image_typography_config.py # Typography settings
+ research_orchestrator.py # Research coordination
+ research_question_manager.py # Question management
+ research_answer_manager.py # Answer management
+ style_manager.py       # Style management
+ volume_manager.py      # Volume management
+ research_csv_manager.py # CSV data management
+ research_backup_manager.py # Backup management
+ generated_images/      # Output directory
+     individual/        # Individual Q&A images
+     compilations/      # Multi-Q&A images
+     covers/           # Cover images
+     toc/              # Table of contents
 ```
 
-## 🔧 API Reference
+# Core Modules
 
-### Main Pipeline
+- **Main Pipeline**: Orchestrates the entire process
+- **Research Orchestrator**: Manages content generation
+- **Image Generation System**: Handles all image creation
+- **Smart Fallback**: Ensures reliable generation
+- **Volume Management**: Organizes output by volumes
 
-```python
-from main import SimplePipeline
+# Image Generation
 
-# Initialize pipeline
-pipeline = SimplePipeline()
+- **AI Image Creation**: Together.ai API integration
+- **Layout Creator**: Professional image layouts
+- **Text Processor**: Smart text handling
+- **Typography Config**: Font and style management
 
-# Run simple mode
-pipeline.run_simple_mode()
+# Utilities
 
-# Run hybrid mode
-pipeline.run_hybrid_mode()
-```
+- **API Client**: Optimized API communication
+- **CSV Manager**: Data logging and management
+- **Backup Manager**: Automatic backup system
+- **Volume Manager**: Output organization
 
-### Image Generation
+#  API Reference
 
-```python
-from smart_image_generator import generate_image_with_smart_fallback
+## Main Functions
 
-# Generate image with smart fallback
-image = generate_image_with_smart_fallback(
-    prompt="Your prompt here",
-    theme="design_research"
-)
-```
+The main pipeline provides several key functions:
 
-### Research Orchestration
+- `main()`: Main orchestration function
+- `run_simple_mode()`: Run simple content generation
+- `run_hybrid_mode()`: Run hybrid content generation
+- `run_cross_disciplinary_mode()`: Run cross-disciplinary content generation
+- `run_chained_mode()`: Run chained content generation
 
-```python
-from research_orchestrator import ResearchOrchestrator
+# API Client
 
-# Initialize orchestrator
-orchestrator = ResearchOrchestrator()
+The API client provides optimized communication with Together.ai:
 
-# Generate chained content
-content = orchestrator.generate_chained_content(
-    themes=["design_research", "technology_innovation"],
-    chain_length=3
-)
-```
+- `APIClient`: Optimized API client with connection pooling
+- `generate_content()`: Generate content asynchronously
+- `generate_content_sync()`: Generate content synchronously
 
-## 🐛 Troubleshooting
+# Image Generation System
 
-### Common Issues
+The image generation system handles all image creation:
 
-**1. API Key Error**
-```bash
-ERROR: TOGETHER_API_KEY environment variable is not set!
-```
-**Solution**: Set your API key in `ask.env`
+- `ImageGenerationSystem`: Main image generation orchestrator
+- `generate_qa_image()`: Generate Q&A image
+- `generate_compilation()`: Generate compilation image
+- `generate_cover()`: Generate cover image
 
-**2. GPU Generation Fails**
-```bash
-CUDA not available
-```
-**Solution**: Install CUDA drivers or disable GPU generation
+#  Troubleshooting
 
-**3. Memory Issues**
-```bash
-Out of memory error
-```
-**Solution**: Reduce image size or enable memory optimization
+## Common Issues
 
-**4. Import Errors**
-```bash
-ModuleNotFoundError
-```
-**Solution**: Run `pip install -r requirements.txt`
+####  API Key Issues
 
-### Performance Optimization
+**Problem**: `Missing TOGETHER_API_KEY`
+**Solution**: 
+1. Copy `ask.env.template` to `ask.env`
+2. Add your Together.ai API key
+3. Restart the application
 
-**For GPU Users:**
-- Enable `GPU_IMAGE_GENERATION_ENABLED=true`
-- Set appropriate memory optimizations
-- Use `GPU_DEFAULT_STEPS=20` for quality
+# Installation Issues
 
-**For CPU Users:**
-- Enable `CPU_IMAGE_GENERATION_ENABLED=true`
-- Use `CPU_DEFAULT_STEPS=6` for speed
-- Enable memory optimizations
+**Problem**: `ModuleNotFoundError`
+**Solution**:
+1. Run `pip install -r requirements.txt`
+2. Or use `install.bat` / `install.sh`
+3. Check Python version (3.8+)
 
-**For API Users:**
-- Ensure stable internet connection
-- Set appropriate rate limits
-- Monitor API usage
+# Image Generation Issues
 
-### Logging
+**Problem**: Images not generating
+**Solution**:
+1. Check hardware configuration
+2. Verify fallback settings
+3. Check disk space
 
-Logs are stored in `logs/execution.log`. Enable debug mode for detailed logging:
+# Performance Issues
 
-```bash
-DEBUG_MODE=true
-LOG_LEVEL=DEBUG
-```
+**Problem**: Slow generation
+**Solution**:
+1. Enable GPU if available
+2. Adjust image quality settings
+3. Use CPU optimization
 
-## 🤝 Contributing
+# Performance Tips
 
-We welcome contributions! Please follow these steps:
+- **GPU Usage**: Enable GPU for faster generation
+- **Image Quality**: Lower quality for faster generation
+- **Batch Processing**: Process multiple items together
+- **Memory Management**: Monitor system resources
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
+# Getting Help
 
-### Development Setup
+- Check the logs in `log.csv`
+- Review error messages
+- Verify configuration settings
+- Test with minimal settings
 
-```bash
-# Clone repository
-git clone https://github.com/yourusername/ask.git
-cd ask
+# 🤝 Contributing
 
-# Install development dependencies
-pip install -r requirements.txt
+We welcome contributions! Please see our contributing guidelines for details.
 
-# Run tests
-python test_image_generation.py
+#  Code Style
 
-# Check code quality
-python -m flake8 .
-```
+- Follow PEP 8 guidelines
+- Add docstrings to all functions
+- Include type hints where appropriate
 
-## 📄 License
+# 🧪 Testing
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- Write tests for new features
+- Ensure all tests pass before submitting
+- Run `python test_comprehensive.py`
 
-## 🙏 Acknowledgments
+#  Pull Requests
 
-- **Together.ai** for AI model access
-- **Diffusers** for image generation capabilities
-- **OpenAI** for inspiration and research methodologies
-- **Community contributors** for feedback and improvements
+- Fork the repository
+- Create a feature branch
+- Submit a pull request with detailed description
 
-## 📞 Support
+#  Bug Reports
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/ask/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/ask/discussions)
-- **Documentation**: [Wiki](https://github.com/yourusername/ask/wiki)
+- Use GitHub Issues
+- Include error messages
+- Provide reproduction steps
+
+#  Feature Requests
+
+- Describe the feature clearly
+- Explain the use case
+- Consider implementation complexity
+
+#  License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+#  Acknowledgments
+
+- Together.ai for AI capabilities
+- Open source community for inspiration
+- Contributors and users for feedback
+
+#  Support
+
+##  Issues
+
+Report bugs and issues on GitHub
+
+#  Discussions
+
+Join community discussions
+
+#  Documentation
+
+Check the wiki for detailed guides
+
+#  Contact Information
+
+- GitHub Issues: [Repository Issues](https://github.com/kushalsamant/ask/issues)
+- Discussions: [GitHub Discussions](https://github.com/kushalsamant/ask/discussions)
+- Wiki: [Project Wiki](https://github.com/kushalsamant/ask/wiki)
 
 ---
 
-**Made with ❤️ for the research community**
-
-*Last updated: August 2024*
+**Made with  by the ASK Community**

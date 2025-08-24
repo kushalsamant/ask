@@ -58,7 +58,7 @@ def generate_answer(question, theme, image_path):
         # Format answer for storage
         formatted_answer = format_answer_for_storage(answer)
         
-        log.info(f"✅ Generated answer for {theme}: {formatted_answer[:50]}...")
+        log.info(f" Generated answer for {theme}: {formatted_answer[:50]}...")
         return formatted_answer
         
     except Exception as e:

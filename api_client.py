@@ -288,7 +288,7 @@ class APIClient:
         if use_cache:
             cached_response = self.cache.get(endpoint, payload)
             if cached_response:
-                log.info(f"✅ {operation_name} served from cache")
+                log.info(f" {operation_name} served from cache")
                 self.metrics.update_metrics(True, 0.0)
                 return cached_response
         
@@ -314,7 +314,7 @@ class APIClient:
                     if use_cache:
                         self.cache.set(endpoint, payload, data)
                     
-                    log.info(f"✅ {operation_name} successful ({response_time:.2f}s)")
+                    log.info(f" {operation_name} successful ({response_time:.2f}s)")
                     self.metrics.update_metrics(True, response_time)
                     self._circuit_breaker_success()
                     return data
@@ -493,7 +493,7 @@ class APIClient:
                 with open(save_path, 'wb') as f:
                     f.write(response.content)
                 
-                log.info(f"✅ Image downloaded successfully: {save_path}")
+                log.info(f" Image downloaded successfully: {save_path}")
                 return True
                 
             except Exception as e:

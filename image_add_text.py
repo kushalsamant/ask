@@ -1,18 +1,120 @@
-import os
-import logging
-from PIL import Image, ImageDraw, ImageFont
-from image_layout_creator import layout_creator
-from image_text_processor import text_processor
-    import re
-        from image_create_ai import generate_image_with_retry
-            import shutil
 #!/usr/bin/env python3
 """
 Text Overlay Module
 Professional text overlay using PDF layout standards
 """
 
-# Import image standards modules
+import os
+import time
+from typing import Optional, Tuple, List, Dict, Any
+
+# Performance monitoring
+class PerformanceMonitor:
+    def __init__(self):
+        self.start_time = None
+        self.metrics = {'total_operations': 0, 'successful_operations': 0, 'failed_operations': 0, 'total_time': 0.0}
+    
+    def start_timer(self):
+        self.start_time = time.time()
+    
+    def end_timer(self):
+        if self.start_time:
+            duration = time.time() - self.start_time
+            self.metrics['total_time'] += duration
+            self.metrics['total_operations'] += 1
+    
+    def record_success(self):
+        self.metrics['successful_operations'] += 1
+    
+    def record_failure(self):
+        self.metrics['failed_operations'] += 1
+    
+    def get_stats(self):
+        stats = self.metrics.copy()
+        stats['success_rate'] = (self.metrics['successful_operations'] / max(self.metrics['total_operations'], 1)) * 100
+        return stats
+
+# Global performance monitor
+performance_monitor = PerformanceMonitor()
+
+def validate_input_parameters(image_path: str, prompt: str, image_number: Any, is_question: bool = True) -> Tuple[bool, str]:
+    """Enhanced input validation"""
+    try:
+        if not image_path or not isinstance(image_path, str):
+            return False, "Invalid image path"
+        if not prompt or not isinstance(prompt, str):
+            return False, "Invalid prompt"
+        if len(prompt.strip()) == 0:
+            return False, "Empty prompt"
+        if image_number is None:
+            return False, "Invalid image number"
+        if not isinstance(is_question, bool):
+            return False, "Invalid is_question parameter"
+        return True, "All parameters valid"
+    except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
+        return False, f"Validation error: {str(e)}"
+
+def validate_image_file(image_path: str) -> Tuple[bool, str]:
+    """Validate image file exists and is accessible"""
+    try:
+        if not os.path.exists(image_path):
+            return False, f"Image file does not exist: {image_path}"
+        if not os.path.isfile(image_path):
+            return False, f"Path is not a file: {image_path}"
+        if not os.access(image_path, os.R_OK):
+            return False, f"Image file is not readable: {image_path}"
+        file_size = os.path.getsize(image_path)
+        if file_size == 0:
+            return False, f"Image file is empty: {image_path}"
+        if file_size > 100 * 1024 * 1024:  # 100MB limit
+            return False, f"Image file too large: {file_size} bytes"
+        return True, "Image file valid"
+    except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
+        return False, f"Image validation error: {str(e)}"
+
+def create_font_with_fallback(font_file: str, font_size: int):
+    """Create font with enhanced fallback mechanism"""
+    try:
+        if os.path.exists(font_file):
+            return ImageFont.truetype(font_file, font_size)
+    except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
+        log.warning(f"Failed to load font {font_file}: {e}")
+    
+    try:
+        system_fonts = ['arial.ttf', 'Arial.ttf', 'times.ttf', 'Times.ttf', 'calibri.ttf', 'Calibri.ttf']
+        for system_font in system_fonts:
+            try:
+                return ImageFont.truetype(system_font, font_size)
+            except:
+                continue
+    except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
+        log.warning(f"Failed to load system fonts: {e}")
+    
+    log.warning("Using default font as fallback")
+    return ImageFont.load_default()
+import logging
+import re
+import shutil
+from PIL import Image, ImageDraw, ImageFont
+from image_layout_creator import layout_creator
+from image_text_processor import text_processor
+from image_create_ai import generate_image_with_retry
 
 # Setup logging
 log = logging.getLogger(__name__)
@@ -49,14 +151,10 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         main_font_size = brand_font_size
         number_font_size = brand_font_size
 
-        try:
-            main_font = ImageFont.truetype(font_file, main_font_size)
-            brand_font = ImageFont.truetype(font_file, brand_font_size)
-            number_font = ImageFont.truetype(font_file, number_font_size)
-        except:
-            main_font = ImageFont.load_default()
-            brand_font = ImageFont.load_default()
-            number_font = ImageFont.load_default()
+        # Create fonts with enhanced fallback
+        main_font = create_font_with_fallback(font_file, main_font_size)
+        brand_font = create_font_with_fallback(font_file, brand_font_size)
+        number_font = create_font_with_fallback(font_file, number_font_size)
 
         # Create overlay - fill the whole image
         overlay_height = IMAGE_HEIGHT  # Full image height
@@ -207,10 +305,22 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         img.save(image_path, quality=IMAGE_QUALITY, optimize=True)
         
         log.info(f"Added fallback text overlay to image: {image_path}")
+        # Record success and end timer
+        performance_monitor.end_timer()
+        performance_monitor.record_success()
+        
         return image_path
         
     except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
         log.error(f"Error adding fallback text overlay to {image_path}: {e}")
+        # Record success and end timer
+        performance_monitor.end_timer()
+        performance_monitor.record_success()
+        
         return image_path
 
 def _add_text_overlay_multi_image(image_path, prompt, image_number, is_question=True):
@@ -248,9 +358,17 @@ def _add_text_overlay_multi_image(image_path, prompt, image_number, is_question=
         
         # Return all image paths for multi-image support
         log.info(f"Created {len(image_paths)} images for long answer")
+        # Record success and end timer
+        performance_monitor.end_timer()
+        performance_monitor.record_success()
+        
         return image_paths if image_paths else [image_path]
         
     except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
         log.error(f"Error in multi-image text overlay: {e}")
         # Fallback to single image
         return _add_text_overlay_fallback(image_path, prompt, image_number, is_question)
@@ -280,6 +398,10 @@ def _split_text_into_chunks(text, max_chars_per_chunk=800):
         return chunks
         
     except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
         log.error(f"Error splitting text into chunks: {e}")
         # Fallback: split by character count with ellipsis
         chunks = []
@@ -354,8 +476,23 @@ def _create_new_image_for_chunk(chunk, image_number, original_image_path):
             return new_path
             
     except Exception as e:
+        log.error(f"Error in enhanced text overlay: {e}")
+        performance_monitor.end_timer()
+        performance_monitor.record_failure()
+        return image_path
         log.error(f"Error creating new image for chunk: {e}")
         # Fallback: copy original image with new number
         new_path = original_image_path.replace('.jpg', f'-{image_number}.jpg')
         shutil.copy2(original_image_path, new_path)
         return new_path
+
+
+def get_performance_stats():
+    """Get performance statistics"""
+    return performance_monitor.get_stats()
+
+def reset_performance_stats():
+    """Reset performance statistics"""
+    global performance_monitor
+    performance_monitor = PerformanceMonitor()
+    log.info("Performance statistics reset")

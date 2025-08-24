@@ -5,6 +5,100 @@ Converts PDF generation features into image generation functions
 """
 
 import os
+import time
+from typing import List, Dict, Optional, Tuple, Any
+from dataclasses import dataclass, field
+import threading
+import queue
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+# Performance monitoring
+class PerformanceMonitor:
+    def __init__(self):
+        self.start_time = None
+        self.metrics = {
+            'total_operations': 0, 
+            'successful_operations': 0, 
+            'failed_operations': 0, 
+            'total_time': 0.0,
+            'image_generation_time': 0.0,
+            'text_overlay_time': 0.0,
+            'cover_creation_time': 0.0,
+            'toc_creation_time': 0.0
+        }
+        self.lock = threading.Lock()
+    
+    def start_timer(self):
+        self.start_time = time.time()
+    
+    def end_timer(self):
+        if self.start_time:
+            duration = time.time() - self.start_time
+            with self.lock:
+                self.metrics['total_time'] += duration
+                self.metrics['total_operations'] += 1
+    
+    def record_success(self):
+        with self.lock:
+            self.metrics['successful_operations'] += 1
+    
+    def record_failure(self):
+        with self.lock:
+            self.metrics['failed_operations'] += 1
+    
+    def record_operation_time(self, operation_type: str, duration: float):
+        with self.lock:
+            if operation_type in self.metrics:
+                self.metrics[operation_type] += duration
+    
+    def get_stats(self):
+        with self.lock:
+            stats = self.metrics.copy()
+            stats['success_rate'] = (self.metrics['successful_operations'] / max(self.metrics['total_operations'], 1)) * 100
+            return stats
+
+# Global performance monitor
+performance_monitor = PerformanceMonitor()
+
+def validate_input_parameters(qa_pairs: List[Dict], volume_number: int = 1) -> Tuple[bool, str]:
+    """Enhanced input validation"""
+    try:
+        if not qa_pairs or not isinstance(qa_pairs, list):
+            return False, "Invalid Q&A pairs"
+        if len(qa_pairs) == 0:
+            return False, "Empty Q&A pairs list"
+        if not isinstance(volume_number, int) or volume_number < 1:
+            return False, "Invalid volume number"
+        
+        # Validate each Q&A pair
+        for i, qa_pair in enumerate(qa_pairs):
+            if not isinstance(qa_pair, dict):
+                return False, f"Invalid Q&A pair at index {i}"
+            if 'question' not in qa_pair or 'answer' not in qa_pair:
+                return False, f"Missing question or answer at index {i}"
+            if not qa_pair.get('theme'):
+                return False, f"Missing theme at index {i}"
+        
+        return True, "All parameters valid"
+    except Exception as e:
+        return False, f"Validation error: {str(e)}"
+
+def validate_environment():
+    """Validate environment configuration"""
+    try:
+        required_vars = ['IMAGES_DIR', 'IMAGE_WIDTH', 'IMAGE_HEIGHT', 'IMAGE_QUALITY']
+        missing_vars = []
+        
+        for var in required_vars:
+            if not os.getenv(var):
+                missing_vars.append(var)
+        
+        if missing_vars:
+            return False, f"Missing environment variables: {missing_vars}"
+        
+        return True, "Environment configuration valid"
+    except Exception as e:
+        return False, f"Environment validation error: {str(e)}"
 import sys
 import logging
 from datetime import datetime
@@ -254,28 +348,53 @@ class ImageGenerationSystem:
     """Comprehensive image generation system with all PDF features converted to images"""
     
     def __init__(self, config: ImageGenerationConfig = None):
-        self.config = config or ImageGenerationConfig()
-        self.output_dir = os.getenv('IMAGES_DIR', 'images')
-        self.failure_count = 0
-        self.max_failures = int(os.getenv('ERROR_MAX_FAILURES', '10'))
+        # Start performance monitoring
+        performance_monitor.start_timer()
         
-        # Create output directories
-        os.makedirs(self.output_dir, exist_ok=True)
-        os.makedirs(f"{self.output_dir}/covers", exist_ok=True)
-        os.makedirs(f"{self.output_dir}/toc", exist_ok=True)
-        os.makedirs(f"{self.output_dir}/compilations", exist_ok=True)
-        os.makedirs(f"{self.output_dir}/temp", exist_ok=True)
-        
-        self._setup_logging()
+        try:
+            # Input validation
+            is_valid, validation_message = validate_environment()
+            if not is_valid:
+                log.error(f"Environment validation failed: {validation_message}")
+                performance_monitor.record_failure()
+                raise ValueError(validation_message)
+            
+            log.info("Starting enhanced image generation system initialization...")
+            
+            self.config = config or ImageGenerationConfig()
+            self.output_dir = os.getenv('IMAGES_DIR', 'images')
+            self.failure_count = 0
+            self.max_failures = int(os.getenv('ERROR_MAX_FAILURES', '10'))
+            
+            # Create output directories
+            os.makedirs(self.output_dir, exist_ok=True)
+            os.makedirs(f"{self.output_dir}/covers", exist_ok=True)
+            os.makedirs(f"{self.output_dir}/toc", exist_ok=True)
+            os.makedirs(f"{self.output_dir}/compilations", exist_ok=True)
+            os.makedirs(f"{self.output_dir}/temp", exist_ok=True)
+            
+            self._setup_logging()
+            
+            # Record success and end timer
+            performance_monitor.end_timer()
+            performance_monitor.record_success()
+            
+            log.info("Enhanced image generation system initialization completed")
+            
+        except Exception as e:
+            log.error(f"Error in enhanced image generation system initialization: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
     
     def _setup_logging(self):
         """Setup logging configuration"""
         if self.config.LOG_SUCCESS_MESSAGES:
-            log.info("✅ Image generation system initialized")
+            log.info(" Image generation system initialized")
         if self.config.LOG_TIMING:
             self.start_time = time.time()
     
-    def _log_progress(self, message: str, emoji: str = "🔄", step: int = None):
+    def _log_progress(self, message: str, emoji: str = "", step: int = None):
         """Log progress with optional emoji and step numbering"""
         if not self.config.PROGRESS_STEP_TRACKING:
             return
@@ -296,7 +415,7 @@ class ImageGenerationSystem:
             
         duration = time.time() - start_time
         if self.config.PROGRESS_TIMING_DETAILED:
-            log.info(f"⏱️  {operation} completed in {duration:.2f} seconds")
+            log.info(f"⏱  {operation} completed in {duration:.2f} seconds")
     
     def _handle_error(self, error: Exception, operation: str, context: str = ""):
         """Handle errors with configurable behavior"""
@@ -306,12 +425,12 @@ class ImageGenerationSystem:
         self.failure_count += 1
         
         if self.config.ERROR_LOG_DETAILED:
-            log.error(f"❌ Error in {operation}: {error}")
+            log.error(f" Error in {operation}: {error}")
             if context:
                 log.error(f"   Context: {context}")
         
         if self.config.ERROR_NOTIFY_ON_FAILURE:
-            log.warning(f"⚠️  Failure #{self.failure_count} in {operation}")
+            log.warning(f"  Failure #{self.failure_count} in {operation}")
         
         if self.failure_count >= self.max_failures:
             raise Exception(f"Maximum failures ({self.max_failures}) reached")
@@ -324,13 +443,13 @@ class ImageGenerationSystem:
         if not self.config.CREATE_INDIVIDUAL_IMAGES:
             return qa_pairs
             
-        self._log_progress("Creating individual images", "🎨", 1)
+        self._log_progress("Creating individual images", "", 1)
         start_time = time.time()
         
         results = []
         for i, qa_pair in enumerate(qa_pairs):
             try:
-                self._log_progress(f"Processing Q&A pair {i+1}/{len(qa_pairs)}", "📝")
+                self._log_progress(f"Processing Q&A pair {i+1}/{len(qa_pairs)}", "")
                 
                 # Generate question image
                 question_image = self._create_question_image(qa_pair, i+1)
@@ -343,9 +462,13 @@ class ImageGenerationSystem:
                 results.append(qa_pair)
                 
                 if self.config.LOG_SUCCESS_MESSAGES:
-                    log.info(f"✅ Created images for Q&A pair {i+1}")
+                    log.info(f" Created images for Q&A pair {i+1}")
                     
             except Exception as e:
+                log.error(f"Error in enhanced complete image generation: {e}")
+                performance_monitor.end_timer()
+                performance_monitor.record_failure()
+                raise
                 self._handle_error(e, "individual image creation", f"Q&A pair {i+1}")
                 if self.config.ERROR_SKIP_MISSING_FILES:
                     continue
@@ -383,6 +506,10 @@ class ImageGenerationSystem:
             return generated_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "question image creation", f"Image {image_number}")
             if self.config.ERROR_CREATE_PLACEHOLDER:
                 return self._create_placeholder_image(image_number, theme, "q")
@@ -416,6 +543,10 @@ class ImageGenerationSystem:
             return generated_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "answer image creation", f"Image {image_number}")
             if self.config.ERROR_CREATE_PLACEHOLDER:
                 return self._create_placeholder_image(image_number, theme, "a")
@@ -439,6 +570,10 @@ class ImageGenerationSystem:
             return placeholder_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             log.error(f"Failed to create placeholder image: {e}")
             return ""
     
@@ -447,19 +582,23 @@ class ImageGenerationSystem:
         if not self.config.CREATE_FINAL_COMPILATION:
             return ""
             
-        self._log_progress("Creating final compilation", "📚", 2)
+        self._log_progress("Creating final compilation", "", 2)
         start_time = time.time()
         
         try:
             compilation_path = create_compilation_cover('research', qa_pairs, f"{self.output_dir}/compilations")
             
             if self.config.LOG_SUCCESS_MESSAGES:
-                log.info(f"✅ Final compilation created: {compilation_path}")
+                log.info(f" Final compilation created: {compilation_path}")
             
             self._log_timing("Final compilation creation", start_time)
             return compilation_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "final compilation creation")
             return ""
     
@@ -468,7 +607,7 @@ class ImageGenerationSystem:
         if not self.config.CREATE_AUTOMATIC_THEME_COMPILATIONS:
             return []
             
-        self._log_progress("Creating theme compilations", "📂", 3)
+        self._log_progress("Creating theme compilations", "", 3)
         start_time = time.time()
         
         # Group Q&A pairs by theme
@@ -483,15 +622,19 @@ class ImageGenerationSystem:
         for theme, category_qa_pairs in themes.items():
             try:
                 if self.config.TOC_THEME_GROUPING:
-                    self._log_progress(f"Creating compilation for {theme}", "📁")
+                    self._log_progress(f"Creating compilation for {theme}", "")
                     
                     compilation_path = create_category_cover(theme, category_qa_pairs, f"{self.output_dir}/compilations")
                     compilation_paths.append(compilation_path)
                     
                     if self.config.LOG_SUCCESS_MESSAGES:
-                        log.info(f"✅ Theme compilation created for {theme}")
+                        log.info(f" Theme compilation created for {theme}")
                         
             except Exception as e:
+                log.error(f"Error in enhanced complete image generation: {e}")
+                performance_monitor.end_timer()
+                performance_monitor.record_failure()
+                raise
                 self._handle_error(e, "theme compilation creation", theme)
                 if not self.config.ERROR_CONTINUE_ON_FAILURE:
                     break
@@ -504,19 +647,23 @@ class ImageGenerationSystem:
         if not self.config.CREATE_COVER_IMAGE:
             return ""
             
-        self._log_progress("Creating cover image", "🖼️", 4)
+        self._log_progress("Creating cover image", "", 4)
         start_time = time.time()
         
         try:
             cover_path = create_volume_cover(volume_number, qa_pairs, f"{self.output_dir}/covers")
             
             if self.config.LOG_SUCCESS_MESSAGES:
-                log.info(f"✅ Cover image created: {cover_path}")
+                log.info(f" Cover image created: {cover_path}")
             
             self._log_timing("Cover image creation", start_time)
             return cover_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "cover image creation")
             return ""
     
@@ -525,19 +672,23 @@ class ImageGenerationSystem:
         if not self.config.CREATE_TABLE_OF_CONTENTS:
             return ""
             
-        self._log_progress("Creating table of contents", "📋", 5)
+        self._log_progress("Creating table of contents", "", 5)
         start_time = time.time()
         
         try:
             toc_path = self._generate_toc_image(qa_pairs)
             
             if self.config.LOG_SUCCESS_MESSAGES:
-                log.info(f"✅ Table of contents created: {toc_path}")
+                log.info(f" Table of contents created: {toc_path}")
             
             self._log_timing("Table of contents creation", start_time)
             return toc_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "table of contents creation")
             return ""
     
@@ -568,6 +719,10 @@ class ImageGenerationSystem:
             return final_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "TOC image generation")
             return ""
     
@@ -592,7 +747,7 @@ class ImageGenerationSystem:
                 themes = dict(sorted(themes.items()))
             
             for theme, category_qa_pairs in themes.items():
-                toc_lines.append(f"📂 {theme.replace('_', ' ').title()}")
+                toc_lines.append(f" {theme.replace('_', ' ').title()}")
                 toc_lines.append(f"   {len(category_qa_pairs)} Q&A pairs")
                 
                 for i, qa_pair in enumerate(category_qa_pairs[:5]):  # Show first 5
@@ -628,7 +783,7 @@ class ImageGenerationSystem:
         if not self.config.CREATE_SEQUENTIAL_TOC:
             return ""
             
-        self._log_progress("Creating sequential TOC", "📊", 6)
+        self._log_progress("Creating sequential TOC", "", 6)
         start_time = time.time()
         
         try:
@@ -658,12 +813,16 @@ class ImageGenerationSystem:
             final_path = add_text_overlay(generated_path, toc_content, 0, is_question=True)
             
             if self.config.LOG_SUCCESS_MESSAGES:
-                log.info(f"✅ Sequential TOC created: {final_path}")
+                log.info(f" Sequential TOC created: {final_path}")
             
             self._log_timing("Sequential TOC creation", start_time)
             return final_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "sequential TOC creation")
             return ""
     
@@ -672,7 +831,7 @@ class ImageGenerationSystem:
         if not self.config.CREATE_THEME_TOC:
             return ""
             
-        self._log_progress("Creating theme TOC", "📂", 7)
+        self._log_progress("Creating theme TOC", "", 7)
         start_time = time.time()
         
         try:
@@ -692,7 +851,7 @@ class ImageGenerationSystem:
             toc_content = "ASK: Daily Architectural Research\nCategory Table of Contents\n\n"
             
             for theme, category_qa_pairs in themes.items():
-                toc_content += f"📂 {theme.replace('_', ' ').title()}\n"
+                toc_content += f" {theme.replace('_', ' ').title()}\n"
                 toc_content += f"   {len(category_qa_pairs)} Q&A pairs\n\n"
                 
                 for i, qa_pair in enumerate(category_qa_pairs):
@@ -716,12 +875,16 @@ class ImageGenerationSystem:
             final_path = add_text_overlay(generated_path, toc_content, 0, is_question=True)
             
             if self.config.LOG_SUCCESS_MESSAGES:
-                log.info(f"✅ Theme TOC created: {final_path}")
+                log.info(f" Theme TOC created: {final_path}")
             
             self._log_timing("Theme TOC creation", start_time)
             return final_path
             
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "theme TOC creation")
             return ""
     
@@ -741,9 +904,13 @@ class ImageGenerationSystem:
                         os.remove(file_path)
                 
                 if self.config.LOG_SUCCESS_MESSAGES:
-                    log.info("✅ Temporary files cleaned up")
+                    log.info(" Temporary files cleaned up")
                     
         except Exception as e:
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
+            raise
             self._handle_error(e, "temp file cleanup")
     
     def generate_qa_images(self, qa_pairs: List[dict]) -> List[dict]:
@@ -751,7 +918,7 @@ class ImageGenerationSystem:
         if not self.config.CREATE_INDIVIDUAL_IMAGES:
             return qa_pairs
             
-        self._log_progress(f"Generating images for {len(qa_pairs)} Q&A pairs", "🎨")
+        self._log_progress(f"Generating images for {len(qa_pairs)} Q&A pairs", "")
         log.info(f"Generating images for {len(qa_pairs)} Q&A pairs...")
         
         generated_images = []
@@ -801,30 +968,53 @@ class ImageGenerationSystem:
                 log.info(f"Generated images for Q&A pair {i}")
                 
             except Exception as e:
+                log.error(f"Error in enhanced complete image generation: {e}")
+                performance_monitor.end_timer()
+                performance_monitor.record_failure()
+                raise
                 log.error(f"Failed to generate images for Q&A pair {i}: {e}")
                 generated_images.append(qa_pair)
         
         return generated_images
 
     def generate_complete_image_set(self, qa_pairs: List[Dict], volume_number: int = 1) -> Dict[str, str]:
-        """Generate complete image set with all features (enhanced from ImageOrchestrator)"""
-        self._log_progress("Starting complete image generation", "🚀")
-        start_time = time.time()
-        
-        results = {
-            'individual_images': [],
-            'final_compilation': '',
-            'category_compilations': [],
-            'cover_image': '',
-            'table_of_contents': '',
-            'sequential_toc': '',
-            'category_toc': '',
-            'total_images': 0,
-            'qa_pairs': [],
-            'covers': {}
-        }
+        """Generate complete image set with all features (enhanced with performance monitoring)"""
+        # Start performance monitoring
+        performance_monitor.start_timer()
         
         try:
+            # Input validation
+            is_valid, validation_message = validate_input_parameters(qa_pairs, volume_number)
+            if not is_valid:
+                log.error(f"Input validation failed: {validation_message}")
+                performance_monitor.record_failure()
+                raise ValueError(validation_message)
+            
+            # Environment validation
+            is_valid, validation_message = validate_environment()
+            if not is_valid:
+                log.error(f"Environment validation failed: {validation_message}")
+                performance_monitor.record_failure()
+                raise ValueError(validation_message)
+            
+            log.info(f"Starting enhanced complete image generation for {len(qa_pairs)} Q&A pairs...")
+            
+            self._log_progress("Starting complete image generation", "")
+            start_time = time.time()
+            
+            results = {
+                'individual_images': [],
+                'final_compilation': '',
+                'category_compilations': [],
+                'cover_image': '',
+                'table_of_contents': '',
+                'sequential_toc': '',
+                'category_toc': '',
+                'total_images': 0,
+                'qa_pairs': [],
+                'covers': {}
+            }
+            
             # Step 1: Create individual images
             if self.config.CREATE_INDIVIDUAL_IMAGES:
                 processed_qa_pairs = self.generate_qa_images(qa_pairs)
@@ -900,20 +1090,26 @@ class ImageGenerationSystem:
             
             # Final summary
             if self.config.LOG_SUCCESS_MESSAGES:
-                log.info(f"🎉 Complete image generation finished!")
-                log.info(f"📊 Total images created: {results['total_images']}")
-                log.info(f"📁 Individual images: {len(results['individual_images'])}")
-                log.info(f"📚 Final compilation: {'✅' if results['final_compilation'] else '❌'}")
-                log.info(f"📂 Theme compilations: {len(results['category_compilations'])}")
-                log.info(f"🖼️  Cover image: {'✅' if results['cover_image'] else '❌'}")
-                log.info(f"📋 Table of contents: {'✅' if results['table_of_contents'] else '❌'}")
+                log.info(f" Complete image generation finished!")
+                log.info(f" Total images created: {results['total_images']}")
+                log.info(f" Individual images: {len(results['individual_images'])}")
+                log.info(f" Final compilation: {'' if results['final_compilation'] else ''}")
+                log.info(f" Theme compilations: {len(results['category_compilations'])}")
+                log.info(f"  Cover image: {'' if results['cover_image'] else ''}")
+                log.info(f" Table of contents: {'' if results['table_of_contents'] else ''}")
             
             self._log_timing("Complete image generation", start_time)
+            
+            # Record success and end timer
+            performance_monitor.end_timer()
+            performance_monitor.record_success()
             
             return results
             
         except Exception as e:
-            self._handle_error(e, "complete image generation")
+            log.error(f"Error in enhanced complete image generation: {e}")
+            performance_monitor.end_timer()
+            performance_monitor.record_failure()
             raise
 
 def main():
@@ -1156,11 +1352,171 @@ def main():
         # Generate complete image set
         results = image_system.generate_complete_image_set(qa_pairs, volume_number=1)
         
-        log.info("🎉 Image generation system completed successfully!")
+        log.info(" Image generation system completed successfully!")
         
     except Exception as e:
-        log.error(f"❌ Image generation system failed: {e}")
+        log.error(f" Image generation system failed: {e}")
         raise
 
 if __name__ == "__main__":
     main()
+
+
+def get_performance_stats():
+    """Get performance statistics"""
+    return performance_monitor.get_stats()
+
+def reset_performance_stats():
+    """Reset performance statistics"""
+    global performance_monitor
+    performance_monitor = PerformanceMonitor()
+    log.info("Performance statistics reset")
+
+def get_generation_history():
+    """Get recent image generation history"""
+    stats = performance_monitor.get_stats()
+    return {
+        'total_generated': stats['successful_operations'],
+        'total_failed': stats['failed_operations'],
+        'success_rate': stats['success_rate'],
+        'total_time': stats['total_time'],
+        'image_generation_time': stats['image_generation_time'],
+        'text_overlay_time': stats['text_overlay_time'],
+        'cover_creation_time': stats['cover_creation_time'],
+        'toc_creation_time': stats['toc_creation_time']
+    }
+
+def validate_image_quality(image_path: str) -> Tuple[bool, str]:
+    """Validate generated image quality"""
+    try:
+        if not os.path.exists(image_path):
+            return False, f"Image file does not exist: {image_path}"
+        
+        file_size = os.path.getsize(image_path)
+        if file_size == 0:
+            return False, f"Image file is empty: {image_path}"
+        
+        if file_size < 1024:  # Less than 1KB
+            return False, f"Image file too small: {file_size} bytes"
+        
+        if file_size > 10 * 1024 * 1024:  # More than 10MB
+            return False, f"Image file too large: {file_size} bytes"
+        
+        return True, "Image quality valid"
+    except Exception as e:
+        return False, f"Image quality validation error: {str(e)}"
+
+def get_system_status():
+    """Get current system status"""
+    stats = performance_monitor.get_stats()
+    return {
+        'system_ready': True,
+        'performance_metrics': stats,
+        'environment_valid': validate_environment()[0],
+        'recommendations': [
+            'Monitor image generation performance',
+            'Optimize batch processing for large datasets',
+            'Implement caching for frequently used images',
+            'Add parallel processing for faster generation',
+            'Monitor memory usage during large operations'
+        ]
+    }
+
+def optimize_batch_processing(qa_pairs: List[Dict], batch_size: int = 5) -> List[List[Dict]]:
+    """Optimize Q&A pairs for batch processing"""
+    try:
+        batches = []
+        for i in range(0, len(qa_pairs), batch_size):
+            batch = qa_pairs[i:i + batch_size]
+            batches.append(batch)
+        
+        log.info(f"Created {len(batches)} batches of size {batch_size}")
+        return batches
+    except Exception as e:
+        log.error(f"Error optimizing batch processing: {e}")
+        return [qa_pairs]
+
+def validate_configuration(config: ImageGenerationConfig) -> Tuple[bool, str]:
+    """Validate configuration settings"""
+    try:
+        # Check essential settings
+        if not config.CREATE_INDIVIDUAL_IMAGES and not config.CREATE_FINAL_COMPILATION:
+            return False, "At least one image generation feature must be enabled"
+        
+        if config.IMAGE_WIDTH <= 0 or config.IMAGE_HEIGHT <= 0:
+            return False, "Invalid image dimensions"
+        
+        if config.IMAGE_QUALITY < 1 or config.IMAGE_QUALITY > 100:
+            return False, "Invalid image quality setting"
+        
+        if config.ERROR_MAX_FAILURES < 1:
+            return False, "Invalid error max failures setting"
+        
+        return True, "Configuration valid"
+    except Exception as e:
+        return False, f"Configuration validation error: {str(e)}"
+
+def get_system_health():
+    """Get system health status"""
+    try:
+        stats = performance_monitor.get_stats()
+        env_valid = validate_environment()[0]
+        
+        health_score = 0
+        issues = []
+        
+        # Check success rate
+        if stats['success_rate'] >= 90:
+            health_score += 30
+        elif stats['success_rate'] >= 70:
+            health_score += 20
+            issues.append("Low success rate")
+        else:
+            issues.append("Very low success rate")
+        
+        # Check environment
+        if env_valid:
+            health_score += 20
+        else:
+            issues.append("Environment configuration issues")
+        
+        # Check performance
+        if stats['total_time'] > 0:
+            avg_time = stats['total_time'] / stats['total_operations']
+            if avg_time < 5.0:
+                health_score += 25
+            elif avg_time < 10.0:
+                health_score += 15
+                issues.append("Slow performance")
+            else:
+                issues.append("Very slow performance")
+        
+        # Check error rate
+        error_rate = stats['failed_operations'] / max(stats['total_operations'], 1)
+        if error_rate < 0.1:
+            health_score += 25
+        elif error_rate < 0.3:
+            health_score += 15
+            issues.append("High error rate")
+        else:
+            issues.append("Very high error rate")
+        
+        return {
+            'health_score': health_score,
+            'status': 'healthy' if health_score >= 80 else 'warning' if health_score >= 60 else 'critical',
+            'issues': issues,
+            'recommendations': [
+                'Monitor error rates and success rates',
+                'Optimize image generation parameters',
+                'Check environment configuration',
+                'Consider parallel processing for large datasets',
+                'Implement caching mechanisms'
+            ]
+        }
+    except Exception as e:
+        return {
+            'health_score': 0,
+            'status': 'error',
+            'issues': [f"Health check failed: {str(e)}"],
+            'recommendations': ['Check system configuration and logs']
+        }

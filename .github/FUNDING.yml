@@ -1,15 +1,91 @@
 # These are supported funding model platforms
 
-github: kushalsamant # Replace with up to 4 GitHub Sponsors-enabled usernames e.g., [user1, user2]
-patreon: kvshvl # Replace with a single Patreon username
-open_collective: # Replace with a single Open Collective username
-ko_fi: # Replace with a single Ko-fi username
-tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
-community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
-liberapay: # Replace with a single Liberapay username
-issuehunt: # Replace with a single IssueHunt username
-lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
-polar: # Replace with a single Polar username
-buy_me_a_coffee: # Replace with a single Buy Me a Coffee username
-thanks_dev: # Replace with a single thanks.dev username
-custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+# GitHub Sponsors - Support up to 4 GitHub Sponsors-enabled usernames
+# Format: github: username or github: [user1, user2, user3, user4]
+github: kushalsamant # Replace with your GitHub username
+
+# Patreon - Support for Patreon creators
+# Format: patreon: username
+patreon: kvshvl # Replace with your Patreon username
+
+# Open Collective - Support for open source projects
+# Format: open_collective: username
+open_collective: # Replace with your Open Collective username
+
+# Ko-fi - Support for creators and developers
+# Format: ko_fi: username
+ko_fi: # Replace with your Ko-fi username
+
+# Tidelift - Support for open source maintainers
+# Format: tidelift: platform-name/package-name
+tidelift: # Replace with your Tidelift platform-name/package-name
+
+# Community Bridge - Support for open source projects
+# Format: community_bridge: project-name
+community_bridge: # Replace with your Community Bridge project-name
+
+# Liberapay - Support for creators and developers
+# Format: liberapay: username
+liberapay: # Replace with your Liberapay username
+
+# IssueHunt - Support for open source projects
+# Format: issuehunt: username
+issuehunt: # Replace with your IssueHunt username
+
+# LFX Crowdfunding - Support for open source projects
+# Format: lfx_crowdfunding: project-name
+lfx_crowdfunding: # Replace with your LFX Crowdfunding project-name
+
+# Polar - Support for creators and developers
+# Format: polar: username
+polar: # Replace with your Polar username
+
+# Buy Me a Coffee - Support for creators and developers
+# Format: buy_me_a_coffee: username
+buy_me_a_coffee: # Replace with your Buy Me a Coffee username
+
+# Thanks.dev - Support for open source maintainers
+# Format: thanks_dev: username
+thanks_dev: # Replace with your thanks.dev username
+
+# Custom - Support for custom sponsorship URLs
+# Format: custom: [url1, url2, url3, url4]
+custom: # Replace with up to 4 custom sponsorship URLs
+
+# =============================================================================
+# FUNDING PLATFORM CONFIGURATION GUIDE
+# =============================================================================
+#
+# This file enables funding platforms for your GitHub repository.
+# When users visit your repository, they will see a "Sponsor" button.
+#
+# SUPPORTED PLATFORMS:
+# - GitHub Sponsors: github.com/sponsors
+# - Patreon: patreon.com
+# - Open Collective: opencollective.com
+# - Ko-fi: ko-fi.com
+# - Tidelift: tidelift.com
+# - Community Bridge: communitybridge.org
+# - Liberapay: liberapay.com
+# - IssueHunt: issuehunt.io
+# - LFX Crowdfunding: lfx.linuxfoundation.org
+# - Polar: polar.sh
+# - Buy Me a Coffee: buymeacoffee.com
+# - Thanks.dev: thanks.dev
+# - Custom URLs: Any custom sponsorship links
+#
+# CONFIGURATION TIPS:
+# 1. Replace placeholder values with your actual usernames/URLs
+# 2. Configure at least 2-3 platforms for better coverage
+# 3. Test all links to ensure they work correctly
+# 4. Update this file when you add new funding platforms
+# 5. Keep usernames consistent across platforms when possible
+#
+# BEST PRACTICES:
+# - Use your actual username, not placeholder values
+# - Verify all usernames are active and accessible
+# - Consider your target audience when choosing platforms
+# - Keep the configuration clean and well-documented
+# - Update regularly as funding platforms evolve
+#
+# =============================================================================
