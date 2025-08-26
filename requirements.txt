@@ -14,7 +14,15 @@ huggingface_hub[hf_xet]>=0.19.0  # Hugging Face Hub with Xet Storage for faster 
 safetensors>=0.4.0  # Safe tensor serialization
 xformers>=0.0.22  # Memory efficient attention (GPU optimization)
 
-# Optional: Additional optimizations
+# Enhanced image quality dependencies
 opencv-python>=4.8.0  # Computer vision utilities
 numpy>=1.24.0  # Numerical computing
 scipy>=1.11.0  # Scientific computing
+imageio>=2.31.0  # Image I/O utilities
+imageio-ffmpeg>=0.4.8  # FFmpeg support for image processing
+Pillow-SIMD>=10.0.0  # SIMD-optimized Pillow for better performance
+
+# Optional: Additional optimizations for photorealistic generation
+einops>=0.7.0  # Tensor operations for better model performance
+omegaconf>=2.3.0  # Configuration management
+timm>=0.9.0  # Image models and utilities

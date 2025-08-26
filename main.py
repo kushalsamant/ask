@@ -39,9 +39,9 @@ load_dotenv('ask.env')
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(f"{os.getenv('LOG_DIR', 'logs')}/execution.log")
-    ]
+            handlers=[
+            logging.FileHandler(f"{os.getenv('LOG_DIR', 'logs')}/execution.log")
+        ]
 )
 log = logging.getLogger()
 
@@ -74,11 +74,11 @@ if len(sys.argv) <= 1 or sys.argv[1].lower() != 'help':
             log.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
             console_logger.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
 
-        log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
-        console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
-    else:
-        log.info("Running in offline mode - API generation disabled")
-        console_logger.info("Running in offline mode - API generation disabled")
+    log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+    console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+else:
+    log.info("Running in offline mode - API generation disabled")
+    console_logger.info("Running in offline mode - API generation disabled")
 
 def download_all_models_upfront() -> bool:
     """
@@ -91,7 +91,7 @@ def download_all_models_upfront() -> bool:
         console_logger.info("=" * 60)
         console_logger.info(" DOWNLOADING ALL REQUIRED MODELS UPFRONT")
         console_logger.info("=" * 60)
-        
+            
         # Get model IDs from environment variables
         gpu_model_id = os.getenv("GPU_MODEL_ID", "runwayml/stable-diffusion-v1-5")
         cpu_model_id = os.getenv("CPU_MODEL_ID", "latent-consistency/lcm-sd15")
@@ -227,7 +227,7 @@ def run_simple_mode():
         try:
             from research_orchestrator import ResearchOrchestrator
             from image_generation_system import ImageGenerationSystem
-            from volume_manager import get_current_volume_info
+            from volume_manager import get_current_volume_info, get_next_question_image_number, get_next_answer_image_number
             from offline_question_generator import generate_single_question_for_category
             from offline_answer_generator import generate_answer
             from smart_image_generator import generate_image_with_smart_fallback
@@ -254,10 +254,14 @@ def run_simple_mode():
             console_logger.warning(f" Could not get volume info: {e}")
             current_volume = 1
         
-        # Pick a theme
+                # Pick a theme
         theme = random.choice(themes)
         console_logger.info(f" Step 1: Theme selected: {theme.upper()}")
         
+        # Get next question image number
+        question_image_number = get_next_question_image_number()
+        console_logger.info(f" Step 1b: Next question image number: {question_image_number}")
+    
         # Generate question
         console_logger.info(f" Step 2: Generating question for {theme}...")
         question = generate_single_question_for_category(theme)
@@ -265,14 +269,28 @@ def run_simple_mode():
             console_logger.error(" Failed to generate question")
             return
         console_logger.info(f" Step 2: Question created: {question[:80]}...")
-        
-        # Log question
+    
+        # Generate question image using smart fallback
+        console_logger.info(f" Step 4: Generating base image for question...")
+        try:
+            image_path, style = generate_image_with_smart_fallback(
+                prompt=question,
+                theme=theme,
+                image_number=question_image_number,
+                image_type="q"
+            )
+            console_logger.info(f" Step 4: Base image created: {os.path.basename(image_path)}")
+        except Exception as e:
+            console_logger.error(f" Failed to create question image: {e}")
+            return
+    
+        # Log question with image filename
         console_logger.info(f" Step 3: Logging question to CSV...")
         success = log_single_question(
             theme=theme,
             question=question,
-            image_filename='',
-            style=None,
+            image_filename=os.path.basename(image_path),
+            style=style,
             is_answer=False,
             mark_as_used=False
         )
@@ -281,27 +299,17 @@ def run_simple_mode():
             return
         console_logger.info(f" Step 3: Question logged to CSV")
         
-        # Generate question image using smart fallback
-        console_logger.info(f" Step 4: Generating base image for question...")
-        try:
-            image_path, style = generate_image_with_smart_fallback(
-                prompt=question,
-                theme=theme,
-                image_number=1,
-                image_type="q"
-            )
-            console_logger.info(f" Step 4: Base image created: {os.path.basename(image_path)}")
-        except Exception as e:
-            console_logger.error(f" Failed to create question image: {e}")
-            return
-        
+        # Get next answer image number (after question is logged)
+        answer_image_number = get_next_answer_image_number()
+        console_logger.info(f" Step 3b: Next answer image number: {answer_image_number}")
+    
         # Add text overlay
         console_logger.info(f" Step 5: Adding text overlay to question image...")
         try:
             final_image_path = add_text_overlay(
                 image_path=image_path,
                 prompt=question,
-                image_number=1,
+                image_number=question_image_number,
                 is_question=True
             )
             console_logger.info(f" Step 5: Text overlay added successfully")
@@ -309,7 +317,7 @@ def run_simple_mode():
         except Exception as e:
             console_logger.error(f" Failed to add text overlay: {e}")
             return
-        
+    
         # Generate answer
         console_logger.info(f" Step 7: Generating answer for question...")
         answer = generate_answer(question, theme)
@@ -317,22 +325,7 @@ def run_simple_mode():
             console_logger.error(" Failed to generate answer")
             return
         console_logger.info(f" Step 7: Answer generated: {answer[:80]}...")
-        
-        # Log answer
-        console_logger.info(f" Step 8: Logging answer to CSV...")
-        success = log_single_question(
-            theme=theme,
-            question=answer,
-            image_filename='',
-            style=None,
-            is_answer=True,
-            mark_as_used=False
-        )
-        if not success:
-            console_logger.error(" Failed to log answer")
-            return
-        console_logger.info(f" Step 8: Answer logged to CSV")
-        
+    
         # Mark question as used
         console_logger.info(f" Step 8b: Marking question as used...")
         try:
@@ -344,14 +337,14 @@ def run_simple_mode():
                 console_logger.warning(f" Step 8b: No questions marked as used")
         except Exception as e:
             console_logger.warning(f" Could not mark question as used: {e}")
-        
+    
         # Generate answer image
         console_logger.info(f" Step 9: Generating base image for answer...")
         try:
             answer_image_path, answer_style = generate_image_with_smart_fallback(
                 prompt=answer,
                 theme=theme,
-                image_number=1,
+                image_number=answer_image_number,
                 image_type="a"
             )
             console_logger.info(f" Step 9: Base image created: {os.path.basename(answer_image_path)}")
@@ -359,13 +352,28 @@ def run_simple_mode():
             console_logger.error(f" Failed to create answer image: {e}")
             return
         
+        # Log answer with image filename
+        console_logger.info(f" Step 8: Logging answer to CSV...")
+        success = log_single_question(
+            theme=theme,
+            question=answer,
+            image_filename=os.path.basename(answer_image_path),
+            style=answer_style,
+            is_answer=True,
+            mark_as_used=False
+        )
+        if not success:
+            console_logger.error(" Failed to log answer")
+            return
+        console_logger.info(f" Step 8: Answer logged to CSV")
+        
         # Add text overlay to answer image
         console_logger.info(f" Step 10: Adding text overlay to answer image...")
         try:
             final_answer_image = add_text_overlay(
                 image_path=answer_image_path,
                 prompt=answer,
-                image_number=1,
+                image_number=answer_image_number,
                 is_question=False
             )
             console_logger.info(f" Step 10: Text overlay added successfully")
@@ -450,4 +458,4 @@ def main():
         raise
 
 if __name__ == "__main__":
-    main()
+        main()

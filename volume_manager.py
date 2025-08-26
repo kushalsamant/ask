@@ -115,6 +115,109 @@ def get_next_volume_number() -> int:
         log.error(f"Error getting next volume number: {e}")
         return int(os.getenv('IMAGE_VOLUME_NUMBER', '1'))
 
+def get_next_image_number() -> int:
+    """
+    Get the next image number that should be used
+    
+    Returns:
+        int: Next image number (starts from 1)
+    """
+    try:
+        log_csv_file = os.getenv('LOG_CSV_FILE', 'log.csv')
+        
+        if not os.path.exists(log_csv_file):
+            log.info(f"{log_csv_file} does not exist, starting with image number 1")
+            return 1
+        
+        # Count total images (rows with question_image or answer_image)
+        total_images = 0
+        with open(log_csv_file, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # Check if this row has question or answer images
+                question_image = row.get('question_image', '').strip()
+                answer_image = row.get('answer_image', '').strip()
+                if question_image:
+                    total_images += 1
+                    log.debug(f"Found question image: {question_image}")
+                if answer_image:
+                    total_images += 1
+                    log.debug(f"Found answer image: {answer_image}")
+        
+        next_image_number = total_images + 1
+        log.info(f"Next image number: {next_image_number} (total images so far: {total_images})")
+        return next_image_number
+        
+    except Exception as e:
+        log.error(f"Error getting next image number: {e}")
+        return 1
+
+def get_next_question_image_number() -> int:
+    """
+    Get the next question image number that should be used
+    
+    Returns:
+        int: Next question image number (odd numbers: 1, 3, 5, 7...)
+    """
+    try:
+        log_csv_file = os.getenv('LOG_CSV_FILE', 'log.csv')
+        
+        if not os.path.exists(log_csv_file):
+            log.info(f"{log_csv_file} does not exist, starting with question image number 1")
+            return 1
+        
+        # Count total question images
+        total_question_images = 0
+        with open(log_csv_file, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                question_image = row.get('question_image', '').strip()
+                if question_image:
+                    total_question_images += 1
+                    log.debug(f"Found question image: {question_image}")
+        
+        # Question images are odd numbers: 1, 3, 5, 7...
+        next_question_image_number = (total_question_images * 2) + 1
+        log.info(f"Next question image number: {next_question_image_number} (total question images so far: {total_question_images})")
+        return next_question_image_number
+        
+    except Exception as e:
+        log.error(f"Error getting next question image number: {e}")
+        return 1
+
+def get_next_answer_image_number() -> int:
+    """
+    Get the next answer image number that should be used
+    
+    Returns:
+        int: Next answer image number (even numbers: 2, 4, 6, 8...)
+    """
+    try:
+        log_csv_file = os.getenv('LOG_CSV_FILE', 'log.csv')
+        
+        if not os.path.exists(log_csv_file):
+            log.info(f"{log_csv_file} does not exist, starting with answer image number 2")
+            return 2
+        
+        # Count total answer images
+        total_answer_images = 0
+        with open(log_csv_file, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                answer_image = row.get('answer_image', '').strip()
+                if answer_image:
+                    total_answer_images += 1
+                    log.debug(f"Found answer image: {answer_image}")
+        
+        # Answer images are even numbers: 2, 4, 6, 8...
+        next_answer_image_number = (total_answer_images * 2) + 2
+        log.info(f"Next answer image number: {next_answer_image_number} (total answer images so far: {total_answer_images})")
+        return next_answer_image_number
+        
+    except Exception as e:
+        log.error(f"Error getting next answer image number: {e}")
+        return 2
+
 def get_volume_progress() -> dict:
     """
     Get detailed volume progress information
@@ -150,6 +253,63 @@ def get_volume_progress() -> dict:
             'volume_progress_percentage': 0,
             'pairs_until_next_volume': qa_pairs_per_volume,
             'should_increment_volume': False
+        }
+
+def get_image_progress() -> dict:
+    """
+    Get detailed image progress information
+    
+    Returns:
+        dict: Image progress information
+    """
+    try:
+        log_csv_file = os.getenv('LOG_CSV_FILE', 'log.csv')
+        
+        if not os.path.exists(log_csv_file):
+            return {
+                'total_images': 0,
+                'next_image_number': 1,
+                'images_in_current_volume': 0
+            }
+        
+        # Count total images and get volume info
+        total_images = 0
+        with open(log_csv_file, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                question_image = row.get('question_image', '').strip()
+                answer_image = row.get('answer_image', '').strip()
+                if question_image:
+                    total_images += 1
+                if answer_image:
+                    total_images += 1
+        
+        current_volume, qa_pairs_in_current_volume, total_qa_pairs = get_current_volume_info()
+        qa_pairs_per_volume = int(os.getenv('QA_PAIRS_PER_VOLUME', '100'))
+        
+        # Calculate images in current volume
+        images_in_current_volume = total_images % qa_pairs_per_volume
+        if images_in_current_volume == 0 and total_images > 0:
+            images_in_current_volume = qa_pairs_per_volume
+        
+        progress = {
+            'total_images': total_images,
+            'next_image_number': total_images + 1,
+            'images_in_current_volume': images_in_current_volume,
+            'current_volume': current_volume,
+            'qa_pairs_per_volume': qa_pairs_per_volume
+        }
+        
+        return progress
+        
+    except Exception as e:
+        log.error(f"Error getting image progress: {e}")
+        return {
+            'total_images': 0,
+            'next_image_number': 1,
+            'images_in_current_volume': 0,
+            'current_volume': 1,
+            'qa_pairs_per_volume': 100
         }
 
 def log_volume_info():

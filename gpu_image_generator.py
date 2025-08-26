@@ -263,7 +263,7 @@ class GPUImageGenerator:
             with torch.autocast("cuda" if self.device == "cuda" else "cpu"):
                 image = self.pipe(
                     prompt=formatted_prompt,
-                    negative_prompt="low quality, blurry, distorted, deformed, disfigured, bad proportions, watermark, signature, text, ugly, bad anatomy, abstract, cartoon, illustration, painting, drawing, unrealistic, artificial, fake, synthetic",
+                    negative_prompt=self.get_architectural_negative_prompt(),
                     num_inference_steps=self.default_steps,
                     guidance_scale=self.default_guidance_scale,
                     height=self.default_height,
@@ -293,6 +293,42 @@ class GPUImageGenerator:
             self.performance_monitor.end_timer()
             self.performance_monitor.record_failure()
             return None, None
+    
+    def enhance_architectural_prompt(self, prompt: str, theme: str) -> str:
+        """
+        Enhance prompt for photorealistic architectural generation
+        
+        Args:
+            prompt (str): Original prompt
+            theme (str): Theme name
+            
+        Returns:
+            str: Enhanced architectural prompt
+        """
+        architectural_enhancements = {
+            'design_research': "photorealistic architectural rendering, modern research facility, glass facade, sustainable design, natural lighting, professional photography, 8k resolution, architectural photography, detailed textures, realistic materials",
+            'technology_innovation': "photorealistic architectural rendering, futuristic tech building, smart glass, LED lighting, digital infrastructure, professional photography, 8k resolution, modern architecture, cutting-edge design, technological integration",
+            'sustainability_science': "photorealistic architectural rendering, green building, living walls, solar panels, sustainable materials, natural environment, professional photography, 8k resolution, eco-friendly design, renewable energy",
+            'engineering_systems': "photorealistic architectural rendering, industrial facility, structural engineering, mechanical systems, technical infrastructure, professional photography, 8k resolution, functional architecture, technical design",
+            'environmental_design': "photorealistic architectural rendering, environmental building, natural integration, landscape architecture, sustainable design, professional photography, 8k resolution, environmental harmony, natural materials",
+            'urban_planning': "photorealistic architectural rendering, urban development, city planning, mixed-use building, urban infrastructure, professional photography, 8k resolution, modern urban design, sustainable urban planning",
+            'spatial_design': "photorealistic architectural rendering, spatial architecture, interior design, spatial planning, modern interior, professional photography, 8k resolution, interior architecture, space planning",
+            'digital_technology': "photorealistic architectural rendering, digital building, smart architecture, technological integration, modern digital design, professional photography, 8k resolution, smart systems, technological innovation"
+        }
+        
+        enhancement = architectural_enhancements.get(theme.lower(), architectural_enhancements['design_research'])
+        enhanced_prompt = f"{prompt}, {enhancement}"
+        
+        return enhanced_prompt
+    
+    def get_architectural_negative_prompt(self) -> str:
+        """
+        Get negative prompt to avoid common issues in architectural generation
+        
+        Returns:
+            str: Negative prompt for architectural images
+        """
+        return "blurry, low quality, cartoon, anime, painting, sketch, drawing, abstract, unrealistic, distorted, deformed, ugly, bad anatomy, watermark, signature, text, logo, oversaturated, underexposed, overexposed, noise, artifacts"
     
     def _get_style_for_theme(self, theme: str) -> str:
         """Enhanced style selection for theme"""

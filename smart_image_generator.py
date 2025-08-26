@@ -155,8 +155,14 @@ def generate_image_with_smart_fallback(
     if gpu_enabled:
         try:
             log.info("Attempting GPU image generation (priority method)...")
-            from gpu_image_generator import generate_image_with_retry
-            result = generate_image_with_retry(prompt, theme, image_number, max_retries, timeout, image_type)
+            from gpu_image_generator import generate_image_with_retry, GPUImageGenerator
+            
+            # Enhance prompt for photorealistic architecture
+            gpu_generator = GPUImageGenerator()
+            enhanced_prompt = gpu_generator.enhance_architectural_prompt(prompt, theme)
+            log.info(f"Enhanced architectural prompt: {enhanced_prompt[:100]}...")
+            
+            result = generate_image_with_retry(enhanced_prompt, theme, image_number, max_retries, timeout, image_type)
             _performance_stats['gpu_successes'] += 1
             log.info("GPU generation successful")
             return result
@@ -167,8 +173,13 @@ def generate_image_with_smart_fallback(
     if cpu_enabled:
         try:
             log.info("Attempting CPU image generation (fallback method)...")
-            from simple_cpu_generator import generate_image_with_retry
-            result = generate_image_with_retry(prompt, theme, image_number, image_type)
+            from simple_cpu_generator import generate_image_with_retry, generate_architectural_prompt
+            
+            # Enhance prompt for architectural generation
+            enhanced_prompt = generate_architectural_prompt(theme, prompt)
+            log.info(f"Enhanced architectural prompt: {enhanced_prompt[:100]}...")
+            
+            result = generate_image_with_retry(enhanced_prompt, theme, image_number, image_type)
             _performance_stats['cpu_successes'] += 1
             log.info("CPU generation successful")
             return result

@@ -121,94 +121,212 @@ def create_gradient_background(width: int, height: int, base_color: str) -> Imag
     return image
 
 def add_geometric_patterns(image: Image.Image, theme: str):
-    """Add geometric patterns to the image"""
+    """Add architectural patterns to the image"""
     draw = ImageDraw.Draw(image)
     width, height = image.size
     
-    # Add different patterns based on theme
+    # Add architectural elements based on theme
     if 'technology' in theme.lower():
-        # Circuit-like patterns
-        for i in range(0, width, 50):
-            for j in range(0, height, 50):
-                if random.random() < 0.3:
-                    draw.rectangle([i, j, i+20, j+20], outline='#FFFFFF', width=1)
-                    if random.random() < 0.5:
-                        draw.line([i+10, j, i+10, j+20], fill='#FFFFFF', width=1)
-                        draw.line([i, j+10, i+20, j+10], fill='#FFFFFF', width=1)
+        # Modern architectural elements - glass facades, steel structures
+        for i in range(0, width, 80):
+            for j in range(0, height, 80):
+                if random.random() < 0.4:
+                    # Glass facade panels
+                    panel_width = random.randint(30, 60)
+                    panel_height = random.randint(40, 80)
+                    draw.rectangle([i, j, i+panel_width, j+panel_height], outline='#FFFFFF', width=2)
+                    # Add horizontal lines for glass panels
+                    for k in range(j+10, j+panel_height, 15):
+                        draw.line([i, k, i+panel_width, k], fill='#FFFFFF', width=1)
     
     elif 'sustainability' in theme.lower() or 'environmental' in theme.lower():
-        # Organic patterns
-        for i in range(0, width, 30):
-            for j in range(0, height, 30):
+        # Green building elements - solar panels, green roofs, natural materials
+        for i in range(0, width, 60):
+            for j in range(0, height, 60):
+                if random.random() < 0.5:
+                    # Solar panel arrays
+                    panel_size = random.randint(20, 40)
+                    draw.rectangle([i, j, i+panel_size, j+panel_size], outline='#FFFFFF', width=2)
+                    # Add grid pattern for solar cells
+                    for k in range(i+5, i+panel_size, 8):
+                        for l in range(j+5, j+panel_size, 8):
+                            draw.rectangle([k, l, k+6, l+6], outline='#FFFFFF', width=1)
+    
+    elif 'urban' in theme.lower() or 'planning' in theme.lower():
+        # Urban planning elements - buildings, streets, infrastructure
+        for i in range(0, width, 70):
+            for j in range(0, height, 70):
+                if random.random() < 0.6:
+                    # Building blocks
+                    building_width = random.randint(25, 50)
+                    building_height = random.randint(30, 70)
+                    draw.rectangle([i, j, i+building_width, j+building_height], outline='#FFFFFF', width=2)
+                    # Add windows
+                    for k in range(i+5, i+building_width-5, 8):
+                        for l in range(j+5, j+building_height-5, 12):
+                            draw.rectangle([k, l, k+6, l+8], outline='#FFFFFF', width=1)
+    
+    elif 'spatial' in theme.lower() or 'design' in theme.lower():
+        # Spatial design elements - interior spaces, furniture, circulation
+        for i in range(0, width, 50):
+            for j in range(0, height, 50):
                 if random.random() < 0.4:
-                    radius = random.randint(5, 15)
-                    draw.ellipse([i, j, i+radius*2, j+radius*2], outline='#FFFFFF', width=1)
+                    # Room layouts
+                    room_width = random.randint(30, 60)
+                    room_height = random.randint(25, 50)
+                    draw.rectangle([i, j, i+room_width, j+room_height], outline='#FFFFFF', width=2)
+                    # Add furniture elements
+                    if random.random() < 0.7:
+                        furniture_x = i + random.randint(5, room_width-15)
+                        furniture_y = j + random.randint(5, room_height-10)
+                        draw.rectangle([furniture_x, furniture_y, furniture_x+12, furniture_y+8], outline='#FFFFFF', width=1)
     
     else:
-        # Abstract patterns
-        for i in range(0, width, 40):
-            for j in range(0, height, 40):
-                if random.random() < 0.2:
-                    points = [
-                        (i, j),
-                        (i+30, j),
-                        (i+15, j+30)
-                    ]
-                    draw.polygon(points, outline='#FFFFFF', width=1)
+        # General architectural elements - columns, arches, facades
+        for i in range(0, width, 60):
+            for j in range(0, height, 60):
+                if random.random() < 0.3:
+                    # Architectural columns
+                    column_width = random.randint(15, 25)
+                    column_height = random.randint(40, 80)
+                    draw.rectangle([i, j, i+column_width, j+column_height], outline='#FFFFFF', width=2)
+                    # Add column details
+                    draw.rectangle([i-2, j+column_height-5, i+column_width+2, j+column_height], outline='#FFFFFF', width=1)
 
 def add_texture_effects(image: Image.Image, prompt: str):
-    """Add texture and visual effects"""
-    # Add noise texture
-    noise_layer = Image.new('RGBA', image.size, (0, 0, 0, 0))
-    noise_draw = ImageDraw.Draw(noise_layer)
+    """Add architectural texture and visual effects"""
+    # Add architectural texture
+    texture_layer = Image.new('RGBA', image.size, (0, 0, 0, 0))
+    texture_draw = ImageDraw.Draw(texture_layer)
     
-    for x in range(0, image.size[0], 2):
-        for y in range(0, image.size[1], 2):
-            if random.random() < 0.1:
-                alpha = random.randint(10, 50)
-                noise_draw.point((x, y), fill=(255, 255, 255, alpha))
+    # Add subtle architectural details
+    for x in range(0, image.size[0], 3):
+        for y in range(0, image.size[1], 3):
+            if random.random() < 0.05:
+                alpha = random.randint(5, 25)
+                texture_draw.point((x, y), fill=(255, 255, 255, alpha))
     
-    # Blend noise layer
-    image = Image.alpha_composite(image.convert('RGBA'), noise_layer)
+    # Add architectural grid lines
+    for x in range(0, image.size[0], 50):
+        if random.random() < 0.3:
+            alpha = random.randint(10, 30)
+            texture_draw.line([(x, 0), (x, image.size[1])], fill=(255, 255, 255, alpha), width=1)
     
-    # Add slight blur for texture
-    image = image.filter(ImageFilter.GaussianBlur(radius=0.5))
+    for y in range(0, image.size[1], 50):
+        if random.random() < 0.3:
+            alpha = random.randint(10, 30)
+            texture_draw.line([(0, y), (image.size[0], y)], fill=(255, 255, 255, alpha), width=1)
+    
+    # Blend texture layer
+    image = Image.alpha_composite(image.convert('RGBA'), texture_layer)
+    
+    # Add slight blur for architectural depth
+    image = image.filter(ImageFilter.GaussianBlur(radius=0.3))
     
     return image
 
 def add_theme_elements(image: Image.Image, theme: str, prompt: str):
-    """Add theme-specific visual elements"""
+    """Add architectural theme-specific visual elements"""
     draw = ImageDraw.Draw(image)
     width, height = image.size
     
-    # Add floating elements based on theme
+    # Add architectural elements based on theme
     if 'design' in theme.lower():
-        # Design elements
-        for i in range(5):
+        # Design elements - furniture, lighting, materials
+        for i in range(4):
             x = random.randint(50, width-50)
             y = random.randint(50, height-50)
-            size = random.randint(20, 60)
-            draw.rectangle([x, y, x+size, y+size], outline='#FFFFFF', width=2)
+            if random.random() < 0.5:
+                # Furniture pieces
+                size = random.randint(25, 45)
+                draw.rectangle([x, y, x+size, y+size], outline='#FFFFFF', width=2)
+                # Add furniture details
+                draw.line([x+5, y+size//2, x+size-5, y+size//2], fill='#FFFFFF', width=1)
+            else:
+                # Lighting fixtures
+                radius = random.randint(8, 15)
+                draw.ellipse([x-radius, y-radius, x+radius, y+radius], outline='#FFFFFF', width=2)
+                draw.line([x, y+radius, x, y+radius+20], fill='#FFFFFF', width=1)
     
     elif 'technology' in theme.lower():
-        # Tech elements
-        for i in range(8):
-            x = random.randint(50, width-50)
-            y = random.randint(50, height-50)
-            radius = random.randint(10, 25)
-            draw.ellipse([x-radius, y-radius, x+radius, y+radius], outline='#FFFFFF', width=1)
-    
-    elif 'sustainability' in theme.lower():
-        # Nature elements
+        # Tech elements - smart building systems, digital interfaces
         for i in range(6):
             x = random.randint(50, width-50)
             y = random.randint(50, height-50)
-            points = [
-                (x, y-15),
-                (x-10, y+15),
-                (x+10, y+15)
-            ]
-            draw.polygon(points, outline='#FFFFFF', width=1)
+            if random.random() < 0.6:
+                # Digital displays
+                size = random.randint(20, 35)
+                draw.rectangle([x, y, x+size, y+size//2], outline='#FFFFFF', width=2)
+                # Add digital grid
+                for k in range(x+3, x+size-3, 4):
+                    for l in range(y+3, y+size//2-3, 3):
+                        draw.point((k, l), fill='#FFFFFF')
+            else:
+                # Smart sensors
+                radius = random.randint(5, 12)
+                draw.ellipse([x-radius, y-radius, x+radius, y+radius], outline='#FFFFFF', width=1)
+                draw.line([x-radius-5, y, x+radius+5, y], fill='#FFFFFF', width=1)
+    
+    elif 'sustainability' in theme.lower():
+        # Sustainability elements - green roofs, solar panels, natural materials
+        for i in range(5):
+            x = random.randint(50, width-50)
+            y = random.randint(50, height-50)
+            if random.random() < 0.7:
+                # Green roof sections
+                size = random.randint(30, 50)
+                draw.rectangle([x, y, x+size, y+size//2], outline='#FFFFFF', width=2)
+                # Add vegetation pattern
+                for k in range(x+5, x+size-5, 6):
+                    for l in range(y+5, y+size//2-5, 6):
+                        draw.ellipse([k-2, l-2, k+2, l+2], outline='#FFFFFF', width=1)
+            else:
+                # Solar panels
+                size = random.randint(25, 40)
+                draw.rectangle([x, y, x+size, y+size], outline='#FFFFFF', width=2)
+                # Add solar cell grid
+                for k in range(x+3, x+size-3, 5):
+                    for l in range(y+3, y+size-3, 5):
+                        draw.rectangle([k, l, k+3, l+3], outline='#FFFFFF', width=1)
+    
+    elif 'urban' in theme.lower() or 'planning' in theme.lower():
+        # Urban elements - buildings, streets, public spaces
+        for i in range(7):
+            x = random.randint(50, width-50)
+            y = random.randint(50, height-50)
+            if random.random() < 0.8:
+                # Building facades
+                building_width = random.randint(20, 40)
+                building_height = random.randint(25, 60)
+                draw.rectangle([x, y, x+building_width, y+building_height], outline='#FFFFFF', width=2)
+                # Add windows and doors
+                for k in range(x+3, x+building_width-3, 6):
+                    for l in range(y+3, y+building_height-3, 8):
+                        draw.rectangle([k, l, k+4, l+6], outline='#FFFFFF', width=1)
+            else:
+                # Street elements
+                street_width = random.randint(15, 30)
+                draw.rectangle([x, y, x+street_width, y+8], outline='#FFFFFF', width=2)
+                # Add street markings
+                draw.line([x+street_width//2, y, x+street_width//2, y+8], fill='#FFFFFF', width=1)
+    
+    else:
+        # General architectural elements - structural components
+        for i in range(5):
+            x = random.randint(50, width-50)
+            y = random.randint(50, height-50)
+            if random.random() < 0.6:
+                # Structural beams
+                beam_width = random.randint(20, 35)
+                beam_height = random.randint(8, 15)
+                draw.rectangle([x, y, x+beam_width, y+beam_height], outline='#FFFFFF', width=2)
+                # Add beam details
+                draw.line([x+beam_width//2, y, x+beam_width//2, y+beam_height], fill='#FFFFFF', width=1)
+            else:
+                # Architectural details
+                size = random.randint(15, 25)
+                draw.ellipse([x-size//2, y-size//2, x+size//2, y+size//2], outline='#FFFFFF', width=1)
+                draw.line([x-size//2, y, x+size//2, y], fill='#FFFFFF', width=1)
 
 def enhance_image(image: Image.Image):
     """Apply final enhancements"""
@@ -223,6 +341,71 @@ def enhance_image(image: Image.Image):
     # Add slight saturation
     enhancer = ImageEnhance.Color(image)
     image = enhancer.enhance(1.1)
+
+def generate_architectural_prompt(theme: str, prompt: str) -> str:
+    """
+    Generate photorealistic architectural prompts based on theme
+    
+    Args:
+        theme (str): Theme name
+        prompt (str): Original prompt
+        
+    Returns:
+        str: Enhanced architectural prompt
+    """
+    architectural_prompts = {
+        'design_research': [
+            "photorealistic architectural rendering, modern research facility, glass facade, sustainable design, natural lighting, professional photography, 8k resolution, architectural photography",
+            "photorealistic architectural visualization, contemporary design studio, minimalist interior, clean lines, natural materials, professional architectural photography, high detail",
+            "photorealistic architectural model, innovative research building, geometric forms, sustainable materials, natural environment, professional photography, architectural detail"
+        ],
+        'technology_innovation': [
+            "photorealistic architectural rendering, futuristic tech building, smart glass, LED lighting, digital infrastructure, professional photography, 8k resolution, modern architecture",
+            "photorealistic architectural visualization, innovation center, cutting-edge design, technological integration, sustainable technology, professional photography, high detail",
+            "photorealistic architectural model, smart building, IoT integration, renewable energy, modern facade, professional photography, architectural innovation"
+        ],
+        'sustainability_science': [
+            "photorealistic architectural rendering, green building, living walls, solar panels, sustainable materials, natural environment, professional photography, 8k resolution",
+            "photorealistic architectural visualization, eco-friendly building, passive design, renewable energy, natural ventilation, professional photography, high detail",
+            "photorealistic architectural model, sustainable architecture, green roof, rainwater harvesting, natural lighting, professional photography, environmental design"
+        ],
+        'engineering_systems': [
+            "photorealistic architectural rendering, industrial facility, structural engineering, mechanical systems, technical infrastructure, professional photography, 8k resolution",
+            "photorealistic architectural visualization, engineering complex, structural elements, technical design, functional architecture, professional photography, high detail",
+            "photorealistic architectural model, engineering building, structural innovation, technical systems, industrial design, professional photography, engineering architecture"
+        ],
+        'environmental_design': [
+            "photorealistic architectural rendering, environmental building, natural integration, landscape architecture, sustainable design, professional photography, 8k resolution",
+            "photorealistic architectural visualization, eco-architecture, natural materials, environmental harmony, sustainable landscape, professional photography, high detail",
+            "photorealistic architectural model, environmental design, natural systems, sustainable architecture, landscape integration, professional photography, environmental architecture"
+        ],
+        'urban_planning': [
+            "photorealistic architectural rendering, urban development, city planning, mixed-use building, urban infrastructure, professional photography, 8k resolution",
+            "photorealistic architectural visualization, urban architecture, cityscape, modern urban design, sustainable urban planning, professional photography, high detail",
+            "photorealistic architectural model, urban building, city integration, modern urbanism, sustainable development, professional photography, urban architecture"
+        ],
+        'spatial_design': [
+            "photorealistic architectural rendering, spatial architecture, interior design, spatial planning, modern interior, professional photography, 8k resolution",
+            "photorealistic architectural visualization, spatial design, interior architecture, space planning, modern spatial concepts, professional photography, high detail",
+            "photorealistic architectural model, spatial building, interior innovation, modern space design, architectural interiors, professional photography, spatial architecture"
+        ],
+        'digital_technology': [
+            "photorealistic architectural rendering, digital building, smart architecture, technological integration, modern digital design, professional photography, 8k resolution",
+            "photorealistic architectural visualization, digital architecture, smart systems, technological innovation, modern digital space, professional photography, high detail",
+            "photorealistic architectural model, digital building, smart technology, modern digital architecture, technological design, professional photography, digital architecture"
+        ]
+    }
+    
+    # Get theme-specific prompts
+    theme_prompts = architectural_prompts.get(theme.lower(), architectural_prompts['design_research'])
+    
+    # Select a random architectural prompt
+    base_prompt = random.choice(theme_prompts)
+    
+    # Combine with original prompt
+    enhanced_prompt = f"{prompt}, {base_prompt}"
+    
+    return enhanced_prompt
 
 def generate_image_with_retry(prompt: str, theme: str, image_number: int, image_type: str) -> Tuple[str, str]:
     """
