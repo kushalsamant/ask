@@ -1,24 +1,24 @@
-# 🏗️ *ASK*: Daily Research - Patreon Support
+# 🔬 *ASK*: Daily Research - Patreon Support
 
-## 🎯 **Support Independent Architectural Research & Innovation**
+## 🎯 **Support Independent Research & Innovation**
 
-**Help us revolutionize architectural research with AI-powered photorealistic visualizations and cutting-edge content generation.**
+**Help us revolutionize research with AI-powered photorealistic visualizations and cutting-edge content generation.**
 
 ---
 
 ## 🌟 **What Makes *ASK*: Daily Research Special?**
 
-### **🎨 Photorealistic Architectural Visualizations**
-- **AI-Generated Architectural Backgrounds**: Every research question and answer comes with stunning, photorealistic architectural imagery
-- **Theme-Specific Design**: Each discipline gets custom architectural elements (sustainable buildings, tech facilities, urban planning, etc.)
+### **🎨 Photorealistic Visualizations**
+- **AI-Generated Backgrounds**: Every research question and answer comes with stunning, photorealistic imagery
+- **Theme-Specific Design**: Each discipline gets custom elements tailored to the research field
 - **Professional Quality**: 8K resolution, professional photography style, realistic materials and lighting
 - **Offline-First**: Works completely offline with cached AI models - no internet required!
 
 ### **🧠 Intelligent Content Generation**
-- **Cross-Disciplinary Research**: Explores intersections between design, technology, sustainability, and urban planning
+- **Cross-Disciplinary Research**: Explores intersections between various fields and disciplines
 - **Sequential Knowledge Building**: Questions and answers are numbered sequentially (ASK-01, ASK-02, etc.) for systematic learning
 - **Sentence-Case Answers**: All content is professionally formatted for readability
-- **Architectural Focus**: Every piece of content is specifically tailored to architectural research and practice
+- **Research Focus**: Every piece of content is specifically tailored to research and practice
 
 ### **⚡ Advanced Technology Stack**
 - **GPU-Primary Architecture**: Optimized for NVIDIA GPUs with CPU fallback
@@ -37,8 +37,8 @@
 - **CSV Logging**: Complete tracking of all research content
 
 ### **🖼️ Professional Visual Assets**
-- **Question Images**: Each research question with architectural background
-- **Answer Images**: Detailed answers with complementary architectural visuals
+- **Question Images**: Each research question with photorealistic background
+- **Answer Images**: Detailed answers with complementary photorealistic visuals
 - **Sequential Numbering**: Professional ASK-01, ASK-02, ASK-03... format
 - **High-Quality Output**: 95% quality JPEGs, optimized for professional use
 
@@ -52,27 +52,27 @@
 
 ## 💡 **Perfect For:**
 
-### **🏢 Architecture Professionals**
-- **Research Inspiration**: Daily architectural research questions and insights
-- **Visual Presentations**: High-quality architectural backgrounds for presentations
-- **Knowledge Building**: Systematic exploration of architectural concepts
+### **🏢 Research Professionals**
+- **Research Inspiration**: Daily research questions and insights
+- **Visual Presentations**: High-quality photorealistic backgrounds for presentations
+- **Knowledge Building**: Systematic exploration of research concepts
 - **Offline Work**: Complete functionality without internet dependency
 
 ### **🎓 Students & Educators**
-- **Learning Tool**: Structured architectural research content
-- **Visual Learning**: Photorealistic architectural imagery for better understanding
-- **Research Projects**: Ready-to-use architectural research content
+- **Learning Tool**: Structured research content
+- **Visual Learning**: Photorealistic imagery for better understanding
+- **Research Projects**: Ready-to-use research content
 - **Educational Presentations**: Professional-quality visual assets
 
 ### **🔬 Researchers & Innovators**
-- **Cross-Disciplinary Exploration**: Intersections between architecture and other fields
+- **Cross-Disciplinary Exploration**: Intersections between various fields and disciplines
 - **Content Generation**: Automated research question and answer creation
-- **Visual Documentation**: Professional architectural imagery for research
+- **Visual Documentation**: Professional imagery for research
 - **Knowledge Management**: Systematic organization of research content
 
 ### **💼 Content Creators**
-- **Architectural Content**: Daily architectural research content
-- **Visual Assets**: High-quality architectural backgrounds
+- **Research Content**: Daily research content for various fields
+- **Visual Assets**: High-quality backgrounds for any discipline
 - **Professional Branding**: Consistent ASK branding and numbering
 - **Offline Production**: Create content without internet dependency
 
@@ -80,21 +80,21 @@
 
 ## 🎁 **Why Support This Project?**
 
-### **🌟 Innovation in Architectural Research**
-- **First-of-its-Kind**: Unique combination of AI image generation and architectural research
-- **Photorealistic Quality**: Professional-grade architectural visualizations
-- **Offline Capability**: Revolutionary offline-first approach for architectural tools
-- **Cross-Disciplinary**: Bridges gaps between architecture, technology, and sustainability
+### **🌟 Innovation in Research**
+- **First-of-its-Kind**: Unique combination of AI image generation and research
+- **Photorealistic Quality**: Professional-grade visualizations
+- **Offline Capability**: Revolutionary offline-first approach for research tools
+- **Cross-Disciplinary**: Bridges gaps between various fields and disciplines
 
 ### **🔬 Advancing the Field**
-- **Open Source**: Contributing to the architectural community
-- **Knowledge Sharing**: Making architectural research accessible to everyone
-- **Technology Integration**: Bringing AI to architectural practice
-- **Professional Standards**: Maintaining high quality in architectural content
+- **Open Source**: Contributing to the research community
+- **Knowledge Sharing**: Making research accessible to everyone
+- **Technology Integration**: Bringing AI to research practice
+- **Professional Standards**: Maintaining high quality in research content
 
 ### **💪 Independent Development**
 - **No Corporate Backing**: Pure independent development
-- **Community-Driven**: Built for and by the architectural community
+- **Community-Driven**: Built for and by the research community
 - **Transparent Development**: Open source with full access to code
 - **Continuous Improvement**: Regular updates and enhancements
 
@@ -104,13 +104,13 @@
 
 ### **🥉 Bronze Supporter - $5/month**
 - **Early Access**: Get new features before public release
-- **Exclusive Content**: Special architectural research themes
+- **Exclusive Content**: Special research themes
 - **Community Access**: Join our Discord community
 - **Monthly Updates**: Detailed development progress reports
 
 ### **🥈 Silver Supporter - $15/month**
 - **Everything in Bronze** +
-- **Custom Themes**: Request specific architectural research themes
+- **Custom Themes**: Request specific research themes
 - **Priority Support**: Direct access to development team
 - **Beta Testing**: Test new features before release
 - **Monthly Q&A**: Live Q&A sessions with the development team
@@ -120,12 +120,12 @@
 - **Custom Branding**: Personalized ASK branding for your organization
 - **Dedicated Support**: Direct line to development team
 - **Feature Requests**: Priority consideration for new features
-- **Exclusive Workshops**: Monthly architectural research workshops
+- **Exclusive Workshops**: Monthly research workshops
 
 ### **💎 Platinum Supporter - $50/month**
 - **Everything in Gold** +
 - **Custom Development**: Dedicated development time for your needs
-- **Private Consultation**: One-on-one architectural research consultation
+- **Private Consultation**: One-on-one research consultation
 - **Exclusive Content**: Custom research content for your organization
 - **Recognition**: Featured supporter status in documentation
 
@@ -183,7 +183,7 @@ python main.py
 - **Model Download**: First run downloads AI models (~10GB)
 - **Offline Operation**: Subsequent runs work completely offline
 - **Content Generation**: Automatic generation of research content
-- **Visual Output**: High-quality architectural images in `images/` folder
+- **Visual Output**: High-quality images in `images/` folder
 
 ---
 
@@ -208,7 +208,7 @@ python main.py
 - **Continue Development**: Maintain and improve the tool
 - **Add New Features**: Implement community-requested features
 - **Improve Performance**: Optimize for better speed and quality
-- **Expand Capabilities**: Add new architectural research themes
+- **Expand Capabilities**: Add new research themes
 - **Support Community**: Provide better documentation and support
 
 ### **💝 Every Contribution Matters**
@@ -218,10 +218,10 @@ Whether you're a Bronze supporter or Platinum patron, your support helps us main
 
 ## 🎉 **Ready to Support?**
 
-**Join us in revolutionizing architectural research with AI-powered photorealistic visualizations and intelligent content generation.**
+**Join us in revolutionizing research across all disciplines with AI-powered photorealistic visualizations and intelligent content generation.**
 
 **Your support makes this possible!** 🚀
 
 ---
 
-*Built with ❤️ for the architectural community*
+*Built with ❤️ for the research community*
