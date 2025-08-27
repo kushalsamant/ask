@@ -11271,3 +11271,22 @@ DLL load failed while importing _C: The specified module could not be found.
 2025-08-26 13:21:31,652 - INFO -  Answer image: ASK-06-design_research-a.jpg
 2025-08-26 13:21:31,652 - INFO -  Theme: design_research
 2025-08-26 13:21:31,652 - INFO -  Simple pipeline completed successfully!
+2025-08-27 06:35:12,223 - INFO - SUCCESS: API key configured: ...
+2025-08-27 06:35:12,223 - INFO - SUCCESS: API key configured: ...
+2025-08-27 06:35:12,224 - INFO - 
+2025-08-27 06:35:12,224 - INFO -  *ASK*: Daily Research - Offline-First Pipeline
+2025-08-27 06:35:12,224 - INFO - ============================================================
+2025-08-27 06:35:12,224 - INFO -  Step 0: Downloading all required AI models upfront...
+2025-08-27 06:35:12,224 - INFO - ============================================================
+2025-08-27 06:35:12,224 - INFO -  DOWNLOADING ALL REQUIRED MODELS UPFRONT
+2025-08-27 06:35:12,225 - INFO - ============================================================
+2025-08-27 06:35:12,225 - INFO - 
+2025-08-27 06:35:12,225 - INFO -  [1/2] Checking GPU model: stabilityai/stable-diffusion-2-1
+2025-08-27 06:35:14,971 - INFO -    Downloading GPU model: stabilityai/stable-diffusion-2-1
+2025-08-27 06:35:14,972 - INFO -    This may take a few minutes for the first run...
+2025-08-27 06:36:56,300 - ERROR -    Failed to download GPU model: Data processing error: Internal error : Join error
+2025-08-27 06:36:56,304 - WARNING -  [FAIL] GPU model failed: stabilityai/stable-diffusion-2-1
+2025-08-27 06:36:56,304 - INFO - 
+2025-08-27 06:36:56,304 - INFO -  [1/2] Checking CPU model: stabilityai/stable-diffusion-2-1-base
+2025-08-27 06:36:56,304 - INFO -    Downloading CPU model: stabilityai/stable-diffusion-2-1-base
+2025-08-27 06:36:56,305 - INFO -    This may take a few minutes for the first run...

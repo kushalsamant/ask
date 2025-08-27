@@ -239,7 +239,7 @@ def run_simple_mode():
             return
         
         # Initialize pipeline
-        themes_config = os.getenv('SIMPLE_MODE_THEMES', 'design_research,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology')
+        themes_config = os.getenv('SIMPLE_MODE_THEMES', 'research_methodology,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology')
         themes = [theme.strip() for theme in themes_config.split(',') if theme.strip()]
         
         # Ensure directories exist

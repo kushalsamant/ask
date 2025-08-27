@@ -449,7 +449,7 @@ def _create_new_image_for_chunk(chunk, image_number, original_image_path):
         if len(parts) >= 3:
             theme = parts[2]  # Extract theme from filename
         else:
-            theme = 'architectural_design'  # Default
+            theme = 'research_methodology'  # Default
         
         # Generate new image for this chunk
         # image_number is now a simple integer string (e.g., "02", "03")

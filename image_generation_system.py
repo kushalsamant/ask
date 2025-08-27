@@ -223,7 +223,7 @@ class ImageGenerationConfig:
     MARGIN_BOTTOM: int = 72
     
     # Cover Generation Settings (converted from PDF Cover)
-    COVER_PROMPT: str = "Professional architectural research compilation cover with modern design elements, typography, and visual hierarchy"
+    COVER_PROMPT: str = "Professional research compilation cover with modern design elements, typography, and visual hierarchy"
     COVER_TITLE: str = "*ASK*: Daily Research"
     COVER_TEXT_COLOR: str = "#000000"
     COVER_BRAND_COLOR: str = "#2C3E50"
@@ -1219,7 +1219,7 @@ def main():
         MARGIN_BOTTOM=int(os.getenv('MARGIN_BOTTOM', '72')),
         
         # Cover Generation Settings (converted from PDF Cover)
-        COVER_PROMPT=os.getenv('COVER_PROMPT', 'Professional architectural research compilation cover with modern design elements, typography, and visual hierarchy'),
+        COVER_PROMPT=os.getenv('COVER_PROMPT', 'Professional research compilation cover with modern design elements, typography, and visual hierarchy'),
         COVER_TITLE=os.getenv('COVER_TITLE', '*ASK*: Daily Research'),
         COVER_TEXT_COLOR=os.getenv('COVER_TEXT_COLOR', '#000000'),
         COVER_BRAND_COLOR=os.getenv('COVER_BRAND_COLOR', '#2C3E50'),

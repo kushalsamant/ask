@@ -294,9 +294,9 @@ class GPUImageGenerator:
             self.performance_monitor.record_failure()
             return None, None
     
-    def enhance_architectural_prompt(self, prompt: str, theme: str) -> str:
-        """
-        Enhance prompt for photorealistic architectural generation
+    def enhance_research_prompt(self, prompt: str, theme: str) -> str:
+    """
+    Enhance prompt for photorealistic research generation
         
         Args:
             prompt (str): Original prompt
@@ -305,25 +305,25 @@ class GPUImageGenerator:
         Returns:
             str: Enhanced architectural prompt
         """
-        architectural_enhancements = {
-            'design_research': "photorealistic architectural rendering, modern research facility, glass facade, sustainable design, natural lighting, professional photography, 8k resolution, architectural photography, detailed textures, realistic materials",
-            'technology_innovation': "photorealistic architectural rendering, futuristic tech building, smart glass, LED lighting, digital infrastructure, professional photography, 8k resolution, modern architecture, cutting-edge design, technological integration",
-            'sustainability_science': "photorealistic architectural rendering, green building, living walls, solar panels, sustainable materials, natural environment, professional photography, 8k resolution, eco-friendly design, renewable energy",
-            'engineering_systems': "photorealistic architectural rendering, industrial facility, structural engineering, mechanical systems, technical infrastructure, professional photography, 8k resolution, functional architecture, technical design",
-            'environmental_design': "photorealistic architectural rendering, environmental building, natural integration, landscape architecture, sustainable design, professional photography, 8k resolution, environmental harmony, natural materials",
-            'urban_planning': "photorealistic architectural rendering, urban development, city planning, mixed-use building, urban infrastructure, professional photography, 8k resolution, modern urban design, sustainable urban planning",
-            'spatial_design': "photorealistic architectural rendering, spatial architecture, interior design, spatial planning, modern interior, professional photography, 8k resolution, interior architecture, space planning",
-            'digital_technology': "photorealistic architectural rendering, digital building, smart architecture, technological integration, modern digital design, professional photography, 8k resolution, smart systems, technological innovation"
+        research_enhancements = {
+            'design_research': "photorealistic research visualization, modern research facility, glass facade, sustainable design, natural lighting, professional photography, 8k resolution, research photography, detailed textures, realistic materials",
+            'technology_innovation': "photorealistic research visualization, futuristic tech facility, smart glass, LED lighting, digital infrastructure, professional photography, 8k resolution, modern research, cutting-edge design, technological integration",
+            'sustainability_science': "photorealistic research visualization, green research facility, living walls, solar panels, sustainable materials, natural environment, professional photography, 8k resolution, eco-friendly design, renewable energy",
+            'engineering_systems': "photorealistic research visualization, industrial facility, structural engineering, mechanical systems, technical infrastructure, professional photography, 8k resolution, functional research, technical design",
+            'environmental_design': "photorealistic research visualization, environmental facility, natural integration, landscape design, sustainable design, professional photography, 8k resolution, environmental harmony, natural materials",
+            'urban_planning': "photorealistic research visualization, urban development, city planning, mixed-use facility, urban infrastructure, professional photography, 8k resolution, modern urban design, sustainable urban planning",
+            'spatial_design': "photorealistic research visualization, spatial design, interior design, spatial planning, modern interior, professional photography, 8k resolution, interior design, space planning",
+            'digital_technology': "photorealistic research visualization, digital facility, smart technology, technological integration, modern digital design, professional photography, 8k resolution, smart systems, technological innovation"
         }
         
-        enhancement = architectural_enhancements.get(theme.lower(), architectural_enhancements['design_research'])
+        enhancement = research_enhancements.get(theme.lower(), research_enhancements['design_research'])
         enhanced_prompt = f"{prompt}, {enhancement}"
         
         return enhanced_prompt
     
-    def get_architectural_negative_prompt(self) -> str:
-        """
-        Get negative prompt to avoid common issues in architectural generation
+    def get_research_negative_prompt(self) -> str:
+    """
+    Get negative prompt to avoid common issues in research generation
         
         Returns:
             str: Negative prompt for architectural images

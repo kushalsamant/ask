@@ -4,7 +4,7 @@ Research Answer Prompts Module
 Handles prompt generation and formatting for answer generation
 
 This module provides functionality to:
-- Create architectural analysis prompts
+- Create research analysis prompts
 - Generate image-based analysis prompts
 - Validate answer quality and content
 - Format answers for storage
@@ -35,13 +35,13 @@ MIN_RESPONSE_LENGTH = 50
 MAX_ANSWER_LENGTH = 2000
 
 # Content validation patterns
-ARCHITECTURAL_INDICATORS = [
-    'architecture', 'architectural', 'design', 'building', 'construction', 
-    'space', 'form', 'function', 'structure', 'urban', 'planning', 
-    'sustainable', 'modern', 'traditional', 'facade', 'interior', 
-    'exterior', 'materials', 'technology', 'innovation', 'sustainability',
-    'environmental', 'energy', 'efficiency', 'aesthetics', 'functionality',
-    'context', 'site', 'landscape', 'infrastructure', 'development'
+RESEARCH_INDICATORS = [
+    'research', 'analysis', 'study', 'investigation', 'examination',
+    'exploration', 'evaluation', 'assessment', 'review', 'survey',
+    'development', 'innovation', 'technology', 'science', 'methodology',
+    'sustainable', 'modern', 'traditional', 'design', 'planning', 
+    'environmental', 'energy', 'efficiency', 'functionality',
+    'context', 'infrastructure', 'development'
 ]
 
 NON_ARCHITECTURAL_INDICATORS = [
@@ -51,9 +51,9 @@ NON_ARCHITECTURAL_INDICATORS = [
     'medicine', 'finance', 'business', 'marketing', 'advertising'
 ]
 
-def create_architectural_analysis_prompt(question: str, theme: str) -> PromptTuple:
+def create_research_analysis_prompt(question: str, theme: str) -> PromptTuple:
     """
-    Create a prompt for generating architectural analysis answers
+    Create a prompt for generating research analysis answers
     
     Args:
         question: The question to analyze
@@ -77,16 +77,16 @@ def create_architectural_analysis_prompt(question: str, theme: str) -> PromptTup
         question = question.strip()
         theme = theme.strip()
         
-        system_prompt = """You are an expert architectural researcher and educator analyzing architectural concepts and imagery.
-    Provide insightful, academic analysis focusing on architectural principles, design theory, and practical implications.
+        system_prompt = """You are an expert researcher and educator analyzing research concepts and imagery.
+    Provide insightful, academic analysis focusing on research principles, methodology, and practical implications.
     Your responses should be comprehensive, well-structured, and academically rigorous."""
         
         prompt = f"""Question: {question}
     Theme: {theme}
 
-    Analyze this architectural question and provide a comprehensive, academic response in approximately 200-250 words.
+    Analyze this research question and provide a comprehensive, academic response in approximately 200-250 words.
     Consider:
-    - Key architectural principles and theories involved
+    - Key research principles and methodologies involved
     - Contemporary relevance and future implications
     - Connection to {theme} specifically
     - Practical and theoretical considerations
@@ -99,14 +99,14 @@ def create_architectural_analysis_prompt(question: str, theme: str) -> PromptTup
 
     Provide your detailed analysis:"""
         
-        log.info(f"Created architectural analysis prompt for theme: {theme}")
+        log.info(f"Created research analysis prompt for theme: {theme}")
         return prompt, system_prompt
         
     except ValueError as e:
-        log.error(f"Invalid input for architectural analysis prompt: {e}")
+        log.error(f"Invalid input for research analysis prompt: {e}")
         raise
     except Exception as e:
-        log.error(f"Error creating architectural analysis prompt: {e}")
+        log.error(f"Error creating research analysis prompt: {e}")
         raise
 
 def create_image_based_analysis_prompt(question: str, theme: str, image_path: str) -> PromptTuple:

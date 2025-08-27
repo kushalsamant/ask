@@ -115,8 +115,8 @@ def generate_cover_image(cover_type, volume_number=None, output_dir="images"):
         
         os.makedirs(output_dir, exist_ok=True)
         
-        # Generate cover prompt - clean, minimalist architectural design
-        prompt = "Professional architectural research cover design. Modern, clean, minimalist design with architectural elements, professional typography, suitable for research publication. No text elements, just visual design."
+        # Generate cover prompt - clean, minimalist research design
+prompt = "Professional research cover design. Modern, clean, minimalist design with research elements, professional typography, suitable for research publication. No text elements, just visual design."
         
         # Generate base image
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -334,15 +334,15 @@ def get_cover_templates():
     """Get available cover templates"""
     return {
         'volume': {
-            'prompt': 'Professional architectural research cover design. Modern, clean, minimalist design with architectural elements, professional typography, suitable for research publication. No text elements, just visual design.',
+            'prompt': 'Professional research cover design. Modern, clean, minimalist design with research elements, professional typography, suitable for research publication. No text elements, just visual design.',
             'brand_text': 'ASK: Daily Research - VOL - {volume_number:02d}'
         },
         'theme': {
-            'prompt': 'Professional architectural research cover design. Modern, clean, minimalist design with architectural elements, professional typography, suitable for research publication. No text elements, just visual design.',
+            'prompt': 'Professional research cover design. Modern, clean, minimalist design with research elements, professional typography, suitable for research publication. No text elements, just visual design.',
             'brand_text': 'ASK: Daily Research'
         },
         'compilation': {
-            'prompt': 'Professional architectural research cover design. Modern, clean, minimalist design with architectural elements, professional typography, suitable for research publication. No text elements, just visual design.',
+            'prompt': 'Professional research cover design. Modern, clean, minimalist design with research elements, professional typography, suitable for research publication. No text elements, just visual design.',
             'brand_text': 'ASK: Daily Research'
         }
     }

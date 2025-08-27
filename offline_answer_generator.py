@@ -23,7 +23,7 @@ log = logging.getLogger(__name__)
 
 # Predefined answer templates for offline generation
 ANSWER_TEMPLATES = {
-    'design_research': [
+    'research_methodology': [
         "The concept of {concept} represents a fundamental shift in how we approach {challenge}. By integrating {approach}, designers can create solutions that are both {outcome1} and {outcome2}. This approach emphasizes the importance of {principle} in contemporary design practice, particularly when addressing {context}. The implementation of {concept} requires careful consideration of {factor}, ensuring that the final solution meets both functional and aesthetic requirements while contributing to {goal}.",
         
         "{Concept} has emerged as a critical response to {challenge} in {context}. This design methodology incorporates {approach} to achieve {outcome}, demonstrating how thoughtful design can address complex environmental and social issues. The key principles include {principle1}, {principle2}, and {principle3}, which work together to create {result}. By focusing on {factor}, designers can develop solutions that are both innovative and practical, ultimately contributing to {goal}.",

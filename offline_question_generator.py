@@ -23,7 +23,7 @@ log = logging.getLogger(__name__)
 
 # Predefined question templates for offline generation
 QUESTION_TEMPLATES = {
-    'design_research': [
+    'research_methodology': [
         "How can we design {concept} that responds to {challenge}?",
         "What are the key principles for {concept} in {context}?",
         "How does {concept} influence {outcome} in {context}?",
