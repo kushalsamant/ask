@@ -89,8 +89,8 @@ if len(sys.argv) <= 1 or (sys.argv[1].lower() not in ['help', '--help', '-h']):
             console_logger.warning("WARNING: TOGETHER_API_KEY format may be invalid (should start with 'tgp_')")
 
         # Only show success message if API generation is actually enabled
-    log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
-    console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+        log.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
+        console_logger.info(f"SUCCESS: API key configured: {TOGETHER_API_KEY[:10]}...")
     else:
         log.info("Running in offline mode - API generation disabled")
         console_logger.info("Running in offline mode - API generation disabled")
@@ -234,19 +234,19 @@ def show_help():
 
 def _import_required_modules():
     """Import all required modules for the pipeline"""
-        try:
-            from research_orchestrator import ResearchOrchestrator
-            from image_generation_system import ImageGenerationSystem
-            from volume_manager import get_current_volume_info, get_next_question_image_number, get_next_answer_image_number
+    try:
+        from research_orchestrator import ResearchOrchestrator
+        from image_generation_system import ImageGenerationSystem
+        from volume_manager import get_current_volume_info, get_next_question_image_number, get_next_answer_image_number
         from offline_question_generator import generate_single_question_for_category, QUESTION_TEMPLATES
-            from offline_answer_generator import generate_answer
-            from smart_image_generator import generate_image_with_smart_fallback
-            from image_add_text import add_text_overlay
+        from offline_answer_generator import generate_answer
+        from smart_image_generator import generate_image_with_smart_fallback
+        from image_add_text import add_text_overlay
         from research_csv_manager import log_single_question, mark_questions_as_used, read_log_csv
         return True
-        except ImportError as e:
-            console_logger.error(f" Import error: {e}")
-            console_logger.error(" Please ensure all required modules are available")
+    except ImportError as e:
+        console_logger.error(f" Import error: {e}")
+        console_logger.error(" Please ensure all required modules are available")
         return False
 
 def run_simple_mode():
@@ -423,8 +423,8 @@ def run_simple_mode():
         # Step 7: Add text overlay to question image
         console_logger.info(f" Step 7: Adding text overlay to question image...")
         try:
-        final_image_path = add_text_overlay(
-            image_path=image_path,
+            final_image_path = add_text_overlay(
+                image_path=image_path,
                 prompt=connected_question,
                 image_number=question_image_number,
                 is_question=True
@@ -452,7 +452,7 @@ def run_simple_mode():
             marked_count = mark_questions_as_used(questions_dict)
             if marked_count > 0:
                 console_logger.info(f" Step 9: Question marked as used (prevents duplicates)")
-                else:
+            else:
                 console_logger.warning(f" Step 9: No questions marked as used")
         except Exception as e:
             console_logger.warning(f" Could not mark question as used: {e}")
@@ -463,11 +463,11 @@ def run_simple_mode():
         
         try:
             answer_image_path, answer_style = generate_image_with_smart_fallback(
-            prompt=answer,
+                prompt=answer,
                 theme=selected_theme,
                 image_number=answer_image_number,
-            image_type="a"
-        )
+                image_type="a"
+            )
             console_logger.info(f" Step 10: Answer image created: {os.path.basename(answer_image_path)}")
         except Exception as e:
             console_logger.error(f" Failed to create answer image: {e}")
@@ -503,7 +503,7 @@ def run_simple_mode():
             if isinstance(final_answer_images, list):
                 console_logger.info(f" Step 12: Created {len(final_answer_images)} answer images")
                 final_answer_image = final_answer_images[0]  # Use first image for summary
-                else:
+            else:
                 final_answer_image = final_answer_images
             console_logger.info(f" Step 12: Final answer image created: {os.path.basename(final_answer_image)}")
         except Exception as e:
@@ -519,9 +519,9 @@ def run_simple_mode():
         console_logger.info(f" Total Q&A pairs in database: {len(previous_qa_pairs) + 2}")
         console_logger.info(f" Connected experience created!")
         
-        except Exception as e:
+    except Exception as e:
         console_logger.error(f" Enhanced simple mode failed: {e}")
-                raise
+        raise
 
 def generate_connected_question(theme: str, context_questions: List[str], key_concepts: set) -> Optional[str]:
     """
@@ -567,8 +567,8 @@ def generate_connected_question(theme: str, context_questions: List[str], key_co
         
         # If no context, return base question
         return base_question
-            
-        except Exception as e:
+        
+    except Exception as e:
         console_logger.error(f" Error generating connected question: {e}")
         return None
 
@@ -645,7 +645,7 @@ def generate_multi_theme_question(themes: List[str], context_questions: List[str
         else:
             return f"What are the synergies between {', '.join(themes)} in modern research?"
         
-        except Exception as e:
+    except Exception as e:
         console_logger.error(f" Error generating multi-theme question: {e}")
         return None
 
@@ -776,18 +776,18 @@ def run_original_simple_mode():
                 console_logger.info(f" Original mode: Question marked as used (prevents duplicates)")
             else:
                 console_logger.warning(f" Original mode: No questions marked as used")
-            except Exception as e:
+        except Exception as e:
             console_logger.warning(f" Could not mark question as used: {e}")
-            
-            # Generate answer image
+        
+        # Generate answer image
         console_logger.info(f" Original mode: Generating base image for answer...")
-            try:
-                answer_image_path, answer_style = generate_image_with_smart_fallback(
-                    prompt=answer,
-                    theme=theme,
-                    image_number=answer_image_number,
-                    image_type="a"
-                )
+        try:
+            answer_image_path, answer_style = generate_image_with_smart_fallback(
+                prompt=answer,
+                theme=theme,
+                image_number=answer_image_number,
+                image_type="a"
+            )
             console_logger.info(f" Original mode: Base image created: {os.path.basename(answer_image_path)}")
         except Exception as e:
             console_logger.error(f" Failed to create answer image: {e}")
@@ -808,25 +808,25 @@ def run_original_simple_mode():
             return
         console_logger.info(f" Original mode: Answer logged to CSV")
                 
-                # Add text overlay to answer image
+        # Add text overlay to answer image
         console_logger.info(f" Original mode: Adding text overlay to answer image...")
         try:
-                final_answer_images = add_text_overlay(
-                    image_path=answer_image_path,
-                    prompt=answer,
-                    image_number=answer_image_number,
-                    is_question=False
-                )
+            final_answer_images = add_text_overlay(
+                image_path=answer_image_path,
+                prompt=answer,
+                image_number=answer_image_number,
+                is_question=False
+            )
             console_logger.info(f" Original mode: Text overlay added successfully")
-                
-                # Handle both single image and multiple images
-                if isinstance(final_answer_images, list):
+            
+            # Handle both single image and multiple images
+            if isinstance(final_answer_images, list):
                 console_logger.info(f" Original mode: Created {len(final_answer_images)} answer images")
                 final_answer_image = final_answer_images[0]  # Use first image for summary
             else:
                 final_answer_image = final_answer_images
             console_logger.info(f" Original mode: Final answer image created: {os.path.basename(final_answer_image)}")
-            except Exception as e:
+        except Exception as e:
             console_logger.error(f" Failed to add text overlay to answer: {e}")
             return
         
@@ -837,9 +837,9 @@ def run_original_simple_mode():
         console_logger.info(f" Answer image: {os.path.basename(final_answer_image)}")
         console_logger.info(f" Theme: {theme}")
 
-        except Exception as e:
+    except Exception as e:
         console_logger.error(f" Original simple mode failed: {e}")
-                raise
+        raise
 
 def main():
     """Main execution function - Enhanced with all modes"""
@@ -860,10 +860,10 @@ def main():
         console_logger.info(" Step 1: Starting pipeline execution...")
         console_logger.info("=" * 60)
 
-    # Check command line arguments for different modes
+        # Check command line arguments for different modes
         if len(sys.argv) > 1:
-                mode = sys.argv[1].lower()
-        
+            mode = sys.argv[1].lower()
+            
             if mode in ["help", "--help", "-h"]:
                 show_help()
             elif mode == "hybrid":
@@ -871,21 +871,21 @@ def main():
                 console_logger.info(" Enhanced Simple Mode now provides superior multi-theme capabilities.")
                 console_logger.info(" Use: python main.py (with SIMPLE_MODE_THEMES configured)")
                 show_help()
-                elif mode == "cross-disciplinary":
+            elif mode == "cross-disciplinary":
                 console_logger.warning(" Cross-disciplinary mode has been removed.")
                 console_logger.info(" Enhanced Simple Mode now supports multi-theme exploration.")
                 console_logger.info(" Use: python main.py (with SIMPLE_MODE_THEMES configured)")
                 show_help()
-                else:
-                        console_logger.error(f"Unknown mode: {mode}")
-                        show_help()
-                else:
+            else:
+                console_logger.error(f"Unknown mode: {mode}")
+                show_help()
+        else:
             # Default mode: enhanced simple pipeline
-                run_simple_mode()
+            run_simple_mode()
         
-        except Exception as e:
-                console_logger.error(f" Pipeline failed: {e}")
-                raise
+    except Exception as e:
+        console_logger.error(f" Pipeline failed: {e}")
+        raise
 
 if __name__ == "__main__":
         main()
