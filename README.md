@@ -43,7 +43,7 @@ Your support enables us to:
 
 ## 🌟 Overview
 
-ASK (Advanced Research Knowledge) is a sophisticated offline-first research tool that automatically generates comprehensive question-answer pairs with stunning visual content. Built with a focus on research methodology, sustainability science, engineering systems, and multi-theme exploration, it creates Instagram story-sized images (1080x1920) perfect for social media sharing.
+ASK is a sophisticated offline-first research tool that automatically generates comprehensive question-answer pairs with stunning visual content. Built with a focus on research methodology, sustainability science, engineering systems, and multi-theme exploration, it creates Instagram story-sized images (1080x1920) perfect for social media sharing.
 
 ### ✨ Key Features
 
