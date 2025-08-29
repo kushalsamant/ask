@@ -51,7 +51,7 @@ from research_find_path import (
     get_all_categories,
     get_all_themes
 )
-from api_client import call_together_api
+from api_client import api_client
 from research_question_prompts import process_question_response
 from research_question_prompts import create_category_question_prompt
 
@@ -507,7 +507,7 @@ class ResearchOrchestrator:
             system_prompt = "You are an expert architectural researcher specializing in multi-theme exploration. Generate insightful follow-up questions that build upon previous answers and explore deeper connections between architectural themes."
             
             # Call API to generate the chained question
-            raw_response = call_together_api(prompt, system_prompt)
+            raw_response = api_client.call_text_api(prompt, system_prompt)
             
             if not raw_response:
                 log.warning("No response generated for chained multi-theme question")

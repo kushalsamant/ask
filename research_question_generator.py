@@ -23,7 +23,7 @@ from typing import Optional, Tuple, Dict, Any
 from functools import wraps
 
 # Import core dependencies
-from api_client import call_together_api
+from api_client import api_client
 from research_question_prompts import (
     process_question_response,
     create_category_question_prompt, 
@@ -212,7 +212,7 @@ def generate_single_question_for_category(theme: str) -> Optional[str]:
             return None
         
         # Call API with retry logic
-        raw_response = call_together_api(prompt, system_prompt)
+        raw_response = api_client.call_text_api(prompt, system_prompt)
         
         if not raw_response:
             log.warning(f"No API response generated for theme: {theme}")
@@ -292,7 +292,7 @@ def generate_question_from_answer(answer: str, theme: str) -> Optional[str]:
             return None
         
         # Call API with retry logic
-        raw_response = call_together_api(prompt, system_prompt)
+        raw_response = api_client.call_text_api(prompt, system_prompt)
         
         if not raw_response:
             log.warning(f"No API response generated from answer for theme: {theme}")

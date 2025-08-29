@@ -34,12 +34,18 @@ from dotenv import load_dotenv
 # Import offline generation functions
 from offline_question_generator import generate_single_question_for_category
 from offline_answer_generator import generate_answer as generate_offline_answer
-from volume_manager import get_next_question_image_number, get_next_answer_image_number
-from research_csv_manager import log_single_question
+from volume_manager import get_next_question_image_number, get_next_answer_image_number, get_current_volume_info
+from research_csv_manager import log_single_question, read_log_csv
 
 # Import image generation functions (lazy loading to avoid environment issues)
 # from smart_image_generator import generate_image_with_smart_fallback
 # from image_add_text import add_text_overlay
+
+# Global variables for lazy-loaded functions
+generate_image_with_smart_fallback = None
+add_text_overlay = None
+generate_answer = None
+QUESTION_TEMPLATES = None
 
 def generate_offline_question(theme: str) -> Optional[str]:
     """Wrapper function for offline question generation"""
@@ -234,15 +240,23 @@ def show_help():
 
 def _import_required_modules():
     """Import all required modules for the pipeline"""
+    global generate_image_with_smart_fallback, add_text_overlay, generate_answer, QUESTION_TEMPLATES
     try:
         from research_orchestrator import ResearchOrchestrator
         from image_generation_system import ImageGenerationSystem
         from volume_manager import get_current_volume_info, get_next_question_image_number, get_next_answer_image_number
-        from offline_question_generator import generate_single_question_for_category, QUESTION_TEMPLATES
-        from offline_answer_generator import generate_answer
-        from smart_image_generator import generate_image_with_smart_fallback
-        from image_add_text import add_text_overlay
+        from offline_question_generator import generate_single_question_for_category, QUESTION_TEMPLATES as _QUESTION_TEMPLATES
+        from offline_answer_generator import generate_answer as _generate_answer
+        from smart_image_generator import generate_image_with_smart_fallback as _generate_image_with_smart_fallback
+        from image_add_text import add_text_overlay as _add_text_overlay
         from research_csv_manager import log_single_question, mark_questions_as_used, read_log_csv
+        
+        # Set global variables
+        QUESTION_TEMPLATES = _QUESTION_TEMPLATES
+        generate_answer = _generate_answer
+        generate_image_with_smart_fallback = _generate_image_with_smart_fallback
+        add_text_overlay = _add_text_overlay
+        
         return True
     except ImportError as e:
         console_logger.error(f" Import error: {e}")
