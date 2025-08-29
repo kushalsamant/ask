@@ -79,6 +79,27 @@ ANSWER_TEMPLATES = {
         "The integration of {digital_concept} in {field} represents a paradigm shift that enables {capability}. This innovation addresses {challenge} by providing {solution}, which leads to {outcome}. The technology's key features include {feature1}, {feature2}, and {feature3}, making it particularly effective for {application}. Successful implementation depends on understanding {factor} and ensuring that the technology aligns with {goal}.",
         
         "{Digital_technology} transforms {industry} by introducing {capability} that enhances {process}. This innovation responds to {challenge} through {approach}, resulting in {outcome}. The technology's effectiveness stems from {characteristic1}, {characteristic2}, and {characteristic3}, which work together to improve {performance}. Implementation requires attention to {factor}, ensuring that the technology contributes to {goal}."
+    ],
+    'cricket': [
+        "The strategy of {cricket_concept} represents a fundamental approach to {cricket_challenge} in modern cricket. By implementing {cricket_approach}, teams can achieve {cricket_outcome} while maintaining {cricket_principle}. This methodology addresses {cricket_situation} through {cricket_solution}, resulting in {cricket_result}. The key factors include {cricket_factor1}, {cricket_factor2}, and {cricket_factor3}, which collectively determine {cricket_performance}. Successful implementation requires understanding {cricket_requirement} and ensuring that the strategy contributes to {cricket_goal}.",
+        
+        "In addressing {cricket_challenge}, {cricket_concept} offers a comprehensive framework that integrates {cricket_approach1} with {cricket_approach2}. This strategy emphasizes {cricket_principle} as a core component, ensuring that the approach is both {cricket_characteristic1} and {cricket_characteristic2}. The implementation process involves careful consideration of {cricket_factor}, which influences both the tactical execution and the final outcome. Through this approach, teams can create {cricket_result} that contribute meaningfully to {cricket_goal}.",
+        
+        "The implementation of {cricket_strategy} addresses {cricket_situation} by incorporating {cricket_approach}. This methodology emphasizes {cricket_principle} as a fundamental consideration, ensuring that the strategy is both {cricket_outcome1} and {cricket_outcome2}. The process involves {cricket_process1}, {cricket_process2}, and {cricket_process3}, which work together to achieve {cricket_result}. Teams must consider {cricket_factor}, ensuring that the strategy contributes to {cricket_goal} while maintaining {cricket_standard}."
+    ],
+    'marketing': [
+        "The concept of {marketing_concept} represents a fundamental shift in how we approach {marketing_challenge}. By integrating {marketing_approach}, marketers can create strategies that are both {marketing_outcome1} and {marketing_outcome2}. This approach emphasizes the importance of {marketing_principle} in contemporary marketing practice, particularly when addressing {marketing_context}. The implementation of {marketing_concept} requires careful consideration of {marketing_factor}, ensuring that the final strategy meets both business and customer requirements while contributing to {marketing_goal}.",
+        
+        "{Marketing_concept} has emerged as a critical response to {marketing_challenge} in {marketing_context}. This marketing methodology incorporates {marketing_approach} to achieve {marketing_outcome}, demonstrating how thoughtful marketing can address complex business and consumer issues. The key principles include {marketing_principle1}, {marketing_principle2}, and {marketing_principle3}, which work together to create {marketing_result}. By focusing on {marketing_factor}, marketers can develop strategies that are both innovative and practical, ultimately contributing to {marketing_goal}.",
+        
+        "In addressing {marketing_challenge}, {marketing_concept} offers a comprehensive framework that integrates {marketing_approach1} with {marketing_approach2}. This methodology emphasizes {marketing_principle} as a core marketing principle, ensuring that strategies are both {marketing_outcome1} and {marketing_outcome2}. The implementation process involves careful consideration of {marketing_factor}, which influences both the marketing process and the final outcome. Through this approach, marketers can create {marketing_result} that contribute meaningfully to {marketing_goal} while addressing the specific needs of {marketing_context}."
+    ],
+    'architecture': [
+        "The concept of {architectural_concept} represents a fundamental shift in how we approach {architectural_challenge}. By integrating {architectural_approach}, architects can create solutions that are both {architectural_outcome1} and {architectural_outcome2}. This approach emphasizes the importance of {architectural_principle} in contemporary architectural practice, particularly when addressing {architectural_context}. The implementation of {architectural_concept} requires careful consideration of {architectural_factor}, ensuring that the final solution meets both functional and aesthetic requirements while contributing to {architectural_goal}.",
+        
+        "{Architectural_concept} has emerged as a critical response to {architectural_challenge} in {architectural_context}. This architectural methodology incorporates {architectural_approach} to achieve {architectural_outcome}, demonstrating how thoughtful design can address complex environmental and social issues. The key principles include {architectural_principle1}, {architectural_principle2}, and {architectural_principle3}, which work together to create {architectural_result}. By focusing on {architectural_factor}, architects can develop solutions that are both innovative and practical, ultimately contributing to {architectural_goal}.",
+        
+        "In addressing {architectural_challenge}, {architectural_concept} offers a comprehensive framework that integrates {architectural_approach1} with {architectural_approach2}. This methodology emphasizes {architectural_principle} as a core architectural principle, ensuring that solutions are both {architectural_outcome1} and {architectural_outcome2}. The implementation process involves careful consideration of {architectural_factor}, which influences both the design process and the final outcome. Through this approach, architects can create {architectural_result} that contribute meaningfully to {architectural_goal} while addressing the specific needs of {architectural_context}."
     ]
 }
 
@@ -154,7 +175,34 @@ ANSWER_CONCEPTS = {
     'principle3': ['community engagement', 'stakeholder consultation', 'environmental assessment', 'economic analysis', 'social impact evaluation', 'cultural preservation', 'historical research', 'geographic analysis', 'demographic study', 'infrastructure planning'],
     'factor1': ['user needs', 'environmental conditions', 'budget constraints', 'technical requirements', 'regulatory standards', 'cultural context', 'climate considerations', 'material availability', 'construction methods', 'maintenance requirements'],
     'factor2': ['safety requirements', 'accessibility standards', 'sustainability goals', 'performance objectives', 'quality expectations', 'cost effectiveness', 'timeline constraints', 'resource availability', 'stakeholder input', 'future adaptability'],
-    'factor3': ['maintenance needs', 'operational efficiency', 'lifecycle costs', 'environmental benefits', 'social impact', 'cultural significance', 'economic value', 'technological integration', 'community engagement', 'long-term viability']
+    'factor3': ['maintenance needs', 'operational efficiency', 'lifecycle costs', 'environmental benefits', 'social impact', 'cultural significance', 'economic value', 'technological integration', 'community engagement', 'long-term viability'],
+    # Cricket-specific concepts
+    'cricket_concept': ['power play strategy', 'field placement', 'bowling variations', 'batting technique', 'team tactics', 'match analysis', 'player development', 'captaincy decisions', 'bowling partnerships', 'batting partnerships'],
+    'cricket_challenge': ['run rate pressure', 'wicket preservation', 'boundary scoring', 'bowling accuracy', 'fielding efficiency', 'team coordination', 'match situation', 'opposition strength', 'pitch conditions', 'weather factors'],
+    'cricket_approach': ['aggressive batting', 'defensive bowling', 'smart fielding', 'tactical bowling', 'calculated risk-taking', 'team communication', 'match awareness', 'situation analysis', 'player rotation', 'strategy adaptation'],
+    'cricket_outcome': ['match victory', 'run scoring', 'wicket taking', 'team performance', 'player development', 'tactical success', 'strategic advantage', 'competitive edge', 'team cohesion', 'match control'],
+    'cricket_principle': ['teamwork', 'discipline', 'strategy', 'adaptability', 'consistency', 'pressure handling', 'decision making', 'leadership', 'communication', 'focus'],
+    'cricket_situation': ['power play', 'middle overs', 'death overs', 'run chase', 'defending total', 'wicket pressure', 'boundary requirement', 'partnership building', 'tail-end batting', 'opening partnership'],
+    'cricket_solution': ['boundary hitting', 'wicket preservation', 'run accumulation', 'bowling variations', 'field adjustments', 'batting rotation', 'bowling changes', 'tactical timeouts', 'player substitutions', 'strategy shifts'],
+    'cricket_result': ['match victory', 'successful chase', 'defended total', 'player performance', 'team success', 'tactical achievement', 'strategic advantage', 'competitive performance', 'team improvement', 'match control'],
+    'cricket_factor1': ['pitch conditions', 'weather factors', 'opposition strength', 'team form', 'player fitness', 'match situation', 'run rate', 'wicket count', 'overs remaining', 'partnership status'],
+    'cricket_factor2': ['boundary options', 'field restrictions', 'bowling variations', 'batting technique', 'team strategy', 'captaincy decisions', 'player roles', 'match pressure', 'time constraints', 'scoreboard pressure'],
+    'cricket_factor3': ['team coordination', 'communication', 'decision making', 'pressure handling', 'adaptability', 'consistency', 'focus', 'discipline', 'leadership', 'teamwork'],
+    'cricket_performance': ['batting average', 'bowling economy', 'fielding efficiency', 'team coordination', 'match awareness', 'tactical execution', 'strategic planning', 'pressure handling', 'decision making', 'leadership'],
+    'cricket_requirement': ['team coordination', 'tactical awareness', 'pressure handling', 'decision making', 'adaptability', 'consistency', 'focus', 'discipline', 'leadership', 'communication'],
+    'cricket_goal': ['match victory', 'team success', 'player development', 'tactical achievement', 'strategic advantage', 'competitive performance', 'team improvement', 'match control', 'run scoring', 'wicket taking'],
+    'cricket_approach1': ['aggressive batting', 'defensive bowling', 'smart fielding', 'tactical bowling', 'calculated risk-taking'],
+    'cricket_approach2': ['team communication', 'match awareness', 'situation analysis', 'player rotation', 'strategy adaptation'],
+    'cricket_characteristic1': ['aggressive', 'defensive', 'tactical', 'strategic', 'adaptive', 'consistent', 'focused', 'disciplined', 'coordinated', 'efficient'],
+    'cricket_characteristic2': ['team-oriented', 'situation-aware', 'pressure-resistant', 'decision-focused', 'adaptable', 'consistent', 'disciplined', 'leadership-driven', 'communication-focused', 'performance-oriented'],
+    'cricket_factor': ['match situation', 'team coordination', 'pressure handling', 'decision making', 'adaptability', 'consistency', 'focus', 'discipline', 'leadership', 'communication'],
+    'cricket_strategy': ['power play tactics', 'field placement', 'bowling variations', 'batting approach', 'team coordination', 'match awareness', 'situation analysis', 'player rotation', 'strategy adaptation', 'tactical execution'],
+    'cricket_outcome1': ['aggressive', 'defensive', 'tactical', 'strategic', 'adaptive', 'consistent', 'focused', 'disciplined', 'coordinated', 'efficient'],
+    'cricket_outcome2': ['team-oriented', 'situation-aware', 'pressure-resistant', 'decision-focused', 'adaptable', 'consistent', 'disciplined', 'leadership-driven', 'communication-focused', 'performance-oriented'],
+    'cricket_process1': ['match analysis', 'situation assessment', 'strategy planning', 'tactical execution', 'performance monitoring'],
+    'cricket_process2': ['team coordination', 'communication', 'decision making', 'pressure handling', 'adaptability'],
+    'cricket_process3': ['consistency', 'focus', 'discipline', 'leadership', 'teamwork'],
+    'cricket_standard': ['teamwork', 'discipline', 'strategy', 'adaptability', 'consistency', 'pressure handling', 'decision making', 'leadership', 'communication', 'focus']
 }
 
 def generate_offline_answer(question: str, theme: str) -> Optional[str]:
@@ -174,13 +222,13 @@ def generate_offline_answer(question: str, theme: str) -> Optional[str]:
         
         # Get templates for theme
         if theme not in ANSWER_TEMPLATES:
-            log.warning(f"No answer templates available for theme: {theme}")
-            return None
-        
-        templates = ANSWER_TEMPLATES[theme]
-        
-        # Select random template
-        template = random.choice(templates)
+            log.warning(f"No answer templates available for theme: {theme}, using default template")
+            # Use a default template for unsupported themes
+            template = "The concept of {concept} represents a fundamental shift in how we approach {challenge}. By integrating {approach}, practitioners can create solutions that are both {outcome1} and {outcome2}. This approach emphasizes the importance of {principle} in contemporary practice, particularly when addressing {context}. The implementation of {concept} requires careful consideration of {factor}, ensuring that the final solution meets both functional and aesthetic requirements while contributing to {goal}."
+        else:
+            templates = ANSWER_TEMPLATES[theme]
+            # Select random template
+            template = random.choice(templates)
         
         # Fill template with random concepts
         answer = template

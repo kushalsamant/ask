@@ -99,7 +99,6 @@ import shutil
 from PIL import Image, ImageDraw, ImageFont
 from image_layout_creator import layout_creator
 from image_text_processor import text_processor
-from image_create_ai import generate_image_with_retry
 
 # Setup logging
 log = logging.getLogger(__name__)

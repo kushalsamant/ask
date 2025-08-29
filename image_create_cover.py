@@ -10,7 +10,6 @@ import time
 from typing import Optional, Tuple, List, Dict, Any
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
-from image_create_ai import generate_image_with_retry
 
 # Setup logging
 log = logging.getLogger(__name__)
@@ -124,17 +123,13 @@ def generate_cover_image(cover_type, volume_number=None, output_dir="images"):
         image_path = os.path.join(output_dir, filename)
         
         # Generate image using AI
-        generated_path, _ = generate_image_with_retry(
-            prompt=prompt,
-            theme="cover",
-            image_number="cover",
-            image_type="cover"
-        )
+        # This part is now a placeholder as AI generation is removed.
+        # In a real scenario, you would generate an image here using a different method.
+        # For now, we'll just create a blank image.
+        img = Image.new('RGB', (IMAGE_WIDTH, IMAGE_HEIGHT), color = 'white')
+        img.save(image_path, quality=IMAGE_QUALITY, optimize=True)
         
-        if generated_path and os.path.exists(generated_path):
-            # Rename to our desired filename
-            os.rename(generated_path, image_path)
-            
+        if os.path.exists(image_path):
             # Add only brand text overlay
             add_cover_brand_overlay(image_path, volume_number)
             

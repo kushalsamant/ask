@@ -44,7 +44,6 @@ _performance_stats = {
     'total_generations': 0,
     'gpu_successes': 0,
     'cpu_successes': 0,
-    'api_successes': 0,
     'placeholder_fallbacks': 0,
     'total_time': 0.0,
     'last_reset': time.time()
@@ -147,9 +146,8 @@ def generate_image_with_smart_fallback(
     # Check if different generation methods are enabled (offline-first defaults)
     gpu_enabled = os.getenv("GPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
     cpu_enabled = os.getenv("CPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
-    api_enabled = bool(os.getenv("TOGETHER_API_KEY") and os.getenv("TOGETHER_API_KEY") != "your_api_key_here")
     
-    log.info(f"Smart fallback: GPU enabled={gpu_enabled}, CPU enabled={cpu_enabled}, API enabled={api_enabled}")
+    log.info(f"Smart fallback: GPU enabled={gpu_enabled}, CPU enabled={cpu_enabled}")
     
     # Method 1: Try GPU generation FIRST (Primary Mode - Offline)
     if gpu_enabled:
@@ -186,22 +184,16 @@ def generate_image_with_smart_fallback(
         except Exception as e:
             log.warning(f"CPU generation failed: {e}")
     
-    # Method 3: Try API generation as fallback (Last Resort - Requires Internet)
-    if api_enabled:
-        try:
-            log.info("Attempting API image generation (fallback method)...")
-            from image_create_ai import generate_image_with_retry
-            result = generate_image_with_retry(prompt, theme, image_number, max_retries, timeout, image_type)
-            _performance_stats['api_successes'] += 1
-            log.info("API generation successful")
-            return result
-        except Exception as e:
-            log.warning(f"API generation failed: {e}")
-    
-    # Method 4: Create placeholder image (Emergency Fallback - Offline)
-    log.warning("All generation methods failed, creating placeholder...")
-    _performance_stats['placeholder_fallbacks'] += 1
-    return create_placeholder_image(theme, image_number, image_type)
+    # Method 3: Create placeholder image (Emergency Fallback - Always Available)
+    try:
+        log.info("Creating placeholder image (emergency fallback)...")
+        result = create_placeholder_image(theme, image_number, image_type)
+        _performance_stats['placeholder_fallbacks'] += 1
+        log.info("Placeholder generation successful")
+        return result
+    except Exception as e:
+        log.error(f"All generation methods failed: {e}")
+        raise Exception(f"All image generation methods failed: {e}")
 
 def create_placeholder_image(theme: str, image_number: int, image_type: str) -> Tuple[str, str]:
     """
@@ -316,15 +308,10 @@ def get_generation_methods_status() -> Dict[str, Any]:
     try:
         gpu_enabled = os.getenv("GPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
         cpu_enabled = os.getenv("CPU_IMAGE_GENERATION_ENABLED", "true").lower() == "true"
-        api_enabled = bool(os.getenv("TOGETHER_API_KEY") and os.getenv("TOGETHER_API_KEY") != "your_api_key_here")
         
         status = {
             "gpu_enabled": gpu_enabled,
             "cpu_enabled": cpu_enabled,
-            "api_enabled": api_enabled,
-            "api_key_configured": bool(os.getenv("TOGETHER_API_KEY")),
-            "gpu_dependencies_available": check_gpu_dependencies(),
-            "cpu_dependencies_available": check_cpu_dependencies(),
             "performance_stats": get_performance_statistics(),
             "module_version": "2.0"
         }
@@ -336,10 +323,6 @@ def get_generation_methods_status() -> Dict[str, Any]:
         return {
             "gpu_enabled": False,
             "cpu_enabled": False,
-            "api_enabled": False,
-            "api_key_configured": False,
-            "gpu_dependencies_available": False,
-            "cpu_dependencies_available": False,
             "error": str(e),
             "module_version": "2.0"
         }
@@ -409,7 +392,6 @@ def get_performance_statistics() -> Dict[str, Any]:
         'total_generations': total_operations,
         'gpu_successes': _performance_stats['gpu_successes'],
         'cpu_successes': _performance_stats['cpu_successes'],
-        'api_successes': _performance_stats['api_successes'],
         'placeholder_fallbacks': _performance_stats['placeholder_fallbacks'],
         'total_time': _performance_stats['total_time'],
         'average_time_per_generation': _performance_stats['total_time'] / max(total_operations, 1),
@@ -425,7 +407,6 @@ def reset_performance_stats():
         'total_generations': 0,
         'gpu_successes': 0,
         'cpu_successes': 0,
-        'api_successes': 0,
         'placeholder_fallbacks': 0,
         'total_time': 0.0,
         'last_reset': time.time()
@@ -447,7 +428,6 @@ def validate_environment() -> Dict[str, Any]:
         'environment_variables': {
                     'GPU_IMAGE_GENERATION_ENABLED': os.getenv("GPU_IMAGE_GENERATION_ENABLED", "true"),
         'CPU_IMAGE_GENERATION_ENABLED': os.getenv("CPU_IMAGE_GENERATION_ENABLED", "true"),
-            'TOGETHER_API_KEY': bool(os.getenv("TOGETHER_API_KEY")),
             'CPU_DEFAULT_WIDTH': os.getenv("CPU_DEFAULT_WIDTH", "512"),
             'CPU_DEFAULT_HEIGHT': os.getenv("CPU_DEFAULT_HEIGHT", "512")
         },

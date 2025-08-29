@@ -328,6 +328,81 @@ def log_single_question(theme: str, question: str, image_filename: str,
         log.error(f"Error logging question: {e}")
         return False
 
+def log_qa_pair(theme: str, question: str, answer: str, question_image: str, answer_image: str, 
+                question_style: Optional[str] = None, answer_style: Optional[str] = None) -> bool:
+    """
+    Log a complete Q&A pair to log.csv as a single entry
+    
+    Args:
+        theme: Theme/category for the Q&A pair
+        question: Question text
+        answer: Answer text
+        question_image: Filename of the question image
+        answer_image: Filename of the answer image
+        question_style: Optional style information for question
+        answer_style: Optional style information for answer
+        
+    Returns:
+        True if logging was successful, False otherwise
+    """
+    try:
+        # Input validation
+        if not theme or not theme.strip():
+            log.error("Theme cannot be empty")
+            return False
+        
+        if not question or not question.strip():
+            log.error("Question cannot be empty")
+            return False
+            
+        if not answer or not answer.strip():
+            log.error("Answer cannot be empty")
+            return False
+        
+        # Ensure log.csv exists with proper headers
+        if not os.path.exists(LOG_CSV_FILE):
+            with open(LOG_CSV_FILE, 'w', encoding='utf-8', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(CSV_HEADERS)
+
+        # Read existing data
+        rows = []
+        with open(LOG_CSV_FILE, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+
+        # Get next question number
+        next_question_number = len(rows) + 1
+
+        # Create new row with complete Q&A pair
+        new_row = {
+            'question_number': next_question_number,
+            'theme': theme.strip(),
+            'question': question.strip(),
+            'question_image': question_image.strip(),
+            'style': (question_style or '').strip(),
+            'answer': answer.strip(),
+            'answer_image': answer_image.strip(),
+            'is_used': 'false',
+            'created_timestamp': datetime.now().isoformat()
+        }
+
+        # Add new row
+        rows.append(new_row)
+
+        # Write back to file
+        with open(LOG_CSV_FILE, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=CSV_HEADERS)
+            writer.writeheader()
+            writer.writerows(rows)
+
+        log.info(f"Logged complete Q&A pair for {theme}: Q: {question[:50]}... A: {answer[:50]}...")
+        return True
+
+    except Exception as e:
+        log.error(f"Error logging Q&A pair: {e}")
+        return False
+
 def mark_questions_as_used(questions_dict: Dict[str, str]) -> int:
     """
     Mark questions as used in log.csv after successful PDF creation
