@@ -114,7 +114,6 @@ from image_create_cover import create_volume_cover, create_category_cover, creat
 from research_csv_manager import read_log_csv
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 @dataclass
@@ -468,7 +467,6 @@ class ImageGenerationSystem:
                 log.error(f"Error in enhanced complete image generation: {e}")
                 performance_monitor.end_timer()
                 performance_monitor.record_failure()
-                raise
                 self._handle_error(e, "individual image creation", f"Q&A pair {i+1}")
                 if self.config.ERROR_SKIP_MISSING_FILES:
                     continue
@@ -509,7 +507,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "question image creation", f"Image {image_number}")
             if self.config.ERROR_CREATE_PLACEHOLDER:
                 return self._create_placeholder_image(image_number, theme, "q")
@@ -546,7 +543,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "answer image creation", f"Image {image_number}")
             if self.config.ERROR_CREATE_PLACEHOLDER:
                 return self._create_placeholder_image(image_number, theme, "a")
@@ -573,7 +569,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             log.error(f"Failed to create placeholder image: {e}")
             return ""
     
@@ -598,7 +593,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "final compilation creation")
             return ""
     
@@ -634,7 +628,6 @@ class ImageGenerationSystem:
                 log.error(f"Error in enhanced complete image generation: {e}")
                 performance_monitor.end_timer()
                 performance_monitor.record_failure()
-                raise
                 self._handle_error(e, "theme compilation creation", theme)
                 if not self.config.ERROR_CONTINUE_ON_FAILURE:
                     break
@@ -663,7 +656,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "cover image creation")
             return ""
     
@@ -688,7 +680,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "table of contents creation")
             return ""
     
@@ -722,7 +713,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "TOC image generation")
             return ""
     
@@ -822,7 +812,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "sequential TOC creation")
             return ""
     
@@ -884,7 +873,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "theme TOC creation")
             return ""
     
@@ -910,7 +898,6 @@ class ImageGenerationSystem:
             log.error(f"Error in enhanced complete image generation: {e}")
             performance_monitor.end_timer()
             performance_monitor.record_failure()
-            raise
             self._handle_error(e, "temp file cleanup")
     
     def generate_qa_images(self, qa_pairs: List[dict]) -> List[dict]:
@@ -971,7 +958,6 @@ class ImageGenerationSystem:
                 log.error(f"Error in enhanced complete image generation: {e}")
                 performance_monitor.end_timer()
                 performance_monitor.record_failure()
-                raise
                 log.error(f"Failed to generate images for Q&A pair {i}: {e}")
                 generated_images.append(qa_pair)
         

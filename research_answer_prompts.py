@@ -91,7 +91,7 @@ def create_research_analysis_prompt(question: str, theme: str) -> PromptTuple:
     - Connection to {theme} specifically
     - Practical and theoretical considerations
     - Historical context and evolution
-    - Cross-disciplinary implications
+    - Multi-theme implications
     - Innovation potential and challenges
     - Environmental and sustainability aspects
     - Social and cultural impact
@@ -155,7 +155,7 @@ def create_image_based_analysis_prompt(question: str, theme: str, image_path: st
     - Connection to {theme} specifically
     - Practical and theoretical considerations
     - Historical context and evolution
-    - Cross-disciplinary implications
+    - Multi-theme implications
     - Innovation potential and challenges
     - Visual elements and their significance
     - Spatial organization and flow
@@ -211,23 +211,23 @@ def validate_answer(answer: str) -> bool:
         # Check for basic content indicators (case-insensitive)
         answer_lower = answer_clean.lower()
         
-        # Check for architectural content
-        has_architectural_content = any(
-            indicator in answer_lower for indicator in ARCHITECTURAL_INDICATORS
+        # Check for research content
+        has_research_content = any(
+            indicator in answer_lower for indicator in RESEARCH_INDICATORS
         )
         
-        if not has_architectural_content:
-            log.warning("Answer validation failed: No architectural content detected")
+        if not has_research_content:
+            log.warning("Answer validation failed: No research content detected")
             return False
         
-        # Check for non-architectural content dominance
-        non_arch_count = sum(
+        # Check for non-research content dominance
+        non_research_count = sum(
             1 for indicator in NON_ARCHITECTURAL_INDICATORS 
             if indicator in answer_lower
         )
         
-        if non_arch_count > 3:  # Allow some non-architectural terms but not dominance
-            log.warning("Answer validation failed: Too much non-architectural content")
+        if non_research_count > 3:  # Allow some non-research terms but not dominance
+            log.warning("Answer validation failed: Too much non-research content")
             return False
         
         # Check for repetitive content
@@ -264,24 +264,24 @@ def get_validation_details(answer: str) -> AnswerValidationResult:
     """
     try:
         if not answer:
-            return {
-                'valid': False,
-                'length': 0,
-                'has_architectural_content': False,
-                'non_architectural_count': 0,
-                'repetition_score': 0,
-                'issues': ['Empty answer']
-            }
+                    return {
+            'valid': False,
+            'length': 0,
+            'has_research_content': False,
+            'non_research_count': 0,
+            'repetition_score': 0,
+            'issues': ['Empty answer']
+        }
         
         answer_clean = answer.strip()
         answer_lower = answer_clean.lower()
         
         # Calculate metrics
         length = len(answer_clean)
-        has_arch_content = any(
-            indicator in answer_lower for indicator in ARCHITECTURAL_INDICATORS
+        has_research_content = any(
+            indicator in answer_lower for indicator in RESEARCH_INDICATORS
         )
-        non_arch_count = sum(
+        non_research_count = sum(
             1 for indicator in NON_ARCHITECTURAL_INDICATORS 
             if indicator in answer_lower
         )
@@ -306,18 +306,18 @@ def get_validation_details(answer: str) -> AnswerValidationResult:
             issues.append(f"Too long ({length} chars, maximum {MAX_ANSWER_LENGTH})")
         if answer_clean.lower().startswith('question:'):
             issues.append("Starts with 'Question:'")
-        if not has_arch_content:
-            issues.append("No architectural content")
-        if non_arch_count > 3:
-            issues.append(f"Too much non-architectural content ({non_arch_count} terms)")
+        if not has_research_content:
+            issues.append("No research content")
+        if non_research_count > 3:
+            issues.append(f"Too much non-research content ({non_research_count} terms)")
         if repetition_score > 0.15:
             issues.append(f"Too much repetition (score: {repetition_score:.2f})")
         
         return {
             'valid': len(issues) == 0,
             'length': length,
-            'has_architectural_content': has_arch_content,
-            'non_architectural_count': non_arch_count,
+            'has_research_content': has_research_content,
+            'non_research_count': non_research_count,
             'repetition_score': repetition_score,
             'issues': issues
         }
@@ -327,8 +327,8 @@ def get_validation_details(answer: str) -> AnswerValidationResult:
         return {
             'valid': False,
             'length': 0,
-            'has_architectural_content': False,
-            'non_architectural_count': 0,
+            'has_research_content': False,
+            'non_research_count': 0,
             'repetition_score': 0,
             'issues': [f'Error: {str(e)}']
         }
@@ -442,7 +442,7 @@ def clear_prompt_cache() -> None:
 
 # Export main functions for easy access
 __all__ = [
-    'create_architectural_analysis_prompt',
+    'create_research_analysis_prompt',
     'create_image_based_analysis_prompt',
     'validate_answer',
     'get_validation_details',

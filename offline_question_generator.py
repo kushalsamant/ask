@@ -16,6 +16,7 @@ Version: 1.0 (Offline-First)
 
 import random
 import logging
+import re
 from typing import Optional, Dict, List
 
 # Setup logging
@@ -118,6 +119,54 @@ QUESTION_TEMPLATES = {
         "What are the security considerations of {digital_solution}?",
         "How does {digital_technology} enable {innovation}?",
         "What are the future applications of {digital_concept}?"
+    ],
+    'design_research': [
+        "How can we research {design_concept} in {context}?",
+        "What are the key methodologies for studying {design_element}?",
+        "How does {research_method} contribute to {design_outcome}?",
+        "What are the challenges of researching {design_topic}?",
+        "How can {research_approach} improve {design_process}?",
+        "What role does {research_methodology} play in {design_field}?",
+        "How can we measure the effectiveness of {design_research}?",
+        "What are the emerging trends in {design_research_field}?",
+        "How does {research_finding} influence {design_practice}?",
+        "What are the best practices for {design_research_method}?"
+    ],
+    'architecture': [
+        "How can we design {architectural_concept} that responds to {design_challenge}?",
+        "What are the key principles for {architectural_element} in {context}?",
+        "How does {architectural_design} influence {building_outcome}?",
+        "What are the emerging trends in {architectural_approach} for {context}?",
+        "How can {architectural_system} be optimized for {performance_goal}?",
+        "What role does {architectural_consideration} play in {design_context}?",
+        "How can we integrate {architectural_feature} with {related_system}?",
+        "What are the challenges of implementing {architectural_solution} in {context}?",
+        "How does {architectural_concept} contribute to {sustainable_outcome}?",
+        "What are the best practices for {architectural_design} in {modern_context}?"
+    ],
+    'marketing': [
+        "How can we develop {marketing_strategy} that targets {audience_segment}?",
+        "What are the key principles for {marketing_campaign} in {market_context}?",
+        "How does {marketing_approach} influence {consumer_behavior}?",
+        "What are the emerging trends in {marketing_technology} for {industry}?",
+        "How can {marketing_channel} be optimized for {business_goal}?",
+        "What role does {marketing_concept} play in {brand_strategy}?",
+        "How can we integrate {marketing_tool} with {customer_experience}?",
+        "What are the challenges of implementing {marketing_solution} in {competitive_market}?",
+        "How does {marketing_method} contribute to {business_outcome}?",
+        "What are the best practices for {marketing_innovation} in {digital_age}?"
+    ],
+    'cricket': [
+        "How can we improve {cricket_skill} through {training_method}?",
+        "What are the key strategies for {cricket_tactic} in {match_situation}?",
+        "How does {cricket_technique} influence {game_outcome}?",
+        "What are the emerging trends in {cricket_technology} for {performance_improvement}?",
+        "How can {cricket_equipment} be optimized for {player_advantage}?",
+        "What role does {cricket_strategy} play in {team_performance}?",
+        "How can we integrate {cricket_analysis} with {coaching_method}?",
+        "What are the challenges of implementing {cricket_innovation} in {competitive_environment}?",
+        "How does {cricket_methodology} contribute to {success_metric}?",
+        "What are the best practices for {cricket_development} in {modern_era}?"
     ]
 }
 
@@ -183,7 +232,69 @@ CONCEPTS = {
     'process': ['design', 'construction', 'manufacturing', 'communication', 'collaboration', 'decision-making', 'problem-solving', 'innovation', 'research', 'development'],
     'digital_concept': ['artificial intelligence', 'machine learning', 'big data', 'cloud computing', 'internet of things', 'blockchain', 'augmented reality', 'virtual reality', 'cybersecurity', 'digital twins'],
     'modern_context': ['digital transformation', 'remote work', 'e-commerce', 'smart cities', 'connected devices', 'social media', 'online education', 'telemedicine', 'digital entertainment', 'fintech'],
-    'innovation': ['automation', 'optimization', 'personalization', 'prediction', 'simulation', 'visualization', 'analysis', 'monitoring', 'control', 'communication']
+    'innovation': ['automation', 'optimization', 'personalization', 'prediction', 'simulation', 'visualization', 'analysis', 'monitoring', 'control', 'communication'],
+    'design_concept': ['sustainable design', 'user-centered design', 'adaptive architecture', 'biophilic design', 'modular systems', 'smart environments', 'resilient infrastructure', 'inclusive design', 'parametric design', 'generative design'],
+    'design_element': ['materials', 'forms', 'colors', 'textures', 'patterns', 'shapes', 'volumes', 'surfaces', 'openings', 'structures'],
+    'research_method': ['case study', 'survey', 'interview', 'observation', 'experiment', 'simulation', 'prototyping', 'analysis', 'evaluation', 'testing'],
+    'design_outcome': ['sustainability', 'resilience', 'efficiency', 'accessibility', 'well-being', 'productivity', 'creativity', 'social cohesion', 'economic growth', 'environmental protection'],
+    'design_topic': ['climate change', 'urban density', 'resource scarcity', 'social inequality', 'technological disruption', 'environmental degradation', 'economic uncertainty', 'cultural diversity', 'aging population', 'digital transformation'],
+    'research_approach': ['qualitative', 'quantitative', 'mixed-methods', 'participatory', 'evidence-based', 'action research', 'design thinking', 'systems thinking', 'human-centered', 'sustainable'],
+    'design_process': ['concept development', 'schematic design', 'design development', 'construction documents', 'construction administration', 'post-occupancy evaluation', 'lifecycle assessment', 'stakeholder engagement', 'iterative refinement', 'continuous improvement'],
+    'research_methodology': ['case study', 'survey research', 'experimental design', 'observational study', 'longitudinal study', 'cross-sectional study', 'comparative analysis', 'systematic review', 'meta-analysis', 'action research'],
+    'design_field': ['architecture', 'urban planning', 'interior design', 'landscape architecture', 'industrial design', 'graphic design', 'fashion design', 'product design', 'service design', 'experience design'],
+    'design_research': ['post-occupancy evaluation', 'behavioral research', 'environmental psychology', 'building performance', 'user experience', 'accessibility studies', 'sustainability assessment', 'cultural analysis', 'economic evaluation', 'social impact'],
+    'design_research_field': ['environmental psychology', 'building science', 'urban sociology', 'design anthropology', 'architectural history', 'construction technology', 'sustainable design', 'digital fabrication', 'smart cities', 'resilient design'],
+    'research_finding': ['user preferences', 'environmental impact', 'economic benefits', 'social outcomes', 'technical performance', 'cultural significance', 'behavioral patterns', 'spatial relationships', 'material properties', 'system interactions'],
+    'design_practice': ['architectural design', 'urban planning', 'interior design', 'landscape design', 'construction management', 'project coordination', 'stakeholder engagement', 'sustainability consulting', 'research collaboration', 'knowledge sharing'],
+    'design_research_method': ['post-occupancy evaluation', 'behavioral mapping', 'environmental monitoring', 'user interviews', 'focus groups', 'surveys', 'observational studies', 'case studies', 'experimental design', 'participatory research'],
+    'architectural_concept': ['sustainable architecture', 'modern design', 'classical architecture', 'vernacular building', 'adaptive reuse', 'modular construction', 'parametric design', 'biophilic architecture', 'smart buildings', 'resilient design'],
+    'architectural_element': ['facade', 'roof', 'foundation', 'structural system', 'building envelope', 'interior space', 'circulation', 'lighting', 'acoustics', 'thermal mass'],
+    'architectural_design': ['sustainable building', 'modern structure', 'classical building', 'vernacular architecture', 'adaptive design', 'modular building', 'parametric structure', 'biophilic building', 'smart architecture', 'resilient structure'],
+    'building_outcome': ['energy efficiency', 'thermal comfort', 'acoustic quality', 'daylighting', 'ventilation', 'structural integrity', 'aesthetic appeal', 'functional performance', 'sustainability', 'user satisfaction'],
+    'architectural_approach': ['sustainable design', 'modern architecture', 'classical design', 'vernacular approach', 'adaptive architecture', 'modular design', 'parametric approach', 'biophilic design', 'smart architecture', 'resilient design'],
+    'architectural_system': ['structural system', 'mechanical system', 'electrical system', 'plumbing system', 'HVAC system', 'lighting system', 'acoustic system', 'security system', 'communication system', 'fire protection system'],
+    'architectural_consideration': ['structural integrity', 'energy efficiency', 'thermal comfort', 'acoustic quality', 'daylighting', 'ventilation', 'sustainability', 'accessibility', 'safety', 'aesthetics'],
+    'architectural_feature': ['green roof', 'solar panels', 'rainwater harvesting', 'natural ventilation', 'daylighting', 'thermal mass', 'shading devices', 'living walls', 'smart controls', 'renewable energy'],
+    'architectural_solution': ['passive design', 'active systems', 'hybrid approach', 'adaptive reuse', 'modular construction', 'prefabrication', 'green building', 'smart technology', 'renewable energy', 'sustainable materials'],
+    'sustainable_outcome': ['carbon neutrality', 'zero waste', 'energy efficiency', 'water conservation', 'biodiversity protection', 'circular economy', 'green building', 'sustainable transport', 'clean energy', 'climate resilience'],
+    'modern_context': ['digital transformation', 'climate change', 'urbanization', 'technological advancement', 'social change', 'economic development', 'environmental awareness', 'sustainability goals', 'smart cities', 'resilient communities'],
+    'marketing_strategy': ['digital marketing', 'content marketing', 'social media marketing', 'email marketing', 'influencer marketing', 'viral marketing', 'guerilla marketing', 'relationship marketing', 'direct marketing', 'integrated marketing'],
+    'audience_segment': ['millennials', 'gen z', 'baby boomers', 'professionals', 'students', 'parents', 'tech enthusiasts', 'environmentalists', 'urban dwellers', 'rural communities'],
+    'marketing_campaign': ['brand awareness', 'product launch', 'seasonal promotion', 'holiday campaign', 'social cause', 'loyalty program', 'referral program', 'educational content', 'thought leadership', 'community engagement'],
+    'market_context': ['competitive landscape', 'economic conditions', 'social trends', 'technological changes', 'regulatory environment', 'cultural shifts', 'demographic changes', 'consumer behavior', 'industry dynamics', 'global markets'],
+    'marketing_approach': ['data-driven', 'customer-centric', 'storytelling', 'experiential', 'personalized', 'omnichannel', 'agile', 'sustainable', 'ethical', 'innovative'],
+    'consumer_behavior': ['purchasing decisions', 'brand loyalty', 'online shopping', 'social influence', 'price sensitivity', 'quality preference', 'convenience seeking', 'status consciousness', 'environmental awareness', 'technology adoption'],
+    'marketing_technology': ['artificial intelligence', 'machine learning', 'big data analytics', 'customer relationship management', 'marketing automation', 'social media platforms', 'email marketing tools', 'content management systems', 'search engine optimization', 'pay-per-click advertising'],
+    'business_goal': ['revenue growth', 'market share', 'brand awareness', 'customer acquisition', 'customer retention', 'profitability', 'market expansion', 'product development', 'competitive advantage', 'sustainability'],
+    'marketing_concept': ['brand positioning', 'target audience', 'value proposition', 'customer journey', 'touchpoints', 'conversion funnel', 'customer lifetime value', 'brand equity', 'market segmentation', 'competitive differentiation'],
+    'brand_strategy': ['brand identity', 'brand positioning', 'brand messaging', 'brand values', 'brand personality', 'brand voice', 'brand guidelines', 'brand architecture', 'brand extension', 'brand revitalization'],
+    'marketing_tool': ['social media platforms', 'email marketing software', 'content management systems', 'analytics tools', 'customer relationship management', 'marketing automation', 'advertising platforms', 'survey tools', 'influencer platforms', 'seo tools'],
+    'customer_experience': ['user journey', 'touchpoints', 'interactions', 'satisfaction', 'loyalty', 'engagement', 'personalization', 'convenience', 'quality', 'support'],
+    'competitive_market': ['saturated market', 'emerging market', 'mature market', 'niche market', 'global market', 'local market', 'online market', 'offline market', 'b2b market', 'b2c market'],
+    'marketing_method': ['digital marketing', 'traditional advertising', 'public relations', 'direct marketing', 'event marketing', 'content marketing', 'social media marketing', 'email marketing', 'influencer marketing', 'viral marketing'],
+    'business_outcome': ['revenue growth', 'profitability', 'market share', 'customer acquisition', 'customer retention', 'brand awareness', 'competitive advantage', 'operational efficiency', 'innovation', 'sustainability'],
+    'marketing_innovation': ['artificial intelligence', 'virtual reality', 'augmented reality', 'blockchain', 'voice search', 'chatbots', 'personalization', 'automation', 'data analytics', 'social commerce'],
+    'digital_age': ['online presence', 'mobile-first', 'social media', 'e-commerce', 'digital transformation', 'automation', 'data-driven', 'personalization', 'omnichannel', 'technology integration'],
+    'cricket_skill': ['batting', 'bowling', 'fielding', 'wicket-keeping', 'captaincy', 'team coordination', 'mental strength', 'physical fitness', 'tactical awareness', 'technical proficiency'],
+    'training_method': ['practice sessions', 'fitness training', 'mental conditioning', 'video analysis', 'simulation exercises', 'match practice', 'skill development', 'strength training', 'endurance training', 'recovery protocols'],
+    'cricket_tactic': ['batting strategy', 'bowling plan', 'field placement', 'run chase', 'defense', 'aggressive play', 'conservative approach', 'risk management', 'momentum building', 'pressure handling'],
+    'match_situation': ['run chase', 'defending total', 'power play', 'death overs', 'test match', 'limited overs', 't20 format', 'one day international', 'domestic cricket', 'international cricket'],
+    'cricket_technique': ['cover drive', 'pull shot', 'yorker', 'googly', 'sweep shot', 'reverse swing', 'spin bowling', 'fast bowling', 'fielding technique', 'wicket-keeping stance'],
+    'game_outcome': ['victory', 'defeat', 'draw', 'tie', 'winning margin', 'run rate', 'wicket haul', 'century', 'five-wicket haul', 'man of the match'],
+    'cricket_technology': ['hawk-eye', 'hot spot', 'snickometer', 'ball tracking', 'performance analytics', 'biomechanical analysis', 'video technology', 'sensor technology', 'data analytics', 'virtual reality training'],
+    'performance_improvement': ['batting average', 'bowling economy', 'fielding efficiency', 'team performance', 'individual skills', 'match awareness', 'decision making', 'pressure handling', 'fitness levels', 'technical skills'],
+    'cricket_equipment': ['bat', 'ball', 'protective gear', 'stumps', 'bails', 'sight screen', 'boundary rope', 'scoreboard', 'communication devices', 'training equipment'],
+    'player_advantage': ['better performance', 'injury prevention', 'comfort', 'confidence', 'safety', 'efficiency', 'accuracy', 'power', 'control', 'endurance'],
+    'cricket_strategy': ['batting order', 'bowling rotation', 'field placement', 'run chase plan', 'defense strategy', 'aggressive tactics', 'conservative approach', 'risk assessment', 'momentum management', 'pressure handling'],
+    'team_performance': ['winning percentage', 'team ranking', 'championship success', 'consistency', 'adaptability', 'team chemistry', 'leadership effectiveness', 'skill balance', 'experience level', 'fitness standards'],
+    'cricket_analysis': ['performance data', 'match statistics', 'opponent study', 'pitch conditions', 'weather factors', 'historical trends', 'player form', 'team dynamics', 'tactical patterns', 'success metrics'],
+    'coaching_method': ['technical coaching', 'tactical guidance', 'mental preparation', 'fitness training', 'video analysis', 'match simulation', 'skill development', 'team building', 'leadership training', 'performance monitoring'],
+    'cricket_innovation': ['new formats', 'technology integration', 'training methods', 'equipment design', 'tactical approaches', 'performance analysis', 'fan engagement', 'broadcasting technology', 'safety measures', 'sustainability practices'],
+    'competitive_environment': ['international cricket', 'domestic leagues', 'championship tournaments', 'test series', 'limited overs cricket', 't20 leagues', 'world cups', 'bilateral series', 'multi-nation tournaments', 'qualification events'],
+    'cricket_methodology': ['training approach', 'coaching philosophy', 'team selection', 'match preparation', 'performance analysis', 'skill development', 'fitness management', 'mental conditioning', 'tactical planning', 'leadership development'],
+    'success_metric': ['winning percentage', 'individual records', 'team achievements', 'championship titles', 'ranking improvements', 'performance consistency', 'skill development', 'team chemistry', 'leadership effectiveness', 'fan engagement'],
+    'cricket_development': ['youth programs', 'grassroots initiatives', 'talent identification', 'skill development', 'coaching education', 'infrastructure improvement', 'technology integration', 'safety measures', 'sustainability practices', 'global expansion'],
+    'modern_era': ['professional cricket', 'technology integration', 'global leagues', 'performance analytics', 'fan engagement', 'broadcasting innovation', 'safety standards', 'sustainability practices', 'diversity inclusion', 'commercial development']
 }
 
 def generate_offline_question(theme: str) -> Optional[str]:
@@ -218,7 +329,6 @@ def generate_offline_question(theme: str) -> Optional[str]:
                 question = question.replace(f"{{{placeholder}}}", concept)
         
         # Clean up any remaining placeholders
-        import re
         question = re.sub(r'\{[^}]+\}', 'sustainable design', question)
         
         log.info(f"Generated offline question for theme '{theme}': {question}")

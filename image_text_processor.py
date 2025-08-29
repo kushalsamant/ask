@@ -708,109 +708,39 @@ text_processor = ImageTextProcessor()
 # Convenience functions with performance monitoring
 @performance_monitor
 def process_text_for_image(text: str, text_type: str = 'question', max_lines: Optional[int] = None) -> List[str]:
-    """
-    Process text for image display with performance monitoring
-    
-    Args:
-        text: Text content to process
-        text_type: Type of text
-        max_lines: Maximum number of lines
-        
-    Returns:
-        List[str]: Processed text lines
-    """
+    """Process text for image display with performance monitoring"""
     return text_processor.process_text_for_image(text, text_type, max_lines)
 
 @performance_monitor
 def calculate_adaptive_font_size(text: str, text_type: str = 'question') -> int:
-    """
-    Calculate adaptive font size with performance monitoring
-    
-    Args:
-        text: Text content
-        text_type: Type of text
-        
-    Returns:
-        int: Adaptive font size
-    """
+    """Calculate adaptive font size with performance monitoring"""
     return text_processor.calculate_adaptive_font_size(text, text_type)
 
 def get_font_config(text_type: str = 'question') -> Dict[str, Any]:
-    """
-    Get font configuration
-    
-    Args:
-        text_type: Type of text
-        
-    Returns:
-        Dict[str, Any]: Font configuration
-    """
+    """Get font configuration"""
     return text_processor.get_font_config(text_type)
 
 @performance_monitor
 def calculate_text_dimensions(lines: List[str], font_size: int, line_spacing: float) -> Tuple[int, int]:
-    """
-    Calculate text dimensions with performance monitoring
-    
-    Args:
-        lines: List of text lines
-        font_size: Font size
-        line_spacing: Line spacing
-        
-    Returns:
-        Tuple[int, int]: Text dimensions (width, height)
-    """
+    """Calculate text dimensions with performance monitoring"""
     return text_processor.calculate_text_dimensions(lines, font_size, line_spacing)
 
 @performance_monitor
 def split_long_text(text: str, text_type: str = 'question', max_chars_per_line: Optional[int] = None) -> List[str]:
-    """
-    Split long text with performance monitoring
-    
-    Args:
-        text: Long text content
-        text_type: Type of text
-        max_chars_per_line: Maximum characters per line
-        
-    Returns:
-        List[str]: Text chunks
-    """
+    """Split long text with performance monitoring"""
     return text_processor.split_long_text(text, text_type, max_chars_per_line)
 
 def add_text_emphasis(text: str, emphasis_type: str = 'bold') -> str:
-    """
-    Add text emphasis
-    
-    Args:
-        text: Text content
-        emphasis_type: Type of emphasis
-        
-    Returns:
-        str: Text with emphasis
-    """
+    """Add text emphasis"""
     return text_processor.add_text_emphasis(text, emphasis_type)
 
 @performance_monitor
 def create_text_summary(text: str, max_length: int = 100) -> str:
-    """
-    Create text summary with performance monitoring
-    
-    Args:
-        text: Full text content
-        max_length: Maximum length for summary
-        
-    Returns:
-        str: Text summary
-    """
+    """Create text summary with performance monitoring"""
     return text_processor.create_text_summary(text, max_length)
 
 def get_performance_statistics() -> Dict[str, Any]:
-    """
-    Get performance statistics
-    
-    Returns:
-        dict: Performance statistics
-    """
+    """Get performance statistics"""
     return text_processor.get_performance_statistics()
 
 def reset_performance_stats():
@@ -818,12 +748,7 @@ def reset_performance_stats():
     text_processor.reset_performance_stats()
 
 def validate_environment() -> Dict[str, Any]:
-    """
-    Validate environment
-    
-    Returns:
-        dict: Environment validation results
-    """
+    """Validate environment"""
     return text_processor.validate_environment()
 
 # Export main functions

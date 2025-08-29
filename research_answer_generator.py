@@ -5,10 +5,10 @@ Handles main answer generation orchestration
 """
 
 import logging
-from api_client import call_together_api_for_answer
+from api_client import api_client
 from research_answer_prompts import process_answer_response
 from research_answer_prompts import (
-    create_architectural_analysis_prompt,
+    create_research_analysis_prompt,
     create_image_based_analysis_prompt,
     validate_answer,
     format_answer_for_storage
@@ -34,10 +34,10 @@ def generate_answer(question, theme, image_path):
         if image_path:
             prompt, system_prompt = create_image_based_analysis_prompt(question, theme, image_path)
         else:
-            prompt, system_prompt = create_architectural_analysis_prompt(question, theme)
+            prompt, system_prompt = create_research_analysis_prompt(question, theme)
         
         # Call API
-        raw_response = call_together_api_for_answer(prompt, system_prompt)
+        raw_response = api_client.call_text_api(prompt, system_prompt)
         
         if not raw_response:
             log.warning(f"No response generated for question: {question[:50]}...")
@@ -65,29 +65,4 @@ def generate_answer(question, theme, image_path):
         log.error(f"Error generating answer: {e}")
         return None
 
-def generate_answer_without_image(question, theme):
-    """
-    Generate answer without image reference
-    
-    Args:
-        question (str): The question to analyze
-        theme (str): Theme name
-    
-    Returns:
-        str: Generated answer or None if failed
-    """
-    return generate_answer(question, theme, None)
 
-def generate_answer_with_image(question, theme, image_path):
-    """
-    Generate answer with image reference
-    
-    Args:
-        question (str): The question to analyze
-        theme (str): Theme name
-        image_path (str): Path to the image
-    
-    Returns:
-        str: Generated answer or None if failed
-    """
-    return generate_answer(question, theme, image_path)

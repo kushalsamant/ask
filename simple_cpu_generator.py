@@ -353,46 +353,49 @@ def generate_architectural_prompt(theme: str, prompt: str) -> str:
     Returns:
         str: Enhanced architectural prompt
     """
+    # Common architectural prompt elements
+    base_elements = "photorealistic architectural rendering, professional photography, 8k resolution, architectural photography"
+    
     architectural_prompts = {
         'design_research': [
-            "photorealistic architectural rendering, modern research facility, glass facade, sustainable design, natural lighting, professional photography, 8k resolution, architectural photography",
-            "photorealistic architectural visualization, contemporary design studio, minimalist interior, clean lines, natural materials, professional architectural photography, high detail",
-            "photorealistic architectural model, innovative research building, geometric forms, sustainable materials, natural environment, professional photography, architectural detail"
+            f"{base_elements}, modern research facility, glass facade, sustainable design, natural lighting",
+            f"{base_elements}, contemporary design studio, minimalist interior, clean lines, natural materials, high detail",
+            f"{base_elements}, innovative research building, geometric forms, sustainable materials, natural environment, architectural detail"
         ],
         'technology_innovation': [
-            "photorealistic architectural rendering, futuristic tech building, smart glass, LED lighting, digital infrastructure, professional photography, 8k resolution, modern architecture",
-            "photorealistic architectural visualization, innovation center, cutting-edge design, technological integration, sustainable technology, professional photography, high detail",
-            "photorealistic architectural model, smart building, IoT integration, renewable energy, modern facade, professional photography, architectural innovation"
+            f"{base_elements}, futuristic tech building, smart glass, LED lighting, digital infrastructure, modern architecture",
+            f"{base_elements}, innovation center, cutting-edge design, technological integration, sustainable technology, high detail",
+            f"{base_elements}, smart building, IoT integration, renewable energy, modern facade, architectural innovation"
         ],
         'sustainability_science': [
-            "photorealistic architectural rendering, green building, living walls, solar panels, sustainable materials, natural environment, professional photography, 8k resolution",
-            "photorealistic architectural visualization, eco-friendly building, passive design, renewable energy, natural ventilation, professional photography, high detail",
-            "photorealistic architectural model, sustainable architecture, green roof, rainwater harvesting, natural lighting, professional photography, environmental design"
+            f"{base_elements}, green building, living walls, solar panels, sustainable materials, natural environment",
+            f"{base_elements}, eco-friendly building, passive design, renewable energy, natural ventilation, high detail",
+            f"{base_elements}, sustainable architecture, green roof, rainwater harvesting, natural lighting, environmental design"
         ],
         'engineering_systems': [
-            "photorealistic architectural rendering, industrial facility, structural engineering, mechanical systems, technical infrastructure, professional photography, 8k resolution",
-            "photorealistic architectural visualization, engineering complex, structural elements, technical design, functional architecture, professional photography, high detail",
-            "photorealistic architectural model, engineering building, structural innovation, technical systems, industrial design, professional photography, engineering architecture"
+            f"{base_elements}, industrial facility, structural engineering, mechanical systems, technical infrastructure",
+            f"{base_elements}, engineering complex, structural elements, technical design, functional architecture, high detail",
+            f"{base_elements}, engineering building, structural innovation, technical systems, industrial design, engineering architecture"
         ],
         'environmental_design': [
-            "photorealistic architectural rendering, environmental building, natural integration, landscape architecture, sustainable design, professional photography, 8k resolution",
-            "photorealistic architectural visualization, eco-architecture, natural materials, environmental harmony, sustainable landscape, professional photography, high detail",
-            "photorealistic architectural model, environmental design, natural systems, sustainable architecture, landscape integration, professional photography, environmental architecture"
+            f"{base_elements}, environmental building, natural integration, landscape architecture, sustainable design",
+            f"{base_elements}, eco-architecture, natural materials, environmental harmony, sustainable landscape, high detail",
+            f"{base_elements}, environmental design, natural systems, sustainable architecture, landscape integration, environmental architecture"
         ],
         'urban_planning': [
-            "photorealistic architectural rendering, urban development, city planning, mixed-use building, urban infrastructure, professional photography, 8k resolution",
-            "photorealistic architectural visualization, urban architecture, cityscape, modern urban design, sustainable urban planning, professional photography, high detail",
-            "photorealistic architectural model, urban building, city integration, modern urbanism, sustainable development, professional photography, urban architecture"
+            f"{base_elements}, urban development, city planning, mixed-use building, urban infrastructure",
+            f"{base_elements}, urban architecture, cityscape, modern urban design, sustainable urban planning, high detail",
+            f"{base_elements}, urban building, city integration, modern urbanism, sustainable development, urban architecture"
         ],
         'spatial_design': [
-            "photorealistic architectural rendering, spatial architecture, interior design, spatial planning, modern interior, professional photography, 8k resolution",
-            "photorealistic architectural visualization, spatial design, interior architecture, space planning, modern spatial concepts, professional photography, high detail",
-            "photorealistic architectural model, spatial building, interior innovation, modern space design, architectural interiors, professional photography, spatial architecture"
+            f"{base_elements}, spatial architecture, interior design, spatial planning, modern interior",
+            f"{base_elements}, spatial design, interior architecture, space planning, modern spatial concepts, high detail",
+            f"{base_elements}, spatial building, interior innovation, modern space design, architectural interiors, spatial architecture"
         ],
         'digital_technology': [
-            "photorealistic architectural rendering, digital building, smart architecture, technological integration, modern digital design, professional photography, 8k resolution",
-            "photorealistic architectural visualization, digital architecture, smart systems, technological innovation, modern digital space, professional photography, high detail",
-            "photorealistic architectural model, digital building, smart technology, modern digital architecture, technological design, professional photography, digital architecture"
+            f"{base_elements}, digital building, smart architecture, technological integration, modern digital design",
+            f"{base_elements}, digital architecture, smart systems, technological innovation, modern digital space, high detail",
+            f"{base_elements}, digital building, smart technology, modern digital architecture, technological design, digital architecture"
         ]
     }
     

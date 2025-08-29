@@ -23,7 +23,7 @@ import random
 import requests
 from datetime import datetime
 from collections import defaultdict, Counter
-from research_categories_data import get_related_categories
+from research_theme_data import get_related_categories
 
 # Setup logging
 log = logging.getLogger(__name__)

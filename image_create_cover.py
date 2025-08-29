@@ -116,7 +116,7 @@ def generate_cover_image(cover_type, volume_number=None, output_dir="images"):
         os.makedirs(output_dir, exist_ok=True)
         
         # Generate cover prompt - clean, minimalist research design
-prompt = "Professional research cover design. Modern, clean, minimalist design with research elements, professional typography, suitable for research publication. No text elements, just visual design."
+        prompt = "Professional research cover design. Modern, clean, minimalist design with research elements, professional typography, suitable for research publication. No text elements, just visual design."
         
         # Generate base image
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -233,62 +233,38 @@ def add_cover_brand_overlay(image_path, volume_number=None):
         performance_monitor.end_timer()
         performance_monitor.record_failure()
 
-def create_volume_cover(volume_number, qa_pairs, output_dir="images"):
+def create_cover(cover_type, volume_number=None, qa_pairs=None, output_dir="images"):
     """
-    Create a volume cover image with only brand information
+    Create a cover image with only brand information
     
     Args:
-        volume_number (int): Volume number
-        qa_pairs (list): Q&A pairs for this volume
+        cover_type (str): Type of cover ('volume', 'theme', 'compilation')
+        volume_number (int): Volume number (for volume covers)
+        qa_pairs (list): Q&A pairs (unused, kept for compatibility)
         output_dir (str): Output directory
     
     Returns:
         str: Path to cover image
     """
     try:
-        return generate_cover_image('volume', volume_number, output_dir)
+        return generate_cover_image(cover_type, volume_number, output_dir)
         
     except Exception as e:
-        log.error(f"Error creating volume cover: {e}")
+        log.error(f"Error creating {cover_type} cover: {e}")
         return None
+
+# Backward compatibility functions
+def create_volume_cover(volume_number, qa_pairs, output_dir="images"):
+    """Create a volume cover image (backward compatibility)"""
+    return create_cover('volume', volume_number, qa_pairs, output_dir)
 
 def create_category_cover(theme, qa_pairs, output_dir="images"):
-    """
-    Create a theme cover image with only brand information
-    
-    Args:
-        theme (str): Theme name
-        qa_pairs (list): Q&A pairs for this theme
-        output_dir (str): Output directory
-    
-    Returns:
-        str: Path to cover image
-    """
-    try:
-        return generate_cover_image('theme', None, output_dir)
-        
-    except Exception as e:
-        log.error(f"Error creating theme cover: {e}")
-        return None
+    """Create a theme cover image (backward compatibility)"""
+    return create_cover('theme', None, qa_pairs, output_dir)
 
 def create_compilation_cover(compilation_type, qa_pairs, output_dir="images"):
-    """
-    Create a compilation cover image with only brand information
-    
-    Args:
-        compilation_type (str): Type of compilation
-        qa_pairs (list): Q&A pairs for this compilation
-        output_dir (str): Output directory
-    
-    Returns:
-        str: Path to cover image
-    """
-    try:
-        return generate_cover_image('compilation', None, output_dir)
-        
-    except Exception as e:
-        log.error(f"Error creating compilation cover: {e}")
-        return None
+    """Create a compilation cover image (backward compatibility)"""
+    return create_cover('compilation', None, qa_pairs, output_dir)
 
 def get_performance_stats():
     """Get performance statistics"""

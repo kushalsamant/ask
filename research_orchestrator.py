@@ -6,8 +6,8 @@ Focused wrapper for all research pipeline operations
 This module provides functionality to:
 - Generate Q&A pairs for research themes
 - Create chained Q&A sequences
-- Generate cross-disciplinary content
-- Provide hybrid research approaches
+- Generate multi-theme content
+- Provide enhanced research approaches
 - Manage research statistics and analysis
 - Export research data
 - Mark questions as used
@@ -57,6 +57,9 @@ from research_question_prompts import create_category_question_prompt
 
 # Setup logging
 log = logging.getLogger(__name__)
+
+# Fixed retry delays: 30, 60, 90, 120, 150 seconds
+RETRY_DELAYS = [30, 60, 90, 120, 150]
 
 class ResearchOrchestrator:
     """Orchestrates all research pipeline operations"""
@@ -203,17 +206,17 @@ class ResearchOrchestrator:
         
         return qa_pairs
     
-    def generate_cross_disciplinary_qa_pairs(self, theme_count: int = 5) -> List[dict]:
+    def generate_multi_theme_qa_pairs(self, theme_count: int = 5) -> List[dict]:
         """
-        Generate cross-disciplinary Q&A pairs using themes
+        Generate multi-theme Q&A pairs using themes
         
         Args:
-            theme_count: Number of cross-disciplinary themes to explore
+            theme_count: Number of themes to explore
             
         Returns:
             List of Q&A pair dictionaries
         """
-        log.info(f"Generating cross-disciplinary Q&A pairs for {theme_count} themes...")
+        log.info(f"Generating multi-theme Q&A pairs for {theme_count} themes...")
         
         qa_pairs = []
         
@@ -221,31 +224,31 @@ class ResearchOrchestrator:
             # Get available themes
             themes = get_all_themes()
             if not themes:
-                log.error("No themes available for cross-disciplinary generation")
+                log.error("No themes available for multi-theme generation")
                 return qa_pairs
             
-            # Select themes for cross-disciplinary exploration
+            # Select themes for multi-theme exploration
             selected_themes = random.sample(themes, min(theme_count, len(themes)))
             
             for i, theme in enumerate(selected_themes, 1):
                 try:
-                    log.info(f"Generating cross-disciplinary Q&A pair {i}/{theme_count} for theme: {theme}")
+                    log.info(f"Generating multi-theme Q&A pair {i}/{theme_count} for theme: {theme}")
                     
-                    # Generate cross-disciplinary question
-                    question_data = generate_cross_disciplinary_question(theme)
+                    # Generate multi-theme question
+                    question_data = generate_theme_based_question(theme)
                     if not question_data:
-                        log.error(f"Failed to generate cross-disciplinary question for theme: {theme}")
+                        log.error(f"Failed to generate multi-theme question for theme: {theme}")
                         continue
                     
                     question = question_data.get('question', '')
                     if not question:
-                        log.error(f"No question in cross-disciplinary data for theme: {theme}")
+                        log.error(f"No question in multi-theme data for theme: {theme}")
                         continue
                     
                     # Generate answer
-                    answer = self._generate_answer_for_question(question, "cross_disciplinary")
+                    answer = self._generate_answer_for_question(question, "multi_theme")
                     if not answer:
-                        log.error(f"Failed to generate cross-disciplinary answer for theme: {theme}")
+                        log.error(f"Failed to generate multi-theme answer for theme: {theme}")
                         continue
                     
                     # Get next image number
@@ -253,7 +256,7 @@ class ResearchOrchestrator:
                     
                     # Create Q&A pair
                     qa_pair = {
-                        'theme': 'cross_disciplinary',
+                        'theme': 'multi_theme',
                         'question_text': question,
                         'answer_text': answer,
                         'image_number': image_number,
@@ -263,30 +266,30 @@ class ResearchOrchestrator:
                     qa_pairs.append(qa_pair)
                     
                     # Log to CSV
-                    log_single_question('cross_disciplinary', question, answer, image_number)
+                    log_single_question('multi_theme', question, answer, image_number)
                     
-                    log.info(f" Generated cross-disciplinary Q&A pair {i}: {question[:50]}...")
+                    log.info(f" Generated multi-theme Q&A pair {i}: {question[:50]}...")
                     
                 except Exception as e:
-                    log.error(f"Failed to generate cross-disciplinary Q&A pair {i}: {e}")
+                    log.error(f"Failed to generate multi-theme Q&A pair {i}: {e}")
         
         except Exception as e:
-            log.error(f"Failed to generate cross-disciplinary Q&A pairs: {e}")
+            log.error(f"Failed to generate multi-theme Q&A pairs: {e}")
         
         return qa_pairs
     
-    def generate_hybrid_cross_disciplinary_chain(self, theme_count: int = 3, chain_length: int = 3) -> List[dict]:
+    def generate_enhanced_multi_theme_chain(self, theme_count: int = 3, chain_length: int = 3) -> List[dict]:
         """
-        Generate hybrid content that combines cross-disciplinary and chained approaches
+        Generate enhanced content that combines multi-theme and chained approaches
         
         Args:
-            theme_count: Number of cross-disciplinary themes to explore
+            theme_count: Number of themes to explore
             chain_length: Number of chained questions per theme
             
         Returns:
-            List of Q&A pair dictionaries with cross-disciplinary chains
+            List of Q&A pair dictionaries with multi-theme chains
         """
-        log.info(f"Generating hybrid cross-disciplinary chains for {theme_count} themes...")
+        log.info(f"Generating enhanced multi-theme chains for {theme_count} themes...")
         
         qa_pairs = []
         
@@ -294,31 +297,31 @@ class ResearchOrchestrator:
             # Get available themes
             themes = get_all_themes()
             if not themes:
-                log.error("No themes available for hybrid generation")
+                log.error("No themes available for enhanced generation")
                 return qa_pairs
             
-            # Select themes for cross-disciplinary exploration
+            # Select themes for multi-theme exploration
             selected_themes = random.sample(themes, min(theme_count, len(themes)))
             
             for theme_idx, theme in enumerate(selected_themes, 1):
                 try:
-                    log.info(f"Generating hybrid chain {theme_idx}/{theme_count} for theme: {theme}")
+                    log.info(f"Generating enhanced chain {theme_idx}/{theme_count} for theme: {theme}")
                     
-                    # Step 1: Generate initial cross-disciplinary question
-                    cross_question_data = generate_cross_disciplinary_question(theme)
-                    if not cross_question_data:
-                        log.error(f"Failed to generate cross-disciplinary question for theme: {theme}")
+                    # Step 1: Generate initial multi-theme question
+                    question_data = generate_theme_based_question(theme)
+                    if not question_data:
+                        log.error(f"Failed to generate multi-theme question for theme: {theme}")
                         continue
                     
-                    initial_question = cross_question_data.get('question', '')
+                    initial_question = question_data.get('question', '')
                     if not initial_question:
-                        log.error(f"No question in cross-disciplinary data for theme: {theme}")
+                        log.error(f"No question in multi-theme data for theme: {theme}")
                         continue
                     
-                    # Step 2: Generate answer for initial cross-disciplinary question
-                    initial_answer = self._generate_answer_for_question(initial_question, "cross_disciplinary")
+                    # Step 2: Generate answer for initial multi-theme question
+                    initial_answer = self._generate_answer_for_question(initial_question, "multi_theme")
                     if not initial_answer:
-                        log.error(f"Failed to generate answer for cross-disciplinary question: {theme}")
+                        log.error(f"Failed to generate answer for multi-theme question: {theme}")
                         continue
                     
                     # Get next image number
@@ -326,32 +329,32 @@ class ResearchOrchestrator:
                     
                     # Create initial Q&A pair
                     initial_qa_pair = {
-                        'theme': 'cross_disciplinary',
+                        'theme': 'multi_theme',
                         'question_text': initial_question,
                         'answer_text': initial_answer,
                         'image_number': image_number,
                         'original_theme': theme,
                         'chain_position': 1,
                         'chain_id': f"chain_{theme_idx}",
-                        'is_cross_disciplinary': True
+                        'is_multi_theme': True
                     }
                     
                     qa_pairs.append(initial_qa_pair)
                     
                     # Log to CSV
-                    log_single_question('cross_disciplinary', initial_question, initial_answer, image_number)
+                    log_single_question('multi_theme', initial_question, initial_answer, image_number)
                     
-                    log.info(f" Generated initial cross-disciplinary Q&A for theme {theme_idx}: {initial_question[:50]}...")
+                    log.info(f" Generated initial multi-theme Q&A for theme {theme_idx}: {initial_question[:50]}...")
                     
-                    # Step 3: Generate chained questions based on the cross-disciplinary answer
+                    # Step 3: Generate chained questions based on the multi-theme answer
                     current_question = initial_question
                     current_answer = initial_answer
                     
                     for chain_step in range(2, chain_length + 1):
                         try:
                             # Generate next question based on the previous answer
-                            next_question = self._generate_chained_cross_disciplinary_question(
-                                current_answer, theme, cross_question_data
+                            next_question = self._generate_chained_multi_theme_question(
+                                current_answer, theme, question_data
                             )
                             
                             if not next_question:
@@ -359,7 +362,7 @@ class ResearchOrchestrator:
                                 break
                             
                             # Generate answer for the chained question
-                            next_answer = self._generate_answer_for_question(next_question, "cross_disciplinary")
+                            next_answer = self._generate_answer_for_question(next_question, "multi_theme")
                             if not next_answer:
                                 log.warning(f"Failed to generate answer for chained question {chain_step}: {theme}")
                                 break
@@ -369,21 +372,21 @@ class ResearchOrchestrator:
                             
                             # Create chained Q&A pair
                             chained_qa_pair = {
-                                'theme': 'cross_disciplinary',
+                                'theme': 'multi_theme',
                                 'question_text': next_question,
                                 'answer_text': next_answer,
                                 'image_number': image_number,
                                 'original_theme': theme,
                                 'chain_position': chain_step,
                                 'chain_id': f"chain_{theme_idx}",
-                                'is_cross_disciplinary': True,
+                                'is_multi_theme': True,
                                 'is_chained': True
                             }
                             
                             qa_pairs.append(chained_qa_pair)
                             
                             # Log to CSV
-                            log_single_question('cross_disciplinary', next_question, next_answer, image_number)
+                            log_single_question('multi_theme', next_question, next_answer, image_number)
                             
                             log.info(f" Generated chained Q&A {chain_step}/{chain_length} for theme {theme_idx}: {next_question[:50]}...")
                             
@@ -395,22 +398,19 @@ class ResearchOrchestrator:
                             log.error(f"Failed to generate chained Q&A {chain_step} for theme {theme}: {e}")
                             break
                     
-                    log.info(f" Completed hybrid chain {theme_idx}/{theme_count} for theme: {theme}")
+                    log.info(f" Completed enhanced chain {theme_idx}/{theme_count} for theme: {theme}")
                     
                 except Exception as e:
-                    log.error(f"Failed to generate hybrid chain for theme {theme}: {e}")
+                    log.error(f"Failed to generate enhanced chain for theme {theme}: {e}")
         
         except Exception as e:
-            log.error(f"Failed to generate hybrid cross-disciplinary chains: {e}")
+            log.error(f"Failed to generate enhanced multi-theme chains: {e}")
         
-        log.info(f" Generated {len(qa_pairs)} total Q&A pairs in hybrid chains")
+        log.info(f" Generated {len(qa_pairs)} total Q&A pairs in enhanced chains")
         return qa_pairs
     
     def _generate_question_for_category(self, theme: str, max_retries: int = 5) -> Optional[str]:
         """Generate question for specific theme with retry logic"""
-        # Fixed retry delays: 30, 60, 90, 120, 150 seconds
-        retry_delays = [30, 60, 90, 120, 150]
-        
         for attempt in range(max_retries):
             try:
                 question = generate_single_question_for_category(theme)
@@ -421,7 +421,7 @@ class ResearchOrchestrator:
                 log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating question for {theme}: {e}")
             
             if attempt < max_retries - 1:
-                wait_time = retry_delays[attempt]
+                wait_time = RETRY_DELAYS[attempt]
                 log.info(f"Waiting {wait_time} seconds before retry {attempt + 2}/{max_retries}")
                 time.sleep(wait_time)
         
@@ -430,9 +430,6 @@ class ResearchOrchestrator:
     
     def _generate_question_from_answer(self, answer: str, theme: str, max_retries: int = 5) -> Optional[str]:
         """Generate question based on previous answer with retry logic"""
-        # Fixed retry delays: 30, 60, 90, 120, 150 seconds
-        retry_delays = [30, 60, 90, 120, 150]
-        
         for attempt in range(max_retries):
             try:
                 question = generate_question_from_answer(answer, theme)
@@ -443,7 +440,7 @@ class ResearchOrchestrator:
                 log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating chained question for {theme}: {e}")
             
             if attempt < max_retries - 1:
-                wait_time = retry_delays[attempt]
+                wait_time = RETRY_DELAYS[attempt]
                 log.info(f"Waiting {wait_time} seconds before retry {attempt + 2}/{max_retries}")
                 time.sleep(wait_time)
         
@@ -452,9 +449,6 @@ class ResearchOrchestrator:
     
     def _generate_answer_for_question(self, question: str, theme: str, max_retries: int = 5) -> Optional[str]:
         """Generate answer for specific question with retry logic"""
-        # Fixed retry delays: 30, 60, 90, 120, 150 seconds
-        retry_delays = [30, 60, 90, 120, 150]
-        
         for attempt in range(max_retries):
             try:
                 answer = generate_answer(question, theme, None)  # Pass None for image_path
@@ -465,21 +459,21 @@ class ResearchOrchestrator:
                 log.error(f"Attempt {attempt + 1}/{max_retries}: Error generating answer for {theme}: {e}")
             
             if attempt < max_retries - 1:
-                wait_time = retry_delays[attempt]
+                wait_time = RETRY_DELAYS[attempt]
                 log.info(f"Waiting {wait_time} seconds before retry {attempt + 2}/{max_retries}")
                 time.sleep(wait_time)
         
         log.error(f"Failed to generate answer for {theme} after {max_retries} attempts")
         return None
     
-    def _generate_chained_cross_disciplinary_question(self, previous_answer: str, theme: str, original_question_data: dict) -> Optional[str]:
+    def _generate_chained_multi_theme_question(self, previous_answer: str, theme: str, original_question_data: dict) -> Optional[str]:
         """
-        Generate a chained question that builds on a cross-disciplinary answer
+        Generate a chained question that builds on a multi-theme answer
         
         Args:
             previous_answer: The previous answer to build upon
-            theme: The cross-disciplinary theme
-            original_question_data: Data from the original cross-disciplinary question
+            theme: The multi-theme theme
+            original_question_data: Data from the original multi-theme question
             
         Returns:
             Generated chained question or None if failed
@@ -492,16 +486,16 @@ class ResearchOrchestrator:
             elif 'themes' in original_question_data:
                 themes.extend(original_question_data['themes'])
             
-            # Create a prompt for generating chained cross-disciplinary questions
+            # Create a prompt for generating chained multi-theme questions
             prompt = f"""
-            Previous Cross-Disciplinary Question: {original_question_data.get('question', '')}
+            Previous Multi-Theme Question: {original_question_data.get('question', '')}
             Theme: {theme}
             Themes Involved: {', '.join(themes)}
             Previous Answer: {previous_answer}
             
             Generate a follow-up question that:
             1. Builds upon the insights from the previous answer
-            2. Explores deeper aspects of the cross-disciplinary intersection
+            2. Explores deeper aspects of the multi-theme intersection
             3. Maintains the connection between the involved themes
             4. Advances the exploration of the theme
             5. Is specific and actionable
@@ -510,27 +504,27 @@ class ResearchOrchestrator:
             """
             
             # Use the existing question generation infrastructure
-            system_prompt = "You are an expert architectural researcher specializing in cross-disciplinary exploration. Generate insightful follow-up questions that build upon previous answers and explore deeper connections between architectural themes."
+            system_prompt = "You are an expert architectural researcher specializing in multi-theme exploration. Generate insightful follow-up questions that build upon previous answers and explore deeper connections between architectural themes."
             
             # Call API to generate the chained question
             raw_response = call_together_api(prompt, system_prompt)
             
             if not raw_response:
-                log.warning("No response generated for chained cross-disciplinary question")
+                log.warning("No response generated for chained multi-theme question")
                 return None
             
             # Process the response to extract the question
             question = process_question_response(raw_response)
             
             if not question:
-                log.warning("No valid question extracted from chained cross-disciplinary response")
+                log.warning("No valid question extracted from chained multi-theme response")
                 return None
             
-            log.info(f" Generated chained cross-disciplinary question: {question[:50]}...")
+            log.info(f" Generated chained multi-theme question: {question[:50]}...")
             return question
             
         except Exception as e:
-            log.error(f"Error generating chained cross-disciplinary question: {e}")
+            log.error(f"Error generating chained multi-theme question: {e}")
         return None
     
     def get_research_statistics(self) -> Dict[str, any]:
@@ -631,15 +625,15 @@ def generate_chained_qa_pairs(themes: List[str], chain_length: int = 2) -> List[
     orchestrator = ResearchOrchestrator()
     return orchestrator.generate_chained_qa_pairs(themes, chain_length)
 
-def generate_cross_disciplinary_qa_pairs(theme_count: int = 5) -> List[dict]:
-    """Generate cross-disciplinary Q&A pairs"""
+def generate_multi_theme_qa_pairs(theme_count: int = 5) -> List[dict]:
+    """Generate multi-theme Q&A pairs"""
     orchestrator = ResearchOrchestrator()
-    return orchestrator.generate_cross_disciplinary_qa_pairs(theme_count)
+    return orchestrator.generate_multi_theme_qa_pairs(theme_count)
 
-def generate_hybrid_cross_disciplinary_chain(theme_count: int = 3, chain_length: int = 3) -> List[dict]:
-    """Generate hybrid cross-disciplinary chains"""
+def generate_enhanced_multi_theme_chain(theme_count: int = 3, chain_length: int = 3) -> List[dict]:
+    """Generate enhanced multi-theme chains"""
     orchestrator = ResearchOrchestrator()
-    return orchestrator.generate_hybrid_cross_disciplinary_chain(theme_count, chain_length)
+    return orchestrator.generate_enhanced_multi_theme_chain(theme_count, chain_length)
 
 def get_research_statistics() -> Dict[str, any]:
     """Get comprehensive research statistics"""

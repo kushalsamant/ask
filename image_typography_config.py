@@ -623,65 +623,26 @@ typography_config = ImageTypographyConfig()
 # Convenience functions with performance monitoring
 @performance_monitor
 def get_font_config(font_type: str = 'question') -> Dict[str, Any]:
-    """
-    Get font configuration with performance monitoring
-    
-    Args:
-        font_type: Type of font
-        
-    Returns:
-        Dict[str, Any]: Font configuration
-    """
+    """Get font configuration with performance monitoring"""
     return typography_config.get_font_config(font_type)
 
 @performance_monitor
 def calculate_adaptive_font_size(text: str, base_font_type: str = 'question') -> int:
-    """
-    Calculate adaptive font size with performance monitoring
-    
-    Args:
-        text: Text content
-        base_font_type: Base font type
-        
-    Returns:
-        int: Adaptive font size
-    """
+    """Calculate adaptive font size with performance monitoring"""
     return typography_config.calculate_adaptive_font_size(text, base_font_type)
 
 @performance_monitor
 def get_color_rgb(color_hex: str) -> Tuple[int, int, int]:
-    """
-    Convert hex color to RGB with performance monitoring
-    
-    Args:
-        color_hex: Hex color string
-        
-    Returns:
-        Tuple[int, int, int]: RGB values
-    """
+    """Convert hex color to RGB with performance monitoring"""
     return typography_config.get_color_rgb(color_hex)
 
 @performance_monitor
 def get_color_rgba(color_hex: str, alpha: float = 1.0) -> Tuple[int, int, int, int]:
-    """
-    Convert hex color to RGBA with performance monitoring
-    
-    Args:
-        color_hex: Hex color string
-        alpha: Alpha value
-        
-    Returns:
-        Tuple[int, int, int, int]: RGBA values
-    """
+    """Convert hex color to RGBA with performance monitoring"""
     return typography_config.get_color_rgba(color_hex, alpha)
 
 def get_performance_statistics() -> Dict[str, Any]:
-    """
-    Get performance statistics
-    
-    Returns:
-        dict: Performance statistics
-    """
+    """Get performance statistics"""
     return typography_config.get_performance_statistics()
 
 def reset_performance_stats():
@@ -689,12 +650,7 @@ def reset_performance_stats():
     typography_config.reset_performance_stats()
 
 def validate_environment() -> Dict[str, Any]:
-    """
-    Validate environment
-    
-    Returns:
-        dict: Environment validation results
-    """
+    """Validate environment"""
     return typography_config.validate_environment()
 
 # Export main functions

@@ -52,10 +52,6 @@ def validate_input_parameters(prompt: str, theme: str, image_number: Any, image_
             return False, "Invalid image type"
         return True, "All parameters valid"
     except Exception as e:
-        log.error(f"Error in enhanced image generation: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        raise
         return False, f"Validation error: {str(e)}"
 
 def validate_environment():
@@ -77,11 +73,8 @@ def validate_environment():
         
         return True, "Environment configuration valid"
     except Exception as e:
-        log.error(f"Error in enhanced image generation: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        raise
         return False, f"Environment validation error: {str(e)}"
+
 import logging
 import random
 from PIL import Image

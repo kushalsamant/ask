@@ -31,7 +31,7 @@ from functools import lru_cache, wraps
 from collections import defaultdict
 
 # Import core dependencies
-from research_categories_data import get_main_categories, get_subcategories
+from research_theme_data import get_main_categories, get_subcategories
 
 # Setup logging
 log = logging.getLogger(__name__)

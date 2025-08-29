@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Optimized API Client Module for ASK Research Tool
-Enhanced with heavy testing, performance optimization, and advanced features
+API Client Module for ASK Research Tool
 """
 
 import os
@@ -204,7 +203,7 @@ class RateLimiter:
         return False
 
 class APIClient:
-    """Enhanced API client with advanced features for heavy testing and optimization"""
+    """Enhanced API client with advanced features"""
     
     def __init__(self):
         """Initialize optimized API client"""
@@ -212,9 +211,7 @@ class APIClient:
         self.api_key = os.getenv('TOGETHER_API_KEY')
         self.api_base = os.getenv('TOGETHER_API_BASE', 'https://api.together.xyz/v1')
         self.timeout = int(os.getenv('API_TIMEOUT', '60'))
-        self.rate_limit_delay = float(os.getenv('RATE_LIMIT_DELAY', '10.0'))
         self.max_retries = int(os.getenv('API_MAX_RETRIES', '5'))
-        self.retry_delay_multiplier = int(os.getenv('RETRY_DELAY_MULTIPLIER', '30'))
         self.retryable_codes = [int(x) for x in os.getenv('RETRYABLE_STATUS_CODES', '408,429,500,502,503,504').split(',')]
         
         # Enhanced retry delays with exponential backoff
@@ -274,6 +271,19 @@ class APIClient:
         if self.circuit_breaker['failures'] >= self.circuit_breaker['threshold']:
             self.circuit_breaker['state'] = 'OPEN'
     
+    def _handle_retry(self, attempt: int, error_type: str, error_msg: str, response_time: float) -> bool:
+        """Handle retry logic for failed requests"""
+        if attempt < self.max_retries - 1:
+            wait_time = self.retry_delays[attempt]
+            log.warning(f"{error_type}, retrying in {wait_time}s: {error_msg}")
+            time.sleep(wait_time)
+            return True
+        else:
+            log.error(f"{error_type} after {self.max_retries} attempts: {error_msg}")
+            self.metrics.update_metrics(False, response_time, error_type)
+            self._circuit_breaker_failure()
+            return False
+    
     def _make_request(self, endpoint: str, payload: Dict[str, Any], 
                      operation_name: str = "API call", use_cache: bool = True) -> Optional[Dict[str, Any]]:
         """
@@ -321,16 +331,10 @@ class APIClient:
                 
                 elif response.status_code in self.retryable_codes:
                     self.metrics.rate_limit_hits += 1
-                    if attempt < self.max_retries - 1:
-                        wait_time = self.retry_delays[attempt]
-                        log.warning(f"Retryable error {response.status_code}, retrying in {wait_time}s")
-                        time.sleep(wait_time)
-                        continue
-                    else:
-                        log.error(f"Retryable error {response.status_code} after {self.max_retries} attempts")
-                        self.metrics.update_metrics(False, response_time, f"HTTP_{response.status_code}")
-                        self._circuit_breaker_failure()
+                    if not self._handle_retry(attempt, f"Retryable error {response.status_code}", 
+                                            f"Status {response.status_code}", response_time):
                         return None
+                    continue
                 
                 else:
                     error_text = response.text[:200] if response.text else "No response text"
@@ -341,40 +345,19 @@ class APIClient:
                     
             except requests.exceptions.Timeout:
                 self.metrics.timeout_hits += 1
-                if attempt < self.max_retries - 1:
-                    wait_time = self.retry_delays[attempt]
-                    log.warning(f"Timeout, retrying in {wait_time}s")
-                    time.sleep(wait_time)
-                    continue
-                else:
-                    log.error(f"Timeout after {self.max_retries} attempts")
-                    self.metrics.update_metrics(False, time.time() - start_time, "TIMEOUT")
-                    self._circuit_breaker_failure()
+                if not self._handle_retry(attempt, "Timeout", "Request timed out", time.time() - start_time):
                     return None
+                continue
                     
             except requests.exceptions.RequestException as e:
-                if attempt < self.max_retries - 1:
-                    wait_time = self.retry_delays[attempt]
-                    log.warning(f"Network error, retrying in {wait_time}s: {e}")
-                    time.sleep(wait_time)
-                    continue
-                else:
-                    log.error(f"Network error after {self.max_retries} attempts: {e}")
-                    self.metrics.update_metrics(False, time.time() - start_time, "NETWORK_ERROR")
-                    self._circuit_breaker_failure()
+                if not self._handle_retry(attempt, "Network error", str(e), time.time() - start_time):
                     return None
+                continue
                     
             except Exception as e:
-                if attempt < self.max_retries - 1:
-                    wait_time = self.retry_delays[attempt]
-                    log.warning(f"Unexpected error, retrying in {wait_time}s: {e}")
-                    time.sleep(wait_time)
-                    continue
-                else:
-                    log.error(f"Unexpected error after {self.max_retries} attempts: {e}")
-                    self.metrics.update_metrics(False, time.time() - start_time, "UNEXPECTED_ERROR")
-                    self._circuit_breaker_failure()
+                if not self._handle_retry(attempt, "Unexpected error", str(e), time.time() - start_time):
                     return None
+                continue
         
         log.error(f"Failed {operation_name} after {self.max_retries} attempts")
         return None
@@ -552,20 +535,3 @@ class APIClient:
 
 # Global API client instance
 api_client = APIClient()
-
-# Convenience functions for backward compatibility
-def call_together_api(prompt: str, system_prompt: Optional[str] = None, **kwargs) -> Optional[str]:
-    """Backward compatibility function for text API calls"""
-    return api_client.call_text_api(prompt, system_prompt, **kwargs)
-
-def call_together_api_for_answer(prompt: str, system_prompt: Optional[str] = None, **kwargs) -> Optional[str]:
-    """Backward compatibility function for vision API calls"""
-    return api_client.call_vision_api(prompt, system_prompt, **kwargs)
-
-def make_api_request(api_key: str, endpoint: str, payload: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-    """Legacy function for backward compatibility"""
-    # Create temporary client with provided API key
-    temp_client = APIClient()
-    temp_client.api_key = api_key
-    temp_client.headers["Authorization"] = f"Bearer {api_key}"
-    return temp_client._make_request(endpoint, payload, "legacy API request", use_cache=False)

@@ -145,7 +145,6 @@ cython_debug/
 # =============================================================================
 
 # Environment and configuration files (contain sensitive data)
-.env
 .env.local
 .env.production
 .env.staging
@@ -164,9 +163,6 @@ credentials.json
 
 # Logs and execution data
 logs/
-*.log
-log.csv
-log.csv.*
 execution.log
 debug.log
 error.log
@@ -182,8 +178,6 @@ output/
 results/
 exports/
 backups/
-temp/
-tmp/
 
 # Research data and databases
 *.db
@@ -197,7 +191,6 @@ datasets/
 volume_*.csv
 backup_*/
 *.backup
-*.bak
 
 # Development and testing files
 prompt.txt
@@ -230,7 +223,6 @@ models/
 *.ggml
 
 # Hugging Face cache
-.cache/
 huggingface/
 transformers_cache/
 diffusers_cache/
@@ -242,8 +234,6 @@ checkpoints/
 saved_models/
 
 # PyTorch
-*.pth
-*.pt
 checkpoints/
 runs/
 lightning_logs/
@@ -274,7 +264,6 @@ temp_*
 generated/
 samples/
 outputs/
-results/
 
 # =============================================================================
 # DEVELOPMENT TOOLS
@@ -283,8 +272,6 @@ results/
 # IDEs and editors
 .vscode/
 .idea/
-*.swp
-*.swo
 *~
 .project
 .classpath
@@ -300,7 +287,6 @@ results/
 [._]sw[a-p]
 
 # Emacs
-*~
 \#*\#
 /.emacs.desktop
 /.emacs.desktop.lock
@@ -337,8 +323,6 @@ Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
-*.tmp
-*.temp
 Desktop.ini
 $RECYCLE.BIN/
 *.cab
@@ -349,7 +333,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # Linux
-*~
 .fuse_hidden*
 .directory
 .Trash-*
@@ -361,7 +344,6 @@ $RECYCLE.BIN/
 
 # SSL certificates
 *.pem
-*.key
 *.crt
 *.csr
 *.p12
@@ -397,14 +379,6 @@ known_hosts
 # TESTING & QUALITY ASSURANCE
 # =============================================================================
 
-# Test coverage
-.coverage
-coverage.xml
-htmlcov/
-.tox/
-.pytest_cache/
-.mypy_cache/
-
 # Performance testing
 perf_results/
 benchmark_results/
@@ -427,7 +401,6 @@ vulnerability_reports/
 deploy/
 deployment/
 *.deploy
-*.env.production
 
 # CI/CD
 .github/workflows/*.log
@@ -459,7 +432,6 @@ telemetry/
 # =============================================================================
 
 # Documentation builds
-docs/_build/
 docs/build/
 site/
 _site/
@@ -469,34 +441,22 @@ _site/
 # =============================================================================
 
 # Temporary files
-*.tmp
-*.temp
 temp/
 tmp/
 .tmp/
 .temp/
 
 # Cache directories
-.cache/
 cache/
-__pycache__/
-*.pyc
 
 # =============================================================================
 # BACKUP & RECOVERY
 # =============================================================================
 
 # Backup files
-*.bak
-*.backup
 *.old
 *.orig
 *.save
-*.swp
-*.swo
-*~
-
-# Recovery files
 *.recovery
 *.restore
 

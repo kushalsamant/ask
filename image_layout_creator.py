@@ -752,43 +752,16 @@ layout_creator = ImageLayoutCreator()
 # Convenience functions with performance monitoring
 @performance_monitor
 def create_question_image(image_path: str, question_text: str, theme: str, image_number: str) -> Image.Image:
-    """
-    Create question image with performance monitoring
-    
-    Args:
-        image_path: Path to source image
-        question_text: Question text to add
-        theme: Theme/category name
-        image_number: Image number identifier
-        
-    Returns:
-        PIL.Image: Processed image with question text
-    """
+    """Create question image with performance monitoring"""
     return layout_creator.create_question_image(image_path, question_text, theme, image_number)
 
 @performance_monitor
 def create_answer_image(image_path: str, answer_text: str, theme: str, image_number: str) -> Image.Image:
-    """
-    Create answer image with performance monitoring
-    
-    Args:
-        image_path: Path to source image
-        answer_text: Answer text to add
-        theme: Theme/category name
-        image_number: Image number identifier
-        
-    Returns:
-        PIL.Image: Processed image with answer text
-    """
+    """Create answer image with performance monitoring"""
     return layout_creator.create_answer_image(image_path, answer_text, theme, image_number)
 
 def get_performance_statistics() -> Dict[str, Any]:
-    """
-    Get performance statistics
-    
-    Returns:
-        dict: Performance statistics
-    """
+    """Get performance statistics"""
     return layout_creator.get_performance_statistics()
 
 def reset_performance_stats():
@@ -796,12 +769,7 @@ def reset_performance_stats():
     layout_creator.reset_performance_stats()
 
 def validate_environment() -> Dict[str, Any]:
-    """
-    Validate environment
-    
-    Returns:
-        dict: Environment validation results
-    """
+    """Validate environment"""
     return layout_creator.validate_environment()
 
 # Export main functions

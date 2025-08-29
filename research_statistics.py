@@ -487,10 +487,6 @@ def get_stats() -> Dict[str, Any]:
     """Convenience function for getting questions statistics"""
     return get_questions_statistics()
 
-def get_performance_stats() -> Dict[str, Any]:
-    """Convenience function for getting performance statistics"""
-    return get_performance_statistics()
-
 # Export main functions
 __all__ = [
     'get_questions_by_category',
@@ -503,6 +499,5 @@ __all__ = [
     'reset_performance_stats',
     'get_questions_for_theme',
     'get_theme_statistics',
-    'get_stats',
-    'get_performance_stats'
+    'get_stats'
 ]

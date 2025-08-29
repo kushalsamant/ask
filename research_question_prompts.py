@@ -35,6 +35,22 @@ VALID_QUESTION_PATTERN = r'^[A-Za-z].*\?$'
 THEME_MAX_LENGTH = 100
 ANSWER_MAX_LENGTH = 2000
 
+# Common prompt elements
+BASE_SYSTEM_PROMPT = """You are an expert research assistant specializing in question generation for academic and professional research. You excel at creating thought-provoking, open-ended questions that inspire deep thinking and meaningful discussion. Your questions are clear, specific, and designed to explore complex topics from multiple perspectives."""
+
+BASE_PROMPT_START = """You are an expert research assistant and educator."""
+
+COMMON_REQUIREMENTS = """Requirements:
+- Create an open-ended question that encourages deep thinking and discussion
+- Focus on innovation, sustainability, future trends, and societal impact
+- Consider global perspectives and cross-cultural implications
+- Start the question with "How", "What", or "Why"
+- Use clear, professional language
+- Make the question unique and thought-provoking
+- Format: Single question ending with a question mark (?)
+- Minimum length: {min_length} characters
+- Maximum length: {max_length} characters"""
+
 # Performance monitoring
 _performance_stats = {
     'total_prompts_created': 0,
@@ -137,24 +153,13 @@ def create_category_question_prompt(theme: str) -> Tuple[str, str]:
         
         log.info(f"Creating category question prompt for theme: {theme}")
         
-        system_prompt = """You are an expert research assistant specializing in question generation for academic and professional research. You excel at creating thought-provoking, open-ended questions that inspire deep thinking and meaningful discussion. Your questions are clear, specific, and designed to explore complex topics from multiple perspectives."""
-
-        prompt = f"""You are an expert research assistant and educator. Generate 1 thought-provoking question about {theme} in research and practice.
+        prompt = f"""{BASE_PROMPT_START} Generate 1 thought-provoking question about {theme} in research and practice.
 
 Context: This question will inspire research and creative thinking. It should challenge conventional wisdom and explore the intersection of {theme} with contemporary challenges and opportunities.
 
-Requirements:
-- Create an open-ended question that encourages deep thinking and discussion
-- Focus on innovation, sustainability, future trends, and societal impact
+{COMMON_REQUIREMENTS.format(min_length=MIN_QUESTION_LENGTH, max_length=MAX_QUESTION_LENGTH)}
 - Address real-world challenges and opportunities in {theme}
-- Consider global perspectives and cross-cultural implications
-- Start the question with "How", "What", or "Why"
-- Use clear, professional language
-- Make the question unique and thought-provoking
 - Ensure the question is specific to {theme}
-- Format: Single question ending with a question mark (?)
-- Minimum length: {MIN_QUESTION_LENGTH} characters
-- Maximum length: {MAX_QUESTION_LENGTH} characters
 
 Example format:
 How can we design buildings that respond to climate change?
@@ -166,7 +171,7 @@ Please generate 1 {theme}-specific question that provokes meaningful research di
         
         log.info(f" Created category question prompt for '{theme}' in {duration:.3f}s")
         
-        return prompt, system_prompt
+        return prompt, BASE_SYSTEM_PROMPT
         
     except ValueError as e:
         log.error(f"Validation error for theme '{theme}': {e}")
@@ -211,26 +216,15 @@ def create_answer_based_question_prompt(answer: str, theme: str) -> Tuple[str, s
         
         log.info(f"Creating answer-based question prompt for theme: {theme}")
         
-        system_prompt = """You are an expert research assistant specializing in question generation for academic and professional research. You excel at creating thought-provoking, open-ended questions that build upon previous insights and continue research narratives. Your questions are clear, specific, and designed to explore complex topics from multiple perspectives."""
-
-        prompt = f"""You are an expert research assistant and educator. Based on the following research insight, generate 1 thought-provoking question about {theme} in research and practice.
+        prompt = f"""{BASE_PROMPT_START} Based on the following research insight, generate 1 thought-provoking question about {theme} in research and practice.
 
 Research Insight: {answer}
 
 Context: This question should build upon the research insight and explore related aspects of {theme}. It should continue the research narrative and encourage further exploration and analysis.
 
-Requirements:
-- Create an open-ended question that builds upon the research insight
-- Focus on innovation, sustainability, future trends, and societal impact
+{COMMON_REQUIREMENTS.format(min_length=MIN_QUESTION_LENGTH, max_length=MAX_QUESTION_LENGTH)}
 - Address real-world challenges and opportunities in {theme}
-- Consider global perspectives and cross-cultural implications
-- Start the question with "How", "What", or "Why"
-- Use clear, professional language
-- Make the question unique and thought-provoking
 - Ensure the question relates to both the insight and {theme}
-- Format: Single question ending with a question mark (?)
-- Minimum length: {MIN_QUESTION_LENGTH} characters
-- Maximum length: {MAX_QUESTION_LENGTH} characters
 
 Example format:
 How can we design buildings that respond to climate change?
@@ -242,7 +236,7 @@ Please generate 1 {theme}-specific question that builds upon the research insigh
         
         log.info(f" Created answer-based question prompt for '{theme}' in {duration:.3f}s")
         
-        return prompt, system_prompt
+        return prompt, BASE_SYSTEM_PROMPT
         
     except ValueError as e:
         log.error(f"Validation error for answer-based prompt (theme: '{theme}'): {e}")
@@ -409,9 +403,9 @@ def get_prompt_statistics() -> Dict[str, Any]:
         'optimization_date': '2025-08-24'
     }
 
-def create_cross_disciplinary_prompt(theme1: str, theme2: str) -> Tuple[str, str]:
+def create_multi_theme_prompt(theme1: str, theme2: str) -> Tuple[str, str]:
     """
-    Create a prompt for generating cross-disciplinary questions
+    Create a prompt for generating multi-theme questions
     
     Args:
         theme1 (str): First theme
@@ -437,37 +431,28 @@ def create_cross_disciplinary_prompt(theme1: str, theme2: str) -> Tuple[str, str
         theme1 = sanitize_text(theme1)
         theme2 = sanitize_text(theme2)
         
-        log.info(f"Creating cross-disciplinary prompt for themes: {theme1} and {theme2}")
+        log.info(f"Creating multi-theme prompt for themes: {theme1} and {theme2}")
         
-        system_prompt = """You are an expert research assistant specializing in cross-disciplinary question generation. You excel at creating questions that bridge different fields and explore innovative intersections between disciplines."""
+        system_prompt = """You are an expert research assistant specializing in multi-theme question generation. You excel at creating questions that bridge different fields and explore innovative intersections between themes."""
         
-        prompt = f"""You are an expert research assistant and educator. Generate 1 thought-provoking cross-disciplinary question that explores the intersection of {theme1} and {theme2}.
+        prompt = f"""{BASE_PROMPT_START} Generate 1 thought-provoking multi-theme question that explores the intersection of {theme1} and {theme2}.
 
 Context: This question should explore how these two themes can inform and enhance each other, leading to innovative research directions and practical applications.
 
-Requirements:
-- Create an open-ended question that bridges {theme1} and {theme2}
-- Focus on innovation, collaboration, and mutual enhancement
-- Address real-world challenges that benefit from cross-disciplinary approaches
-- Consider global perspectives and cross-cultural implications
-- Start the question with "How", "What", or "Why"
-- Use clear, professional language
-- Make the question unique and thought-provoking
-- Format: Single question ending with a question mark (?)
-- Minimum length: {MIN_QUESTION_LENGTH} characters
-- Maximum length: {MAX_QUESTION_LENGTH} characters
+{COMMON_REQUIREMENTS.format(min_length=MIN_QUESTION_LENGTH, max_length=MAX_QUESTION_LENGTH)}
+- Address real-world challenges that benefit from multi-theme approaches
 
-Please generate 1 cross-disciplinary question that explores {theme1} and {theme2}:"""
+Please generate 1 multi-theme question that explores {theme1} and {theme2}:"""
         
         duration = time.time() - start_time
         _performance_stats['total_time'] += duration
         
-        log.info(f" Created cross-disciplinary prompt in {duration:.3f}s")
+        log.info(f" Created multi-theme prompt in {duration:.3f}s")
         
         return prompt, system_prompt
         
     except Exception as e:
-        log.error(f"Error creating cross-disciplinary prompt: {e}")
+        log.error(f"Error creating multi-theme prompt: {e}")
         raise
 
 # Convenience functions for backward compatibility

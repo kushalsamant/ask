@@ -6,11 +6,9 @@
 
 set -e  # Exit on any error
 
-echo ""
 echo "========================================"
 echo "Smart Image Generation Dependencies"
 echo "========================================"
-echo ""
 
 # Function to print colored output
 print_status() {
@@ -30,7 +28,6 @@ print_status "Checking Python3 installation..."
 if ! command -v python3 &> /dev/null; then
     print_error "Python3 is not installed or not in PATH"
     echo "Please install Python 3.8+ from https://python.org"
-    echo ""
     exit 1
 fi
 
@@ -43,7 +40,6 @@ print_status "Checking installation script..."
 if [ ! -f "install_dependencies.py" ]; then
     print_error "install_dependencies.py not found"
     echo "Please ensure you're running this from the correct directory"
-    echo ""
     exit 1
 fi
 
@@ -60,7 +56,6 @@ if python3 install_dependencies.py; then
 else
     print_error "Installation failed"
     echo "Please check the error messages above"
-    echo ""
     exit 1
 fi
 
@@ -69,8 +64,5 @@ print_status "Setting up permissions..."
 chmod +x install.sh
 
 # Installation completed
-echo ""
 print_success "Installation completed successfully!"
-echo ""
 echo "You can now run the Smart Image Generation system."
-echo ""

@@ -16,6 +16,7 @@ Version: 1.0 (Offline-First)
 
 import random
 import logging
+import re
 from typing import Optional
 
 # Setup logging
@@ -189,18 +190,14 @@ def generate_offline_answer(question: str, theme: str) -> Optional[str]:
                 answer = answer.replace(f"{{{placeholder}}}", concept)
         
         # Clean up any remaining placeholders
-        import re
         answer = re.sub(r'\{[^}]+\}', 'sustainable design', answer)
         
-        # Ensure answer is between 200-250 words
+        # Ensure answer is comprehensive (minimum 200 words, no maximum limit)
         words = answer.split()
         if len(words) < 200:
             # Add more content to reach minimum length
             additional_content = f" This approach demonstrates how {random.choice(ANSWER_CONCEPTS['concept'])} can effectively address {random.choice(ANSWER_CONCEPTS['challenge'])} in {random.choice(ANSWER_CONCEPTS['context'])}. The implementation of such solutions requires careful consideration of {random.choice(ANSWER_CONCEPTS['factor'])} to ensure successful outcomes."
             answer += additional_content
-        elif len(words) > 250:
-            # Truncate to maximum length
-            answer = ' '.join(words[:250]) + "..."
         
         # Ensure proper sentence case (first letter capitalized, rest lowercase)
         if answer:

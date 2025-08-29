@@ -16,15 +16,7 @@ import time
 import json
 from datetime import datetime
 
-# Setup logging with enhanced configuration
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('gpu_image_generator.log'),
-        logging.StreamHandler()
-    ]
-)
+# Setup logging
 log = logging.getLogger(__name__)
 
 # Environment variables with enhanced defaults

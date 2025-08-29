@@ -14,7 +14,8 @@ import json
 import logging
 import tempfile
 import shutil
-from typing import Optional, Dict, Any, Tuple, Union
+import re
+from typing import Optional, Dict, Any, Tuple, Union, List
 from pathlib import Path
 from datetime import datetime
 import warnings
@@ -36,10 +37,6 @@ except ImportError as e:
     logging.warning(f"Diffusers not available: {e}")
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
 logger = logging.getLogger(__name__)
 
 # Suppress diffusers and transformers logging
@@ -263,15 +260,14 @@ class CPUImageGenerator:
             img_array = np.array(image)
             
             # Calculate quality metrics
-            # 1. Sharpness (using Laplacian variance)
             gray = np.mean(img_array, axis=2) if len(img_array.shape) == 3 else img_array
             laplacian = np.var(np.array([[0, 1, 0], [1, -4, 1], [0, 1, 0]]))
             sharpness = np.var(gray)
             
-            # 2. Contrast
+            # Contrast
             contrast = np.std(gray)
             
-            # 3. Brightness balance
+            # Brightness balance
             brightness = np.mean(gray)
             brightness_balance = 1.0 - abs(brightness - 128) / 128
             

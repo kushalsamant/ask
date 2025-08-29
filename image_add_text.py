@@ -52,10 +52,6 @@ def validate_input_parameters(image_path: str, prompt: str, image_number: Any, i
             return False, "Invalid is_question parameter"
         return True, "All parameters valid"
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        return image_path
         return False, f"Validation error: {str(e)}"
 
 def validate_image_file(image_path: str) -> Tuple[bool, str]:
@@ -74,10 +70,6 @@ def validate_image_file(image_path: str) -> Tuple[bool, str]:
             return False, f"Image file too large: {file_size} bytes"
         return True, "Image file valid"
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        return image_path
         return False, f"Image validation error: {str(e)}"
 
 def create_font_with_fallback(font_file: str, font_size: int):
@@ -86,10 +78,6 @@ def create_font_with_fallback(font_file: str, font_size: int):
         if os.path.exists(font_file):
             return ImageFont.truetype(font_file, font_size)
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        return image_path
         log.warning(f"Failed to load font {font_file}: {e}")
     
     try:
@@ -100,14 +88,11 @@ def create_font_with_fallback(font_file: str, font_size: int):
             except:
                 continue
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        return image_path
         log.warning(f"Failed to load system fonts: {e}")
     
     log.warning("Using default font as fallback")
     return ImageFont.load_default()
+
 import logging
 import re
 import shutil
@@ -129,10 +114,11 @@ def add_text_overlay(image_path, prompt, image_number, is_question=True):
     log.info(f"Starting text overlay for {image_path} with prompt: {prompt[:50]}...")
     
     # For answers, check if we need multiple images
-    if not is_question and len(prompt) > 500:  # If answer is long, use multi-image approach
+    if not is_question and len(prompt) > 800:  # Optimal threshold to fit more text on single image
         log.info(f"Long answer detected ({len(prompt)} chars), using multi-image approach")
         return _add_text_overlay_multi_image(image_path, prompt, image_number, is_question)
     else:
+        log.info(f"Answer length: {len(prompt)} chars, using single image approach")
         # Force fallback method for now to ensure text appears
         log.info("Using fallback text overlay method to ensure text visibility")
         return _add_text_overlay_fallback(image_path, prompt, image_number, is_question)
@@ -183,7 +169,7 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         img.paste(full_overlay, (0, 0), full_overlay)
 
         # Prepare prompt text - consistent wrapping for questions and answers
-        max_chars_per_line = int(os.getenv('MAX_CHARS_PER_LINE', '35'))
+        max_chars_per_line = int(os.getenv('MAX_CHARS_PER_LINE', '50'))  # Increased to fit more text per line
 
         words = prompt.split()
         lines = []
@@ -312,15 +298,9 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         return image_path
         
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
+        log.error(f"Error adding fallback text overlay to {image_path}: {e}")
         performance_monitor.end_timer()
         performance_monitor.record_failure()
-        return image_path
-        log.error(f"Error adding fallback text overlay to {image_path}: {e}")
-        # Record success and end timer
-        performance_monitor.end_timer()
-        performance_monitor.record_success()
-        
         return image_path
 
 def _add_text_overlay_multi_image(image_path, prompt, image_number, is_question=True):
@@ -338,16 +318,18 @@ def _add_text_overlay_multi_image(image_path, prompt, image_number, is_question=
         base_image_number = int(image_number) if isinstance(image_number, str) and image_number.isdigit() else int(str(image_number).split('-')[0])
         
         for i, chunk in enumerate(text_chunks):
-            # Use sequential integer numbering for display (ASK 01, ASK 02, etc.)
-            display_image_number = base_image_number + i
+            # Use base image number with chunk suffix (e.g., 68-1, 68-2, 68-3)
+            chunk_suffix = str(i + 1)  # 1, 2, 3, etc.
+            current_image_number = chunk_suffix  # Just use 1, 2, 3, etc.
             
             if i == 0:
-                # Use the original image for the first chunk
-                current_image_path = image_path
-                current_image_number = str(display_image_number)
+                # For the first chunk, rename the original image to include -1 suffix
+                base_filename = os.path.splitext(image_path)[0]
+                current_image_path = f"{base_filename}-1.jpg"
+                # Copy the original image to the new name
+                shutil.copy2(image_path, current_image_path)
             else:
-                # Create new image for additional chunks
-                current_image_number = str(display_image_number)
+                # Create new image for additional chunks with chunk suffix
                 current_image_path = _create_new_image_for_chunk(chunk, current_image_number, image_path)
             
             # Add text overlay to this chunk
@@ -365,15 +347,13 @@ def _add_text_overlay_multi_image(image_path, prompt, image_number, is_question=
         return image_paths if image_paths else [image_path]
         
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
+        log.error(f"Error in multi-image text overlay: {e}")
         performance_monitor.end_timer()
         performance_monitor.record_failure()
-        return image_path
-        log.error(f"Error in multi-image text overlay: {e}")
         # Fallback to single image
         return _add_text_overlay_fallback(image_path, prompt, image_number, is_question)
 
-def _split_text_into_chunks(text, max_chars_per_chunk=800):
+def _split_text_into_chunks(text, max_chars_per_chunk=1000):
     """Split text into chunks that fit on images"""
     try:
         # Split by sentences first
@@ -398,10 +378,6 @@ def _split_text_into_chunks(text, max_chars_per_chunk=800):
         return chunks
         
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        return image_path
         log.error(f"Error splitting text into chunks: {e}")
         # Fallback: split by character count with ellipsis
         chunks = []
@@ -451,35 +427,16 @@ def _create_new_image_for_chunk(chunk, image_number, original_image_path):
         else:
             theme = 'research_methodology'  # Default
         
-        # Generate new image for this chunk
-        # image_number is now a simple integer string (e.g., "02", "03")
-        try:
-            image_number_int = int(image_number)
-        except ValueError:
-            # If conversion fails, use a simple counter
-            image_number_int = 1
-        
-        new_image_path, _ = generate_image_with_retry(
-            prompt=chunk,
-            theme=theme,
-            image_number=image_number_int,
-            image_type="a"
-        )
-        
-        if new_image_path:
-            log.info(f"Generated new image for chunk: {os.path.basename(new_image_path)}")
-            return new_image_path
-        else:
-            # Fallback: copy original image with new number
-            new_path = original_image_path.replace('.jpg', f'-{image_number}.jpg')
-            shutil.copy2(original_image_path, new_path)
-            return new_path
+        # For multi-image chunks, we don't generate new images with text
+        # Instead, we copy the base image and apply text overlay separately
+        # Extract base filename and add chunk suffix
+        base_filename = os.path.splitext(original_image_path)[0]
+        new_path = f"{base_filename}-{image_number}.jpg"
+        shutil.copy2(original_image_path, new_path)
+        log.info(f"Created base image copy for chunk: {os.path.basename(new_path)}")
+        return new_path
             
     except Exception as e:
-        log.error(f"Error in enhanced text overlay: {e}")
-        performance_monitor.end_timer()
-        performance_monitor.record_failure()
-        return image_path
         log.error(f"Error creating new image for chunk: {e}")
         # Fallback: copy original image with new number
         new_path = original_image_path.replace('.jpg', f'-{image_number}.jpg')
