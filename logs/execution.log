@@ -714,3 +714,69 @@
 2025-09-16 22:35:25,629 - INFO -  Total Q&A pairs in database: 2
 2025-09-16 22:35:25,629 - INFO -  Connected experience created!
 2025-09-16 22:35:25,629 - INFO -  Cover images generated!
+2025-09-21 06:22:09,601 - INFO - 
+2025-09-21 06:22:09,601 - INFO -  *ASK*: Daily Research - Text-Only Q&A Generator
+2025-09-21 06:22:09,601 - INFO - ============================================================
+2025-09-21 06:22:09,601 - INFO - 
+2025-09-21 06:22:09,601 - INFO -  ASK: Daily Research - Text-Only Q&A Generator
+2025-09-21 06:22:09,602 - INFO - ============================================================
+2025-09-21 06:22:09,602 - INFO - 
+2025-09-21 06:22:09,602 - INFO -  Usage:
+2025-09-21 06:22:09,602 - INFO -    python main.py                    # Run text-only Q&A generation
+2025-09-21 06:22:09,602 - INFO -    python main.py --help            # Show this help
+2025-09-21 06:22:09,603 - INFO - 
+2025-09-21 06:22:09,604 - INFO -  Features:
+2025-09-21 06:22:09,604 - INFO -  • Text-only Q&A generation
+2025-09-21 06:22:09,604 - INFO -  • Connected, chained-like experience
+2025-09-21 06:22:09,605 - INFO -  • Multi-theme support
+2025-09-21 06:22:09,605 - INFO -  • Offline operation
+2025-09-21 06:22:09,605 - INFO -  • CSV logging
+2025-09-21 06:22:09,605 - INFO - 
+2025-09-21 06:22:09,605 - INFO -  Configuration:
+2025-09-21 06:22:09,606 - INFO -  • Edit ask.env to customize themes and settings
+2025-09-21 06:22:09,606 - INFO -  • Check log.csv for generated Q&A pairs
+2025-09-21 06:22:09,606 - INFO - 
+2025-09-21 06:22:13,769 - INFO - 
+2025-09-21 06:22:13,769 - INFO -  *ASK*: Daily Research - Text-Only Q&A Generator
+2025-09-21 06:22:13,769 - INFO - ============================================================
+2025-09-21 06:22:13,769 - INFO - ============================================================
+2025-09-21 06:22:13,770 - INFO -  ASK: Daily Research - Text-Only Q&A Generator
+2025-09-21 06:22:13,770 - INFO - ============================================================
+2025-09-21 06:22:13,770 - INFO - 
+2025-09-21 06:22:13,770 - INFO -  Features:
+2025-09-21 06:22:13,770 - INFO -  • Reads all previous questions from log.csv
+2025-09-21 06:22:13,770 - INFO -  • Generates questions that reference previous content
+2025-09-21 06:22:13,770 - INFO -  • Creates connected, chained-like experience
+2025-09-21 06:22:13,771 - INFO -  • Text-only output (no image generation)
+2025-09-21 06:22:13,771 - INFO -  • Multi-theme support
+2025-09-21 06:22:13,771 - INFO - 
+2025-09-21 06:22:13,846 - INFO - Reading from log.csv
+2025-09-21 06:22:13,847 - INFO - Volume info: Volume 1, 1/100 pairs in current volume, 1 total pairs
+2025-09-21 06:22:13,847 - INFO -  Current Volume: 1
+2025-09-21 06:22:13,873 - INFO -  Questions in volume: 1
+2025-09-21 06:22:13,874 - INFO -  Answers in volume: 1
+2025-09-21 06:22:13,885 - INFO - 
+2025-09-21 06:22:13,890 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-21 06:22:13,891 - INFO - Read 1 Q&A pairs from log.csv
+2025-09-21 06:22:13,891 - INFO -  Found 1 previous Q&A pairs
+2025-09-21 06:22:13,891 - INFO -  Step 2: Generating connected question...
+2025-09-21 06:22:13,891 - INFO -  Selected theme: sustainability_science
+2025-09-21 06:22:13,892 - INFO - Generated offline question for theme 'sustainability_science': What role does renewable energy play in desert climates?
+2025-09-21 06:22:13,892 - INFO -  Connected question generated: What role does renewable energy play in desert climates?
+2025-09-21 06:22:13,892 - INFO -  Step 3: Generating connected answer...
+2025-09-21 06:22:13,893 - INFO - Generated offline answer for theme 'sustainability_science': Sustainable design represents a holistic response ...
+2025-09-21 06:22:13,893 - INFO -  Connected answer generated: Sustainable design represents a holistic response to climate change that integrates community engage...
+2025-09-21 06:22:13,893 - INFO -  Step 4: Marking question as used...
+2025-09-21 06:22:13,905 - INFO - Marked 0 questions as used
+2025-09-21 06:22:13,905 - WARNING -  No questions marked as used
+2025-09-21 06:22:13,905 - INFO -  Step 5: Logging complete Q&A pair to CSV...
+2025-09-21 06:22:13,908 - INFO - Logged complete Q&A pair for sustainability_science: Q: What role does renewable energy play in desert cli... A: Sustainable design represents a holistic response ...
+2025-09-21 06:22:13,909 - INFO -  Complete Q&A pair logged to CSV
+2025-09-21 06:22:13,909 - INFO - ============================================================
+2025-09-21 06:22:13,909 - INFO -  Text-Only Mode completed successfully!
+2025-09-21 06:22:13,909 - INFO -  Question: What role does renewable energy play in desert climates?
+2025-09-21 06:22:13,910 - INFO -  Answer: Sustainable design represents a holistic response to climate change that integrates community engagement with feasibility analysis. This methodology addresses cultural diversity through community enga...
+2025-09-21 06:22:13,911 - INFO -  Theme: sustainability_science
+2025-09-21 06:22:13,911 - INFO -  Total Q&A pairs in database: 2
+2025-09-21 06:22:13,911 - INFO -  Connected experience created!
+2025-09-21 06:22:13,911 - INFO - ============================================================

@@ -52,7 +52,7 @@ console_logger.setLevel(logging.INFO)
 # Environment variables
 SIMPLE_MODE_THEMES = os.getenv('SIMPLE_MODE_THEMES', 'research_methodology,technology_innovation,sustainability_science,engineering_systems,environmental_design,urban_planning,spatial_design,digital_technology').split(',')
 
-def run_simple_mode():
+def run_text_only_mode():
     """Run the text-only mode with connected Q&A generation"""
     try:
         console_logger.info("=" * 60)
@@ -196,8 +196,8 @@ def show_help():
     console_logger.info("=" * 60)
     console_logger.info("")
     console_logger.info(" Usage:")
-    console_logger.info("   python main.py                    # Run text-only Q&A generation")
-    console_logger.info("   python main.py --help            # Show this help")
+    console_logger.info("   python main_text_only.py          # Run text-only Q&A generation")
+    console_logger.info("   python main_text_only.py --help   # Show this help")
     console_logger.info("")
     console_logger.info(" Features:")
     console_logger.info(" • Text-only Q&A generation")
@@ -231,7 +231,7 @@ def main():
                 return
         else:
             # Default mode: text-only pipeline
-            run_simple_mode()
+            run_text_only_mode()
         
     except KeyboardInterrupt:
         console_logger.info("\n Operation cancelled by user")

@@ -1,0 +1,14 @@
+# ASK: Daily Research - Text-Only Requirements
+# Minimal dependencies for text-only Q&A generation
+
+# Core dependencies
+python-dotenv>=1.0.0
+
+# Optional: For enhanced text processing
+# nltk>=3.8
+# spacy>=3.4.0
+
+# Development dependencies (optional)
+# pytest>=7.0.0
+# black>=22.0.0
+# flake8>=4.0.0
