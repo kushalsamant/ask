@@ -466,11 +466,11 @@ def get_next_image_number() -> int:
                     # Check both question and answer image filenames
                     for filename_field in ['question_image', 'answer_image']:
                         if filename_field in row and row[filename_field].strip():
-                            # Extract number from filename like "ASK-01-architecture-q.jpg"
+                            # Extract number from filename like "ASK-01-ure-q.jpg"
                             filename = row[filename_field].strip()
                             if filename.startswith('ASK-') and '-' in filename:
                                 try:
-                                    # Extract number from "ASK-01-architecture-q.jpg"
+                                    # Extract number from "ASK-01-ure-q.jpg"
                                     parts = filename.split('-')
                                     if len(parts) >= 2:
                                         number_str = parts[1]

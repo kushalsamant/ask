@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Offline-First](https://img.shields.io/badge/Offline--First-GPU%20%7C%20CPU%20%7C%20API-orange.svg)]()
+[![Offline-First](https://img.shields.io/badge/Offline-First-GPU%20%7C%20CPU%20%7C%20API-orange.svg)]()
 
 > **Advanced research tool that generates high-quality Q&A content with photorealistic images, optimized for Instagram stories and social media sharing.**
 
@@ -37,7 +37,7 @@ Your support enables us to:
 
 **Every contribution helps us make research more accessible and engaging for everyone!** 💙
 
----
+-
 
 *"The best way to predict the future is to create it." - Let's build the future of research communication together!*
 
@@ -47,7 +47,7 @@ ASK is a sophisticated offline-first research tool that automatically generates 
 
 ### ✨ Key Features
 
-- **🔬 Offline-First Architecture**: GPU → CPU → API fallback system
+- **🔬 Offline-First ure**: GPU → CPU → API fallback system
 - **📱 Instagram Story Optimized**: All images generated at 1080x1920 pixels
 - **🤖 Enhanced Simple Mode**: Multi-theme support with connected, chained-like experience
 - **🎨 Photorealistic Images**: Advanced AI image generation with text overlays
@@ -72,7 +72,7 @@ ASK is a sophisticated offline-first research tool that automatically generates 
 - **Research Focus**: Every piece of content is specifically tailored to research and practice
 
 ### **⚡ Advanced Technology Stack**
-- **GPU-Primary Architecture**: Optimized for NVIDIA GPUs with CPU fallback
+- **GPU-Primary ure**: Optimized for NVIDIA GPUs with CPU fallback
 - **Stable Diffusion 2.1**: Latest AI models for photorealistic image generation
 - **Offline Operation**: Complete independence from internet connectivity
 - **Smart Fallback System**: GPU → CPU → API (if enabled) → Placeholder
@@ -126,11 +126,11 @@ Generates Q&A pairs with multi-theme support and connected, chained-like experie
 
 ### 📖 Help
 ```bash
-python main.py --help
+python main.py -help
 ```
 Shows all available modes and options.
 
-## 🏗️ System Architecture
+## 🏗️ System ure
 
 ### Offline-First Design
 ```
@@ -144,7 +144,7 @@ Last Resort: API Generation (online)
 ### Core Components
 
 | Component | Purpose | Status |
-|-----------|---------|--------|
+|-|-|-|
 | `main.py` | Main pipeline orchestrator | ✅ Active |
 | `smart_image_generator.py` | Smart fallback image generation | ✅ Active |
 | `offline_question_generator.py` | Template-based question generation | ✅ Active |
@@ -178,7 +178,7 @@ MAX_CHARS_PER_LINE=50     # Characters per line
 MULTI_IMAGE_THRESHOLD=800 # Trigger multi-image mode
 
 # Multi-Theme Support
-SIMPLE_MODE_THEMES=architecture,marketing,cricket
+SIMPLE_MODE_THEMES=ure,marketing,cricket
 ```
 
 ### Research Themes
@@ -190,7 +190,7 @@ The tool supports multiple research themes:
 - **technology_innovation**: Technology and innovation studies
 - **urban_planning**: Urban development and planning
 - **research_methodology**: Research methods and approaches
-- **architecture**: Architectural design and theory
+- **ure**: ural design and theory
 - **marketing**: Marketing strategies and research
 - **cricket**: Sports research and analysis
 
@@ -222,7 +222,7 @@ ask/
 The system maintains detailed logs in `log.csv`:
 
 | Column | Description |
-|--------|-------------|
+|-|-|
 | `id` | Sequential identifier |
 | `theme` | Research theme |
 | `question` | Generated question |
@@ -320,7 +320,7 @@ Core dependencies include:
 ### Hardware Recommendations
 
 | Component | Minimum | Recommended |
-|-----------|---------|-------------|
+|-|-|-|
 | **CPU** | Multi-core | 8+ cores |
 | **RAM** | 8GB | 16GB+ |
 | **GPU** | None | NVIDIA with CUDA |
@@ -329,7 +329,7 @@ Core dependencies include:
 ### Generation Times
 
 | Mode | GPU | CPU | API |
-|------|-----|-----|-----|
+|-|-|-|-|
 | **Simple** | ~30s | ~2min | ~10s |
 | **Enhanced** | ~45s | ~3min | ~15s |
 | **Multi-Image** | ~60s | ~4min | ~20s |
@@ -340,7 +340,7 @@ Core dependencies include:
 
 **1. Import Errors**
 ```bash
-pip install -r requirements.txt --upgrade
+pip install -r requirements.txt -upgrade
 ```
 
 **2. GPU Not Detected**
@@ -348,7 +348,7 @@ pip install -r requirements.txt --upgrade
 # Check CUDA installation
 nvidia-smi
 # Install PyTorch with CUDA
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install torch torchvision torchaudio -index-url https://download.pytorch.org/whl/cu118
 ```
 
 **3. Model Download Issues**
@@ -385,7 +385,7 @@ cd ask
 pip install -r requirements.txt
 cp ask.env.template ask.env
 # Edit ask.env for your environment
-python main.py --help
+python main.py -help
 ```
 
 ## 📄 License
@@ -405,18 +405,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Discussions**: [GitHub Discussions](https://github.com/kushalsamant/ask/discussions)
 - **Documentation**: [Wiki](https://github.com/kushalsamant/ask/wiki)
 
----
+-
 
 **Made with ❤️ for the research community**
 
 *Generate, explore, and share knowledge with ASK: Daily Research*
 
-## 🔧 System Architecture & Implementation Status
+## 🔧 System ure & Implementation Status
 
 ### Current System State
 
 **Date**: 2025-08-24  
-**Analysis**: Current system architecture vs. intended offline-first, GPU-primary design
+**Analysis**: Current system ure vs. intended offline-first, GPU-primary design
 
 #### 1. Smart Image Generator (smart_image_generator.py)
 - ✅ **CORRECT**: GPU → CPU → API → Placeholder fallback order
@@ -514,7 +514,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Verification
 
-The system now properly implements offline-first architecture:
+The system now properly implements offline-first ure:
 - ✅ Defaults to offline operation
 - ✅ GPU is primary mode
 - ✅ CPU is first fallback

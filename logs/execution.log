@@ -87,3 +87,630 @@
 2025-08-29 10:32:53,556 - INFO -  Total Q&A pairs in database: 4
 2025-08-29 10:32:53,556 - INFO -  Connected experience created!
 2025-08-29 10:32:53,556 - INFO -  Cover images generated!
+2025-09-16 10:34:56,913 - INFO - 
+2025-09-16 10:34:56,927 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 10:34:56,927 - INFO - ============================================================
+2025-09-16 10:34:56,927 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 10:34:56,927 - INFO - ============================================================
+2025-09-16 10:34:56,927 - INFO -  Features:
+2025-09-16 10:34:56,927 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 10:34:56,927 - INFO -  • Generates questions that reference previous content
+2025-09-16 10:34:56,928 - INFO -  • Creates connected, chained-like experience
+2025-09-16 10:34:56,928 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 10:34:56,928 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 11:41:44,518 - INFO - 
+2025-09-16 11:41:44,519 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 11:41:44,519 - INFO - ============================================================
+2025-09-16 11:41:44,519 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 11:41:44,519 - INFO - ============================================================
+2025-09-16 11:41:44,519 - INFO -  Features:
+2025-09-16 11:41:44,520 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 11:41:44,520 - INFO -  • Generates questions that reference previous content
+2025-09-16 11:41:44,520 - INFO -  • Creates connected, chained-like experience
+2025-09-16 11:41:44,520 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 11:41:44,520 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 11:42:44,827 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 11:42:44,827 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 11:42:44,851 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 11:42:44,851 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 11:42:44,892 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 11:42:44,965 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 11:42:45,041 - INFO - Reading from log.csv
+2025-09-16 11:42:45,041 - INFO - Volume info: Volume 1, 3/100 pairs in current volume, 3 total pairs
+2025-09-16 11:42:45,042 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 11:42:45,042 - INFO - Read 3 Q&A pairs from log.csv
+2025-09-16 11:42:45,042 - INFO -  Step 1: Found 3 previous Q&A pairs
+2025-09-16 11:42:45,043 - INFO -  Step 2: Analyzing previous content for connection opportunities...
+2025-09-16 11:42:45,043 - INFO -  Step 2: Found 2 themes and 12 key concepts
+2025-09-16 11:42:45,043 - INFO -  Step 3: Multi-theme mode - exploring MARKETING, ARCHITECTURE
+2025-09-16 11:42:45,043 - INFO -  Step 4: Generating multi-theme question for marketing, architecture...
+2025-09-16 11:42:45,044 - INFO - Generated offline question for theme 'marketing': How does email marketing contribute to competitive advantage?
+2025-09-16 11:42:45,044 - INFO -  Step 4: Connected question created: How do Marketing and Architecture intersect in how does email marketing contribu...
+2025-09-16 11:42:45,045 - INFO - Next question image number: 7 (total question images so far: 3)
+2025-09-16 11:42:45,045 - INFO -  Step 5: Generating question image #7...
+2025-09-16 11:42:45,045 - INFO - Starting smart fallback generation for theme 'multi_theme', image 7
+2025-09-16 11:42:45,045 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 11:42:45,045 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 11:42:45,108 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 11:42:45,109 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 11:42:45,205 - INFO - Enhanced architectural prompt: How do Marketing and Architecture intersect in how does email marketing contribute to competitive ad...
+2025-09-16 11:42:45,773 - INFO - Created AI-style image: images\ASK-07-multi_theme-q.jpg
+2025-09-16 11:42:45,774 - INFO - CPU generation successful
+2025-09-16 11:42:45,774 - INFO -  Step 5: Question image created: ASK-07-multi_theme-q.jpg
+2025-09-16 11:42:45,774 - INFO -  Step 6: Logging connected question to CSV...
+2025-09-16 11:42:45,774 - INFO -  Step 6: Question prepared for logging (will log with answer)
+2025-09-16 11:42:45,775 - INFO -  Step 7: Adding text overlay to question image...
+2025-09-16 11:42:45,775 - INFO - Starting text overlay for images\ASK-07-multi_theme-q.jpg with prompt: How do Marketing and Architecture intersect in how...
+2025-09-16 11:42:45,775 - INFO - Answer length: 108 chars, using single image approach
+2025-09-16 11:42:45,775 - INFO - Using fallback text overlay method to ensure text visibility
+2025-09-16 11:42:45,946 - INFO - Added fallback text overlay to image: images\ASK-07-multi_theme-q.jpg
+2025-09-16 11:42:45,948 - INFO -  Step 7: Text overlay added successfully
+2025-09-16 11:42:45,948 - INFO -  Step 7: Final question image created: ASK-07-multi_theme-q.jpg
+2025-09-16 11:42:45,948 - INFO -  Step 8: Generating connected answer...
+2025-09-16 11:42:45,949 - INFO - Generated offline answer for theme 'marketing': In addressing sustainable design, sustainable desi...
+2025-09-16 11:42:45,949 - INFO -  Step 8: Connected answer generated: In addressing sustainable design, sustainable design offers a comprehensive fram...
+2025-09-16 11:42:45,949 - INFO -  Step 9: Marking question as used...
+2025-09-16 11:42:45,951 - INFO - Marked 0 questions as used
+2025-09-16 11:42:45,951 - WARNING -  Step 9: No questions marked as used
+2025-09-16 11:42:45,963 - INFO - Next answer image number: 8 (total answer images so far: 3)
+2025-09-16 11:42:45,963 - INFO -  Step 10: Generating answer image #8...
+2025-09-16 11:42:45,964 - INFO - Starting smart fallback generation for theme 'multi_theme', image 8
+2025-09-16 11:42:45,964 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 11:42:45,964 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 11:42:45,968 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 11:42:45,968 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 11:42:45,968 - INFO - Enhanced architectural prompt: In addressing sustainable design, sustainable design offers a comprehensive framework that integrate...
+2025-09-16 11:42:46,149 - INFO - Created AI-style image: images\ASK-08-multi_theme-a.jpg
+2025-09-16 11:42:46,149 - INFO - CPU generation successful
+2025-09-16 11:42:46,149 - INFO -  Step 10: Answer image created: ASK-08-multi_theme-a.jpg
+2025-09-16 11:42:46,150 - INFO -  Step 11: Logging complete Q&A pair to CSV...
+2025-09-16 11:42:46,151 - INFO - Logged complete Q&A pair for multi_theme: Q: How do Marketing and Architecture intersect in how... A: In addressing sustainable design, sustainable desi...
+2025-09-16 11:42:46,151 - INFO -  Step 11: Complete Q&A pair logged to CSV
+2025-09-16 11:42:46,151 - INFO -  Step 12: Adding text overlay to answer image...
+2025-09-16 11:42:46,151 - INFO - Starting text overlay for images\ASK-08-multi_theme-a.jpg with prompt: In addressing sustainable design, sustainable desi...
+2025-09-16 11:42:46,151 - INFO - Long answer detected (863 chars), using multi-image approach
+2025-09-16 11:42:46,263 - INFO - Added fallback text overlay to image: images\ASK-08-multi_theme-a.jpg
+2025-09-16 11:42:46,265 - INFO -  Step 12: Answer text overlay added successfully
+2025-09-16 11:42:46,265 - INFO -  Step 12: Final answer image created: ASK-08-multi_theme-a.jpg
+2025-09-16 11:42:46,265 - INFO -  Step 13: Creating cover images...
+2025-09-16 11:42:46,333 - INFO -  Creating professional volume cover...
+2025-09-16 11:42:46,349 - INFO - Starting enhanced cover generation for volume...
+2025-09-16 11:42:46,375 - INFO - Starting enhanced brand overlay for images\ASK_COVER_VOLUME_20250916_114246.jpg...
+2025-09-16 11:42:46,449 - INFO - Added brand overlay to cover image: images\ASK_COVER_VOLUME_20250916_114246.jpg
+2025-09-16 11:42:46,450 - INFO - Generated cover image: images\ASK_COVER_VOLUME_20250916_114246.jpg
+2025-09-16 11:42:46,451 - INFO -  Professional volume cover created: ASK_COVER_VOLUME_20250916_114246.jpg
+2025-09-16 11:42:46,452 - INFO - ============================================================
+2025-09-16 11:42:46,452 - INFO -  Enhanced Simple Mode completed successfully!
+2025-09-16 11:42:46,452 - INFO -  Connected question image: ASK-07-multi_theme-q.jpg
+2025-09-16 11:42:46,452 - INFO -  Connected answer image: ASK-08-multi_theme-a.jpg
+2025-09-16 11:42:46,452 - INFO -  Theme: multi_theme
+2025-09-16 11:42:46,452 - INFO -  Total Q&A pairs in database: 5
+2025-09-16 11:42:46,452 - INFO -  Connected experience created!
+2025-09-16 11:42:46,453 - INFO -  Cover images generated!
+2025-09-16 11:44:27,695 - INFO - 
+2025-09-16 11:44:27,695 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 11:44:27,696 - INFO - ============================================================
+2025-09-16 11:44:27,696 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 11:44:27,696 - INFO - ============================================================
+2025-09-16 11:44:27,696 - INFO -  Features:
+2025-09-16 11:44:27,696 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 11:44:27,697 - INFO -  • Generates questions that reference previous content
+2025-09-16 11:44:27,697 - INFO -  • Creates connected, chained-like experience
+2025-09-16 11:44:27,697 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 11:44:27,697 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 11:44:29,739 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 11:44:29,740 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 11:44:29,740 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 11:44:29,740 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 11:44:29,742 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 11:44:29,744 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 11:44:29,745 - INFO - Reading from log.csv
+2025-09-16 11:44:29,745 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-09-16 11:44:29,745 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 11:44:29,745 - INFO - Read 0 Q&A pairs from log.csv
+2025-09-16 11:44:29,745 - WARNING -  No previous questions found in log.csv
+2025-09-16 11:44:29,745 - INFO -  Starting fresh with standard question generation...
+2025-09-16 11:44:29,746 - INFO - Generated offline question for theme 'marketing': What are the emerging trends in big data analytics for agriculture?
+2025-09-16 11:44:29,746 - INFO - Next question image number: 1 (total question images so far: 0)
+2025-09-16 11:44:29,746 - INFO -  Step 5: Generating question image #1...
+2025-09-16 11:44:29,746 - INFO - Starting smart fallback generation for theme 'marketing', image 1
+2025-09-16 11:44:29,746 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 11:44:29,746 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 11:44:29,750 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 11:44:29,750 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 11:44:29,755 - INFO - Enhanced architectural prompt: What are the emerging trends in big data analytics for agriculture?, photorealistic architectural re...
+2025-09-16 11:44:29,951 - INFO - Created AI-style image: images\ASK-01-marketing-q.jpg
+2025-09-16 11:44:29,952 - INFO - CPU generation successful
+2025-09-16 11:44:29,952 - INFO -  Step 5: Question image created: ASK-01-marketing-q.jpg
+2025-09-16 11:44:29,953 - INFO -  Step 6: Logging connected question to CSV...
+2025-09-16 11:44:29,953 - INFO -  Step 6: Question prepared for logging (will log with answer)
+2025-09-16 11:44:29,953 - INFO -  Step 7: Adding text overlay to question image...
+2025-09-16 11:44:29,953 - INFO - Starting text overlay for images\ASK-01-marketing-q.jpg with prompt: What are the emerging trends in big data analytics...
+2025-09-16 11:44:29,953 - INFO - Answer length: 67 chars, using single image approach
+2025-09-16 11:44:29,953 - INFO - Using fallback text overlay method to ensure text visibility
+2025-09-16 11:44:30,057 - INFO - Added fallback text overlay to image: images\ASK-01-marketing-q.jpg
+2025-09-16 11:44:30,059 - INFO -  Step 7: Text overlay added successfully
+2025-09-16 11:44:30,060 - INFO -  Step 7: Final question image created: ASK-01-marketing-q.jpg
+2025-09-16 11:44:30,060 - INFO -  Step 8: Generating connected answer...
+2025-09-16 11:44:30,060 - INFO - Generated offline answer for theme 'marketing': Sustainable design has emerged as a critical respo...
+2025-09-16 11:44:30,060 - INFO -  Step 8: Connected answer generated: Sustainable design has emerged as a critical response to sustainable design in s...
+2025-09-16 11:44:30,061 - INFO -  Step 9: Marking question as used...
+2025-09-16 11:44:30,062 - INFO - Marked 0 questions as used
+2025-09-16 11:44:30,062 - WARNING -  Step 9: No questions marked as used
+2025-09-16 11:44:30,071 - INFO - Next answer image number: 2 (total answer images so far: 0)
+2025-09-16 11:44:30,071 - INFO -  Step 10: Generating answer image #2...
+2025-09-16 11:44:30,071 - INFO - Starting smart fallback generation for theme 'marketing', image 2
+2025-09-16 11:44:30,071 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 11:44:30,071 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 11:44:30,078 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 11:44:30,078 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 11:44:30,078 - INFO - Enhanced architectural prompt: Sustainable design has emerged as a critical response to sustainable design in sustainable design. T...
+2025-09-16 11:44:30,249 - INFO - Created AI-style image: images\ASK-02-marketing-a.jpg
+2025-09-16 11:44:30,250 - INFO - CPU generation successful
+2025-09-16 11:44:30,250 - INFO -  Step 10: Answer image created: ASK-02-marketing-a.jpg
+2025-09-16 11:44:30,250 - INFO -  Step 11: Logging complete Q&A pair to CSV...
+2025-09-16 11:44:30,252 - INFO - Logged complete Q&A pair for marketing: Q: What are the emerging trends in big data analytics... A: Sustainable design has emerged as a critical respo...
+2025-09-16 11:44:30,252 - INFO -  Step 11: Complete Q&A pair logged to CSV
+2025-09-16 11:44:30,252 - INFO -  Step 12: Adding text overlay to answer image...
+2025-09-16 11:44:30,252 - INFO - Starting text overlay for images\ASK-02-marketing-a.jpg with prompt: Sustainable design has emerged as a critical respo...
+2025-09-16 11:44:30,252 - INFO - Long answer detected (813 chars), using multi-image approach
+2025-09-16 11:44:30,364 - INFO - Added fallback text overlay to image: images\ASK-02-marketing-a.jpg
+2025-09-16 11:44:30,365 - INFO -  Step 12: Answer text overlay added successfully
+2025-09-16 11:44:30,365 - INFO -  Step 12: Final answer image created: ASK-02-marketing-a.jpg
+2025-09-16 11:44:30,366 - INFO -  Step 13: Creating cover images...
+2025-09-16 11:44:30,367 - INFO -  Creating professional volume cover...
+2025-09-16 11:44:30,367 - INFO - Starting enhanced cover generation for volume...
+2025-09-16 11:44:30,384 - INFO - Starting enhanced brand overlay for images\ASK_COVER_VOLUME_20250916_114430.jpg...
+2025-09-16 11:44:30,428 - INFO - Added brand overlay to cover image: images\ASK_COVER_VOLUME_20250916_114430.jpg
+2025-09-16 11:44:30,429 - INFO - Generated cover image: images\ASK_COVER_VOLUME_20250916_114430.jpg
+2025-09-16 11:44:30,429 - INFO -  Professional volume cover created: ASK_COVER_VOLUME_20250916_114430.jpg
+2025-09-16 11:44:30,429 - INFO - ============================================================
+2025-09-16 11:44:30,430 - INFO -  Enhanced Simple Mode completed successfully!
+2025-09-16 11:44:30,430 - INFO -  Connected question image: ASK-01-marketing-q.jpg
+2025-09-16 11:44:30,430 - INFO -  Connected answer image: ASK-02-marketing-a.jpg
+2025-09-16 11:44:30,430 - INFO -  Theme: marketing
+2025-09-16 11:44:30,430 - INFO -  Total Q&A pairs in database: 2
+2025-09-16 11:44:30,431 - INFO -  Connected experience created!
+2025-09-16 11:44:30,431 - INFO -  Cover images generated!
+2025-09-16 11:50:38,909 - INFO - 
+2025-09-16 11:50:38,909 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 11:50:38,909 - INFO - ============================================================
+2025-09-16 11:50:38,910 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 11:50:38,910 - INFO - ============================================================
+2025-09-16 11:50:38,910 - INFO -  Features:
+2025-09-16 11:50:38,910 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 11:50:38,911 - INFO -  • Generates questions that reference previous content
+2025-09-16 11:50:38,911 - INFO -  • Creates connected, chained-like experience
+2025-09-16 11:50:38,911 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 11:50:38,911 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 11:50:40,904 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 11:50:40,904 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 11:50:40,904 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 11:50:40,905 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 11:50:40,906 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 11:50:40,909 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 11:50:40,909 - INFO - Reading from log.csv
+2025-09-16 11:50:40,909 - INFO - Volume info: Volume 1, 1/100 pairs in current volume, 1 total pairs
+2025-09-16 11:50:40,909 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 11:50:40,910 - INFO - Read 1 Q&A pairs from log.csv
+2025-09-16 11:50:40,910 - INFO -  Step 1: Found 1 previous Q&A pairs
+2025-09-16 11:50:40,910 - INFO -  Step 2: Analyzing previous content for connection opportunities...
+2025-09-16 11:50:40,910 - INFO -  Step 2: Found 1 themes and 4 key concepts
+2025-09-16 11:50:40,910 - INFO -  Step 3: Multi-theme mode - exploring ARCHITECTURE
+2025-09-16 11:50:40,911 - INFO -  Step 4: Generating connected question for architecture...
+2025-09-16 11:50:40,911 - INFO - Generated offline question for theme 'architecture': How does resilient design contribute to clean energy?
+2025-09-16 11:50:40,911 - INFO -  Step 4: Connected question created: Expanding on the theme of emerging, trends, How does resilient design contribute...
+2025-09-16 11:50:40,911 - INFO - Next question image number: 3 (total question images so far: 1)
+2025-09-16 11:50:40,911 - INFO -  Step 5: Generating question image #3...
+2025-09-16 11:50:40,912 - INFO - Starting smart fallback generation for theme 'architecture', image 3
+2025-09-16 11:50:40,912 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 11:50:40,912 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 11:50:40,916 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 11:50:40,916 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 11:50:40,919 - INFO - Enhanced architectural prompt: Expanding on the theme of emerging, trends, How does resilient design contribute to clean energy?, p...
+2025-09-16 11:50:41,118 - INFO - Created AI-style image: images\ASK-03-architecture-q.jpg
+2025-09-16 11:50:41,119 - INFO - CPU generation successful
+2025-09-16 11:50:41,119 - INFO -  Step 5: Question image created: ASK-03-architecture-q.jpg
+2025-09-16 11:50:41,120 - INFO -  Step 6: Logging connected question to CSV...
+2025-09-16 11:50:41,120 - INFO -  Step 6: Question prepared for logging (will log with answer)
+2025-09-16 11:50:41,120 - INFO -  Step 7: Adding text overlay to question image...
+2025-09-16 11:50:41,120 - INFO - Starting text overlay for images\ASK-03-architecture-q.jpg with prompt: Expanding on the theme of emerging, trends, How do...
+2025-09-16 11:50:41,120 - INFO - Answer length: 97 chars, using single image approach
+2025-09-16 11:50:41,120 - INFO - Using fallback text overlay method to ensure text visibility
+2025-09-16 11:50:41,204 - INFO - Added fallback text overlay to image: images\ASK-03-architecture-q.jpg
+2025-09-16 11:50:41,206 - INFO -  Step 7: Text overlay added successfully
+2025-09-16 11:50:41,206 - INFO -  Step 7: Final question image created: ASK-03-architecture-q.jpg
+2025-09-16 11:50:41,207 - INFO -  Step 8: Generating connected answer...
+2025-09-16 11:50:41,207 - INFO - Generated offline answer for theme 'architecture': In addressing sustainable design, sustainable desi...
+2025-09-16 11:50:41,207 - INFO -  Step 8: Connected answer generated: In addressing sustainable design, sustainable design offers a comprehensive fram...
+2025-09-16 11:50:41,207 - INFO -  Step 9: Marking question as used...
+2025-09-16 11:50:41,209 - INFO - Marked 0 questions as used
+2025-09-16 11:50:41,209 - WARNING -  Step 9: No questions marked as used
+2025-09-16 11:50:41,210 - INFO - Next answer image number: 4 (total answer images so far: 1)
+2025-09-16 11:50:41,210 - INFO -  Step 10: Generating answer image #4...
+2025-09-16 11:50:41,210 - INFO - Starting smart fallback generation for theme 'architecture', image 4
+2025-09-16 11:50:41,210 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 11:50:41,210 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 11:50:41,215 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 11:50:41,215 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 11:50:41,215 - INFO - Enhanced architectural prompt: In addressing sustainable design, sustainable design offers a comprehensive framework that integrate...
+2025-09-16 11:50:41,399 - INFO - Created AI-style image: images\ASK-04-architecture-a.jpg
+2025-09-16 11:50:41,399 - INFO - CPU generation successful
+2025-09-16 11:50:41,399 - INFO -  Step 10: Answer image created: ASK-04-architecture-a.jpg
+2025-09-16 11:50:41,400 - INFO -  Step 11: Logging complete Q&A pair to CSV...
+2025-09-16 11:50:41,401 - INFO - Logged complete Q&A pair for architecture: Q: Expanding on the theme of emerging, trends, How do... A: In addressing sustainable design, sustainable desi...
+2025-09-16 11:50:41,401 - INFO -  Step 11: Complete Q&A pair logged to CSV
+2025-09-16 11:50:41,401 - INFO -  Step 12: Adding text overlay to answer image...
+2025-09-16 11:50:41,401 - INFO - Starting text overlay for images\ASK-04-architecture-a.jpg with prompt: In addressing sustainable design, sustainable desi...
+2025-09-16 11:50:41,401 - INFO - Long answer detected (862 chars), using multi-image approach
+2025-09-16 11:50:41,535 - INFO - Added fallback text overlay to image: images\ASK-04-architecture-a.jpg
+2025-09-16 11:50:41,538 - INFO -  Step 12: Answer text overlay added successfully
+2025-09-16 11:50:41,538 - INFO -  Step 12: Final answer image created: ASK-04-architecture-a.jpg
+2025-09-16 11:50:41,538 - INFO -  Step 13: Creating cover images...
+2025-09-16 11:50:41,539 - INFO -  Creating professional volume cover...
+2025-09-16 11:50:41,540 - INFO - Starting enhanced cover generation for volume...
+2025-09-16 11:50:41,556 - INFO - Starting enhanced brand overlay for images\ASK_COVER_VOLUME_20250916_115041.jpg...
+2025-09-16 11:50:41,614 - INFO - Added brand overlay to cover image: images\ASK_COVER_VOLUME_20250916_115041.jpg
+2025-09-16 11:50:41,615 - INFO - Generated cover image: images\ASK_COVER_VOLUME_20250916_115041.jpg
+2025-09-16 11:50:41,616 - INFO -  Professional volume cover created: ASK_COVER_VOLUME_20250916_115041.jpg
+2025-09-16 11:50:41,616 - INFO - ============================================================
+2025-09-16 11:50:41,616 - INFO -  Enhanced Simple Mode completed successfully!
+2025-09-16 11:50:41,616 - INFO -  Connected question image: ASK-03-architecture-q.jpg
+2025-09-16 11:50:41,617 - INFO -  Connected answer image: ASK-04-architecture-a.jpg
+2025-09-16 11:50:41,617 - INFO -  Theme: architecture
+2025-09-16 11:50:41,617 - INFO -  Total Q&A pairs in database: 3
+2025-09-16 11:50:41,617 - INFO -  Connected experience created!
+2025-09-16 11:50:41,617 - INFO -  Cover images generated!
+2025-09-16 22:21:25,897 - INFO - 
+2025-09-16 22:21:25,898 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 22:21:25,898 - INFO - ============================================================
+2025-09-16 22:21:25,898 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 22:21:25,898 - INFO - ============================================================
+2025-09-16 22:21:25,899 - INFO -  Features:
+2025-09-16 22:21:25,899 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 22:21:25,899 - INFO -  • Generates questions that reference previous content
+2025-09-16 22:21:25,899 - INFO -  • Creates connected, chained-like experience
+2025-09-16 22:21:25,899 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 22:21:25,900 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 22:21:32,015 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 22:21:32,015 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 22:21:32,032 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 22:21:32,032 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 22:21:32,041 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 22:21:32,069 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 22:21:32,070 - INFO - Reading from log.csv
+2025-09-16 22:21:32,070 - INFO - Volume info: Volume 1, 2/100 pairs in current volume, 2 total pairs
+2025-09-16 22:21:32,070 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 22:21:32,070 - INFO - Read 2 Q&A pairs from log.csv
+2025-09-16 22:21:32,070 - INFO -  Step 1: Found 2 previous Q&A pairs
+2025-09-16 22:21:32,071 - INFO -  Step 2: Analyzing previous content for connection opportunities...
+2025-09-16 22:21:32,071 - INFO -  Step 2: Found 2 themes and 10 key concepts
+2025-09-16 22:21:32,071 - INFO -  Step 3: Single theme mode - exploring INSTAGRAM
+2025-09-16 22:21:32,072 - INFO -  Step 4: Generating connected question for instagram...
+2025-09-16 22:21:32,072 - WARNING - No templates available for theme: instagram
+2025-09-16 22:21:32,072 - WARNING -  Failed to generate connected question, using fallback...
+2025-09-16 22:21:32,072 - WARNING - No templates available for theme: instagram
+2025-09-16 22:21:32,072 - ERROR -  Failed to generate question
+2025-09-16 22:21:49,422 - INFO - 
+2025-09-16 22:21:49,422 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 22:21:49,422 - INFO - ============================================================
+2025-09-16 22:21:49,423 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 22:21:49,423 - INFO - ============================================================
+2025-09-16 22:21:49,423 - INFO -  Features:
+2025-09-16 22:21:49,423 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 22:21:49,424 - INFO -  • Generates questions that reference previous content
+2025-09-16 22:21:49,424 - INFO -  • Creates connected, chained-like experience
+2025-09-16 22:21:49,424 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 22:21:49,424 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 22:21:58,338 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 22:21:58,338 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 22:21:58,355 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 22:21:58,355 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 22:21:58,364 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 22:21:58,392 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 22:21:58,406 - INFO - Reading from log.csv
+2025-09-16 22:21:58,406 - INFO - Volume info: Volume 1, 2/100 pairs in current volume, 2 total pairs
+2025-09-16 22:21:58,406 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 22:21:58,407 - INFO - Read 2 Q&A pairs from log.csv
+2025-09-16 22:21:58,407 - INFO -  Step 1: Found 2 previous Q&A pairs
+2025-09-16 22:21:58,408 - INFO -  Step 2: Analyzing previous content for connection opportunities...
+2025-09-16 22:21:58,408 - INFO -  Step 2: Found 2 themes and 10 key concepts
+2025-09-16 22:21:58,408 - INFO -  Step 3: Single theme mode - exploring INSTAGRAM
+2025-09-16 22:21:58,409 - INFO -  Step 4: Generating connected question for instagram...
+2025-09-16 22:21:58,409 - WARNING - No templates available for theme: instagram
+2025-09-16 22:21:58,409 - WARNING -  Failed to generate connected question, using fallback...
+2025-09-16 22:21:58,409 - WARNING - No templates available for theme: instagram
+2025-09-16 22:21:58,409 - ERROR -  Failed to generate question
+2025-09-16 22:22:20,720 - INFO - 
+2025-09-16 22:22:20,720 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 22:22:20,720 - INFO - ============================================================
+2025-09-16 22:22:20,721 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 22:22:20,721 - INFO - ============================================================
+2025-09-16 22:22:20,721 - INFO -  Features:
+2025-09-16 22:22:20,721 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 22:22:20,721 - INFO -  • Generates questions that reference previous content
+2025-09-16 22:22:20,722 - INFO -  • Creates connected, chained-like experience
+2025-09-16 22:22:20,722 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 22:22:20,722 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 22:22:29,283 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 22:22:29,283 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 22:22:29,300 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 22:22:29,300 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 22:22:29,309 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 22:22:29,337 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 22:22:29,351 - INFO - Reading from log.csv
+2025-09-16 22:22:29,352 - INFO - Volume info: Volume 1, 2/100 pairs in current volume, 2 total pairs
+2025-09-16 22:22:29,352 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 22:22:29,353 - INFO - Read 2 Q&A pairs from log.csv
+2025-09-16 22:22:29,353 - INFO -  Step 1: Found 2 previous Q&A pairs
+2025-09-16 22:22:29,353 - INFO -  Step 2: Analyzing previous content for connection opportunities...
+2025-09-16 22:22:29,353 - INFO -  Step 2: Found 2 themes and 10 key concepts
+2025-09-16 22:22:29,353 - INFO -  Step 3: Single theme mode - exploring INSTAGRAM
+2025-09-16 22:22:29,354 - INFO -  Step 4: Generating connected question for instagram...
+2025-09-16 22:22:29,354 - WARNING - No templates available for theme: instagram
+2025-09-16 22:22:29,354 - WARNING -  Failed to generate connected question, using fallback...
+2025-09-16 22:22:29,354 - WARNING - No templates available for theme: instagram
+2025-09-16 22:22:29,354 - ERROR -  Failed to generate question
+2025-09-16 22:23:07,790 - INFO - 
+2025-09-16 22:23:07,790 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 22:23:07,791 - INFO - ============================================================
+2025-09-16 22:23:07,791 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 22:23:07,791 - INFO - ============================================================
+2025-09-16 22:23:07,792 - INFO -  Features:
+2025-09-16 22:23:07,792 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 22:23:07,792 - INFO -  • Generates questions that reference previous content
+2025-09-16 22:23:07,793 - INFO -  • Creates connected, chained-like experience
+2025-09-16 22:23:07,793 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 22:23:07,793 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 22:23:20,406 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 22:23:20,407 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 22:23:20,423 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 22:23:20,423 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 22:23:20,432 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 22:23:20,449 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 22:23:20,450 - INFO - Reading from log.csv
+2025-09-16 22:23:20,450 - INFO - Volume info: Volume 1, 2/100 pairs in current volume, 2 total pairs
+2025-09-16 22:23:20,450 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 22:23:20,450 - INFO - Read 2 Q&A pairs from log.csv
+2025-09-16 22:23:20,450 - INFO -  Step 1: Found 2 previous Q&A pairs
+2025-09-16 22:23:20,451 - INFO -  Step 2: Analyzing previous content for connection opportunities...
+2025-09-16 22:23:20,451 - INFO -  Step 2: Found 2 themes and 10 key concepts
+2025-09-16 22:23:20,451 - INFO -  Step 3: Single theme mode - exploring ARCHITECTURE
+2025-09-16 22:23:20,451 - INFO -  Step 4: Generating connected question for architecture...
+2025-09-16 22:23:20,451 - INFO - Generated offline question for theme 'architecture': How can we integrate daylighting with mechanical systems?
+2025-09-16 22:23:20,452 - INFO -  Step 4: Connected question created: Building on previous research about emerging, resilient, How can we integrate da...
+2025-09-16 22:23:20,452 - INFO - Next question image number: 5 (total question images so far: 2)
+2025-09-16 22:23:20,452 - INFO -  Step 5: Generating question image #5...
+2025-09-16 22:23:20,452 - INFO - Starting smart fallback generation for theme 'architecture', image 5
+2025-09-16 22:23:20,452 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 22:23:20,452 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 22:23:20,484 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 22:23:20,484 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 22:23:20,539 - INFO - Enhanced architectural prompt: Building on previous research about emerging, resilient, How can we integrate daylighting with mecha...
+2025-09-16 22:23:20,915 - INFO - Created AI-style image: images\ASK-05-architecture-q.jpg
+2025-09-16 22:23:20,916 - INFO - CPU generation successful
+2025-09-16 22:23:20,916 - INFO -  Step 5: Question image created: ASK-05-architecture-q.jpg
+2025-09-16 22:23:20,917 - INFO -  Step 6: Logging connected question to CSV...
+2025-09-16 22:23:20,917 - INFO -  Step 6: Question prepared for logging (will log with answer)
+2025-09-16 22:23:20,917 - INFO -  Step 7: Adding text overlay to question image...
+2025-09-16 22:23:20,917 - INFO - Starting text overlay for images\ASK-05-architecture-q.jpg with prompt: Building on previous research about emerging, resi...
+2025-09-16 22:23:20,918 - INFO - Answer length: 114 chars, using single image approach
+2025-09-16 22:23:20,918 - INFO - Using fallback text overlay method to ensure text visibility
+2025-09-16 22:23:21,021 - INFO - Added fallback text overlay to image: images\ASK-05-architecture-q.jpg
+2025-09-16 22:23:21,023 - INFO -  Step 7: Text overlay added successfully
+2025-09-16 22:23:21,023 - INFO -  Step 7: Final question image created: ASK-05-architecture-q.jpg
+2025-09-16 22:23:21,023 - INFO -  Step 8: Generating connected answer...
+2025-09-16 22:23:21,024 - INFO - Generated offline answer for theme 'architecture': The concept of sustainable design represents a fun...
+2025-09-16 22:23:21,024 - INFO -  Step 8: Connected answer generated: The concept of sustainable design represents a fundamental shift in how we appro...
+2025-09-16 22:23:21,024 - INFO -  Step 9: Marking question as used...
+2025-09-16 22:23:21,025 - INFO - Marked 0 questions as used
+2025-09-16 22:23:21,026 - WARNING -  Step 9: No questions marked as used
+2025-09-16 22:23:21,027 - INFO - Next answer image number: 6 (total answer images so far: 2)
+2025-09-16 22:23:21,027 - INFO -  Step 10: Generating answer image #6...
+2025-09-16 22:23:21,027 - INFO - Starting smart fallback generation for theme 'architecture', image 6
+2025-09-16 22:23:21,027 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 22:23:21,027 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 22:23:21,032 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 22:23:21,032 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 22:23:21,032 - INFO - Enhanced architectural prompt: The concept of sustainable design represents a fundamental shift in how we approach sustainable desi...
+2025-09-16 22:23:21,216 - INFO - Created AI-style image: images\ASK-06-architecture-a.jpg
+2025-09-16 22:23:21,217 - INFO - CPU generation successful
+2025-09-16 22:23:21,217 - INFO -  Step 10: Answer image created: ASK-06-architecture-a.jpg
+2025-09-16 22:23:21,218 - INFO -  Step 11: Logging complete Q&A pair to CSV...
+2025-09-16 22:23:21,219 - INFO - Logged complete Q&A pair for architecture: Q: Building on previous research about emerging, resi... A: The concept of sustainable design represents a fun...
+2025-09-16 22:23:21,219 - INFO -  Step 11: Complete Q&A pair logged to CSV
+2025-09-16 22:23:21,219 - INFO -  Step 12: Adding text overlay to answer image...
+2025-09-16 22:23:21,219 - INFO - Starting text overlay for images\ASK-06-architecture-a.jpg with prompt: The concept of sustainable design represents a fun...
+2025-09-16 22:23:21,219 - INFO - Long answer detected (829 chars), using multi-image approach
+2025-09-16 22:23:21,338 - INFO - Added fallback text overlay to image: images\ASK-06-architecture-a.jpg
+2025-09-16 22:23:21,339 - INFO -  Step 12: Answer text overlay added successfully
+2025-09-16 22:23:21,340 - INFO -  Step 12: Final answer image created: ASK-06-architecture-a.jpg
+2025-09-16 22:23:21,340 - INFO -  Step 13: Creating cover images...
+2025-09-16 22:23:21,372 - INFO -  Creating professional volume cover...
+2025-09-16 22:23:21,373 - INFO - Starting enhanced cover generation for volume...
+2025-09-16 22:23:21,390 - INFO - Starting enhanced brand overlay for images\ASK_COVER_VOLUME_20250916_222321.jpg...
+2025-09-16 22:23:21,435 - INFO - Added brand overlay to cover image: images\ASK_COVER_VOLUME_20250916_222321.jpg
+2025-09-16 22:23:21,436 - INFO - Generated cover image: images\ASK_COVER_VOLUME_20250916_222321.jpg
+2025-09-16 22:23:21,437 - INFO -  Professional volume cover created: ASK_COVER_VOLUME_20250916_222321.jpg
+2025-09-16 22:23:21,437 - INFO - ============================================================
+2025-09-16 22:23:21,437 - INFO -  Enhanced Simple Mode completed successfully!
+2025-09-16 22:23:21,438 - INFO -  Connected question image: ASK-05-architecture-q.jpg
+2025-09-16 22:23:21,438 - INFO -  Connected answer image: ASK-06-architecture-a.jpg
+2025-09-16 22:23:21,438 - INFO -  Theme: architecture
+2025-09-16 22:23:21,438 - INFO -  Total Q&A pairs in database: 4
+2025-09-16 22:23:21,439 - INFO -  Connected experience created!
+2025-09-16 22:23:21,439 - INFO -  Cover images generated!
+2025-09-16 22:24:18,358 - INFO - 
+2025-09-16 22:24:18,358 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 22:24:18,358 - INFO - ============================================================
+2025-09-16 22:24:18,359 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 22:24:18,359 - INFO - ============================================================
+2025-09-16 22:24:18,359 - INFO -  Features:
+2025-09-16 22:24:18,359 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 22:24:18,360 - INFO -  • Generates questions that reference previous content
+2025-09-16 22:24:18,360 - INFO -  • Creates connected, chained-like experience
+2025-09-16 22:24:18,360 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 22:24:18,360 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 22:24:23,280 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 22:24:23,280 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 22:24:23,281 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 22:24:23,281 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 22:24:23,282 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 22:24:23,285 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 22:24:23,286 - INFO - Reading from log.csv
+2025-09-16 22:24:23,286 - INFO - Volume info: Volume 1, 3/100 pairs in current volume, 3 total pairs
+2025-09-16 22:24:23,286 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 22:24:23,286 - INFO - Read 3 Q&A pairs from log.csv
+2025-09-16 22:24:23,286 - INFO -  Step 1: Found 3 previous Q&A pairs
+2025-09-16 22:24:23,287 - INFO -  Step 2: Analyzing previous content for connection opportunities...
+2025-09-16 22:24:23,287 - INFO -  Step 2: Found 2 themes and 17 key concepts
+2025-09-16 22:24:23,287 - INFO -  Step 3: Single theme mode - exploring ARCHITECTURE
+2025-09-16 22:24:23,287 - INFO -  Step 4: Generating connected question for architecture...
+2025-09-16 22:24:23,288 - INFO - Generated offline question for theme 'architecture': What are the best practices for modern structure in economic development?
+2025-09-16 22:24:23,288 - INFO -  Step 4: Connected question created: Expanding on the theme of expanding, resilient, What are the best practices for ...
+2025-09-16 22:24:23,288 - INFO - Next question image number: 7 (total question images so far: 3)
+2025-09-16 22:24:23,288 - INFO -  Step 5: Generating question image #7...
+2025-09-16 22:24:23,288 - INFO - Starting smart fallback generation for theme 'architecture', image 7
+2025-09-16 22:24:23,288 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 22:24:23,289 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 22:24:23,293 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 22:24:23,293 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 22:24:23,349 - INFO - Enhanced architectural prompt: Expanding on the theme of expanding, resilient, What are the best practices for modern structure in ...
+2025-09-16 22:24:23,717 - INFO - Created AI-style image: images\ASK-07-architecture-q.jpg
+2025-09-16 22:24:23,718 - INFO - CPU generation successful
+2025-09-16 22:24:23,718 - INFO -  Step 5: Question image created: ASK-07-architecture-q.jpg
+2025-09-16 22:24:23,718 - INFO -  Step 6: Logging connected question to CSV...
+2025-09-16 22:24:23,718 - INFO -  Step 6: Question prepared for logging (will log with answer)
+2025-09-16 22:24:23,719 - INFO -  Step 7: Adding text overlay to question image...
+2025-09-16 22:24:23,719 - INFO - Starting text overlay for images\ASK-07-architecture-q.jpg with prompt: Expanding on the theme of expanding, resilient, Wh...
+2025-09-16 22:24:23,719 - INFO - Answer length: 121 chars, using single image approach
+2025-09-16 22:24:23,719 - INFO - Using fallback text overlay method to ensure text visibility
+2025-09-16 22:24:23,812 - INFO - Added fallback text overlay to image: images\ASK-07-architecture-q.jpg
+2025-09-16 22:24:23,814 - INFO -  Step 7: Text overlay added successfully
+2025-09-16 22:24:23,814 - INFO -  Step 7: Final question image created: ASK-07-architecture-q.jpg
+2025-09-16 22:24:23,815 - INFO -  Step 8: Generating connected answer...
+2025-09-16 22:24:23,815 - INFO - Generated offline answer for theme 'architecture': In addressing sustainable design, sustainable desi...
+2025-09-16 22:24:23,815 - INFO -  Step 8: Connected answer generated: In addressing sustainable design, sustainable design offers a comprehensive fram...
+2025-09-16 22:24:23,815 - INFO -  Step 9: Marking question as used...
+2025-09-16 22:24:23,817 - INFO - Marked 0 questions as used
+2025-09-16 22:24:23,817 - WARNING -  Step 9: No questions marked as used
+2025-09-16 22:24:23,818 - INFO - Next answer image number: 8 (total answer images so far: 3)
+2025-09-16 22:24:23,818 - INFO -  Step 10: Generating answer image #8...
+2025-09-16 22:24:23,818 - INFO - Starting smart fallback generation for theme 'architecture', image 8
+2025-09-16 22:24:23,818 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 22:24:23,818 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 22:24:23,822 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 22:24:23,822 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 22:24:23,822 - INFO - Enhanced architectural prompt: In addressing sustainable design, sustainable design offers a comprehensive framework that integrate...
+2025-09-16 22:24:24,008 - INFO - Created AI-style image: images\ASK-08-architecture-a.jpg
+2025-09-16 22:24:24,009 - INFO - CPU generation successful
+2025-09-16 22:24:24,009 - INFO -  Step 10: Answer image created: ASK-08-architecture-a.jpg
+2025-09-16 22:24:24,009 - INFO -  Step 11: Logging complete Q&A pair to CSV...
+2025-09-16 22:24:24,010 - INFO - Logged complete Q&A pair for architecture: Q: Expanding on the theme of expanding, resilient, Wh... A: In addressing sustainable design, sustainable desi...
+2025-09-16 22:24:24,010 - INFO -  Step 11: Complete Q&A pair logged to CSV
+2025-09-16 22:24:24,011 - INFO -  Step 12: Adding text overlay to answer image...
+2025-09-16 22:24:24,011 - INFO - Starting text overlay for images\ASK-08-architecture-a.jpg with prompt: In addressing sustainable design, sustainable desi...
+2025-09-16 22:24:24,011 - INFO - Long answer detected (857 chars), using multi-image approach
+2025-09-16 22:24:24,153 - INFO - Added fallback text overlay to image: images\ASK-08-architecture-a.jpg
+2025-09-16 22:24:24,155 - INFO -  Step 12: Answer text overlay added successfully
+2025-09-16 22:24:24,155 - INFO -  Step 12: Final answer image created: ASK-08-architecture-a.jpg
+2025-09-16 22:24:24,155 - INFO -  Step 13: Creating cover images...
+2025-09-16 22:24:24,185 - INFO -  Creating professional volume cover...
+2025-09-16 22:24:24,185 - INFO - Starting enhanced cover generation for volume...
+2025-09-16 22:24:24,202 - INFO - Starting enhanced brand overlay for images\ASK_COVER_VOLUME_20250916_222424.jpg...
+2025-09-16 22:24:24,270 - INFO - Added brand overlay to cover image: images\ASK_COVER_VOLUME_20250916_222424.jpg
+2025-09-16 22:24:24,271 - INFO - Generated cover image: images\ASK_COVER_VOLUME_20250916_222424.jpg
+2025-09-16 22:24:24,272 - INFO -  Professional volume cover created: ASK_COVER_VOLUME_20250916_222424.jpg
+2025-09-16 22:24:24,272 - INFO - ============================================================
+2025-09-16 22:24:24,272 - INFO -  Enhanced Simple Mode completed successfully!
+2025-09-16 22:24:24,273 - INFO -  Connected question image: ASK-07-architecture-q.jpg
+2025-09-16 22:24:24,273 - INFO -  Connected answer image: ASK-08-architecture-a.jpg
+2025-09-16 22:24:24,273 - INFO -  Theme: architecture
+2025-09-16 22:24:24,273 - INFO -  Total Q&A pairs in database: 5
+2025-09-16 22:24:24,274 - INFO -  Connected experience created!
+2025-09-16 22:24:24,274 - INFO -  Cover images generated!
+2025-09-16 22:35:22,359 - INFO - 
+2025-09-16 22:35:22,359 - INFO -  *ASK*: Daily Research - Enhanced Simple Pipeline with Covers
+2025-09-16 22:35:22,359 - INFO - ============================================================
+2025-09-16 22:35:22,359 - INFO -  Starting Enhanced Simple Mode - Connected Chained Experience with Covers
+2025-09-16 22:35:22,359 - INFO - ============================================================
+2025-09-16 22:35:22,359 - INFO -  Features:
+2025-09-16 22:35:22,360 - INFO -  • Reads all previous questions from log.csv
+2025-09-16 22:35:22,360 - INFO -  • Generates questions that reference previous content
+2025-09-16 22:35:22,360 - INFO -  • Creates connected, chained-like experience
+2025-09-16 22:35:22,360 - INFO -  • Generates cover images (professional volume covers only)
+2025-09-16 22:35:22,360 - INFO -  Offline-first mode: GPU (SDXL) -> CPU -> Placeholder
+2025-09-16 22:35:24,653 - WARNING - Font size hierarchy may not be optimal
+2025-09-16 22:35:24,653 - INFO - ImageTypographyConfig initialized successfully
+2025-09-16 22:35:24,654 - INFO - Starting enhanced image layout configuration initialization...
+2025-09-16 22:35:24,654 - INFO - Enhanced image layout configuration initialization completed
+2025-09-16 22:35:24,656 - INFO - ImageTextProcessor initialized successfully
+2025-09-16 22:35:24,660 - INFO - ImageLayoutCreator initialized successfully
+2025-09-16 22:35:24,661 - INFO - Reading from log.csv
+2025-09-16 22:35:24,661 - INFO - Volume info: Volume 1, 0/100 pairs in current volume, 0 total pairs
+2025-09-16 22:35:24,661 - INFO -  Step 1: Reading all previous questions from log.csv...
+2025-09-16 22:35:24,661 - INFO - Read 0 Q&A pairs from log.csv
+2025-09-16 22:35:24,661 - WARNING -  No previous questions found in log.csv
+2025-09-16 22:35:24,661 - INFO -  Starting fresh with standard question generation...
+2025-09-16 22:35:24,662 - INFO - Generated offline question for theme 'ure': What are the key principles for acoustics in tropical zones?
+2025-09-16 22:35:24,662 - INFO - Next question image number: 1 (total question images so far: 0)
+2025-09-16 22:35:24,662 - INFO -  Step 5: Generating question image #1...
+2025-09-16 22:35:24,662 - INFO - Starting smart fallback generation for theme 'ure', image 1
+2025-09-16 22:35:24,662 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 22:35:24,663 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 22:35:24,667 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 22:35:24,667 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 22:35:24,681 - INFO - Enhanced ural prompt: What are the key principles for acoustics in tropical zones?, photorealistic ural rendering, profess...
+2025-09-16 22:35:25,104 - INFO - Created AI-style image: images\ASK-01-ure-q.jpg
+2025-09-16 22:35:25,105 - INFO - CPU generation successful
+2025-09-16 22:35:25,105 - INFO -  Step 5: Question image created: ASK-01-ure-q.jpg
+2025-09-16 22:35:25,105 - INFO -  Step 6: Logging connected question to CSV...
+2025-09-16 22:35:25,105 - INFO -  Step 6: Question prepared for logging (will log with answer)
+2025-09-16 22:35:25,106 - INFO -  Step 7: Adding text overlay to question image...
+2025-09-16 22:35:25,106 - INFO - Starting text overlay for images\ASK-01-ure-q.jpg with prompt: What are the key principles for acoustics in tropi...
+2025-09-16 22:35:25,106 - INFO - Answer length: 60 chars, using single image approach
+2025-09-16 22:35:25,106 - INFO - Using fallback text overlay method to ensure text visibility
+2025-09-16 22:35:25,203 - INFO - Added fallback text overlay to image: images\ASK-01-ure-q.jpg
+2025-09-16 22:35:25,205 - INFO -  Step 7: Text overlay added successfully
+2025-09-16 22:35:25,206 - INFO -  Step 7: Final question image created: ASK-01-ure-q.jpg
+2025-09-16 22:35:25,206 - INFO -  Step 8: Generating connected answer...
+2025-09-16 22:35:25,206 - INFO - Generated offline answer for theme 'ure': In addressing sustainable design, sustainable desi...
+2025-09-16 22:35:25,206 - INFO -  Step 8: Connected answer generated: In addressing sustainable design, sustainable design offers a comprehensive fram...
+2025-09-16 22:35:25,206 - INFO -  Step 9: Marking question as used...
+2025-09-16 22:35:25,208 - INFO - Marked 0 questions as used
+2025-09-16 22:35:25,208 - WARNING -  Step 9: No questions marked as used
+2025-09-16 22:35:25,217 - INFO - Next answer image number: 2 (total answer images so far: 0)
+2025-09-16 22:35:25,217 - INFO -  Step 10: Generating answer image #2...
+2025-09-16 22:35:25,218 - INFO - Starting smart fallback generation for theme 'ure', image 2
+2025-09-16 22:35:25,218 - INFO - Smart fallback: GPU enabled=True, CPU enabled=True
+2025-09-16 22:35:25,218 - INFO - Attempting GPU image generation (priority method)...
+2025-09-16 22:35:25,222 - WARNING - GPU generation failed: expected an indented block after function definition on line 289 (gpu_image_generator.py, line 290)
+2025-09-16 22:35:25,222 - INFO - Attempting CPU image generation (fallback method)...
+2025-09-16 22:35:25,222 - INFO - Enhanced ural prompt: In addressing sustainable design, sustainable design offers a comprehensive framework that integrate...
+2025-09-16 22:35:25,417 - INFO - Created AI-style image: images\ASK-02-ure-a.jpg
+2025-09-16 22:35:25,418 - INFO - CPU generation successful
+2025-09-16 22:35:25,418 - INFO -  Step 10: Answer image created: ASK-02-ure-a.jpg
+2025-09-16 22:35:25,418 - INFO -  Step 11: Logging complete Q&A pair to CSV...
+2025-09-16 22:35:25,419 - INFO - Logged complete Q&A pair for ure: Q: What are the key principles for acoustics in tropi... A: In addressing sustainable design, sustainable desi...
+2025-09-16 22:35:25,419 - INFO -  Step 11: Complete Q&A pair logged to CSV
+2025-09-16 22:35:25,420 - INFO -  Step 12: Adding text overlay to answer image...
+2025-09-16 22:35:25,420 - INFO - Starting text overlay for images\ASK-02-ure-a.jpg with prompt: In addressing sustainable design, sustainable desi...
+2025-09-16 22:35:25,420 - INFO - Long answer detected (854 chars), using multi-image approach
+2025-09-16 22:35:25,539 - INFO - Added fallback text overlay to image: images\ASK-02-ure-a.jpg
+2025-09-16 22:35:25,541 - INFO -  Step 12: Answer text overlay added successfully
+2025-09-16 22:35:25,541 - INFO -  Step 12: Final answer image created: ASK-02-ure-a.jpg
+2025-09-16 22:35:25,541 - INFO -  Step 13: Creating cover images...
+2025-09-16 22:35:25,556 - INFO -  Creating professional volume cover...
+2025-09-16 22:35:25,557 - INFO - Starting enhanced cover generation for volume...
+2025-09-16 22:35:25,570 - INFO - Starting enhanced brand overlay for images\ASK_COVER_VOLUME_20250916_223525.jpg...
+2025-09-16 22:35:25,625 - INFO - Added brand overlay to cover image: images\ASK_COVER_VOLUME_20250916_223525.jpg
+2025-09-16 22:35:25,627 - INFO - Generated cover image: images\ASK_COVER_VOLUME_20250916_223525.jpg
+2025-09-16 22:35:25,627 - INFO -  Professional volume cover created: ASK_COVER_VOLUME_20250916_223525.jpg
+2025-09-16 22:35:25,628 - INFO - ============================================================
+2025-09-16 22:35:25,628 - INFO -  Enhanced Simple Mode completed successfully!
+2025-09-16 22:35:25,628 - INFO -  Connected question image: ASK-01-ure-q.jpg
+2025-09-16 22:35:25,628 - INFO -  Connected answer image: ASK-02-ure-a.jpg
+2025-09-16 22:35:25,628 - INFO -  Theme: ure
+2025-09-16 22:35:25,629 - INFO -  Total Q&A pairs in database: 2
+2025-09-16 22:35:25,629 - INFO -  Connected experience created!
+2025-09-16 22:35:25,629 - INFO -  Cover images generated!

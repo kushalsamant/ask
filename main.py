@@ -446,7 +446,7 @@ def main():
         if len(sys.argv) > 1:
             mode = sys.argv[1].lower()
             
-            if mode in ["help", "--help", "-h"]:
+            if mode in ["help", "-help", "-h"]:
                 show_help()
                 return
             else:

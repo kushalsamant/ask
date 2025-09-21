@@ -223,7 +223,7 @@ class GPUImageGenerator:
             theme (str): Theme for filename
             image_number (int): Image number for filename
             image_type (str): Image type (q/a) for filename
-            style (str): Architectural style to apply
+            style (str): ural style to apply
             
         Returns:
             Tuple[Optional[str], Optional[str]]: (filename, style) or (None, None) if failed
@@ -255,7 +255,7 @@ class GPUImageGenerator:
             with torch.autocast("cuda" if self.device == "cuda" else "cpu"):
                 image = self.pipe(
                     prompt=formatted_prompt,
-                    negative_prompt=self.get_architectural_negative_prompt(),
+                    negative_prompt=self.get_ural_negative_prompt(),
                     num_inference_steps=self.default_steps,
                     guidance_scale=self.default_guidance_scale,
                     height=self.default_height,
@@ -295,7 +295,7 @@ class GPUImageGenerator:
             theme (str): Theme name
             
         Returns:
-            str: Enhanced architectural prompt
+            str: Enhanced ural prompt
         """
         research_enhancements = {
             'design_research': "photorealistic research visualization, modern research facility, glass facade, sustainable design, natural lighting, professional photography, 8k resolution, research photography, detailed textures, realistic materials",
@@ -318,7 +318,7 @@ class GPUImageGenerator:
     Get negative prompt to avoid common issues in research generation
         
         Returns:
-            str: Negative prompt for architectural images
+            str: Negative prompt for ural images
         """
         return "blurry, low quality, cartoon, anime, painting, sketch, drawing, abstract, unrealistic, distorted, deformed, ugly, bad anatomy, watermark, signature, text, logo, oversaturated, underexposed, overexposed, noise, artifacts"
     
@@ -349,27 +349,27 @@ class GPUImageGenerator:
             return "Modern"  # Default fallback
     
     def _format_prompt(self, prompt: str, theme: str, style: str) -> str:
-        """Enhanced prompt formatting for GPU generation with contextual architectural focus"""
-        # Determine if theme benefits from architectural context
-        architectural_themes = {
-            'design_research', 'architectural_design', 'urban_planning', 'urban_design', 
+        """Enhanced prompt formatting for GPU generation with contextual ural focus"""
+        # Determine if theme benefits from ural context
+        ural_themes = {
+            'design_research', 'ural_design', 'urban_planning', 'urban_design', 
             'spatial_design', 'interior_environments', 'construction_technology', 
             'engineering_systems', 'environmental_design'
         }
         
-        non_architectural_themes = {
+        non_ural_themes = {
             'technology_innovation', 'digital_technology', 'sustainability_science'
         }
         
-        if theme.lower() in architectural_themes:
-            # Architectural focus for design/construction themes
+        if theme.lower() in ural_themes:
+            # ural focus for design/construction themes
             return (
-                f"Professional architectural visualization, {style} architectural style. "
+                f"Professional ural visualization, {style} ural style. "
                 f"Focus on {theme} aspects. {prompt} "
-                f"High-quality, photorealistic, detailed, professional photography, architectural visualisation, 8k resolution, "
-                f"real-life objects, natural lighting, realistic materials, authentic architectural elements"
+                f"High-quality, photorealistic, detailed, professional photography, ural visualisation, 8k resolution, "
+                f"real-life objects, natural lighting, realistic materials, authentic ural elements"
             )
-        elif theme.lower() in non_architectural_themes:
+        elif theme.lower() in non_ural_themes:
             # Broader focus for technology/innovation themes
             return (
                 f"Professional research visualization, {style} style. "
@@ -380,7 +380,7 @@ class GPUImageGenerator:
         else:
             # Balanced approach for other themes
             return (
-                f"Professional research visualization, {style} style with architectural elements. "
+                f"Professional research visualization, {style} style with ural elements. "
                 f"Focus on {theme} aspects. {prompt} "
                 f"High-quality, photorealistic, detailed, professional photography, 8k resolution, "
                 f"real-life objects, natural lighting, realistic materials, modern context"
@@ -460,8 +460,8 @@ def test_gpu_generation():
         log.info("Testing enhanced GPU image generation...")
         
         # Test prompt
-        test_prompt = "Modern architectural building with clean lines and glass facade"
-        test_theme = "architecture"
+        test_prompt = "Modern ural building with clean lines and glass facade"
+        test_theme = "ure"
         test_number = 777
         
         filename, style = generate_image_with_retry(test_prompt, test_theme, test_number, image_type="test")

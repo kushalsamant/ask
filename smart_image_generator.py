@@ -10,7 +10,7 @@ This module provides functionality to:
 - Monitor generation method status and dependencies
 - Provide comprehensive error handling and logging
 
-Offline-First Architecture:
+Offline-First ure:
 - GPU Generation: Primary mode (offline, fastest, highest quality)
 - CPU Generation: First fallback (offline, slower but reliable)
 - API Generation: Last resort (requires internet, only when local fails)
@@ -155,10 +155,10 @@ def generate_image_with_smart_fallback(
             log.info("Attempting GPU image generation (priority method)...")
             from gpu_image_generator import generate_image_with_retry, GPUImageGenerator
             
-            # Enhance prompt for photorealistic architecture
+            # Enhance prompt for photorealistic ure
             gpu_generator = GPUImageGenerator()
-            enhanced_prompt = gpu_generator.enhance_architectural_prompt(prompt, theme)
-            log.info(f"Enhanced architectural prompt: {enhanced_prompt[:100]}...")
+            enhanced_prompt = gpu_generator.enhance_ural_prompt(prompt, theme)
+            log.info(f"Enhanced ural prompt: {enhanced_prompt[:100]}...")
             
             result = generate_image_with_retry(enhanced_prompt, theme, image_number, max_retries, timeout, image_type)
             _performance_stats['gpu_successes'] += 1
@@ -171,11 +171,11 @@ def generate_image_with_smart_fallback(
     if cpu_enabled:
         try:
             log.info("Attempting CPU image generation (fallback method)...")
-            from simple_cpu_generator import generate_image_with_retry, generate_architectural_prompt
+            from simple_cpu_generator import generate_image_with_retry, generate_ural_prompt
             
-            # Enhance prompt for architectural generation
-            enhanced_prompt = generate_architectural_prompt(theme, prompt)
-            log.info(f"Enhanced architectural prompt: {enhanced_prompt[:100]}...")
+            # Enhance prompt for ural generation
+            enhanced_prompt = generate_ural_prompt(theme, prompt)
+            log.info(f"Enhanced ural prompt: {enhanced_prompt[:100]}...")
             
             result = generate_image_with_retry(enhanced_prompt, theme, image_number, image_type)
             _performance_stats['cpu_successes'] += 1

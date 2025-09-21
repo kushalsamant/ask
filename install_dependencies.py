@@ -183,19 +183,19 @@ def install_dependencies():
         
         # Install PyTorch with CUDA
         pytorch_index = install_pytorch_with_cuda()
-        pytorch_cmd = f"pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/{pytorch_index}"
+        pytorch_cmd = f"pip install torch torchvision torchaudio -index-url https://download.pytorch.org/whl/{pytorch_index}"
         
         logger.info(f" Installing PyTorch with {pytorch_index}...")
         if not install_package_with_retry(pytorch_cmd):
             logger.error(" Failed to install PyTorch with CUDA")
             logger.info(" Falling back to CPU-only PyTorch...")
-            pytorch_cmd = "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu"
+            pytorch_cmd = "pip install torch torchvision torchaudio -index-url https://download.pytorch.org/whl/cpu"
             if not install_package_with_retry(pytorch_cmd):
                 logger.error(" Failed to install PyTorch")
                 return False
     else:
         logger.info(" No CUDA detected - Installing CPU-only PyTorch")
-        pytorch_cmd = "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu"
+        pytorch_cmd = "pip install torch torchvision torchaudio -index-url https://download.pytorch.org/whl/cpu"
         
         logger.info(" Installing PyTorch for CPU...")
         if not install_package_with_retry(pytorch_cmd):

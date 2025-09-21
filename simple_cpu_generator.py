@@ -121,13 +121,13 @@ def create_gradient_background(width: int, height: int, base_color: str) -> Imag
     return image
 
 def add_geometric_patterns(image: Image.Image, theme: str):
-    """Add architectural patterns to the image"""
+    """Add ural patterns to the image"""
     draw = ImageDraw.Draw(image)
     width, height = image.size
     
-    # Add architectural elements based on theme
+    # Add ural elements based on theme
     if 'technology' in theme.lower():
-        # Modern architectural elements - glass facades, steel structures
+        # Modern ural elements - glass facades, steel structures
         for i in range(0, width, 80):
             for j in range(0, height, 80):
                 if random.random() < 0.4:
@@ -182,11 +182,11 @@ def add_geometric_patterns(image: Image.Image, theme: str):
                         draw.rectangle([furniture_x, furniture_y, furniture_x+12, furniture_y+8], outline='#FFFFFF', width=1)
     
     else:
-        # General architectural elements - columns, arches, facades
+        # General ural elements - columns, arches, facades
         for i in range(0, width, 60):
             for j in range(0, height, 60):
                 if random.random() < 0.3:
-                    # Architectural columns
+                    # ural columns
                     column_width = random.randint(15, 25)
                     column_height = random.randint(40, 80)
                     draw.rectangle([i, j, i+column_width, j+column_height], outline='#FFFFFF', width=2)
@@ -194,19 +194,19 @@ def add_geometric_patterns(image: Image.Image, theme: str):
                     draw.rectangle([i-2, j+column_height-5, i+column_width+2, j+column_height], outline='#FFFFFF', width=1)
 
 def add_texture_effects(image: Image.Image, prompt: str):
-    """Add architectural texture and visual effects"""
-    # Add architectural texture
+    """Add ural texture and visual effects"""
+    # Add ural texture
     texture_layer = Image.new('RGBA', image.size, (0, 0, 0, 0))
     texture_draw = ImageDraw.Draw(texture_layer)
     
-    # Add subtle architectural details
+    # Add subtle ural details
     for x in range(0, image.size[0], 3):
         for y in range(0, image.size[1], 3):
             if random.random() < 0.05:
                 alpha = random.randint(5, 25)
                 texture_draw.point((x, y), fill=(255, 255, 255, alpha))
     
-    # Add architectural grid lines
+    # Add ural grid lines
     for x in range(0, image.size[0], 50):
         if random.random() < 0.3:
             alpha = random.randint(10, 30)
@@ -220,17 +220,17 @@ def add_texture_effects(image: Image.Image, prompt: str):
     # Blend texture layer
     image = Image.alpha_composite(image.convert('RGBA'), texture_layer)
     
-    # Add slight blur for architectural depth
+    # Add slight blur for ural depth
     image = image.filter(ImageFilter.GaussianBlur(radius=0.3))
     
     return image
 
 def add_theme_elements(image: Image.Image, theme: str, prompt: str):
-    """Add architectural theme-specific visual elements"""
+    """Add ural theme-specific visual elements"""
     draw = ImageDraw.Draw(image)
     width, height = image.size
     
-    # Add architectural elements based on theme
+    # Add ural elements based on theme
     if 'design' in theme.lower():
         # Design elements - furniture, lighting, materials
         for i in range(4):
@@ -311,7 +311,7 @@ def add_theme_elements(image: Image.Image, theme: str, prompt: str):
                 draw.line([x+street_width//2, y, x+street_width//2, y+8], fill='#FFFFFF', width=1)
     
     else:
-        # General architectural elements - structural components
+        # General ural elements - structural components
         for i in range(5):
             x = random.randint(50, width-50)
             y = random.randint(50, height-50)
@@ -323,7 +323,7 @@ def add_theme_elements(image: Image.Image, theme: str, prompt: str):
                 # Add beam details
                 draw.line([x+beam_width//2, y, x+beam_width//2, y+beam_height], fill='#FFFFFF', width=1)
             else:
-                # Architectural details
+                # ural details
                 size = random.randint(15, 25)
                 draw.ellipse([x-size//2, y-size//2, x+size//2, y+size//2], outline='#FFFFFF', width=1)
                 draw.line([x-size//2, y, x+size//2, y], fill='#FFFFFF', width=1)
@@ -342,67 +342,67 @@ def enhance_image(image: Image.Image):
     enhancer = ImageEnhance.Color(image)
     image = enhancer.enhance(1.1)
 
-def generate_architectural_prompt(theme: str, prompt: str) -> str:
+def generate_ural_prompt(theme: str, prompt: str) -> str:
     """
-    Generate photorealistic architectural prompts based on theme
+    Generate photorealistic ural prompts based on theme
     
     Args:
         theme (str): Theme name
         prompt (str): Original prompt
         
     Returns:
-        str: Enhanced architectural prompt
+        str: Enhanced ural prompt
     """
-    # Common architectural prompt elements
-    base_elements = "photorealistic architectural rendering, professional photography, 8k resolution, architectural photography"
+    # Common ural prompt elements
+    base_elements = "photorealistic ural rendering, professional photography, 8k resolution, ural photography"
     
-    architectural_prompts = {
+    ural_prompts = {
         'design_research': [
             f"{base_elements}, modern research facility, glass facade, sustainable design, natural lighting",
             f"{base_elements}, contemporary design studio, minimalist interior, clean lines, natural materials, high detail",
-            f"{base_elements}, innovative research building, geometric forms, sustainable materials, natural environment, architectural detail"
+            f"{base_elements}, innovative research building, geometric forms, sustainable materials, natural environment, ural detail"
         ],
         'technology_innovation': [
-            f"{base_elements}, futuristic tech building, smart glass, LED lighting, digital infrastructure, modern architecture",
+            f"{base_elements}, futuristic tech building, smart glass, LED lighting, digital infrastructure, modern ure",
             f"{base_elements}, innovation center, cutting-edge design, technological integration, sustainable technology, high detail",
-            f"{base_elements}, smart building, IoT integration, renewable energy, modern facade, architectural innovation"
+            f"{base_elements}, smart building, IoT integration, renewable energy, modern facade, ural innovation"
         ],
         'sustainability_science': [
             f"{base_elements}, green building, living walls, solar panels, sustainable materials, natural environment",
             f"{base_elements}, eco-friendly building, passive design, renewable energy, natural ventilation, high detail",
-            f"{base_elements}, sustainable architecture, green roof, rainwater harvesting, natural lighting, environmental design"
+            f"{base_elements}, sustainable ure, green roof, rainwater harvesting, natural lighting, environmental design"
         ],
         'engineering_systems': [
             f"{base_elements}, industrial facility, structural engineering, mechanical systems, technical infrastructure",
-            f"{base_elements}, engineering complex, structural elements, technical design, functional architecture, high detail",
-            f"{base_elements}, engineering building, structural innovation, technical systems, industrial design, engineering architecture"
+            f"{base_elements}, engineering complex, structural elements, technical design, functional ure, high detail",
+            f"{base_elements}, engineering building, structural innovation, technical systems, industrial design, engineering ure"
         ],
         'environmental_design': [
-            f"{base_elements}, environmental building, natural integration, landscape architecture, sustainable design",
-            f"{base_elements}, eco-architecture, natural materials, environmental harmony, sustainable landscape, high detail",
-            f"{base_elements}, environmental design, natural systems, sustainable architecture, landscape integration, environmental architecture"
+            f"{base_elements}, environmental building, natural integration, landscape ure, sustainable design",
+            f"{base_elements}, eco-ure, natural materials, environmental harmony, sustainable landscape, high detail",
+            f"{base_elements}, environmental design, natural systems, sustainable ure, landscape integration, environmental ure"
         ],
         'urban_planning': [
             f"{base_elements}, urban development, city planning, mixed-use building, urban infrastructure",
-            f"{base_elements}, urban architecture, cityscape, modern urban design, sustainable urban planning, high detail",
-            f"{base_elements}, urban building, city integration, modern urbanism, sustainable development, urban architecture"
+            f"{base_elements}, urban ure, cityscape, modern urban design, sustainable urban planning, high detail",
+            f"{base_elements}, urban building, city integration, modern urbanism, sustainable development, urban ure"
         ],
         'spatial_design': [
-            f"{base_elements}, spatial architecture, interior design, spatial planning, modern interior",
-            f"{base_elements}, spatial design, interior architecture, space planning, modern spatial concepts, high detail",
-            f"{base_elements}, spatial building, interior innovation, modern space design, architectural interiors, spatial architecture"
+            f"{base_elements}, spatial ure, interior design, spatial planning, modern interior",
+            f"{base_elements}, spatial design, interior ure, space planning, modern spatial concepts, high detail",
+            f"{base_elements}, spatial building, interior innovation, modern space design, ural interiors, spatial ure"
         ],
         'digital_technology': [
-            f"{base_elements}, digital building, smart architecture, technological integration, modern digital design",
-            f"{base_elements}, digital architecture, smart systems, technological innovation, modern digital space, high detail",
-            f"{base_elements}, digital building, smart technology, modern digital architecture, technological design, digital architecture"
+            f"{base_elements}, digital building, smart ure, technological integration, modern digital design",
+            f"{base_elements}, digital ure, smart systems, technological innovation, modern digital space, high detail",
+            f"{base_elements}, digital building, smart technology, modern digital ure, technological design, digital ure"
         ]
     }
     
     # Get theme-specific prompts
-    theme_prompts = architectural_prompts.get(theme.lower(), architectural_prompts['design_research'])
+    theme_prompts = ural_prompts.get(theme.lower(), ural_prompts['design_research'])
     
-    # Select a random architectural prompt
+    # Select a random ural prompt
     base_prompt = random.choice(theme_prompts)
     
     # Combine with original prompt

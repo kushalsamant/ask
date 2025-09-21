@@ -170,7 +170,14 @@ def _add_text_overlay_fallback(image_path, prompt, image_number, is_question=Tru
         # Prepare prompt text - consistent wrapping for questions and answers
         max_chars_per_line = int(os.getenv('MAX_CHARS_PER_LINE', '50'))  # Increased to fit more text per line
 
-        words = prompt.split()
+        # New: prepend distinct labels for question vs answer (configurable)
+        question_label = os.getenv('QUESTION_LABEL', 'Question: ')
+        answer_label = os.getenv('ANSWER_LABEL', 'Answer: ')
+        label_text = question_label if is_question else answer_label
+
+        display_text = f"{label_text}{prompt}" if label_text else prompt
+
+        words = display_text.split()
         lines = []
         current_line = ""
         
